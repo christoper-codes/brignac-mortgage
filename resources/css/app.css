@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* |----------------------------------------------------------------------------
+   | Custom Utilities | Tailwind
+   |----------------------------------------------------------------------------
+*/
+@layer base {
+    input, textarea, select {
+      background: transparent !important;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        background: transparent !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* |----------------------------------------------------------------------------
+   | Custom Utilities | Vuetify
+   |----------------------------------------------------------------------------
+*/
+.v-window__controls .v-btn--icon.v-btn--density-default {
+    border-radius: 2px !important;
+    background: transparent !important;
+    border: 1px solid white !important;
+    color: white !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    width: 50px !important;
+    height: 50px !important;
+    display: none !important;
+}
+
+.w-testimonials-control .v-window__controls .v-btn--icon.v-btn--density-default {
+    background: #fff !important;
+    border: 1px solid #cfcfcf !important;
+    color: #7c7c7c !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    border-radius: 5px !important;
+}
+.w-testimonials-control .v-window__controls {
+    justify-content: center !important;
+    align-items: start !important;
+    gap: 50px !important;
+}
+
+.welcome-header .v-carousel {
+    height: 850px !important;
+}
+.welcome-header .v-carousel__controls{
+    margin-bottom: 100px !important;
+}
+.v-navigation-drawer--temporary.v-navigation-drawer--active {
+    width: 80% !important;
+    border: none !important;
+}
+.v-navigation-drawer__scrim {
+    position: fixed !important;
+}
+
+@media (min-width: 1264px) {
+    .v-window__controls .v-btn--icon.v-btn--density-default {
+        display: block !important;
+    }
+    .welcome-header .v-carousel {
+        height: 100vh !important;
+    }
+    .welcome-header .v-carousel__controls{
+        margin-bottom: 0px !important;
+    }
+}
