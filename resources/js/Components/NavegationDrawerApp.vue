@@ -22,7 +22,7 @@ const toggleFav = () => {
   <div class="">
     <v-layout>
       <v-navigation-drawer v-model="draweAppNavState" temporary class="">
-        <div class="!text-gray-100 bg-slate-950 min-h-screen relative overflow-hidden bg-[url('https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg')] bg-center bg-cover">
+        <div class="!text-gray-100 bg-slate-950 min-h-screen relative overflow-hidden bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover">
 
             <div class="w-full h-full bg-black/85 min-h-screen">
                 <div class="w-full relative h-full">
@@ -71,13 +71,13 @@ const toggleFav = () => {
                                 </AppNavLink>
                             </div>
                             <div class=" w-full">
-                                <AppNavLink :href="route('auth-programs.index')" :active="route().current('auth-programs.index')">
-                                    <span class="material-symbols-outlined text-lg">folder</span>Loans programs
+                                <AppNavLink :href="route('interested-clients.index')" :active="route().current('interested-clients.index')">
+                                    <span class="material-symbols-outlined text-lg">folder</span>Interested clients
                                 </AppNavLink>
                             </div>
                             <div class=" w-full">
-                                <AppNavLink :href="route('auth-team.index')" :active="route().current('auth-team.index')">
-                                    <span class="material-symbols-outlined text-lg">group</span>Our team
+                                <AppNavLink :href="route('candidates-for-hiring.index')" :active="route().current('candidates-for-hiring.index')">
+                                    <span class="material-symbols-outlined text-lg">group</span>candidates for hiring
                                 </AppNavLink>
                             </div>
                         </div>
@@ -87,7 +87,7 @@ const toggleFav = () => {
                         <h2 class="font-semibold text-sm mb-3">Authentication</h2>
                         <div class="flex flex-col items-center gap-3 w-full">
                             <div class="w-full">
-                                <AppNavLink :href="route('welcome')" :active="route().current('welcome')">
+                                <AppNavLink :href="route('profile.edit')" :active="route().current('profile.edit')">
                                     <span class="material-symbols-outlined text-lg">person</span>Profile
                                 </AppNavLink>
                             </div>

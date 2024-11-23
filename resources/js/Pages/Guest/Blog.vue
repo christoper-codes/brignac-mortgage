@@ -3,7 +3,7 @@ import Breadcrumb from '@/Components/Breadcrumb.vue';
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
 
 </script>
@@ -42,7 +42,7 @@ import { Head } from '@inertiajs/vue3';
             <p class="text-xs sm:text-sm text-gray-800">November, 2024</p>
           </div>
 
-          <p class="text-lg text-gray-800">At Brignac Mortgage Company, our mission has always been to offer transparency and accessibility throughout the home loan process. We believe that by providing a platform where potential homeowners can explore and compare loan options, we empower them to make informed decisions and invest wisely in real estate.</p>
+          <p class="text-lg text-gray-800">At Brignac Mortgage And Consulting Services, our mission has always been to offer transparency and accessibility throughout the home loan process. We believe that by providing a platform where potential homeowners can explore and compare loan options, we empower them to make informed decisions and invest wisely in real estate.</p>
 
           <p class="text-lg text-gray-800">We are proud to be part of a new culture where homeownership is more attainable, clear, and straightforward for everyone. We continue to innovate and provide financial products that support this vision.</p>
 
@@ -50,23 +50,23 @@ import { Head } from '@inertiajs/vue3';
             <div class="grid lg:grid-cols-2 gap-3">
               <div class="grid grid-cols-2 lg:grid-cols-1 gap-3">
                 <figure class="relative w-full h-60">
-                  <img class="size-full absolute top-0 start-0 object-cover rounded-md" src="https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg" alt="Blog Image">
+                  <img class="size-full absolute top-0 start-0 object-cover rounded-md" src="/storage/img/header-1.webp" alt="Blog Image">
                 </figure>
                 <figure class="relative w-full h-60">
-                  <img class="size-full absolute top-0 start-0 object-cover rounded-md" src="https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/12.jpg" alt="Blog Image">
+                  <img class="size-full absolute top-0 start-0 object-cover rounded-md" src="/storage/img/header-2.webp" alt="Blog Image">
                 </figure>
               </div>
               <figure class="relative w-full h-72 sm:h-96 lg:h-full">
-                <img class="size-full absolute top-0 start-0 object-cover rounded-md" src="https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/13.jpg" alt="Blog Image">
+                <img class="size-full absolute top-0 start-0 object-cover rounded-md" src="/storage/img/header-3.webp" alt="Blog Image">
               </figure>
             </div>
 
             <span class="mt-3 block text-sm text-center text-gray-500">
-                Brignac Mortgage Company news
+                Brignac Mortgage And Consulting Services news
             </span>
           </div>
 
-          <p class="text-lg text-gray-800">As we’ve grown, we’ve seen how Brignac Mortgage Company has helped thousands of people access the best mortgage options. Leading financial institutions and real estate agencies have trusted us to guide their clients through the home loan journey. We’ve also learned that when financial education is provided from the beginning, homebuyers can make more informed and confident decisions.</p>
+          <p class="text-lg text-gray-800">As we’ve grown, we’ve seen how Brignac Mortgage And Consulting Services has helped thousands of people access the best mortgage options. Leading financial institutions and real estate agencies have trusted us to guide their clients through the home loan journey. We’ve also learned that when financial education is provided from the beginning, homebuyers can make more informed and confident decisions.</p>
 
           <p class="text-lg text-gray-800">That’s why we’re excited to announce that we now offer a free version of our platform, giving individuals, families, and small businesses easy access to clear and reliable loan information from the start of their home buying process.</p>
 
@@ -75,21 +75,21 @@ import { Head } from '@inertiajs/vue3';
                 “Shawn and Company got me a very low rate and Were very easy to get in touch with to answer my questions throughout the process. Would recommend” says one of our satisfied clients, David Rooney.
             </p>
             <p class="mt-5 text-gray-800">
-             Brignac Mortgage Company news
+             Brignac Mortgage And Consulting Services news
             </p>
           </blockquote>
 
           <figure>
-            <img class="w-full object-cover rounded-md" src="https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg" alt="Blog Image">
+            <img class="w-full object-cover rounded-md" src="/storage/img/header-3.webp" alt="Blog Image">
             <figcaption class="mt-3 text-sm text-center text-gray-500">
-                Brignac Mortgage Company news
+                Brignac Mortgage And Consulting Services news
             </figcaption>
           </figure>
 
           <div class="space-y-3">
             <h3 class="text-2xl font-semibold">Bringing Transparency to Everyone</h3>
 
-            <p class="text-lg text-gray-800">We know the power of clear communication, and we want to give everyone the opportunity to try Brignac Mortgage Company and see how easy it can be to navigate the home loan process. Whether you're looking for a residential mortgage, investment loan, or commercial financing solution, we provide a wide range of options to meet your unique needs.</p>
+            <p class="text-lg text-gray-800">We know the power of clear communication, and we want to give everyone the opportunity to try Brignac Mortgage And Consulting Services and see how easy it can be to navigate the home loan process. Whether you're looking for a residential mortgage, investment loan, or commercial financing solution, we provide a wide range of options to meet your unique needs.</p>
           </div>
 
           <ul class="list-disc list-outside space-y-5 ps-5 text-lg text-gray-800">
@@ -199,9 +199,12 @@ import { Head } from '@inertiajs/vue3';
           </a>
 
           <div class="grow">
-            <div class="flex justify-end">
-                <v-btn rounded="xs" class="text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply Now</v-btn>
-            </div>
+            <Link :href="route('our-team.index')">
+              <div class="flex justify-end">
+                  <v-btn rounded="xs" class="text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply Now</v-btn>
+              </div>
+            </Link>
+
           </div>
         </div>
         <!-- End Avatar Media -->

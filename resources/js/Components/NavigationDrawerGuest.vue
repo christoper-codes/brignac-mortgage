@@ -142,7 +142,7 @@ onUnmounted(() => {
                                         </Link>
                                     </div>
                                     <div class="bg-gray-300 w-[50%] h-[215px] rounded-md overflow-hidden">
-                                        <div class="w-full h-full bg-[url('https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg')] bg-center bg-cover rounded-md">
+                                        <div class="w-full h-full bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover rounded-md">
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
                                                 <div @click="navigateToMortgageLoanCalculatorAndScroll" class="bg-black/30 cursor-pointer rounded-full py-2 px-5 inline-flex text-white text-xs text-center items-center justify-center">
                                                     <span class="material-symbols-outlined text-2xl">web_traffic</span>

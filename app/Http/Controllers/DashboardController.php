@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
 use App\Models\Dashboard;
+use App\Models\Email;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -30,10 +31,14 @@ class DashboardController extends Controller
         }
     }
 
-    public function indexPrograms()
+    public function indexInterestedClients()
     {
         try {
-            return Inertia::render('App/Programs');
+            $emails = Email::where('is_hiring', false)->orderBy('created_at', 'desc')->get();
+
+            return Inertia::render('App/InterestedClients', [
+                'emails' => $emails
+            ]);
 
         } catch(\Exception $e){
             return response()->json([
@@ -42,11 +47,13 @@ class DashboardController extends Controller
         }
     }
 
-    public function indexTeam()
+    public function indexCandidatesForHiring()
     {
         try {
-            return Inertia::render('App/Team');
-
+            $emails = Email::where('is_hiring', true)->orderBy('created_at', 'desc')->get();
+            return Inertia::render('App/CandidatesForHiring', [
+                'emails' => $emails
+            ]);
         } catch(\Exception $e){
             return response()->json([
                 "Error" => $e->getMessage()

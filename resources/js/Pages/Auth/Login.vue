@@ -38,7 +38,14 @@ const show = ref(false);
 
 
 const onSubmit = () => {
-    if(!form.value) return;
+    if(!form.value){
+        toast('All fields are required', {
+            "theme": "auto",
+            "type": "error",
+            "dangerouslyHTMLString": true
+        })
+        return;
+    } 
     loading.value = true;
 
     const formData = useForm({
@@ -73,7 +80,7 @@ const rules = {
 <template>
     <Head title="Login" />
 
-    <div class="w-full h-screen bg-[url('https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg')] bg-center bg-cover">
+    <div class="w-full h-screen bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover">
         <div class="h-full w-full flex items-center justify-center text-white bg-black/40 overflow-hidden px-4 lg:px-0">
             <div class="py-14 lg:py-10 px-5 rounded-lg bg-black/20 backdrop-blur-md max-w-5xl mx-auto w-full overflow-hidden">
                 <div class="lg:px-10 w-full flex flex-col justify-between max-w-5xl mx-auto lg:mt-0" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">

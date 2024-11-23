@@ -4,8 +4,9 @@ import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import axios from 'axios';
 import { ref } from 'vue';
-
+import { toast } from 'vue3-toastify'
 
 const form = ref(false);
 const name = ref('');
@@ -15,10 +16,55 @@ const loading = ref(false);
 const files = ref([]);
 
 const onSubmit = () => {
-    if(!form.value) return;
+    if(!form.value){
+        toast('All fields are required', {
+            "theme": "auto",
+            "type": "error",
+            "dangerouslyHTMLString": true
+        })
+        return;
+    }
 
     loading.value = true;
-    console.log(form.value);
+
+    const formData = new FormData();
+    formData.append('name', name.value);
+    formData.append('email', email.value);
+    formData.append('message', message.value);
+    formData.append('is_hiring', true);
+    files.value.forEach((file, index) => {
+        formData.append(`files[${index}]`, file);
+    });
+
+    axios.post(route('send-email'), formData, {
+            headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+        })
+        .then(response => {
+            console.log(response)
+            toast(response.data.message, {
+                "theme": "auto",
+                "type": "success",
+                "dangerouslyHTMLString": true
+            })
+        })
+        .catch(error => {
+            toast(error.response.data.message, {
+                "theme": "auto",
+                "type": "error",
+                "dangerouslyHTMLString": true
+            })
+            console.log(error.response.data)
+        })
+        .finally(() => {
+            loading.value = false;
+            name.value = ' ';
+            email.value = ' ';
+            message.value = ' ';
+            files.value = [];
+        });
+
 }
 
 const rules = {
@@ -39,7 +85,7 @@ const rules = {
     <GuestNav />
 
     <div class="bg-white">
-        <div class="w-full relative h-auto bg-[url('https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
+        <div class="w-full relative h-auto bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
             <div class="absolute top-0 lg:mt-10 w-full lg:right-10 lg:w-[30%] gap-5 bg-black/30 backdrop-blur-sm p-10 flex items-center flex-col justify-center rounded-md text-white">
                 <p class="font-bold">If you already have an account, log in.</p>
                 <Link :href="route('login')">
@@ -81,7 +127,7 @@ const rules = {
                                         color="orange"
                                         clearable
                                         class="w-full lg:w-[50%] backdrop-blur-sm"
-                                        hint="Your email to subscribe"
+                                        hint="Your personal email"
                                         persistent-hint=""
                                         v-model="email"
                                         :rules="[rules.required, rules.email]"
@@ -91,6 +137,7 @@ const rules = {
                                     <v-file-input
                                         v-model="files"
                                         label="Resume file"
+                                        accept=".doc,.docx,.xml,.pdf,.txt"
                                         hint="Attach your resume"
                                         placeholder="Upload your documents"
                                         prepend-icon="mdi-paperclip"

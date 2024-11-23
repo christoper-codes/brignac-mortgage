@@ -75,10 +75,10 @@ onMounted(() => {
     <AppLayout>
 
         <div class="p-10 lg:mx-10 bg-gray-300 text-white text-center  lg:mt-7 rounded-md">
-            <h2 class="font-bold lg:text-4xl">Welcome to Brignac Mortgage Administration </h2>
+            <h2 class="font-bold text-xl lg:text-4xl"><span class="italic text-orange-500">Welcome</span> to Brignac Mortgage Administration</h2>
         </div>
         <section class="mt-10 lg:mt-[73px] lg:mx-10 rounded-md">
-            <div class="w-full h-[300px] bg-[url('https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg')] bg-center bg-cover">
+            <div class="w-full h-[300px] bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover">
                 <div class="h-full w-full bg-black/60 pt-14 px-4 lg:px-0">
                     <div class="flex flex-col gap-3 items-center justify-center">
                         <div class="bg-black/20 rounded-full py-2 px-5 inline-flex text-white">

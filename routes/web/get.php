@@ -3,9 +3,11 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\TeamController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,6 +27,30 @@ Route::get('/mortgage', function () {
     return Inertia::render('Mortgage');
 })->name('mortgage');
 
+Route::get('/migrate-fresh', function () {
+    
+    Artisan::call('migrate:fresh');
+    
+    return "migrate-fresh";
+    
+});
+
+Route::get('/storage-fresh', function () {
+    
+    Artisan::call('storage:link');
+    
+    return "migrate-fresh";
+    
+});
+
+Route::get('/optimize-fresh', function () {
+    
+    Artisan::call('optimize:clear');
+    
+    return "migrate-fresh";
+    
+});
+
 /*
 * |--------------------------------------------------------------------------
 * | Web Routes
@@ -34,7 +60,7 @@ Route::get('/mortgage', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/auth-programs', [DashboardController::class, 'indexPrograms'])->name('auth-programs.index');
-    Route::get('/auth-team', [DashboardController::class, 'indexTeam'])->name('auth-team.index');
+    Route::get('/interested-clients', [DashboardController::class, 'indexInterestedClients'])->name('interested-clients.index');
+    Route::get('/candidates-for-hiring', [DashboardController::class, 'indexCandidatesForHiring'])->name('candidates-for-hiring.index');
 
 });

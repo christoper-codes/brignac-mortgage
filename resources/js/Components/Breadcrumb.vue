@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <div class="w-full h-[230px] bg-[url('https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
+    <div class="w-full h-[230px] bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
         <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/60">
             <div class="w-full flex flex-col lg:flex-row items-center justify-between max-w-7xl mx-auto px-4 lg:px-0" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                 <div class="flex flex-col gap-2 justify-center mb-5">

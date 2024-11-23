@@ -3,8 +3,10 @@ import Breadcrumb from '@/Components/Breadcrumb.vue';
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
+import axios from 'axios';
 import { onMounted, onUnmounted, ref } from 'vue';
+import { toast } from 'vue3-toastify'
 
 const form = ref(false);
 const name = ref('');
@@ -13,10 +15,46 @@ const message = ref('');
 const loading = ref(false);
 
 const onSubmit = () => {
-    if(!form.value) return;
+    if(!form.value){
+        toast('All fields are required', {
+            "theme": "auto",
+            "type": "error",
+            "dangerouslyHTMLString": true
+        })
+        return;
+    }
 
     loading.value = true;
-    console.log(form.value);
+
+    const data = {
+        name: name.value,
+        email: email.value,
+        message: message.value,
+        is_hiring: false
+    }
+
+    axios.post(route('send-email'), data)
+        .then(response => {
+            console.log(response)
+            toast(response.data.message, {
+                "theme": "auto",
+                "type": "success",
+                "dangerouslyHTMLString": true
+            })
+        })
+        .catch(error => {
+            toast(error.response.data.message, {
+                "theme": "auto",
+                "type": "error",
+                "dangerouslyHTMLString": true
+            })
+        })
+        .finally(() => {
+            loading.value = false;
+            name.value = ' ';
+            email.value = ' ';
+            message.value = ' ';
+        });
 }
 
 const rules = {
@@ -72,7 +110,7 @@ onUnmounted(() => {
                                     <span class="inline-flex">About us</span>
                                 </div>
                             </div>
-                            <h2 class="text-3xl lg:text-4xl font-bold">Brignac Mortgage Company</h2>
+                            <h2 class="text-3xl lg:text-4xl font-bold">Brignac Mortgage And Consulting Services</h2>
                             <p class="text-sm lg:text-base">Shaun Brignac, President and CEO welcomes you to our site.  We believe that life is for living and you should be passionate about what you do. We hold our team to a high standard, and we only hire the best!  We look forward to working with you and your family.</p>
                             <p></p>
                         </div>
@@ -102,7 +140,7 @@ onUnmounted(() => {
                                 <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
                                     <span class="material-symbols-outlined text-2xl text-orange-500">badge</span>
                                 </div>
-                                <h3 class="text-sm flex-grow">Mobile Home Loans - Single and Double Wide</h3>
+                                <h3 class="text-sm flex-grow">Home Equity Line of Credit Loans</h3>
                             </div>
                         </div>
                     <ServiceDialog />
@@ -113,7 +151,7 @@ onUnmounted(() => {
     </section>
 
     <section class="">
-        <div class="w-full h-[500px] bg-[url('https://html.themewin.com/pixells/quarter-tailwind-preview/quarter/assets/img/slider/11.jpg')] bg-center bg-cover">
+        <div class="w-full h-[500px] bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover">
             <div class="h-full w-full bg-black/60 pt-14 px-4 lg:px-0">
                 <div class="flex flex-col gap-3 items-center justify-center">
                     <div class="bg-black/20 rounded-full py-2 px-5 inline-flex text-white">
@@ -129,12 +167,18 @@ onUnmounted(() => {
                         <span style="color: #EA4335;">e</span>
                         Testimonials
                     </h2>
+                    <a href="https://maps.app.goo.gl/6YyqmAGQ8nJtZ9Jk6" target="_blank">
+                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-500 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
+                            <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
+                            Leave a review on google
+                        </v-btn>
+                    </a>
                 </div>
             </div>
         </div>
 
         <main class="bg-white relative z-10" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 absolute top-[-300px] left-1/2 transform -translate-x-1/2 bg-white">
+            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 absolute top-[-230px] left-1/2 transform -translate-x-1/2 bg-white">
                 <div class="relative">
                     <iframe class="h-[450px] z-50 w-full" src="https://widget.tagembed.com/2135662" style="border:none;"></iframe>
                 </div>
@@ -144,7 +188,7 @@ onUnmounted(() => {
     </section>
 
 
-    <section class="mt-80" ref="contactUs">
+    <section class="mt-80 lg:mt-96" ref="contactUs">
         <div class="flex flex-col gap-3 items-center justify-center px-4 lg:px-0">
             <div class="bg-green-100 rounded-full py-2 px-5 inline-flex text-green-600">
                 <span>Contact</span>
@@ -155,8 +199,9 @@ onUnmounted(() => {
             <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green_persistent lg:hover:scale-105 lg:transition-all lg:duration-700">
                 <div><span class="material-symbols-outlined text-5xl text-green-500">location_on</span></div>
                 <h3 class="text-2xl font-bold">Office Address</h3>
-                <p class="text-sm">12481 Home Port Dr Suite 101, Maurepas, LA 70449, Estados Unidos</p>
-                <p class="text-sm">66XH+RC Maurepas, Luisiana, EE. UU.</p>
+                <p class="text-sm">12481 Home Port Dr Suite 101, Maurepas, LA 70449, United States</p>
+                <p class="text-sm">66XH+RC Maurepas, Louisiana, USA</p>
+
             </div>
             <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:hover:scale-105 lg:transition-all lg:duration-700">
                 <div><span class="material-symbols-outlined text-5xl text-green-500">perm_phone_msg</span></div>
@@ -165,10 +210,15 @@ onUnmounted(() => {
                 <p class="text-sm">NMLS ID: 2401214</p>
             </div>
             <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:hover:scale-105 lg:transition-all lg:duration-700">
-                <div><span class="material-symbols-outlined text-5xl text-green-500">mail</span></div>
-                <h3 class="text-2xl font-bold">Email Address</h3>
-                <p class="text-sm">Shaun@brignacmortgage.com</p>
-                <p class="text-sm">Allie@brignacmortgage.com</p>
+                <div><span class="material-symbols-outlined text-5xl text-green-500">group</span></div>
+                <h3 class="text-2xl font-bold">Our team</h3>
+                <Link :href="route('our-team.index')">
+                    <div class="cursor-pointer flex items-center gap-1 py-2 px-4 rounded-full bg-green-100 text-green-600">
+                        <span class="material-symbols-outlined block text-lg">arrow_outward</span>
+                        <span class="block">Apply with one of us</span>
+                    </div>
+                </Link>
+
             </div>
          </div>
 

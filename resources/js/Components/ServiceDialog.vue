@@ -64,7 +64,7 @@ const slides = ref([
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <p class="mt-5 font-bold text-2xl text-center">{{ slide }}</p>
+                                                    <p class="mt-5 font-bold text-xl lg:text-2xl text-center">{{ slide }}</p>
                                                 </div>
                                             </div>
                                         </div>
