@@ -9,6 +9,7 @@ import { drawerNavState } from '@/composables/drawersStates';
 import axios from 'axios';
 import { toast } from 'vue3-toastify';
 import usePriceFormat from '@/composables/priceFormat';
+import AvgWelcomeSection from '@/Components/AvgWelcomeSection.vue';
 
 const { formatPrice } = usePriceFormat();
 const dialog = ref(false);
@@ -47,6 +48,7 @@ onMounted(() => {
     window.addEventListener('scroll-mortgage-loan-calculator-section', scrollMortgageLoanCalculatorSection);
     window.addEventListener('scroll-testimonials-section', scrolltestimonialsSection);
 });
+
 onUnmounted(() => {
     window.removeEventListener('scroll-our-services-section', scrollOurServicesSection);
     window.removeEventListener('scroll-mortgage-loan-calculator-section', scrollMortgageLoanCalculatorSection);
@@ -255,6 +257,7 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
     <Head title="Welcome" />
     <NavigationDrawerGuest @scroll-our-services-section="scrollOurServicesSection" @scroll-mortgage-loan-calculator-section="scrollMortgageLoanCalculatorSection" />
     <GuestNav @scroll-our-services-section="scrollOurServicesSection" @scroll-mortgage-loan-calculator-section="scrollMortgageLoanCalculatorSection" />
+    <AvgWelcomeSection />
     <div class="relative overflow-hidden welcome-header">
         <nav class="absolute w-full bg-transparent z-50 text-white">
             <div class="py-2 border-b-[1px] border-b-gray-500">
@@ -443,8 +446,6 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
             <v-carousel-item src="/storage/img/header-1.webp" cover>
                 <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
                    <div class="max-w-3xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
-                     data-aos="fade-down"
-                    data-aos-duration="3000"
                    >
                         <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-0">
                             <span class="material-symbols-outlined text-xl text-white">home</span>
@@ -468,8 +469,7 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
             <v-carousel-item src="/storage/img/header-4.jpg" cover>
                 <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
                    <div class="max-w-3xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
-                     data-aos="fade-down"
-                    data-aos-duration="3000"
+
                    >
                         <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-0">
                             <span class="material-symbols-outlined text-xl text-white">home</span>
@@ -492,8 +492,7 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
             <v-carousel-item src="/storage/img/header-6.jpg" cover>
                 <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
                    <div class="max-w-3xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
-                     data-aos="fade-down"
-                    data-aos-duration="3000"
+
                    >
                         <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-0">
                             <span class="material-symbols-outlined text-xl text-white">home</span>

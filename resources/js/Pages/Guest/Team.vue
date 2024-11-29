@@ -1,4 +1,5 @@
 <script setup>
+import AvgWelcomeSection from '@/Components/AvgWelcomeSection.vue';
 import Breadcrumb from '@/Components/Breadcrumb.vue';
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
@@ -75,6 +76,7 @@ const rules = {
     <Head title="Our team" />
     <NavigationDrawerGuest />
     <GuestNav />
+    <AvgWelcomeSection />
     <Breadcrumb>
         <template #title>
             <span>Our team</span>
