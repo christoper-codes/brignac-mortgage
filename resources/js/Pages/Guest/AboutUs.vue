@@ -1,4 +1,5 @@
 <script setup>
+import AvgWelcomeSection from '@/Components/AvgWelcomeSection.vue';
 import Breadcrumb from '@/Components/Breadcrumb.vue';
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
@@ -85,6 +86,7 @@ onUnmounted(() => {
     <Head title="About us" />
     <NavigationDrawerGuest @scroll-contact-us-section="scrollContactUsSection" />
     <GuestNav @scroll-contact-us-section="scrollContactUsSection"/>
+    <AvgWelcomeSection />
     <Breadcrumb>
         <template #title>
             <span>About us</span>

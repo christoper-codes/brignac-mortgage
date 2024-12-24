@@ -1,4 +1,5 @@
 <script setup>
+import AvgWelcomeSection from '@/Components/AvgWelcomeSection.vue';
 import Breadcrumb from '@/Components/Breadcrumb.vue';
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
@@ -83,6 +84,7 @@ const rules = {
     <Head title="Join" />
     <NavigationDrawerGuest />
     <GuestNav />
+    <AvgWelcomeSection />
 
     <div class="bg-white">
         <div class="w-full relative h-auto bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">

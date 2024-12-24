@@ -1,4 +1,5 @@
 <script setup>
+import AvgWelcomeSection from '@/Components/AvgWelcomeSection.vue';
 import Breadcrumb from '@/Components/Breadcrumb.vue';
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
@@ -12,6 +13,7 @@ import { Head, Link } from '@inertiajs/vue3';
     <Head title="Blog" />
     <NavigationDrawerGuest />
     <GuestNav />
+    <AvgWelcomeSection />
     <Breadcrumb>
         <template #title>
             <span>Blog and news</span>
