@@ -260,6 +260,22 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
     <AvgWelcomeSection />
     <div class="relative overflow-hidden welcome-header">
         <nav class="absolute w-full bg-transparent z-50 text-white">
+            <!-- Announcement Banner -->
+            <!-- <div class="bg-gradient-to-r from-cyan-500 to-green-500">
+                <div class="max-w-[85rem] px-4 py-3 sm:px-6 lg:px-8 mx-auto text-center">
+                    <Link :href="route('our-team.index')">
+                        <div class="group inline-flex flex-wrap items-center bg-white/20 hover:bg-white/10 p-1 ps-4 rounded-full shadow-lg">
+                            <p class="me-2 text-white text-xs">
+                                Season's Greetings and Happy New Year 🎉
+                            </p>
+                            <span class="group-hover:bg-white/10 group-focus:bg-white/10 py-1.5 px-2.5 inline-flex justify-center items-center gap-x-2 rounded-full bg-white/20 font-semibold text-white text-sm">
+                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </span>
+                        </div>
+                    </Link>
+                </div>
+            </div> -->
+            <!-- End Announcement Banner -->
             <div class="py-2 border-b-[1px] border-b-gray-500">
                 <div class="flex items-center justify-between max-w-7xl mx-auto px-4 lg:px-0">
                     <div class="flex flex-col lg:flex-row lg:items-center lg:gap-6">
@@ -447,9 +463,9 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
                 <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
                    <div class="max-w-3xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
                    >
-                        <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-0">
+                        <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-20">
                             <span class="material-symbols-outlined text-xl text-white">home</span>
-                            <p class="font-bold text-xs lg:text-base">Brignac Mortgage And Consulting Services</p>
+                            <p class="font-bold text-xs lg:text-base">Brignac Mortgage</p>
                         </div>
                         <h1 class="text-4xl lg:text-5xl" style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold !important;">{{ about_us.welcome_title }}</h1>
                         <div >
