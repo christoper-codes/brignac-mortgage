@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\JoinController;
+use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Artisan;
@@ -28,28 +29,38 @@ Route::get('/mortgage', function () {
 })->name('mortgage');
 
 Route::get('/migrate-fresh', function () {
-    
+
     Artisan::call('migrate:fresh');
-    
+
     return "migrate-fresh";
-    
+
 });
 
 Route::get('/storage-fresh', function () {
-    
+
     Artisan::call('storage:link');
-    
+
     return "migrate-fresh";
-    
+
 });
 
 Route::get('/optimize-fresh', function () {
-    
+
     Artisan::call('optimize:clear');
-    
+
     return "migrate-fresh";
-    
+
 });
+
+/*
+* |--------------------------------------------------------------------------
+* | Web Routes
+* |--------------------------------------------------------------------------
+* | Legal | GUEST ROUTES
+*/
+Route::get('/privacy-policy-for-website', [LegalController::class, 'privacyPolicyForWebsite'])->name('privacy-policy-website');
+Route::get('/disclaimers-for-website', [LegalController::class, 'disclaimersForWebsite'])->name('disclaimers-website');
+Route::get('/terms-of-use-for-website', [LegalController::class, 'termsOfUseForWebsite'])->name('terms-of-use-website');
 
 /*
 * |--------------------------------------------------------------------------

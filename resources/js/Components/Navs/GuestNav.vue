@@ -6,6 +6,7 @@ import { drawerNavState } from '@/composables/drawersStates';
 const scrolledDown = ref(false);
 const menuServices = ref(false);
 const menuTeam = ref(false);
+const menuLegal = ref(false);
 const emits = defineEmits(['scroll-our-services-section', 'scroll-contact-us-section', 'scroll-mortgage-loan-calculator-section'])
 const navigateToWelcomeAndScroll = () => {
     if (routeName.value == '/') {
@@ -225,6 +226,57 @@ onUnmounted(() => {
                                                     <span class="material-symbols-outlined text-2xl text-orange-500">key</span>
                                                 </div>
                                                 <h3 class="flex-grow text-base">Join or login</h3>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </v-card>
+                        </v-menu>
+                    </div>
+                    <div class="">
+                        <v-menu
+                            v-model="menuLegal"
+                            open-on-hover
+                            location="bottom start" origin="top center"
+                            >
+                            <template v-slot:activator="{ props }">
+                                <div v-bind="props" class="flex items-center card_green cursor-pointer">
+                                    <span class="block">Legal</span>
+                                    <span class="material-symbols-outlined block text-xl">keyboard_arrow_down</span>
+                                </div>
+                            </template>
+
+                            <v-card min-width="500" rounded="lg" class="mt-3">
+                                <div class="flex items-start justify-between gap-5 p-5">
+                                    <div class="bg-gray-300 w-[40%] h-[240px] rounded-md overflow-hidden">
+                                        <div class="w-full h-full bg-[url('https://images.pexels.com/photos/7247401/pexels-photo-7247401.jpeg')] bg-center bg-cover rounded-md">
+                                            <div class="h-full w-full bg-black/60 flex items-center justify-center">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-[60%] flex flex-col justify-between gap-3">
+                                        <Link :href="route('privacy-policy-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-2xl text-orange-500">contract</span>
+                                                </div>
+                                                <h3 class="flex-grow text-base">Privacy policy</h3>
+                                            </div>
+                                        </Link>
+                                        <Link :href="route('disclaimers-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-2xl text-orange-500">gavel</span>
+                                                </div>
+                                                <h3 class="flex-grow text-base">Disclaimers</h3>
+                                            </div>
+                                        </Link>
+                                        <Link :href="route('terms-of-use-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-2xl text-orange-500">contract_edit</span>
+                                                </div>
+                                                <h3 class="flex-grow text-base">Terms of use</h3>
                                             </div>
                                         </Link>
                                     </div>

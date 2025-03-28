@@ -21,6 +21,7 @@ const message = ref('');
 const loading = ref(false);
 const menuServices = ref(false);
 const menuTeam = ref(false);
+const menuLegal = ref(false);
 const rangeSlider = ref(0);
 
 const ourServices = ref(null);
@@ -440,6 +441,57 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
                         </v-menu>
                     </div>
                     <div class="">
+                        <v-menu
+                            v-model="menuLegal"
+                            open-on-hover
+                            location="bottom start" origin="top center"
+                            >
+                            <template v-slot:activator="{ props }">
+                                <div v-bind="props" class="flex items-center card_green cursor-pointer">
+                                    <span class="block">Legal</span>
+                                    <span class="material-symbols-outlined block text-gray-50 text-xl">keyboard_arrow_down</span>
+                                </div>
+                            </template>
+
+                            <v-card min-width="500" rounded="lg" class="mt-3">
+                                <div class="flex items-start justify-between gap-5 p-5">
+                                    <div class="bg-gray-300 w-[40%] h-[240px] rounded-md overflow-hidden">
+                                        <div class="w-full h-full bg-[url('https://images.pexels.com/photos/7247401/pexels-photo-7247401.jpeg')] bg-center bg-cover rounded-md">
+                                            <div class="h-full w-full bg-black/60 flex items-center justify-center">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-[60%] flex flex-col justify-between gap-3">
+                                        <Link :href="route('privacy-policy-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-2xl text-orange-500">contract</span>
+                                                </div>
+                                                <h3 class="flex-grow text-base">Privacy policy</h3>
+                                            </div>
+                                        </Link>
+                                        <Link :href="route('disclaimers-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-2xl text-orange-500">gavel</span>
+                                                </div>
+                                                <h3 class="flex-grow text-base">Disclaimers</h3>
+                                            </div>
+                                        </Link>
+                                        <Link :href="route('terms-of-use-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-2xl text-orange-500">contract_edit</span>
+                                                </div>
+                                                <h3 class="flex-grow text-base">Terms of use</h3>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </v-card>
+                        </v-menu>
+                    </div>
+                    <div class="">
                         <Link :href="route('our-team.index')">
                             <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply Now</v-btn>
                         </Link>
@@ -489,7 +541,7 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
                    >
                         <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-0">
                             <span class="material-symbols-outlined text-xl text-white">home</span>
-                            <p class="font-bold text-xs lg:text-base">Brignac Mortgage And Consulting Services</p>
+                            <p class="font-bold text-xs lg:text-base">Brignac Mortgage</p>
                         </div>
                         <h1 class="text-4xl lg:text-5xl" style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold !important;">{{ about_us.welcome_title }}</h1>
                         <div >
@@ -505,14 +557,14 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
                 </div>
             </v-carousel-item>
 
-            <v-carousel-item src="/storage/img/header-6.jpg" cover>
+            <v-carousel-item src="/storage/img/header-3.webp" cover>
                 <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
                    <div class="max-w-3xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
 
                    >
                         <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-0">
                             <span class="material-symbols-outlined text-xl text-white">home</span>
-                            <p class="font-bold text-xs lg:text-base">Brignac Mortgage And Consulting Services</p>
+                            <p class="font-bold text-xs lg:text-base">Brignac Mortgage</p>
                         </div>
                         <h1 class="text-4xl lg:text-5xl" style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold !important;">{{ about_us.welcome_title }}</h1>
                         <div >

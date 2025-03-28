@@ -41,7 +41,7 @@ import { Head, Link } from '@inertiajs/vue3';
             <a class="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200" href="#">
               Company News
             </a>
-            <p class="text-xs sm:text-sm text-gray-800">November, 2024</p>
+            <p class="text-xs sm:text-sm text-gray-800">November, 2025</p>
           </div>
 
           <p class="text-lg text-gray-800">At Brignac Mortgage And Consulting Services, our mission has always been to offer transparency and accessibility throughout the home loan process. We believe that by providing a platform where potential homeowners can explore and compare loan options, we empower them to make informed decisions and invest wisely in real estate.</p>

@@ -6,6 +6,7 @@ import { drawerNavState } from '@/composables/drawersStates';
 const scrolledDown = ref(false);
 const menuServices = ref(false);
 const menuTeam = ref(false);
+const menuLegal = ref(false);
 const emits = defineEmits(['scroll-our-services-section', 'scroll-contact-us-section', 'scroll-mortgage-loan-calculator-section'])
 
 const navigateToWelcomeAndScroll = () => {
@@ -214,6 +215,57 @@ onUnmounted(() => {
                             </v-card>
                         </v-menu>
                     </div>
+                    <div class="">
+                        <v-menu
+                            v-model="menuLegal"
+                            location="bottom start" origin="top center"
+                            >
+                            <template v-slot:activator="{ props }">
+                                <div v-bind="props" class="flex items-center card_green cursor-pointer">
+                                    <span class="block">Legal</span>
+                                    <span class="material-symbols-outlined block text-gray-500 text-xl">keyboard_arrow_down</span>
+                                </div>
+                            </template>
+
+                            <v-card min-width="350" rounded="lg" class="mt-3">
+                                <div class="flex items-start justify-between gap-5 p-5">
+                                    <div class="w-[50%] flex flex-col justify-between gap-3">
+                                        <Link :href="route('privacy-policy-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">contract</span>
+                                                </div>
+                                                <h3 class="flex-grow text-xs">Privacy policy</h3>
+                                            </div>
+                                        </Link>
+                                        <Link :href="route('disclaimers-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">gavel</span>
+                                                </div>
+                                                <h3 class="flex-grow text-xs">Disclaimers</h3>
+                                            </div>
+                                        </Link>
+                                        <Link :href="route('terms-of-use-website')">
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">contract_edit</span>
+                                                </div>
+                                                <h3 class="flex-grow text-xs">Terms of use</h3>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div class="bg-gray-300 w-[50%] h-[215px] rounded-md overflow-hidden">
+                                        <div class="w-full h-full bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover rounded-md">
+                                            <div class="h-full w-full bg-black/60 flex items-center justify-center">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </v-card>
+                        </v-menu>
+                    </div>
                     <div class="w-full">
                         <Link :href="route('our-team.index')" @click="drawerNavState = !drawerNavState">
                             <v-btn rounded="xs" size="large" block class="text-none !w-full !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply Now</v-btn>
@@ -222,7 +274,7 @@ onUnmounted(() => {
                 </div>
 
                 <div class="mt-5 flex items-center justify-center gap-3 px-5 text-center">
-                    <p class="text-xs">Copyright © 2024 Brignac Mortgage</p>
+                    <p class="text-xs">Copyright © 2025 Brignac Mortgage</p>
                 </div>
             </v-navigation-drawer>
         </v-layout>

@@ -333,7 +333,7 @@ import { Head, Link } from '@inertiajs/vue3';
                     <p><strong>Average Credit Score:</strong> 700 or higher</p>
                     <p><strong>Minimum Down Payment:</strong> 3% to 5%</p>
                     <p><strong>Average Down Payment:</strong> 10%</p>
-                    <p>Jumbo loans are generally utilized for home purchases that exceed the conforming loan limit, which for 2024 is set at $766,550.</p>
+                    <p>Jumbo loans are generally utilized for home purchases that exceed the conforming loan limit, which for 2025 is set at $766,550.</p>
 
                     <div class="flex flex-col lg:flex-row items-start gap-3 justify-between w-full">
                         <!-- Opciones de préstamos -->
