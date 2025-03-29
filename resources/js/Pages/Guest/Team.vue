@@ -88,7 +88,7 @@ const rules = {
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-10 max-w-7xl mx-auto mt-20 px-4 lg:px-0">
         <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden">
+            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden hover:scale-[130%] transition-all duration-500">
                 <img class="w-full h-full" src="../../../../public/img/company-seo-img.jpg" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
@@ -117,8 +117,8 @@ const rules = {
         </div>
 
         <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden">
-                <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-allie.jpg" alt="team img">
+            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden hover:scale-[130%] transition-all duration-500">
+                <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-allie.png" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
                 <h2 class="text-xl font-bold">Allison Ratcliff</h2>
@@ -145,7 +145,7 @@ const rules = {
         </div>
 
         <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden">
+            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden hover:scale-[130%] transition-all duration-500">
                 <img class="w-full h-full" src="../../../../public/img/team-jennifer.jpg" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
