@@ -118,7 +118,7 @@ const rules = {
 
         <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
             <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden">
-                <img class="w-full h-full" src="../../../../public/img/team-allie.jpg" alt="team img">
+                <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-allie.jpg" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
                 <h2 class="text-xl font-bold">Allison Ratcliff</h2>
@@ -178,7 +178,7 @@ const rules = {
 
     <div class="bg-white">
         <div class="w-full h-auto bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
-        <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/80 lg:w-[65%] py-28 px-4 lg:px-0">
+        <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/80 py-28 px-4 lg:px-0">
             <div class="w-full flex flex-col justify-between max-w-3xl mx-auto" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                 <div class="flex flex-col gap-2 justify-center mb-5">
                     <h2 class="text-3xl lg:text-4xl font-bold">

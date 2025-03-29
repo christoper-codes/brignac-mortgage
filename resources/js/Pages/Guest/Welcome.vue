@@ -284,10 +284,10 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
                             <span class="material-symbols-outlined text-lg text-green-500">mail</span>
                             <p>Shaun@brignacmortgage.com</p>
                         </a>
-                        <div class="flex items-center gap-1 text-xs lg:text-sm">
+                        <a href="tel:+12254359287" class="flex items-center gap-1 text-xs lg:text-sm">
                             <span class="material-symbols-outlined text-lg text-green-500">phone</span>
-                            <p> +1 225-435-9287</p>
-                        </div>
+                            <p>+1 225-435-9287</p>
+                        </a>
                     </div>
 
                     <div class="flex flex-col items-end lg:flex-row lg:items-center gap-1 lg:gap-6">
