@@ -30,7 +30,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
         </Link>
       </div>
       <div class="flex flex-col items-center w-full mt-3 lg:mt-5">
-        <h2 class="text-center shadow-lg font-bold text-xl lg:text-3xl bg-gray-50 p-5 rounded-md block w-full">Disclaimers</h2>
+        <h2 class="text-center shadow-lg font-bold text-xl lg:text-3xl bg-gray-50 p-5 rounded-md block w-full">Terms and Conditions</h2>
         <h4 class="text-center  mt-7 inline-block mx-auto">Last Updated: {{ formattedDate }}</h4>
       </div>
       <div class="mt-7 leading-7">
