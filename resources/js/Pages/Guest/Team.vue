@@ -112,7 +112,7 @@ const rules = {
                         </ul>
                     </div>
                 </div>
-                <v-btn href="https://2401214.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5">Apply with Shaun</v-btn>
+                <v-btn href="https://app.brignacmortgage.com/pos/sign-up?account_id=account_1748639309677_p3z94m1n&lo_user_id=user_1748639309756_9n4wipe1" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5">Apply with Shaun</v-btn>
             </div>
         </div>
 
@@ -140,7 +140,7 @@ const rules = {
                         </ul>
                     </div>
                 </div>
-                <v-btn href="https://allieratcliff.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5">Apply with Allie</v-btn>
+                <v-btn href="https://app.brignacmortgage.com/pos/sign-up?account_id=account_1748639309677_p3z94m1n&lo_user_id=user_1748969701625_tdn9xgqc" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5">Apply with Allie</v-btn>
             </div>
         </div>
 
