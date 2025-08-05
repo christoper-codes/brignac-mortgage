@@ -13,7 +13,7 @@ import { Head, Link } from '@inertiajs/vue3';
     <Head title="Blog" />
     <NavigationDrawerGuest />
     <GuestNav />
-    <AvgWelcomeSection />
+
     <Breadcrumb>
         <template #title>
             <span>Blog and news</span>

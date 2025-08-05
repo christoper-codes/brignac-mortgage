@@ -76,7 +76,7 @@ const rules = {
     <Head title="Our team" />
     <NavigationDrawerGuest />
     <GuestNav />
-    <AvgWelcomeSection />
+
     <Breadcrumb>
         <template #title>
             <span>Our team</span>

@@ -14,7 +14,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
 <template>
     <Head title="Privacy Policy for website" />
-    <AvgWelcomeSection />
+
   <main class="min-h-screen flex items-center justify-center py-5 lg:py-0 relative">
     <div class="px-5 lg:px-0 lg:w-[60%] 2xl:w-1/2 mx-auto lg:py-5">
       <div class="flex items-center justify-between">

@@ -258,7 +258,7 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
     <Head title="Welcome" />
     <NavigationDrawerGuest @scroll-our-services-section="scrollOurServicesSection" @scroll-mortgage-loan-calculator-section="scrollMortgageLoanCalculatorSection" />
     <GuestNav @scroll-our-services-section="scrollOurServicesSection" @scroll-mortgage-loan-calculator-section="scrollMortgageLoanCalculatorSection" />
-    <AvgWelcomeSection />
+
     <div class="relative overflow-hidden welcome-header">
         <nav class="absolute w-full bg-transparent z-50 text-white">
             <!-- Announcement Banner -->

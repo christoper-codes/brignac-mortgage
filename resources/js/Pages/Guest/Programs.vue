@@ -13,7 +13,7 @@ import { Head, Link } from '@inertiajs/vue3';
     <Head title="Loan programs" />
     <NavigationDrawerGuest />
     <GuestNav />
-    <AvgWelcomeSection />
+
     <Breadcrumb>
         <template #title>
             <span>Loans programs</span>

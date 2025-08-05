@@ -86,7 +86,7 @@ onUnmounted(() => {
     <Head title="About us" />
     <NavigationDrawerGuest @scroll-contact-us-section="scrollContactUsSection" />
     <GuestNav @scroll-contact-us-section="scrollContactUsSection"/>
-    <AvgWelcomeSection />
+
     <Breadcrumb>
         <template #title>
             <span>About us</span>
