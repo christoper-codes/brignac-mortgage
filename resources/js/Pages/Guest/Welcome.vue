@@ -555,7 +555,7 @@ const facebookTestimonials = [
                     </div>
                     <div class="">
                         <Link :href="route('our-team.index')">
-                            <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply Now</v-btn>
+                            <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700">Apply Now</v-btn>
                         </Link>
                     </div>
                 </div>
@@ -573,69 +573,43 @@ const facebookTestimonials = [
             class="relative"
             hide-delimiter-background
         >
-            <v-carousel-item src="https://brignacmortgage.com/storage/img/header-1.webp" cover>
+            <v-carousel-item src="https://images.pexels.com/photos/14528988/pexels-photo-14528988.jpeg" cover>
                 <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
-                   <div class="max-w-3xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
+                   <div class="max-w-4xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
                    >
                         <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-20">
                             <span class="material-symbols-outlined text-xl text-white">home</span>
                             <p class="font-bold text-xs lg:text-base">Brignac Mortgage</p>
                         </div>
-                        <h1 class="text-4xl lg:text-5xl" style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold !important;">{{ about_us.welcome_title }}</h1>
+                        <h1 class="text-4xl lg:text-6xl font-bold">{{ about_us.welcome_title }}</h1>
                         <div >
-                            <p class="text-base lg:text-lg">{{ about_us.welcome_subtitle }}</p>
+                            <p class="text-base lg:text-lg max-w-2xl">{{ about_us.welcome_subtitle }}</p>
                         </div>
                         <div>
                             <Link :href="route('our-team.index')">
-
-                                <v-btn rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply now for a mortgage</v-btn>
-                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply now for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Apply now for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Apply now for a mortgage</v-btn>
                             </Link >
                         </div>
                    </div>
                 </div>
             </v-carousel-item>
-
-            <v-carousel-item src="/storage/img/header-4.jpg" cover>
+            <v-carousel-item src="https://images.pexels.com/photos/14528988/pexels-photo-14528988.jpeg" cover>
                 <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
-                   <div class="max-w-3xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
-
+                   <div class="max-w-4xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
                    >
-                        <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-0">
+                        <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-20">
                             <span class="material-symbols-outlined text-xl text-white">home</span>
                             <p class="font-bold text-xs lg:text-base">Brignac Mortgage</p>
                         </div>
-                        <h1 class="text-4xl lg:text-5xl" style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold !important;">{{ about_us.welcome_title }}</h1>
+                        <h1 class="text-4xl lg:text-6xl font-bold">{{ about_us.welcome_title }}</h1>
                         <div >
-                            <p class="text-base lg:text-lg">{{ about_us.welcome_subtitle }}</p>
+                            <p class="text-base lg:text-lg max-w-2xl">{{ about_us.welcome_subtitle }}</p>
                         </div>
                         <div>
                             <Link :href="route('our-team.index')">
-                                <v-btn rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply now for a mortgage</v-btn>
-                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply now for a mortgage</v-btn>
-                            </Link >
-                        </div>
-                   </div>
-                </div>
-            </v-carousel-item>
-
-            <v-carousel-item src="/storage/img/header-3.webp" cover>
-                <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
-                   <div class="max-w-3xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
-
-                   >
-                        <div class="flex items-center gap-1 bg-black/10 py-2 px-5 rounded-full mt-20 lg:mt-0">
-                            <span class="material-symbols-outlined text-xl text-white">home</span>
-                            <p class="font-bold text-xs lg:text-base">Brignac Mortgage</p>
-                        </div>
-                        <h1 class="text-4xl lg:text-5xl" style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold !important;">{{ about_us.welcome_title }}</h1>
-                        <div >
-                            <p class="text-base lg:text-lg">{{ about_us.welcome_subtitle }}</p>
-                        </div>
-                        <div>
-                            <Link :href="route('our-team.index')">
-                                <v-btn rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply now for a mortgage</v-btn>
-                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply now for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Apply now for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Apply now for a mortgage</v-btn>
                             </Link >
                         </div>
                    </div>
@@ -702,9 +676,9 @@ const facebookTestimonials = [
     </section>
 
     <section ref="mortgageLoanCalculator" class="mt-[550px] lg:mt-[480px] text-gray-700 w-full mx-auto lg:rounded-lg overflow-hidden">
-         <div class="shadow-xl bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover">
+         <div class="shadow-xl bg-[url('/storage/img/header-6.jpg')] bg-center bg-cover">
 
-            <v-form v-model="formSimulator" @submit.prevent="onSubmitCalculate" lazy-validation class="h-full w-full bg-black/90 py-20 px-4 text-white">
+            <v-form v-model="formSimulator" @submit.prevent="onSubmitCalculate" lazy-validation class="h-full w-full bg-black/70 py-20 px-4 text-white">
                 <div class="max-w-7xl mx-auto" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                     <div class="flex flex-col gap-3 items-center justify-center px-4 lg:px-0">
                         <div class="bg-white/20 rounded-full py-2 px-5 inline-flex">
@@ -956,13 +930,13 @@ const facebookTestimonials = [
     </section>
 
     <section ref="testimonials" class="mt-28 lg:mt-36">
-        <div class="w-full h-[500px] bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover">
-            <div class="h-full w-full bg-black/60 pt-14 px-4 lg:px-0">
+        <div class="w-full">
+            <div class="h-full w-full pt-14 px-4 lg:px-0">
                 <div class="flex flex-col gap-3 items-center justify-center">
-                    <div class="bg-black/20 rounded-full py-2 px-5 inline-flex text-white">
+                    <div class="bg-black/10 rounded-full py-2 px-5 inline-flex">
                         <span>Testimonials</span>
                     </div>
-                    <h2 class="text-3xl lg:text-4xl font-bold text-white text-center">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-center">
                         Our
                         <span style="color: #4285F4;">G</span>
                         <span style="color: #EA4335;">o</span>
@@ -975,16 +949,15 @@ const facebookTestimonials = [
                     <a href="https://maps.app.goo.gl/6YyqmAGQ8nJtZ9Jk6" target="_blank">
                         <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
                             <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
-                            Leave a review on google
+                            Read more reviews
                         </v-btn>
                     </a>
-
                 </div>
             </div>
         </div>
 
-        <main class="bg-white relative z-10" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 absolute top-[-230px] left-1/2 transform -translate-x-1/2 bg-white">
+        <main class="bg-white relative z-10">
+            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 bg-white">
                 <div class="relative">
                    <!--  <iframe class="h-[450px] z-50 w-full" src="https://widget.tagembed.com/2135662" style="border:none;"></iframe> -->
                     <div class="elfsight-app-ebce6ca8-0720-4595-b6cd-c4d2cb07e6df" data-elfsight-app-lazy></div>
@@ -993,20 +966,20 @@ const facebookTestimonials = [
         </main>
     </section>
 
-    <section ref="testimonialsfacebook" class="mt-[1050px] lg:mt-[1100px]">
-        <div class="w-full h-[500px] bg-[url('/storage/img/header-1.webp')] bg-center bg-cover">
-            <div class="h-full w-full bg-black/60 pt-14 px-4 lg:px-0">
+    <section ref="testimonialsfacebook" class="mt-32">
+        <div class="w-full">
+            <div class="h-full w-full pt-14 px-4 lg:px-0">
                 <div class="flex flex-col gap-3 items-center justify-center">
-                    <div class="bg-black/20 rounded-full py-2 px-5 inline-flex text-white">
+                    <div class="bg-black/10 rounded-full py-2 px-5 inline-flex">
                         <span>Testimonials</span>
                     </div>
-                    <h2 class="text-3xl lg:text-4xl font-bold text-center text-white">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-center">
                         Our <span class="text-blue-500">Facebook</span> Testimonials
                     </h2>
                     <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank">
                         <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
                             <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
-                            Leave a review on facebook
+                            Read more reviews
                         </v-btn>
                     </a>
 
@@ -1015,7 +988,7 @@ const facebookTestimonials = [
         </div>
 
         <main class="bg-white relative z-10">
-            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 absolute top-[-230px] left-1/2 transform -translate-x-1/2 bg-white">
+            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 bg-white">
                 <div class="relative">
                     <div class="w-full p-6 bg-gray-100/70 rounded-lg flex items-center justify-between">
                         <div class="flex flex-col gap-3">
@@ -1038,7 +1011,7 @@ const facebookTestimonials = [
                             </a>
                         </div>
                     </div>
-                    <div class="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+                    <div class="my-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
                         <div v-for="testimonial in facebookTestimonials" :key="testimonial.name" class="bg-gray-100/70 rounded-lg flex flex-col gap-5 p-7">
                             <div class="text-center flex flex-col items-center justify-center gap-1">
                                 <div class="flex gap-0 items-center text-yellow-500">
@@ -1280,8 +1253,8 @@ const facebookTestimonials = [
                                 <div class='flex items-center justify-center relative'>
                                     <div class="animate-ping absolute inline-flex h-12 w-24 lg:h-14 lg:w-32 rounded-lg bg-green-500 opacity-75"></div>
                                     <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                        <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Send now</v-btn>
-                                        <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Send now</v-btn>
+                                        <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white !transition-all !duration-700">Send now</v-btn>
+                                        <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700">Send now</v-btn>
                                     </div>
                                 </div>
                             </div>
