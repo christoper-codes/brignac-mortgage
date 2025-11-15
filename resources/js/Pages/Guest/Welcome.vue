@@ -993,7 +993,7 @@ const facebookTestimonials = [
         </main>
     </section>
 
-    <section ref="testimonials" class="mt-[1050px] lg:mt-[1100px]">
+    <section ref="testimonialsfacebook" class="mt-[1050px] lg:mt-[1100px]">
         <div class="w-full h-[500px] bg-[url('/storage/img/header-1.webp')] bg-center bg-cover">
             <div class="h-full w-full bg-black/60 pt-14 px-4 lg:px-0">
                 <div class="flex flex-col gap-3 items-center justify-center">
@@ -1048,7 +1048,7 @@ const facebookTestimonials = [
                                     <svg class="size-5 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
                                     <svg class="size-5 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
                                 </div>
-                                <p>{{ testimonial.content }}</p>
+                                <p class="line-clamp-3">{{ testimonial.content }}</p>
                                 <v-dialog max-width="600">
                                     <template v-slot:activator="{ props: activatorProps }">
                                         <p v-bind="activatorProps" class="text-blue-500 cursor-pointer">Read more</p>
@@ -1112,106 +1112,6 @@ const facebookTestimonials = [
                 </div>
             </div>
         </main>
-    </section>
-
-    <section class="mt-[1050px] lg:mt-[990px]" data-aos="fade-up" data-aos-duration="3000" data-aos-once="true">
-        <div class="flex flex-col gap-3 items-center justify-center px-4 lg:px-0">
-            <div class="bg-gray-200 rounded-full py-2 px-5 inline-flex">
-                <span class="text-gray-700">Testimonials</span>
-            </div>
-            <h2 class="text-3xl lg:text-4xl font-bold text-center">
-                Our <span class="text-orange-500">Facebook</span> Testimonials
-            </h2>
-            <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank">
-                <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
-                    <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
-                    Leave a review on facebook
-                </v-btn>
-            </a>
-        </div>
-
-        <div class="hidden lg:flex items-center justify-between mt-12" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="w-[50%] h-[500px] bg-[url('/storage/img/header-1.webp')] bg-center bg-cover">
-                <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/70">
-                    <div class="flex flex-col gap-2 justify-center mb-5">
-                        <h2 class="text-3xl lg:text-4xl font-bold">Our Testimonials</h2>
-                        <div class="h-1 w-14 bg-orange-500 rounded-full"></div>
-                        <p class="max-w-[400px]">Clients who have trusted our offers and services in Brignac Mortgage</p>
-                    </div>
-                </div>
-            </div>
-            <div class="w-[50%] h-[500px] bg-gray-100 flex items-center justify-center relative">
-                <div class="w-[115%] h-[400px] absolute left-[-150px] transform flex items-center justify-center w-testimonials-control" data-aos="fade-up" data-aos-duration="3000" data-aos-once="true">
-                    <v-carousel hide-delimiters height="400">
-                        <v-carousel-item>
-                            <div class="w-full h-full flex items-center justify-between gap-10 mt-5">
-                                <div class="h-[300px] shadow-lg w-full bg-white flex items-center justify-center p-7 cursor-pointer rounded-md card_blue">
-                                    <a href="https://www.facebook.com/grant.murphy.503/posts/995434784396558?ref=embed_post" target="_blank" class="w-full h-full flex items-center justify-center">
-                                        <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial3.png" alt="">
-                                    </a>                                </div>
-                                <div class="h-[300px] shadow-lg w-full bg-white flex items-center justify-center p-7 cursor-pointer rounded-md card_blue">
-                                    <a href="https://www.facebook.com/jeremy.bergeron.7/posts/10100116932176682?ref=embed_post" target="_blank" class="w-full h-full flex items-center justify-center">
-                                        <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial4.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </v-carousel-item>
-                        <v-carousel-item>
-                            <div class="w-full h-full flex items-center justify-between gap-10 mt-5">
-                                <div class="h-[300px] shadow-lg w-full bg-white flex items-center justify-center p-7 cursor-pointer rounded-md card_blue">
-                                    <a href="https://www.facebook.com/brant.gauthreaux/posts/5756679497685251?ref=embed_post" target="_blank" class="w-full h-full flex items-center justify-center">
-                                        <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial1.png" alt="">
-                                    </a>                                </div>
-                                <div class="h-[300px] shadow-lg w-full bg-white flex items-center justify-center p-7 cursor-pointer rounded-md card_blue">
-                                    <a href="https://www.facebook.com/justin.pfister.7/posts/6175620575790131?ref=embed_post" target="_blank" class="w-full h-full flex items-center justify-center">
-                                        <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial2.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </v-carousel-item>
-                        <v-carousel-item>
-                            <div class="w-full h-full flex items-center justify-between gap-10 mt-5">
-                                <div class="h-[300px] shadow-lg w-full bg-white flex items-center justify-center p-7 cursor-pointer rounded-md card_blue">
-                                    <iframe class="w-full h-[275px] cursor-pointer" src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fangelo.datseris%2Fposts%2Fpfbid02e7L8hKjCxSfEuk8HCjkhFZcbSZjvosnxijXMRvo3Hzvc4zUhRNMirszpDpDZ3QRpl&show_text=true&width=500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-                                </div>
-                                <div class="h-[300px] shadow-lg w-full bg-white flex items-center justify-center p-7 cursor-pointer rounded-md card_blue">
-                                    <a href="https://www.facebook.com/grant.murphy.503/posts/995434784396558?ref=embed_post" target="_blank" class="w-full h-full flex items-center justify-center">
-                                        <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial3.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </v-carousel-item>
-                    </v-carousel>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4 lg:px-0 lg:hidden">
-            <a href="https://www.facebook.com/grant.murphy.503/posts/995434784396558?ref=embed_post" target="_blank" class="w-full p-4 rounded-sm shadow-xl card_blue_persistent" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-                <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial3.png" alt="">
-            </a>
-            <a href="https://www.facebook.com/jeremy.bergeron.7/posts/10100116932176682?ref=embed_post" target="_blank" class="w-full p-4 rounded-sm shadow-xl card_blue" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-                <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial4.png" alt="">
-            </a>
-            <a href="https://www.facebook.com/brant.gauthreaux/posts/5756679497685251?ref=embed_post" target="_blank" class="w-full p-4 rounded-sm shadow-xl card_blue" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-                <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial1.png" alt="">
-            </a>
-            <a href="https://www.facebook.com/justin.pfister.7/posts/6175620575790131?ref=embed_post" target="_blank" class="w-full p-4 rounded-sm shadow-xl card_blue" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-                <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial2.png" alt="">
-            </a>
-            <a href="https://www.facebook.com/angelo.datseris/posts/10230219937151699?ref=embed_post" target="_blank" class="w-full p-4 rounded-sm shadow-xl card_blue" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-                <img class="w-full h-auto" src="../../../../public/img/facebook-testimonials/testimonial5.png" alt="">
-            </a>
-        </div>
-
-        <!-- <div class="mt-12 lg:grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4 lg:px-0 hidden">
-            <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="lg:hover:scale-105 lg:transition-transform lg:duration-500 cursor-pointer w-full shadow-xl rounded-sm p-4 card_blue">
-                <iframe class="w-full h-[240px]" src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjustin.pfister.7%2Fposts%2Fpfbid02mTgmjJaFUKJjCkAcd4VdG2PVfepymdSLGPwtvoPXD1ybuHQpJVnjkyXibEAcM3CFl&show_text=true&width=500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-            </div>
-            <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="lg:col-span-2 lg:hover:scale-105 lg:transition-transform lg:duration-500 cursor-pointer w-full shadow-xl rounded-sm p-4 card_blue">
-                <iframe class="w-full h-[350px] lg:h-[240px]" src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fangelo.datseris%2Fposts%2Fpfbid02e7L8hKjCxSfEuk8HCjkhFZcbSZjvosnxijXMRvo3Hzvc4zUhRNMirszpDpDZ3QRpl&show_text=true&width=500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-            </div>
-        </div> -->
     </section>
 
     <section class="mt-20 lg:mt-40 w-full flex flex-col items-center justify-center">
