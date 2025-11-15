@@ -573,7 +573,7 @@ const facebookTestimonials = [
             class="relative"
             hide-delimiter-background
         >
-            <v-carousel-item src="https://images.pexels.com/photos/14528988/pexels-photo-14528988.jpeg" cover>
+            <v-carousel-item src="/storage/img/header-5.jpg" cover>
                 <div class="w-full h-full bg-black/60 flex items-center justify-center text-white">
                    <div class="max-w-4xl flex items-center justify-center flex-col gap-8 lg:mx-auto text-center mx-4"
                    >

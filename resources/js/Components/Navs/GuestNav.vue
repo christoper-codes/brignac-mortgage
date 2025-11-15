@@ -77,7 +77,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div @click="scrollToTop" class="animate__animated animate__fadeInDown fixed bottom-10 right-5 w-10 h-10 bg-orange-500 z-40 rounded-sm flex items-center justify-center floating-shadow lg:hover:scale-110 duration-500 transition-transform cursor-pointer">
+    <div @click="scrollToTop" class="animate__animated animate__fadeInDown fixed bottom-10 right-5 size-12 bg-orange-500 z-40 rounded-full flex items-center justify-center floating-shadow lg:hover:scale-110 duration-500 transition-transform cursor-pointer">
         <span class="material-symbols-outlined text-white">keyboard_arrow_up</span>
     </div>
     <nav :class="['fixed top-0 left-0 w-full transition-all z-40 bg-white shadow-xl', { 'hidden': !scrolledDown, 'animate__animated animate__fadeInDown': scrolledDown }]">
