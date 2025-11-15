@@ -555,7 +555,7 @@ const facebookTestimonials = [
                     </div>
                     <div class="">
                         <Link :href="route('our-team.index')">
-                            <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700">Apply Now</v-btn>
+                            <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Apply Now</v-btn>
                         </Link>
                     </div>
                 </div>
@@ -564,7 +564,7 @@ const facebookTestimonials = [
                 <div class="flex items-center justify-center">
                     <img class="w-32" src="../../../../public/img/primary-logo-dark.png" alt="">
                 </div>
-                <div @click="drawerNavState = !drawerNavState" class="flex items-center justify-center h-12 w-12 bg-white">
+                <div @click="drawerNavState = !drawerNavState" class="flex items-center justify-center h-12 w-12 bg-white rounded-md">
                     <span class="material-symbols-outlined block">menu</span>
                 </div>
             </div>
@@ -619,9 +619,9 @@ const facebookTestimonials = [
     </div>
 
     <section class="bg-white relative z-10">
-        <div class="w-[90%] lg:w-[70%] mx-auto shadow-xl rounded-sm p-10 absolute overflow-hidden top-[-60px] left-1/2 transform -translate-x-1/2 bg-white lg:hover:-translate-y-2 lg:transition-all lg:duration-700">
+        <div class="w-[90%] lg:w-[70%] mx-auto shadow-xl rounded-xl p-10 absolute overflow-hidden top-[-60px] left-1/2 transform -translate-x-1/2 bg-white">
             <!-- Testimonials -->
-            <div class="relative" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+            <div class="relative">
                 <!-- Blockquote -->
                 <blockquote class="text-center lg:mx-auto lg:w-3/5">
                     <div class="flex items-center justify-center">
@@ -648,23 +648,23 @@ const facebookTestimonials = [
                        </div>
                     </footer>
                     <div class="mt-6 flex items-center gap-2 justify-center">
-                        <a data-aos="fade-up" data-aos-duration="1000" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://www.facebook.com/BrignacMortgage" target="_blank">
+                        <a data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://www.facebook.com/BrignacMortgage" target="_blank">
                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
                             </svg>
                         </a>
-                        <a data-aos="fade-up" data-aos-duration="1500" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://maps.app.goo.gl/wBjcfrZDJV8aNYr9A" target="_blank">
+                        <a data-aos="fade-up" data-aos-duration="1500" data-aos-once="true" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://maps.app.goo.gl/wBjcfrZDJV8aNYr9A" target="_blank">
                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
                             </svg>
                         </a>
-                        <a data-aos="fade-up" data-aos-duration="2000" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://x.com/shaunbrignac" target="_blank">
+                        <a data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://x.com/shaunbrignac" target="_blank">
                             <svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="none"><g clip-path="url(#clip0_1_2)"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="gray"/></g><defs><clipPath id="clip0_1_2"><rect width="1200" height="1227" fill="white"/></clipPath></defs></svg>
                         </a>
-                        <a data-aos="fade-up" data-aos-duration="2500" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://www.tiktok.com/@shaunbrignac?is_from_webapp=1&sender_device=pc" target="_blank">
+                        <a data-aos="fade-up" data-aos-duration="2500" data-aos-once="true" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://www.tiktok.com/@shaunbrignac?is_from_webapp=1&sender_device=pc" target="_blank">
                             <svg class="w-5 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"></path></svg>
                         </a>
-                        <a data-aos="fade-up" data-aos-duration="3000" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://www.instagram.com/shaunbrignac?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <a data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-500 hover:bg-black/10 focus:outline-none focus:bg-black/10 disabled:opacity-50 disabled:pointer-events-none" href="https://www.instagram.com/shaunbrignac?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-current text-gray-500" viewBox="0 0 24 24"><path d="M11.999 7.377a4.623 4.623 0 1 0 0 9.248 4.623 4.623 0 0 0 0-9.248zm0 7.627a3.004 3.004 0 1 1 0-6.008 3.004 3.004 0 0 1 0 6.008z"></path><circle cx="16.806" cy="7.207" r="1.078"></circle><path d="M20.533 6.111A4.605 4.605 0 0 0 17.9 3.479a6.606 6.606 0 0 0-2.186-.42c-.963-.042-1.268-.054-3.71-.054s-2.755 0-3.71.054a6.554 6.554 0 0 0-2.184.42 4.6 4.6 0 0 0-2.633 2.632 6.585 6.585 0 0 0-.419 2.186c-.043.962-.056 1.267-.056 3.71 0 2.442 0 2.753.056 3.71.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.042 1.268.055 3.71.055s2.755 0 3.71-.055a6.615 6.615 0 0 0 2.186-.419 4.613 4.613 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.186.043-.962.056-1.267.056-3.71s0-2.753-.056-3.71a6.581 6.581 0 0 0-.421-2.217zm-1.218 9.532a5.043 5.043 0 0 1-.311 1.688 2.987 2.987 0 0 1-1.712 1.711 4.985 4.985 0 0 1-1.67.311c-.95.044-1.218.055-3.654.055-2.438 0-2.687 0-3.655-.055a4.96 4.96 0 0 1-1.669-.311 2.985 2.985 0 0 1-1.719-1.711 5.08 5.08 0 0 1-.311-1.669c-.043-.95-.053-1.218-.053-3.654 0-2.437 0-2.686.053-3.655a5.038 5.038 0 0 1 .311-1.687c.305-.789.93-1.41 1.719-1.712a5.01 5.01 0 0 1 1.669-.311c.951-.043 1.218-.055 3.655-.055s2.687 0 3.654.055a4.96 4.96 0 0 1 1.67.311 2.991 2.991 0 0 1 1.712 1.712 5.08 5.08 0 0 1 .311 1.669c.043.951.054 1.218.054 3.655 0 2.436 0 2.698-.043 3.654h-.011z"></path></svg>
                         </a>
                     </div>
@@ -757,9 +757,8 @@ const facebookTestimonials = [
 
                     <div class="mt-10">
                         <div class='flex items-center justify-center relative'>
-                            <div class="animate-ping absolute inline-flex h-10 w-48 rounded-lg bg-orange-500 opacity-75"></div>
                             <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                <v-btn type="submit"  :loading="loadingCalculate" rounded="xs" size="large" class="text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700">Calculate the credit payment</v-btn>
+                                <v-btn type="submit"  :loading="loadingCalculate" rounded="xs" size="large" class="text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !flex !items-center !justify-center !py-5 !px-7 lg:!py-7 lg:!px-10 !rounded-full">Calculate the credit payment</v-btn>
                             </div>
                         </div>
                     </div>

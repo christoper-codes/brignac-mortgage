@@ -286,7 +286,7 @@ onUnmounted(() => {
                     </div>
                     <div class="">
                         <Link :href="route('our-team.index')">
-                            <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Apply Now</v-btn>
+                            <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Apply Now</v-btn>
                         </Link>
                     </div>
                 </div>
