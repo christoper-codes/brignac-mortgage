@@ -112,7 +112,7 @@ onUnmounted(() => {
 <template>
     <!-- ========== FOOTER ========== -->
     <footer class="mt-auto bg-gray-900 w-full relative">
-        <div class="w-[90%] lg:w-[70%] p-10 flex items-center justify-center text-center gap-10 mx-auto rounded-sm absolute top-[-70px] left-1/2 transform -translate-x-1/2 bg-orange-500">
+        <div class="w-[90%] lg:w-[70%] p-10 rounded-xl flex items-center justify-center text-center gap-10 mx-auto rounded-sm absolute top-[-70px] left-1/2 transform -translate-x-1/2 bg-orange-500">
             <div>
                 <h3 class="font-bold text-xl lg:text-3xl text-white">Don't see what you are looking for?</h3>
                 <p class="text-white text-sm lg:text-base mt-3">We can help you with that, Give us a call!</p>
@@ -157,7 +157,7 @@ onUnmounted(() => {
                 </Link>
                 <p @click="navigateToTestimonialsAndScroll"><span class="inline-flex cursor-pointer gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200">Testimonials</span></p>
                 <Link :href="route('blog.index')">
-                    <p><span class="inline-flex cursor-pointer gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200">Blog</span> <span class="inline-block ms-1 text-xs bg-green-700 text-white py-1 px-2 rounded-lg">New section</span></p>
+                    <p><span class="inline-flex cursor-pointer gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200">Blog</span> <span class="inline-block ms-1 text-xs bg-green-600 text-white py-1 px-2 rounded-lg">New section</span></p>
                 </Link>
                 <Link :href="route('about-us.index')">
                     <p><span class="inline-flex cursor-pointer gap-x-2 text-gray-400 hover:text-gray-200 focus:outline-none focus:text-gray-200">Mission and vision</span></p>
@@ -185,7 +185,7 @@ onUnmounted(() => {
                                 v-model="email"
                                 :rules="[rules.required, rules.email]"
                             ></v-text-field>
-                            <v-btn type="submit" :loading="loading" rounded="xs" class="text-none lg:!w-[35%] !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Send now</v-btn>
+                            <v-btn type="submit" :loading="loading" rounded="xs" class="text-none lg:!w-[35%] !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
                     </v-form>
                 </div>
                 <p class="mt-3 text-xs lg:text-sm text-gray-400">

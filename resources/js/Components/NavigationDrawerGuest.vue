@@ -115,22 +115,22 @@ onUnmounted(() => {
                             <v-card min-width="350" rounded="lg" class="mt-3">
                                 <div class="flex items-start justify-between gap-5 p-5">
                                     <div class="w-[50%] flex flex-col justify-between gap-3">
-                                        <div @click="navigateToWelcomeAndScroll" class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                            <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                <span class="material-symbols-outlined text-xl text-blue-500">group</span>
+                                        <div @click="navigateToWelcomeAndScroll" class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                            <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                <span class="material-symbols-outlined text-xl text-orange-500">group</span>
                                             </div>
                                             <h3 class="flex-grow text-xs">Our services</h3>
                                         </div>
-                                        <div @click="navigateToAboutUsAndScroll" class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                            <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                <span class="material-symbols-outlined text-xl text-blue-500">groups</span>
+                                        <div @click="navigateToAboutUsAndScroll" class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                            <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                <span class="material-symbols-outlined text-xl text-orange-500">groups</span>
                                             </div>
                                             <h3 class="flex-grow text-xs">Contact us</h3>
                                         </div>
                                         <Link :href="route('blog.index')" @click="drawerNavState = !drawerNavState">
-                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                    <span class="material-symbols-outlined text-xl text-blue-500">bookmark</span>
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">bookmark</span>
                                                 </div>
                                                 <h3 class="flex-grow text-xs">Blog</h3>
                                             </div>
@@ -181,25 +181,25 @@ onUnmounted(() => {
                                     </div>
                                     <div class="w-[50%] flex flex-col justify-between gap-3">
                                         <Link :href="route('our-team.index')" @click="drawerNavState = !drawerNavState">
-                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                    <span class="material-symbols-outlined text-xl text-blue-500">group</span>
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">group</span>
                                                 </div>
                                                 <h3 class="flex-grow text-xs">Our team</h3>
                                             </div>
                                         </Link>
                                         <Link :href="route('about-us.index')" @click="drawerNavState = !drawerNavState">
-                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                    <span class="material-symbols-outlined text-xl text-blue-500">apartment</span>
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">apartment</span>
                                                 </div>
                                                 <h3 class="flex-grow text-xs">About</h3>
                                             </div>
                                         </Link>
                                         <Link :href="route('join-our-team.index')" @click="drawerNavState = !drawerNavState">
-                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                    <span class="material-symbols-outlined text-xl text-blue-500">key</span>
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">key</span>
                                                 </div>
                                                 <h3 class="flex-grow text-xs">Join or login</h3>
                                             </div>
@@ -225,25 +225,25 @@ onUnmounted(() => {
                                 <div class="flex items-start justify-between gap-5 p-5">
                                     <div class="w-[50%] flex flex-col justify-between gap-3">
                                         <Link :href="route('privacy-policy-website')">
-                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                    <span class="material-symbols-outlined text-xl text-blue-500">contract</span>
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">contract</span>
                                                 </div>
                                                 <h3 class="flex-grow text-xs">Privacy policy</h3>
                                             </div>
                                         </Link>
                                         <Link :href="route('disclaimers-website')">
-                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                    <span class="material-symbols-outlined text-xl text-blue-500">gavel</span>
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">gavel</span>
                                                 </div>
                                                 <h3 class="flex-grow text-xs">Disclaimers</h3>
                                             </div>
                                         </Link>
                                         <Link :href="route('terms-of-use-website')">
-                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-blue-100 cursor-pointer hover:bg-blue-200 transition-colors duration-500">
-                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-blue-200">
-                                                    <span class="material-symbols-outlined text-xl text-blue-500">contract_edit</span>
+                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
+                                                <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                                    <span class="material-symbols-outlined text-xl text-orange-500">contract_edit</span>
                                                 </div>
                                                 <h3 class="flex-grow text-xs">Terms of use</h3>
                                             </div>

@@ -826,16 +826,15 @@ const facebookTestimonials = [
     </section>
 
     <section ref="ourServices" class="text-gray-700 mb-10 mt-20">
-
          <div class="w-full flex flex-col-reverse lg:flex-col lg:mt-10">
-            <div class="bg-gray-100 w-full pt-14 pb-14 lg:mb-10">
+            <div class="bg-gray-50 border-y lg:my-10 w-full py-20 lg:mb-10">
                 <div class="max-w-6xl mx-auto gap-16 flex flex-col-reverse lg:flex-row items-center justify-between px-4 lg:px-0 overflow-hidden">
-                    <div class="w-full lg:w-[40%] px-2"  data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
-                        <div class="relative h-[400px] lg:h-[600px] border-[10px] shadow-xl border-white w-full after:w-[20px] lg:after:w-[30px] after:h-[250px] lg:after:h-[500px] after:absolute after:top-1/2 after:-left-[20px] lg:after:-left-[30px] after:-translate-y-1/2 after:bg-orange-500">
-                            <img class="w-full h-full object-cover" src="/storage/img/header-3.webp" alt="">
+                    <div class="w-full lg:w-[40%] px-2" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
+                        <div class="relative h-[400px] lg:h-[600px] border-[10px] rounded-lg shadow-xl border-white w-full after:w-[20px] lg:after:w-[30px] after:h-[250px] lg:after:h-[500px] lg:after:rounded-l-lg after:absolute after:top-1/2 after:-left-[20px] lg:after:-left-[30px] after:-translate-y-1/2 after:bg-orange-500">
+                            <img class="w-full h-full object-cover rounded-lg" src="/storage/img/header-3.webp" alt="">
                         </div>
                     </div>
-                    <div class="w-full lg:w-[60%]" data-aos="fade-left" data-aos-duration="3000" data-aos-once="true">
+                    <div class="w-full lg:w-[60%]">
                         <div class="flex flex-col gap-5">
                             <div>
                                 <div class="bg-orange-100 rounded-full py-2 px-5 inline-flex text-orange-600">
@@ -886,7 +885,7 @@ const facebookTestimonials = [
             </div>
             <div class="px-4 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto gap-5 mt-5 mb-0">
 
-                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="overflow-hidden relative bg-center bg-cover w-full shadow-xl mx-auto card2 lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer">
+                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="overflow-hidden relative bg-center bg-cover w-full shadow-xl mx-auto card2 lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer rounded-lg">
                    <div class="w-full h-full px-10 py-12 flex flex-col gap-3 items-center justify-center text-center">
                     <div><span class="material-symbols-outlined text-5xl text-green-500">real_estate_agent</span></div>
                     <h3 class="text-xl font-bold">Excellent Customer Experience!</h3>
@@ -946,9 +945,9 @@ const facebookTestimonials = [
                         Testimonials
                     </h2>
                     <a href="https://maps.app.goo.gl/6YyqmAGQ8nJtZ9Jk6" target="_blank">
-                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
-                            <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
+                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700 !flex !items-center !justify-center !p-5 lg:!py-7 lg:!px-8 !rounded-full !mb-3">
                             Read more reviews
+                            <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
                         </v-btn>
                     </a>
                 </div>
@@ -976,9 +975,9 @@ const facebookTestimonials = [
                         Our <span class="text-blue-500">Facebook</span> Testimonials
                     </h2>
                     <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank">
-                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
-                            <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
+                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700 !flex !items-center !justify-center !p-5 lg:!py-7 lg:!px-8 !rounded-full !mb-3">
                             Read more reviews
+                            <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
                         </v-btn>
                     </a>
 
@@ -1087,13 +1086,13 @@ const facebookTestimonials = [
     </section>
 
     <section class="mt-20 lg:mt-40 w-full flex flex-col items-center justify-center">
-        <div class="w-[90%] lg:w-[50%] h-10 bg-green-500"></div>
-        <div class="w-full h-[300px] lg:hidden bg-[url('https://www.bbva.com/wp-content/uploads/2018/04/plan-negocios-empresas-bbva-e1523885477593.jpg')] bg-center bg-cover">
+        <div class="w-[90%] lg:w-[50%] h-10 bg-green-500 rounded-t-xl"></div>
+        <div class="w-full h-[300px] lg:hidden bg-[url('/storage/img/header-6.jpg')] bg-center bg-cover">
             <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/50">
                 <div class="flex flex-col gap-0 items-center justify-center mb-5">
                     <h2 class="text-3xl lg:text-4xl font-bold">About us</h2>
                     <div class="inline-flex cursor-pointer items-center gap-x-1 text-sm">
-                        <span class="block decoration-2 underline decoration-green-500">Show more</span>
+                        <span class="block">Show more</span>
                         <span class="material-symbols-outlined block text-xl">chevron_right</span>
                     </div>
                 </div>
@@ -1137,13 +1136,13 @@ const facebookTestimonials = [
         <div class="w-full !hidden lg:!block">
             <v-parallax
             class="w-full h-[300px] "
-            src="https://www.bbva.com/wp-content/uploads/2018/04/plan-negocios-empresas-bbva-e1523885477593.jpg"
+            src="/storage/img/header-6.jpg"
         >
                 <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/50">
                     <div class="flex flex-col gap-0 items-center justify-center mb-5">
                         <h2 class="text-3xl lg:text-4xl font-bold">About us</h2>
                         <div class="inline-flex cursor-pointer items-center gap-x-1 text-sm">
-                            <span class="block decoration-2 underline decoration-green-500">Show more</span>
+                            <span class="block">Show more</span>
                             <span class="material-symbols-outlined block text-xl">chevron_right</span>
                         </div>
                     </div>
@@ -1192,7 +1191,7 @@ const facebookTestimonials = [
         <iframe class="w-full h-[400px]" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6893.12326712053!2d-90.771464!3d30.249575!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8626cf3dc655337f%3A0x3b15aacf38947f0c!2sBrignac%20Mortgage%20and%20Consulting%20Services%20LLC!5e0!3m2!1ses-419!2smx!4v1730790533348!5m2!1ses-419!2smx" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
         <main class="bg-white relative z-10" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="w-[90%] lg:w-[70%] mx-auto rounded-sm py-10 px-6 absolute top-[-200px] left-1/2 transform -translate-x-1/2 bg-white">
+            <div class="w-[90%] lg:w-[70%] mx-auto rounded-xl py-10 px-6 absolute top-[-200px] left-1/2 transform -translate-x-1/2 bg-white">
                 <div class="relative min-h-[300px]">
                     <div class="flex flex-col gap-3 items-center justify-center">
                         <div class="bg-green-100 rounded-full py-2 px-5 inline-flex">
@@ -1250,14 +1249,12 @@ const facebookTestimonials = [
 
                             <div class="w-full flex items-center justify-end mt-12">
                                 <div class='flex items-center justify-center relative'>
-                                    <div class="animate-ping absolute inline-flex h-12 w-24 lg:h-14 lg:w-32 rounded-lg bg-green-500 opacity-75"></div>
                                     <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                        <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white !transition-all !duration-700">Send now</v-btn>
-                                        <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700">Send now</v-btn>
+                                        <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Send now</v-btn>
+                                        <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Send now</v-btn>
                                     </div>
                                 </div>
                             </div>
-
                         </v-form>
                     </div>
                 </div>
