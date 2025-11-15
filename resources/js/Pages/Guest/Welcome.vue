@@ -48,6 +48,13 @@ onMounted(() => {
     window.addEventListener('scroll-our-services-section', scrollOurServicesSection);
     window.addEventListener('scroll-mortgage-loan-calculator-section', scrollMortgageLoanCalculatorSection);
     window.addEventListener('scroll-testimonials-section', scrolltestimonialsSection);
+      if (!document.getElementById('elfsight-script')) {
+        const script = document.createElement('script');
+        script.id = 'elfsight-script';
+        script.src = 'https://elfsightcdn.com/platform.js';
+        script.async = true;
+        document.head.appendChild(script);
+    }
 });
 
 onUnmounted(() => {
@@ -924,14 +931,15 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
         <main class="bg-white relative z-10" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
             <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 absolute top-[-230px] left-1/2 transform -translate-x-1/2 bg-white">
                 <div class="relative">
-                    <iframe class="h-[450px] z-50 w-full" src="https://widget.tagembed.com/2135662" style="border:none;"></iframe>
+                   <!--  <iframe class="h-[450px] z-50 w-full" src="https://widget.tagembed.com/2135662" style="border:none;"></iframe> -->
+                    <div class="elfsight-app-ebce6ca8-0720-4595-b6cd-c4d2cb07e6df" data-elfsight-app-lazy></div>
                 </div>
             </div>
         </main>
 
     </section>
 
-    <section class="mt-[350px] lg:mt-[430px]" data-aos="fade-up" data-aos-duration="3000" data-aos-once="true">
+    <section class="mt-[1050px] lg:mt-[990px]" data-aos="fade-up" data-aos-duration="3000" data-aos-once="true">
         <div class="flex flex-col gap-3 items-center justify-center px-4 lg:px-0">
             <div class="bg-gray-200 rounded-full py-2 px-5 inline-flex">
                 <span class="text-gray-700">Testimonials</span>

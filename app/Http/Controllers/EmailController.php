@@ -7,6 +7,7 @@ use App\Mail\TestMailable;
 use App\Models\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
@@ -16,7 +17,7 @@ class EmailController extends Controller
     {
         DB::beginTransaction();
         try {
-            
+
             $request->validate([
                 'email' => 'required|email',
                 'name' => 'required',
@@ -27,7 +28,7 @@ class EmailController extends Controller
 
             $details = [
                 'email' => $request->email,
-                'title' => $request->name, 
+                'title' => $request->name,
                 'body' => $request->message,
                 'is_hiring' => $request->is_hiring,
                 'files' => $request->files ?? []
@@ -45,23 +46,23 @@ class EmailController extends Controller
 
             Email::create([
                 'email' => $request->email,
-                'subject' => $request->name, 
+                'subject' => $request->name,
                 'message' => $request->message,
                 'is_hiring' => $request->is_hiring ? 1 : 0,
                 'files' => $filesString
             ]);
 
-    
+
             Mail::to('shaun@brignacmortgage.com')->send(new TestMailable($details, $filePaths));//shaun@brignacmortgage.com
             Mail::to('eh2002cc415@ueh.edu.mx')->send(new TestMailable($details, $filePaths));
-
+            Log::info('Email enviado correctamente a ' . $request->email);
             DB::commit();
             return response()->json([
                 'message' => 'The message has been sent successfully',
                 'data' => $filePaths,
                 'success' => true
             ], 200);
-    
+
         } catch(\Exception $e){
             DB::rollBack();
             return response()->json([

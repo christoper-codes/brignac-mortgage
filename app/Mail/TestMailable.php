@@ -60,19 +60,4 @@ class TestMailable extends Mailable
         }
         return $attachments;
     }
-
-     /* public function build()
-    {
-        $email = $this->view('emails.cliente_interesado')
-                      ->with('details', $this->details);
-
-        foreach ($this->attachments() as $filePath) {
-            $email->attach($filePath, [
-                'as' => basename($filePath),
-                'mime' => mime_content_type($filePath),
-            ]);
-        }
-
-        return $email;
-    } */
 }
