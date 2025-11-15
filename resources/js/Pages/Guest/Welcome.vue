@@ -258,7 +258,62 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
     return paymentDetails;
 };
 
-
+const facebookTestimonials = [
+    {
+        name: 'Tim Huynh',
+        content: 'Shaun and Allie are an amazing team at Brignac Mortgage. They got my refi deal done in under a week and cut down my loan in half the time and cost! They are fast, efficient, and made the process an amazing experience. They definitely have my business and referrals going forward.',
+        image: '/storage/facebookprofiles/profile-1.jpg',
+        createdAt: 'Oct 8, 2025'
+    },
+    {
+        name: 'Ashley J Simon',
+        content: 'Shaun and his team are straightforward and honest! They got the job done quick and easy. Will use them again if I ever need to purchase another home. Highly recommend!!!!!',
+        image: '/storage/facebookprofiles/profile-2.jpg',
+        createdAt: 'Jul 15, 2025'
+    },
+    {
+        name: 'Evan Mullins ',
+        content: 'A friend of mine recommended Brignac Mortgage to me while I was home hunting. I decided to give them a chance and it was worth it!  They weren’t pushy like some of these other company’s.  I purchased the home by-owner and not through a realtor. Shaun, Allie, and Jenn were there to answer any questions I had. and were patient and willing through the entire process.  They made the purchase of my new home easy and understanding.  I cannot give Brignac Mortgage enough credit for all the work there team did.  If I ever purchase another home there is no doubt in my mind that Shaun will be my first call!',
+        image: '/storage/facebookprofiles/profile-3.jpg',
+        createdAt: 'May 8, 2025'
+    },
+    {
+        name:'Jason Villar',
+        content: 'Shaun Brignac and his team worked around the clock to get my loan.  They were all very available, professional, and knowledgeable about their work.  Looking forward to working with them again in the future!',
+        image: '/storage/facebookprofiles/profile-4.jpg',
+        createdAt: 'Apr 10, 2025'
+    },
+    {
+        name: 'Angelo Datseris',
+        content: 'Shaun and I crossed paths at a mortgage conference and it didn\'t take long at all for us to become pretty tight friends. There are many people in this industry that are not in it for the right reasons but I can tell you whole heartedly that Shaun is not one of those people. Genuine, honest and the hardest working person in the room is what I think of when I think of Shaun. He does not stop when he puts his mind into getting something done. He doesn\'t listen to people telling him no either - if there\'s a way to get a deal closed he will find a way. Proud to call him a friend. This is the kind of person you want in your corner at all times.',
+        image: '/storage/facebookprofiles/profile-5.jpg',
+        createdAt: 'May 5, 2023'
+    },
+    {
+        name: 'Justin Pfister',
+        content: 'I talked with and received numbers (rates) from 6 different brokers. Brignac smoked them all by more then 2-3% lower! I’ll never even consider any other mortgage company out there… call Brignac Mortgage and let them blow your mind with the numbers they put together!!',
+        image: '/storage/facebookprofiles/profile-6.jpg',
+        createdAt: 'Jan 10, 2023'
+    },
+    {
+        name: 'Brant Gauthreaux',
+        content: 'Shaun made the loan process so easy and my loan closed fast. Would definitely recommend and use them on my next mortgage.',
+        image: '/storage/facebookprofiles/profile-7.jpg',
+        createdAt: 'Aug 23, 2022'
+    },
+    {
+        name: 'Jeremy Bergeron',
+        content: 'easy and fast process! Highly recommend Shaun for your mortgage services!',
+        image: '/storage/facebookprofiles/profile-8.jpg',
+        createdAt: 'May 30, 2022'
+    },
+    {
+        name: 'Gmurph Pro Wash',
+        content: 'Shaun has been a great help and is very knowledgeable in the Mortgage world!',
+        image: '/storage/facebookprofiles/profile-9.jpg',
+        createdAt: 'Feb 27, 2022'
+    }
+]
 </script>
 
 <template>
@@ -647,9 +702,9 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
     </section>
 
     <section ref="mortgageLoanCalculator" class="mt-[550px] lg:mt-[480px] text-gray-700 w-full mx-auto lg:rounded-lg overflow-hidden">
-         <div class="shadow-xl bg-[url('/storage/img/header-1.webp')] bg-center bg-cover">
+         <div class="shadow-xl bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover">
 
-            <v-form v-model="formSimulator" @submit.prevent="onSubmitCalculate" lazy-validation class="h-full w-full bg-black/80 py-20 px-4 text-white">
+            <v-form v-model="formSimulator" @submit.prevent="onSubmitCalculate" lazy-validation class="h-full w-full bg-black/90 py-20 px-4 text-white">
                 <div class="max-w-7xl mx-auto" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                     <div class="flex flex-col gap-3 items-center justify-center px-4 lg:px-0">
                         <div class="bg-white/20 rounded-full py-2 px-5 inline-flex">
@@ -918,7 +973,7 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
                         Testimonials
                     </h2>
                     <a href="https://maps.app.goo.gl/6YyqmAGQ8nJtZ9Jk6" target="_blank">
-                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-500 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
+                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
                             <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
                             Leave a review on google
                         </v-btn>
@@ -936,7 +991,84 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
                 </div>
             </div>
         </main>
+    </section>
 
+    <section ref="testimonials" class="mt-[1050px] lg:mt-[1100px]">
+        <div class="w-full h-[500px] bg-[url('/storage/img/header-1.webp')] bg-center bg-cover">
+            <div class="h-full w-full bg-black/60 pt-14 px-4 lg:px-0">
+                <div class="flex flex-col gap-3 items-center justify-center">
+                    <div class="bg-black/20 rounded-full py-2 px-5 inline-flex text-white">
+                        <span>Testimonials</span>
+                    </div>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-center text-white">
+                        Our <span class="text-blue-500">Facebook</span> Testimonials
+                    </h2>
+                    <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank">
+                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
+                            <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
+                            Leave a review on facebook
+                        </v-btn>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <main class="bg-white relative z-10">
+            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 absolute top-[-230px] left-1/2 transform -translate-x-1/2 bg-white">
+                <div class="relative">
+                    <div class="w-full p-6 bg-gray-100/70 rounded-lg flex items-center justify-between">
+                        <div class="flex flex-col gap-3">
+                            <h2 class="font-bold text-xl text-blue-600">Facebook <span class="text-lg text-neutral-800">Reviews</span></h2>
+                            <div class="flex items-center gap-1">
+                                <p class="text-xl font-bold">5.0</p>
+                                <div class="flex gap-0 items-center text-yellow-500">
+                                    <svg class="size-6 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                    <svg class="size-6 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                    <svg class="size-6 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                    <svg class="size-6 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                    <svg class="size-6 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                </div>
+                                <p class="text-xs opacity-70">(9)</p>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank" class="py-2 px-4 rounded-full bg-blue-600 text-white">
+                                Review us on Facebook
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+                        <div v-for="testimonial in facebookTestimonials" :key="testimonial.name" class="bg-gray-100/70 rounded-lg flex flex-col gap-5 p-7">
+                            <div class="text-center flex flex-col items-center justify-center gap-1">
+                                <div class="flex gap-0 items-center text-yellow-500">
+                                    <svg class="size-5 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                    <svg class="size-5 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                    <svg class="size-5 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                    <svg class="size-5 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                    <svg class="size-5 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                                </div>
+                                <p>{{ testimonial.content }}</p>
+                            </div>
+                            <div class="text-center flex flex-col items-center justify-center gap-1">
+                                <div class="size-12 rounded-full flex items-center justify-center relative">
+                                    <img class="w-full h-full object-cover rounded-full z-10" :src="testimonial.image" alt="profile picture">
+                                    <div class="absolute -bottom-1 -right-1 z-20 bg-white rounded-full p-[3px]">
+                                        <svg class="shrink-0 size-5 fill-blue-600 text-blue-600" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-lg font-bold">{{ testimonial.name }}</p>
+                                    <p class="text-xs opacity-70">{{ testimonial.createdAt }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </section>
 
     <section class="mt-[1050px] lg:mt-[990px]" data-aos="fade-up" data-aos-duration="3000" data-aos-once="true">
@@ -948,7 +1080,7 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
                 Our <span class="text-orange-500">Facebook</span> Testimonials
             </h2>
             <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank">
-                <v-btn rounded="xs" size="large" class="text-none !bg-blue-500 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
+                <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700">
                     <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
                     Leave a review on facebook
                 </v-btn>
@@ -1221,8 +1353,6 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
     <section class="mt-[600px] lg:mt-[550px]">
         <Footer  @scroll-our-services-section="scrollOurServicesSection" @scroll-testimonials-section="scrolltestimonialsSection" />
     </section>
-
-
 </template>
 
 <style scoped>
