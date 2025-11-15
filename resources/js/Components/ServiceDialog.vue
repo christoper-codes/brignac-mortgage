@@ -34,56 +34,44 @@ const slides = ref([
             </template>
 
             <template v-slot:default="{ isActive }">
-                <v-card>
-                <v-card-text>
-                    <div class="flex items-center justify-center text-center">
-                        <h2 class="font-bold text-xl my-2">Loan Products & Programs</h2>
-                    </div>
+                <v-card class="!rounded-xl">
+                    <v-card-text>
+                        <div class="flex items-center justify-center text-center">
+                            <h2 class="font-bold text-xl my-2">Loan Products & Programs</h2>
+                        </div>
 
-                    <div class="w-controls">
-                        <v-carousel
-                            height="250"
-                            cycle
-                            hide-delimiter-background
-                        >
-                            <v-carousel-item
-                                v-for="(slide, i) in slides"
-                                :key="i"
-                                >
-                                    <v-sheet
-                                        color="transparent"
-                                        height="100%"
+                        <div class="w-controls">
+                            <v-carousel
+                                height="250"
+                                cycle
+                                hide-delimiter-background
+                            >
+                                <v-carousel-item
+                                    v-for="(slide, i) in slides"
+                                    :key="i"
                                     >
-                                        <div class="d-flex fill-height justify-center align-center px-20">
-                                            <div>
-                                                <div class="flex gap-2 items-center justify-center flex-col">
-                                                    <img class="w-10" src="../../../public/img/secondary-logo-light.jpg" alt="avatar">
-                                                    <div class="">
-                                                        <h3 class="text-xs">Brignac Mortgage</h3>
+                                        <v-sheet
+                                            color="transparent"
+                                            height="100%"
+                                        >
+                                            <div class="d-flex fill-height justify-center align-center px-20">
+                                                <div>
+                                                    <div class="flex gap-2 items-center justify-center flex-col">
+                                                        <img class="w-10" src="../../../public/img/secondary-logo-light.jpg" alt="avatar">
+                                                        <div class="">
+                                                            <h3 class="text-xs">Brignac Mortgage</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <p class="mt-5 font-bold text-xl lg:text-2xl text-center">{{ slide }}</p>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <p class="mt-5 font-bold text-xl lg:text-2xl text-center">{{ slide }}</p>
-                                                </div>
                                             </div>
-                                        </div>
-                                    </v-sheet>
-                            </v-carousel-item>
-                        </v-carousel>
-                    </div>
-                </v-card-text>
-
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-
-                    <v-btn
-                    color="red"
-                    variant="tonal"
-                    text="Close"
-                    class="text-none mr-2 mb-2"
-                    @click="isActive.value = false"
-                    ></v-btn>
-                </v-card-actions>
+                                        </v-sheet>
+                                </v-carousel-item>
+                            </v-carousel>
+                        </div>
+                    </v-card-text>
                 </v-card>
             </template>
         </v-dialog>

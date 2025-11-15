@@ -387,8 +387,8 @@ const facebookTestimonials = [
                     </Link>
                     <a href="https://dot.cards/shaunbrignac" target="_blank">
                         <div class="card_green cursor-pointer flex items-center gap-1">
-                            <span class="material-symbols-outlined block text-lg">arrow_outward</span>
                             <span class="block">Networking</span>
+                            <span class="material-symbols-outlined block text-lg">arrow_outward</span>
                         </div>
                     </a>
                     <div class="">
@@ -463,7 +463,7 @@ const facebookTestimonials = [
                             <v-card min-width="500" rounded="lg" class="mt-3">
                                 <div class="flex items-start justify-between gap-5 p-5">
                                     <div class="bg-gray-300 w-[40%] h-[240px] rounded-md overflow-hidden">
-                                        <div class="w-full h-full bg-[url('https://www.bbva.com/wp-content/uploads/2018/04/plan-negocios-empresas-bbva-e1523885477593.jpg')] bg-center bg-cover rounded-md">
+                                        <div class="w-full h-full bg-[url('/storage/img/header-5.jpg')] bg-center bg-cover rounded-md">
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
                                                 <div @click="scrollMortgageLoanCalculatorSection" class="bg-black/20 cursor-pointer rounded-full py-2 px-5 inline-flex text-white text-xs text-center items-center justify-center">
                                                     <span class="material-symbols-outlined text-2xl">web_traffic</span>
@@ -518,7 +518,7 @@ const facebookTestimonials = [
                             <v-card min-width="500" rounded="lg" class="mt-3">
                                 <div class="flex items-start justify-between gap-5 p-5">
                                     <div class="bg-gray-300 w-[40%] h-[240px] rounded-md overflow-hidden">
-                                        <div class="w-full h-full bg-[url('https://images.pexels.com/photos/7247401/pexels-photo-7247401.jpeg')] bg-center bg-cover rounded-md">
+                                        <div class="w-full h-full bg-[url('/storage/img/header-6.jpg')] bg-center bg-cover rounded-md">
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
                                             </div>
                                         </div>
@@ -553,11 +553,11 @@ const facebookTestimonials = [
                             </v-card>
                         </v-menu>
                     </div>
-                    <div class="">
-                        <Link :href="route('our-team.index')">
-                            <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Apply Now</v-btn>
-                        </Link>
-                    </div>
+                </div>
+                <div>
+                    <Link :href="route('our-team.index')">
+                        <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Apply Now</v-btn>
+                    </Link>
                 </div>
             </div>
             <div class="py-3 max-w-7xl mx-auto flex items-center justify-between lg:hidden px-4 lg:px-0 mt-7 lg:mt-0">
@@ -1009,7 +1009,7 @@ const facebookTestimonials = [
                             </a>
                         </div>
                     </div>
-                    <div class="my-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+                    <div class="my-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
                         <div v-for="testimonial in facebookTestimonials" :key="testimonial.name" class="bg-gray-100/70 rounded-lg flex flex-col gap-5 p-7">
                             <div class="text-center flex flex-col items-center justify-center gap-1">
                                 <div class="flex gap-0 items-center text-yellow-500">
