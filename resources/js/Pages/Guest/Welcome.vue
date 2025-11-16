@@ -9,7 +9,6 @@ import { drawerNavState } from '@/composables/drawersStates';
 import axios from 'axios';
 import { toast } from 'vue3-toastify';
 import usePriceFormat from '@/composables/priceFormat';
-import AvgWelcomeSection from '@/Components/AvgWelcomeSection.vue';
 
 const { formatPrice } = usePriceFormat();
 const dialog = ref(false);
@@ -22,7 +21,6 @@ const loading = ref(false);
 const menuServices = ref(false);
 const menuTeam = ref(false);
 const menuLegal = ref(false);
-const rangeSlider = ref(0);
 
 const ourServices = ref(null);
 const mortgageLoanCalculator = ref(null);
@@ -182,29 +180,6 @@ const headerProps = {
     class: '!font-bold'
 };
 
-/* const onSubmitCalculate = () => {
-    if(!formSimulator.value){
-        toast('All fields are required', {
-            "theme": "auto",
-            "type": "error",
-            "dangerouslyHTMLString": true
-        })
-        return;
-    }
-
-    loadingCalculate.value = true;
-    setTimeout(() => {
-        toast('result obtained successfully', {
-            "theme": "auto",
-            "type": "success",
-            "dangerouslyHTMLString": true
-        })
-        showCalculatorResult.value = true;
-        monthlyPayment.value = calculateMortgage(loanNeeded.value, interestRate.value, creditTerm.value);
-        loadingCalculate.value = false;
-    }, 1000)
-} */
-
 const onSubmitCalculate = () => {
     if (!formSimulator.value) {
         toast('All fields are required', {
@@ -230,10 +205,7 @@ const onSubmitCalculate = () => {
     }, 1000);
 };
 
-
 const paymentDetails = ref([]);
-
-
 const calculatePaymentDetails = (principal, annualInterestRate, years) => {
     const monthlyInterestRate = annualInterestRate / 100 / 12;
     const numberOfPayments = years * 12;
@@ -318,8 +290,8 @@ const facebookTestimonials = [
 
 <template>
     <Head title="Welcome" />
-    <NavigationDrawerGuest @scroll-our-services-section="scrollOurServicesSection" @scroll-mortgage-loan-calculator-section="scrollMortgageLoanCalculatorSection" />
-    <GuestNav @scroll-our-services-section="scrollOurServicesSection" @scroll-mortgage-loan-calculator-section="scrollMortgageLoanCalculatorSection" />
+    <NavigationDrawerGuest @scroll-our-services-section="scrollOurServicesSection" @scroll-mortgage-loan-calculator-section="scrollMortgageLoanCalculatorSection" @scroll-testimonials-section="scrolltestimonialsSection" />
+    <GuestNav @scroll-our-services-section="scrollOurServicesSection" @scroll-mortgage-loan-calculator-section="scrollMortgageLoanCalculatorSection" @scroll-testimonials-section="scrolltestimonialsSection" />
 
     <div class="relative overflow-hidden welcome-header">
         <nav class="absolute w-full bg-transparent z-50 text-white">
@@ -518,11 +490,11 @@ const facebookTestimonials = [
                     </div>
                 </div>
                 <div class="flex items-center gap-5">
-                    <a href="https://dot.cards/shaunbrignac" target="_blank">
+                    <div @click="scrolltestimonialsSection">
                         <div class="card_green cursor-pointer flex items-center gap-1">
-                            <span class="block text-base font-bold">Networking</span>
+                            <span class="block text-base font-bold">Testimonials</span>
                         </div>
-                    </a>
+                    </div>
                     <Link :href="route('our-team.index')">
                         <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Apply Now</v-btn>
                     </Link>

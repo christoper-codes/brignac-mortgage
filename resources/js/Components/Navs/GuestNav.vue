@@ -7,7 +7,7 @@ const scrolledDown = ref(false);
 const menuServices = ref(false);
 const menuTeam = ref(false);
 const menuLegal = ref(false);
-const emits = defineEmits(['scroll-our-services-section', 'scroll-contact-us-section', 'scroll-mortgage-loan-calculator-section'])
+const emits = defineEmits(['scroll-our-services-section', 'scroll-contact-us-section', 'scroll-mortgage-loan-calculator-section', 'scroll-testimonials-section'])
 const navigateToWelcomeAndScroll = () => {
     if (routeName.value == '/') {
         emits('scroll-our-services-section');
@@ -35,6 +35,20 @@ const navigateToMortgageLoanCalculatorAndScroll = () => {
         });
     }
 };
+
+const navigateToTestimonialsAndScroll = () => {
+    if (routeName.value == '/') {
+        emits('scroll-testimonials-section');
+    } else {
+        router.visit('/', {
+            onSuccess: () => {
+                setTimeout(() => {
+                    window.dispatchEvent(new CustomEvent('scroll-testimonials-section'));
+                }, 700);
+            },
+        });
+    }
+}
 
 const navigateToAboutUsAndScroll = () => {
     if (routeName.value == '/about-us') {
@@ -258,11 +272,11 @@ onUnmounted(() => {
                     </div>
                 </div>
                 <div class="flex items-center gap-5">
-                    <a href="https://dot.cards/shaunbrignac" target="_blank">
+                    <div @click="navigateToTestimonialsAndScroll">
                         <div class="card_green cursor-pointer flex items-center gap-1">
-                            <span class="block text-base font-bold">Networking</span>
+                            <span class="block text-base font-bold">Testimonials</span>
                         </div>
-                    </a>
+                    </div>
                     <Link :href="route('our-team.index')">
                         <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Apply Now</v-btn>
                     </Link>

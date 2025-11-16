@@ -7,7 +7,7 @@ const scrolledDown = ref(false);
 const menuServices = ref(false);
 const menuTeam = ref(false);
 const menuLegal = ref(false);
-const emits = defineEmits(['scroll-our-services-section', 'scroll-contact-us-section', 'scroll-mortgage-loan-calculator-section'])
+const emits = defineEmits(['scroll-our-services-section', 'scroll-contact-us-section', 'scroll-mortgage-loan-calculator-section', 'scroll-testimonials-section'])
 
 const navigateToWelcomeAndScroll = () => {
     drawerNavState.value = drawerNavState.value ? !drawerNavState.value : drawerNavState.value;
@@ -41,6 +41,22 @@ const navigateToMortgageLoanCalculatorAndScroll = () => {
     }
 };
 
+const navigateToTestimonialsAndScroll = () => {
+    drawerNavState.value = drawerNavState.value ? !drawerNavState.value : drawerNavState.value;
+
+    if (routeName.value == '/') {
+        emits('scroll-testimonials-section');
+    } else {
+        router.visit('/', {
+            onSuccess: () => {
+                setTimeout(() => {
+                    window.dispatchEvent(new CustomEvent('scroll-testimonials-section'));
+                }, 700);
+            },
+        });
+    }
+};
+
 const navigateToAboutUsAndScroll = () => {
     drawerNavState.value = drawerNavState.value ? !drawerNavState.value : drawerNavState.value;
 
@@ -56,7 +72,6 @@ const navigateToAboutUsAndScroll = () => {
         });
     }
 }
-
 
 const onScroll = () => {
     scrolledDown.value = window.scrollY >= 200;
@@ -94,12 +109,16 @@ onUnmounted(() => {
                             Home
                         </div>
                     </Link>
-                    <a href="https://dot.cards/shaunbrignac" target="_blank" @click="drawerNavState = !drawerNavState" class="border-b border-b-neutral-50 py-4">
+                    <div @click="navigateToTestimonialsAndScroll" class="border-b border-b-neutral-50 py-4">
                         <div class="card_green cursor-pointer flex items-center gap-1">
-                            <span class="block">Networking</span>
-                            <span class="material-symbols-outlined block text-lg">arrow_outward</span>
+                            <span class="block">Testimonials</span>
                         </div>
-                    </a>
+                    </div>
+                    <Link :href="route('programs.index')" @click="drawerNavState = !drawerNavState" class="border-b border-b-neutral-50 py-4">
+                        <div class="card_green cursor-pointer">
+                            Loan programs
+                        </div>
+                    </Link>
                     <div>
                         <v-menu
                             v-model="menuServices"
@@ -150,11 +169,6 @@ onUnmounted(() => {
                             </v-card>
                         </v-menu>
                     </div>
-                    <Link :href="route('programs.index')" @click="drawerNavState = !drawerNavState" class="border-b border-b-neutral-50 py-4">
-                        <div class="card_green cursor-pointer">
-                            Loan programs
-                        </div>
-                    </Link>
                     <div>
                         <v-menu
                             v-model="menuTeam"
