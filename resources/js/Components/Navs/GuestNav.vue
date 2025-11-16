@@ -80,7 +80,7 @@ onUnmounted(() => {
     <div @click="scrollToTop" class="animate__animated animate__fadeInDown fixed bottom-10 right-5 size-12 bg-orange-500 z-40 rounded-full flex items-center justify-center floating-shadow lg:hover:scale-110 duration-500 transition-transform cursor-pointer">
         <span class="material-symbols-outlined text-white">keyboard_arrow_up</span>
     </div>
-    <nav :class="['fixed top-0 left-0 w-full transition-all z-40 bg-white/70 backdrop-blur-xl backdrop-brightness-150 shadow-xl', { 'hidden': !scrolledDown, 'animate__animated animate__fadeInDown': scrolledDown }]">
+    <nav :class="['fixed top-0 left-0 w-full transition-all z-40 bg-white/60 backdrop-blur-xl backdrop-brightness-150 shadow-xl', { 'hidden': !scrolledDown, 'animate__animated animate__fadeInDown': scrolledDown }]">
         <section class="w-full text-gray-600 hidden lg:block">
             <div class="py-5 max-w-7xl mx-auto flex items-center justify-between">
                 <Link :href="route('welcome')">
@@ -270,14 +270,16 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <section class="py-3 w-full mx-auto flex items-center justify-between lg:hidden px-4 lg:px-0 shadow-xl">
+        <section class="py-5 w-full mx-auto flex items-center justify-between lg:hidden px-4 lg:px-0 shadow-xl">
             <Link :href="route('welcome')">
                 <div class="flex items-center justify-center">
                     <img class="w-28" src="/img/darklogo.png" alt="">
                 </div>
             </Link>
-            <div @click="drawerNavState = !drawerNavState" class="flex items-center justify-center h-12 w-12 bg-white/10 backdrop-blur-lg shadow-xl rounded-lg">
-                <span class="material-symbols-outlined block text-black">menu</span>
+            <div @click="drawerNavState = !drawerNavState">
+                <svg class="size-8 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                </svg>
             </div>
         </section>
     </nav>

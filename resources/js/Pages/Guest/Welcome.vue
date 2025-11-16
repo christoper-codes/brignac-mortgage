@@ -323,22 +323,6 @@ const facebookTestimonials = [
 
     <div class="relative overflow-hidden welcome-header">
         <nav class="absolute w-full bg-transparent z-50 text-white">
-            <!-- Announcement Banner -->
-            <!-- <div class="bg-gradient-to-r from-cyan-500 to-green-500">
-                <div class="max-w-[85rem] px-4 py-3 sm:px-6 lg:px-8 mx-auto text-center">
-                    <Link :href="route('our-team.index')">
-                        <div class="group inline-flex flex-wrap items-center bg-white/20 hover:bg-white/10 p-1 ps-4 rounded-full shadow-lg">
-                            <p class="me-2 text-white text-xs">
-                                Season's Greetings and Happy New Year 🎉
-                            </p>
-                            <span class="group-hover:bg-white/10 group-focus:bg-white/10 py-1.5 px-2.5 inline-flex justify-center items-center gap-x-2 rounded-full bg-white/20 font-semibold text-white text-sm">
-                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                            </span>
-                        </div>
-                    </Link>
-                </div>
-            </div> -->
-            <!-- End Announcement Banner -->
             <div class="py-2 border-b-[1px] border-b-gray-500">
                 <div class="flex lg:items-center justify-between max-w-7xl mx-auto px-4 lg:px-0">
                     <div class="flex flex-col lg:flex-row lg:items-center lg:gap-6">
@@ -548,8 +532,10 @@ const facebookTestimonials = [
                 <div class="flex items-center justify-center">
                     <img class="w-32" src="../../../../public/img/primary-logo-dark.png" alt="">
                 </div>
-                <div @click="drawerNavState = !drawerNavState" class="flex items-center justify-center h-12 w-12 bg-white/30 backdrop-blur-md rounded-md">
-                    <span class="material-symbols-outlined block text-white">menu</span>
+                <div @click="drawerNavState = !drawerNavState">
+                    <svg class="size-9 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                    </svg>
                 </div>
             </div>
         </nav>
@@ -661,7 +647,6 @@ const facebookTestimonials = [
 
     <section ref="mortgageLoanCalculator" class="mt-[550px] lg:mt-[480px] text-gray-700 w-full mx-auto lg:rounded-lg overflow-hidden">
          <div class="shadow-xl bg-[url('/storage/img/header-6.jpg')] bg-center bg-cover">
-
             <v-form v-model="formSimulator" @submit.prevent="onSubmitCalculate" lazy-validation class="h-full w-full bg-black/70 py-20 px-4 text-white">
                 <div class="max-w-7xl mx-auto" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                     <div class="flex flex-col gap-3 items-center justify-center px-4 lg:px-0">
@@ -948,7 +933,7 @@ const facebookTestimonials = [
         </main>
     </section>
 
-    <section ref="testimonialsfacebook" class="mt-32">
+    <section ref="testimonialsfacebook" class="mt-20 lg:mt-32">
         <div class="w-full">
             <div class="h-full w-full pt-14 px-4 lg:px-0">
                 <div class="flex flex-col gap-3 items-center justify-center">
