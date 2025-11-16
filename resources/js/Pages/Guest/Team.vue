@@ -86,89 +86,80 @@ const rules = {
         </template>
     </Breadcrumb>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-10 max-w-7xl mx-auto mt-20 px-4 lg:px-0">
-        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start w-full gap-10 max-w-7xl mx-auto mt-20 px-4 lg:px-0">
+        <div class="bg-white border-2 p-6 rounded-lg flex flex-col items-center justify-between transition-all duration-500">
             <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
                 <img class="w-full h-full" src="../../../../public/img/company-seo-img.jpg" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
                 <h2 class="text-xl font-bold">Shaun Brignac, MBA</h2>
-                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 bg-orange-100 rounded-full">President and CEO</h2>
+                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 border-2 border-orange-100 rounded-full">President and CEO</h2>
             </div>
-            <div class="mt-3 w-full">
+            <div class="mt-7 w-full">
                 <a href="mailto:Shaun@brignacmortgage.com" class="flex items-center lg:gap-2">
-                    <div class="size-9 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-orange-500 text-xl">email</span>
-                    </div>
                     <h3 class="text-sm">Shaun@brignacmortgage.com</h3>
                 </a>
                 <div class="flex flex-col lg:flex-row items-start gap-3 justify-between w-full">
                     <!-- Opciones de préstamos -->
                     <div class="mt-4 text-sm">
-                        <ul class="list-disc pl-5">
+                        <ul class="list-disc pl-5 space-y-3">
                             <li>NMLS# 1928157</li>
-                            <li><span class="font-bold">C:</span> 504-559-2821</li>
-                            <li><span class="font-bold">O:</span> 225-435-9287</li>
+                            <li><span>C:</span> 504-559-2821</li>
+                            <li><span>O:</span> 225-435-9287</li>
                         </ul>
                     </div>
                 </div>
-                <v-btn href="https://2401214.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5">Apply with Shaun</v-btn>
+                <v-btn href="https://2401214.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5 !rounded-full !flex !items-center !justify-center !py-5">Apply</v-btn>
             </div>
         </div>
 
-        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500">
+        <div class="bg-white border-2 p-6 rounded-lg flex flex-col items-center justify-between transition-all duration-500">
             <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
                 <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-allie.png" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
                 <h2 class="text-xl font-bold">Allison Ratcliff</h2>
-                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 bg-orange-100 rounded-full">Chief of Operations</h2>
+                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 border-2 border-orange-100 rounded-full">Chief of Operations</h2>
             </div>
-            <div class="mt-3 w-full">
+            <div class="mt-7 w-full">
                 <a href="mailto:Allie@brignacmortgage.com" class="flex items-center lg:gap-2">
-                    <div class="size-9 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-orange-500 text-xl">email</span>
-                    </div>
                     <h3 class="text-sm">Allie@brignacmortgage.com</h3>
                 </a>
                 <div class="flex flex-col lg:flex-row items-start gap-3 justify-between w-full">
                     <!-- Opciones de préstamos -->
                     <div class="mt-4 text-sm">
-                        <ul class="list-disc pl-5">
+                        <ul class="list-disc pl-5 space-y-3">
                             <li>NMLS #2405703 </li>
-                            <li><span class="font-bold">C:</span> 225-718-3978</li>
+                            <li><span>C:</span> 225-718-3978</li>
                         </ul>
                     </div>
                 </div>
-                <v-btn href="https://allieratcliff.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5">Apply with Allie</v-btn>
+                <v-btn href="https://allieratcliff.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5 !rounded-full !flex !items-center !justify-center !py-5">Apply</v-btn>
             </div>
         </div>
 
-        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500">
+        <div class="bg-white border-2 p-6 rounded-lg flex flex-col items-center justify-between transition-all duration-500">
             <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
                 <img class="w-full h-full" src="../../../../public/img/team-jennifer.jpg" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
                 <h2 class="text-xl font-bold">Jennifer McMinn-Griffin </h2>
-                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 bg-orange-100 rounded-full">Loan Processor</h2>
+                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 border-2 border-orange-100 rounded-full">Loan Processor</h2>
             </div>
-            <div class="mt-3 w-full">
+            <div class="mt-7 w-full">
                 <a href="mailto:jen@tigerprocessingllc.com" class="flex items-center lg:gap-2">
-                    <div class="size-9 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-orange-500 text-xl">email</span>
-                    </div>
                     <h3 class="text-sm">jen@tigerprocessingllc.com</h3>
                 </a>
                 <div class="flex flex-col lg:flex-row items-start gap-3 justify-between w-full">
                     <!-- Opciones de préstamos -->
                     <div class="mt-4 text-sm">
-                        <ul class="list-disc pl-5">
-                            <li><span class="font-bold">Owner of Tiger Processing Services LLC</span></li>
-                            <li><span class="font-bold">Third Party Processor</span></li>
-                            <li><span class="font-bold">Office</span> 225-469-6858</li>
-                            <li><span class="font-bold">Individual NMLS # 1409144</span></li>
-                            <li><span class="font-bold">Company NMLS # 2407930 </span></li>
-                            <li><span class="font-bold">Licensed in LA</span></li>
+                        <ul class="list-disc pl-5 space-y-3">
+                            <li><span>Owner of Tiger Processing Services LLC</span></li>
+                            <li><span>Third Party Processor</span></li>
+                            <li><span>Office</span> 225-469-6858</li>
+                            <li><span>Individual NMLS # 1409144</span></li>
+                            <li><span>Company NMLS # 2407930 </span></li>
+                            <li><span>Licensed in LA</span></li>
                         </ul>
                     </div>
                 </div>
@@ -177,7 +168,7 @@ const rules = {
     </div>
 
     <div class="bg-white">
-        <div class="w-full h-auto bg-[url('/storage/img/header-5.jpg')] bg-center bg-cover mt-[73px] lg:mt-[100px]">
+        <div class="w-full h-auto bg-[url('/storage/img/header-5.jpg')] bg-center bg-cover mt-[73px]">
         <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/70 py-28 px-4 lg:px-0">
             <div class="w-full flex flex-col justify-between max-w-3xl mx-auto" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                 <div class="flex flex-col gap-2 justify-center mb-5">
@@ -191,7 +182,7 @@ const rules = {
                 </div>
 
                 <div class="relative">
-                        <div class="">
+                        <div class="mb-10">
                             <v-form v-model="form" @submit.prevent="onSubmit" lazy-validation>
                             <div class="flex flex-col lg:flex-row items-center justify-between gap-7 mt-3">
                                 <v-text-field
@@ -241,7 +232,6 @@ const rules = {
                                         </div>
                                     </div>
                                 </div>
-
                             </v-form>
                         </div>
                     </div>
@@ -250,10 +240,9 @@ const rules = {
      </div>
     </div>
 
-    <section class="mt-40 lg:mt-[250px]">
+    <section>
         <Footer />
     </section>
-
 </template>
 
 <style scoped>
