@@ -27,8 +27,8 @@ const slides = ref([
             <template v-slot:activator="{ props: activatorProps }">
                 <div class='flex items-center justify-center relative mt-12'>
                     <div class="h-10 flex items-center justify-center w-full relative z-5">
-                        <v-btn v-bind="activatorProps" rounded="xs" size="x-large" class="!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full lg:!flex !items-center !justify-center !py-7 !px-8">Loan Products & Programs</v-btn>
-                        <v-btn v-bind="activatorProps" rounded="xs" size="large" class="lg:!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full !flex !items-center !justify-center !py-5 !px-6">Loan Products & Programs</v-btn>
+                        <v-btn v-bind="activatorProps" rounded="xs" size="x-large" class="!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full lg:!flex !items-center !justify-center !py-7 !px-8">Read more</v-btn>
+                        <v-btn v-bind="activatorProps" rounded="xs" size="large" class="lg:!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full !flex !items-center !justify-center !py-5 !px-6">Read more</v-btn>
                     </div>
                 </div>
             </template>
