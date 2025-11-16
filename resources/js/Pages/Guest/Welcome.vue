@@ -847,25 +847,25 @@ const facebookTestimonials = [
                         </div>
                         <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-5">
                             <div class="flex items-center justify-between gap-3">
-                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex border-2 border-orange-200">
                                     <span class="material-symbols-outlined text-2xl text-orange-500">real_estate_agent</span>
                                 </div>
                                 <h3 class="text-sm flex-grow">Conventional and Construction Loans</h3>
                             </div>
                             <div class="flex items-center justify-between gap-3">
-                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex border-2 border-orange-200">
                                     <span class="material-symbols-outlined text-2xl text-orange-500">support_agent</span>
                                 </div>
                                 <h3 class="text-sm flex-grow">Mobile Home Loans - Single and Double Wide</h3>
                             </div>
                             <div class="flex items-center justify-between gap-3">
-                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex border-2 border-orange-200">
                                     <span class="material-symbols-outlined text-2xl text-orange-500">location_away</span>
                                 </div>
                                 <h3 class="text-sm flex-grow">Fixed, ARMs, 3-2-1, 2-1, 1-1 and 1-0 Buydowns</h3>
                             </div>
                             <div class="flex items-center justify-between gap-3">
-                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
+                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex border-2 border-orange-200">
                                     <span class="material-symbols-outlined text-2xl text-orange-500">badge</span>
                                 </div>
                                 <h3 class="text-sm flex-grow">Home Equity Line of Credit Loans</h3>
@@ -955,7 +955,7 @@ const facebookTestimonials = [
         </div>
 
         <main class="bg-white relative z-10">
-            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 bg-white">
+            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-xl p-4 lg:p-10 bg-white">
                 <div class="relative">
                    <!--  <iframe class="h-[450px] z-50 w-full" src="https://widget.tagembed.com/2135662" style="border:none;"></iframe> -->
                     <div class="elfsight-app-ebce6ca8-0720-4595-b6cd-c4d2cb07e6df" data-elfsight-app-lazy></div>
@@ -986,7 +986,7 @@ const facebookTestimonials = [
         </div>
 
         <main class="bg-white relative z-10">
-            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 bg-white">
+            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-xl p-4 lg:p-10 bg-white">
                 <div class="relative">
                     <div class="w-full p-6 bg-gray-100/70 rounded-lg flex items-center justify-between">
                         <div class="flex flex-col gap-3">
@@ -1190,7 +1190,7 @@ const facebookTestimonials = [
     <section class="mt-24 lg:mt-36">
         <iframe class="w-full h-[400px]" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6893.12326712053!2d-90.771464!3d30.249575!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8626cf3dc655337f%3A0x3b15aacf38947f0c!2sBrignac%20Mortgage%20and%20Consulting%20Services%20LLC!5e0!3m2!1ses-419!2smx!4v1730790533348!5m2!1ses-419!2smx" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-        <main class="bg-white relative z-10" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+        <main class="bg-white relative z-10">
             <div class="w-[90%] lg:w-[70%] mx-auto rounded-xl py-10 px-6 absolute top-[-200px] left-1/2 transform -translate-x-1/2 bg-white">
                 <div class="relative min-h-[300px]">
                     <div class="flex flex-col gap-3 items-center justify-center">
