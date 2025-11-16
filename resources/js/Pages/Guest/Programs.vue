@@ -33,7 +33,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
+            <div class="flex items-start gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
                     <h3 class="font-bold text-xl">Federal Housing Administration Loan</h3>
@@ -82,7 +82,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         </div>
                     </div>
 
-                    <v-btn href="https://www.hud.gov/buying/loans" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10">See more</v-btn>
+                    <v-btn href="https://www.hud.gov/buying/loans" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See more</v-btn>
 
                 </div>
             </div>
@@ -96,7 +96,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
+            <div class="flex items-start gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
                     <h3 class="font-bold text-xl">Conventional Loan</h3>
@@ -132,7 +132,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         </div>
                     </div>
 
-                    <v-btn href="https://www.consumerfinance.gov/owning-a-home/conventional-loans/" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10">See more</v-btn>
+                    <v-btn href="https://www.consumerfinance.gov/owning-a-home/conventional-loans/" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See more</v-btn>
 
                 </div>
             </div>
@@ -146,7 +146,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
+            <div class="flex items-start gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
                     <h3 class="font-bold text-xl">Veteran Affairs Loan</h3>
@@ -184,7 +184,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         </div>
                     </div>
 
-                    <v-btn href="https://www.va.gov/housing-assistance/home-loans/eligibility/" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10">See more</v-btn>
+                    <v-btn href="https://www.va.gov/housing-assistance/home-loans/eligibility/" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See more</v-btn>
                 </div>
             </div>
         </div>
@@ -197,7 +197,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
+            <div class="flex items-start gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
                     <h3 class="font-bold text-xl">USDA LOAN</h3>
@@ -229,7 +229,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         </div>
                     </div>
                     <Link :href="route('our-team.index')">
-                        <v-btn rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-10">Click To Apply</v-btn>
+                        <v-btn rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-yellow-500">Click To Apply</v-btn>
                     </Link >
 
                 </div>
@@ -244,7 +244,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
+            <div class="flex items-start gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
                     <h3 class="font-bold text-xl">ARM LOAN</h3>
@@ -283,7 +283,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         </div>
                     </div>
                     <Link :href="route('our-team.index')">
-                        <v-btn rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-10">Click To Apply</v-btn>
+                        <v-btn rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-yellow-500">Click To Apply</v-btn>
                     </Link>
 
                 </div>
@@ -298,7 +298,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
+            <div class="flex items-start gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
                     <h3 class="font-bold text-xl">JUMBO LOAN</h3>
@@ -333,7 +333,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         </div>
                     </div>
                     <Link :href="route('our-team.index')">
-                        <v-btn rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-10">Click To Apply</v-btn>
+                        <v-btn rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-yellow-500">Click To Apply</v-btn>
                     </Link>
 
                 </div>
