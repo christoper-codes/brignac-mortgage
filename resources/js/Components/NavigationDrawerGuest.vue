@@ -170,7 +170,7 @@ onUnmounted(() => {
                             <v-card min-width="350" rounded="lg" class="mt-3">
                                 <div class="flex items-start justify-between gap-5 p-5">
                                     <div class="bg-gray-300 w-[50%] h-[215px] rounded-md overflow-hidden">
-                                        <div class="w-full h-full bg-[url('https://www.bbva.com/wp-content/uploads/2018/04/plan-negocios-empresas-bbva-e1523885477593.jpg')] bg-center bg-cover rounded-md">
+                                        <div class="w-full h-full bg-[url('/storage/img/header-5.jpg')] bg-center bg-cover rounded-md">
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
                                                 <div @click="navigateToMortgageLoanCalculatorAndScroll" class="bg-black/30 cursor-pointer rounded-full py-2 px-5 inline-flex text-white text-xs text-center items-center justify-center">
                                                     <span class="material-symbols-outlined text-2xl">web_traffic</span>
@@ -250,7 +250,7 @@ onUnmounted(() => {
                                         </Link>
                                     </div>
                                     <div class="bg-gray-300 w-[50%] h-[215px] rounded-md overflow-hidden">
-                                        <div class="w-full h-full bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover rounded-md">
+                                        <div class="w-full h-full bg-[url('/storage/img/header-6.jpg')] bg-center bg-cover rounded-md">
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
 
                                             </div>
