@@ -42,7 +42,7 @@ const user = usePage().props.auth.user;
             <section class="py-3 w-full mx-auto flex items-center justify-between lg:hidden px-4 lg:px-0 shadow-xl">
                 <Link :href="route('welcome')">
                     <div class="flex items-center justify-center">
-                        <img class="w-28" src="../../../public/img/primary-logo-light.jpg" alt="">
+                        <img class="w-28" src="../../../public/img/primary-logo-light.jpg" alt="brignac logo">
                     </div>
                 </Link>
                 <div @click="draweAppNavState = !draweAppNavState" class="flex items-center justify-center h-12 w-12 bg-white shadow-xl">

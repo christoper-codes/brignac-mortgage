@@ -318,7 +318,7 @@ const facebookTestimonials = [
             </div>
             <div class="py-3 max-w-7xl mx-auto lg:flex items-center justify-between hidden">
                 <div class="flex items-center justify-center">
-                    <img class="w-40" src="../../../../public/img/primary-logo-dark.png" alt="">
+                    <img class="w-40" src="../../../../public/img/primary-logo-dark.png" alt="brignac logo">
                 </div>
                 <div class="flex items-center gap-6 font-bold text-base">
                     <Link :href="route('welcome')">
@@ -502,7 +502,7 @@ const facebookTestimonials = [
             </div>
             <div class="py-3 max-w-7xl mx-auto flex items-center justify-between lg:hidden px-4 lg:px-0 mt-7 lg:mt-0">
                 <div class="flex items-center justify-center">
-                    <img class="w-32" src="../../../../public/img/primary-logo-dark.png" alt="">
+                    <img class="w-32" src="../../../../public/img/primary-logo-dark.png" alt="brignac logo">
                 </div>
                 <div @click="drawerNavState = !drawerNavState">
                     <svg class="size-9 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -582,7 +582,7 @@ const facebookTestimonials = [
 
                     <footer class="mt-6 flex items-center justify-center gap-3">
                         <div class="h-12 w-12 rounded-full overflow-hidden">
-                            <img class="h-full w-full" src="../../../../public/img/company-seo-img.jpg" alt="">
+                            <img class="h-full w-full" src="../../../../public/img/company-seo-img.jpg" alt="brignac logo">
                         </div>
                        <div class="text-start">
                             <div class="font-semibold text-gray-800">Shaun Brignac</div>
@@ -772,7 +772,7 @@ const facebookTestimonials = [
                 <div class="max-w-6xl mx-auto gap-16 flex flex-col-reverse lg:flex-row items-center justify-between px-4 lg:px-0 overflow-hidden">
                     <div class="w-full lg:w-[40%] px-2">
                         <div class="relative h-[400px] lg:h-[600px] rounded-xl w-full after:w-[20px] lg:after:w-[30px] after:h-[250px] lg:after:h-[500px] after:absolute after:top-1/2 after:-left-[20px] lg:after:-left-[30px] after:-translate-y-1/2 after:bg-orange-500 after:rounded-l-xl">
-                            <img class="w-full h-full object-cover rounded-xl" src="/storage/img/header-5.jpg" alt="">
+                            <img class="w-full h-full object-cover rounded-xl" src="/storage/img/header-5.jpg" alt="brignac logo">
                         </div>
                     </div>
                     <div class="w-full lg:w-[60%]">

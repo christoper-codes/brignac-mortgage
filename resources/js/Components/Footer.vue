@@ -123,7 +123,7 @@ onUnmounted(() => {
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             <div class="col-span-full lg:col-span-1">
                 <a class="flex-none text-xl font-semibold text-white focus:outline-none focus:opacity-80" href="#" aria-label="Brand">
-                    <img class="w-40" src="img/darklogo.png" alt="">
+                    <img class="w-40" src="img/darklogo.png" alt="brignac logo">
                 </a>
             </div>
             <!-- End Col -->

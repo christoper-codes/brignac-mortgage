@@ -99,7 +99,7 @@ onUnmounted(() => {
             <div class="py-5 max-w-7xl mx-auto flex items-center justify-between">
                 <Link :href="route('welcome')">
                     <div class="flex items-center justify-center cursor-pointer">
-                    <img class="w-40" src="/img/darklogo.png" alt="">
+                    <img class="w-40" src="/img/darklogo.png" alt="brignac logo">
                 </div>
                 </Link>
                 <div class="flex items-center gap-6 font-bold text-base">
@@ -287,7 +287,7 @@ onUnmounted(() => {
         <section class="py-5 w-full mx-auto flex items-center justify-between lg:hidden px-4 lg:px-0 shadow-xl">
             <Link :href="route('welcome')">
                 <div class="flex items-center justify-center">
-                    <img class="w-28" src="/img/darklogo.png" alt="">
+                    <img class="w-28" src="/img/darklogo.png" alt="brignac logo">
                 </div>
             </Link>
             <div @click="drawerNavState = !drawerNavState">

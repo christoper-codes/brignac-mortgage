@@ -98,7 +98,7 @@ onUnmounted(() => {
             <v-navigation-drawer v-model="drawerNavState" temporary class="!tw-bg-white">
                 <Link :href="route('welcome')" @click="drawerNavState = !drawerNavState">
                     <div class="w-full p-5">
-                        <img class="w-36" src="../../../public/img/primary-logo-light.jpg" alt="">
+                        <img class="w-36" src="../../../public/img/primary-logo-light.jpg" alt="brignac logo">
                     </div>
                 </Link>
 
