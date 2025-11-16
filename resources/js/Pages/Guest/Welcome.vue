@@ -364,19 +364,18 @@ const facebookTestimonials = [
                 <div class="flex items-center justify-center">
                     <img class="w-40" src="../../../../public/img/primary-logo-dark.png" alt="">
                 </div>
-                <div class="flex items-center gap-6 font-bold text-lg">
+                <div class="flex items-center gap-6 font-bold text-base">
                     <Link :href="route('welcome')">
                         <div class="card_green cursor-pointer">
                             Home
                         </div>
                     </Link>
-                    <a href="https://dot.cards/shaunbrignac" target="_blank">
-                        <div class="card_green cursor-pointer flex items-center gap-1">
-                            <span class="block">Networking</span>
-                            <span class="material-symbols-outlined block text-lg">arrow_outward</span>
+                    <Link :href="route('programs.index')">
+                        <div class="card_green cursor-pointer">
+                            Loan programs
                         </div>
-                    </a>
-                    <div class="">
+                    </Link>
+                    <div>
                         <v-menu
                             v-model="menuServices"
                             open-on-hover
@@ -427,12 +426,7 @@ const facebookTestimonials = [
                             </v-card>
                         </v-menu>
                     </div>
-                    <Link :href="route('programs.index')">
-                        <div class="card_green cursor-pointer">
-                            Loan programs
-                        </div>
-                    </Link>
-                    <div class="">
+                    <div>
                         <v-menu
                             v-model="menuTeam"
                             open-on-hover
@@ -487,7 +481,7 @@ const facebookTestimonials = [
                             </v-card>
                         </v-menu>
                     </div>
-                    <div class="">
+                    <div>
                         <v-menu
                             v-model="menuLegal"
                             open-on-hover
@@ -539,7 +533,12 @@ const facebookTestimonials = [
                         </v-menu>
                     </div>
                 </div>
-                <div>
+                <div class="flex items-center gap-5">
+                    <a href="https://dot.cards/shaunbrignac" target="_blank">
+                        <div class="card_green cursor-pointer flex items-center gap-1">
+                            <span class="block text-base font-bold">Networking</span>
+                        </div>
+                    </a>
                     <Link :href="route('our-team.index')">
                         <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Apply Now</v-btn>
                     </Link>
@@ -730,7 +729,7 @@ const facebookTestimonials = [
                             :max="7.5"
                             :step="0.01"
                         ></v-slider>
-                        <div class="">
+                        <div >
                             <p>Annual effective rate: {{ interestRate.toFixed(2) }}%</p>
                             <p>Monthly interest rate: {{ (interestRate / 12).toFixed(2) }}%</p>
                         </div>

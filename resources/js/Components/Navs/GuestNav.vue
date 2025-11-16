@@ -88,19 +88,18 @@ onUnmounted(() => {
                     <img class="w-40" src="/img/darklogo.png" alt="">
                 </div>
                 </Link>
-                <div class="flex items-center gap-6 font-bold text-lg">
+                <div class="flex items-center gap-6 font-bold text-base">
                     <Link :href="route('welcome')">
                         <div class="card_green cursor-pointer">
                             Home
                         </div>
                     </Link>
-                    <a href="https://dot.cards/shaunbrignac" target="_blank">
-                        <div class="card_green cursor-pointer flex items-center gap-1">
-                            <span class="block">Networking</span>
-                            <span class="material-symbols-outlined block text-lg">arrow_outward</span>
+                    <Link :href="route('programs.index')">
+                        <div class="card_green cursor-pointer">
+                            Loan programs
                         </div>
-                    </a>
-                    <div class="">
+                    </Link>
+                    <div>
                         <v-menu
                             v-model="menuServices"
                             open-on-hover
@@ -151,12 +150,7 @@ onUnmounted(() => {
                             </v-card>
                         </v-menu>
                     </div>
-                    <Link :href="route('programs.index')">
-                        <div class="card_green cursor-pointer">
-                            Loan programs
-                        </div>
-                    </Link>
-                    <div class="">
+                    <div>
                         <v-menu
                             v-model="menuTeam"
                             open-on-hover
@@ -211,7 +205,7 @@ onUnmounted(() => {
                             </v-card>
                         </v-menu>
                     </div>
-                    <div class="">
+                    <div>
                         <v-menu
                             v-model="menuLegal"
                             open-on-hover
@@ -263,7 +257,12 @@ onUnmounted(() => {
                         </v-menu>
                     </div>
                 </div>
-                <div>
+                <div class="flex items-center gap-5">
+                    <a href="https://dot.cards/shaunbrignac" target="_blank">
+                        <div class="card_green cursor-pointer flex items-center gap-1">
+                            <span class="block text-base font-bold">Networking</span>
+                        </div>
+                    </a>
                     <Link :href="route('our-team.index')">
                         <v-btn rounded="xs" size="large" class="text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Apply Now</v-btn>
                     </Link>
