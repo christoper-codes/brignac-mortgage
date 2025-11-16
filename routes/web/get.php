@@ -3,7 +3,6 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EmailController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProgramsController;
