@@ -7,7 +7,7 @@ import { Link } from '@inertiajs/vue3';
 <template>
     <div class="w-full h-[230px] bg-[url('/storage/img/header-5.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
         <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/60">
-            <div class="w-full flex flex-col lg:flex-row items-center justify-between max-w-7xl mx-auto px-4 lg:px-0" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
+            <div class="w-full flex flex-col items-start lg:flex-row lg:items-center justify-between max-w-7xl mx-auto px-4 lg:px-0" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                 <div class="flex flex-col gap-2 justify-center mb-5">
                     <h2 class="text-3xl lg:text-4xl font-bold">
                         <slot name="title" />
@@ -31,7 +31,3 @@ import { Link } from '@inertiajs/vue3';
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>
