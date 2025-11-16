@@ -85,7 +85,7 @@ const rules = {
     <div class="bg-white">
         <div class="w-full relative h-auto bg-[url('/storage/img/header-6.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
             <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/70 py-28 px-4 lg:px-0 w-full">
-                <div class="w-full flex flex-col justify-between max-w-3xl mx-auto mt-32 lg:mt-0 mb-20" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
+                <div class="w-full flex flex-col justify-between max-w-3xl mx-auto mt-32 lg:mt-0 mb-20">
                     <div class="flex flex-col gap-2 justify-center mb-5">
                         <h2 class="text-3xl lg:text-4xl font-bold">
                             We're Hiring!

@@ -45,7 +45,7 @@ const onSubmit = () => {
             "dangerouslyHTMLString": true
         })
         return;
-    } 
+    }
     loading.value = true;
 
     const formData = useForm({
@@ -84,9 +84,6 @@ const rules = {
         <div class="h-full w-full flex items-center justify-center text-white bg-black/40 overflow-hidden px-4 lg:px-0">
             <div class="py-14 lg:py-10 px-5 rounded-lg bg-black/20 backdrop-blur-md max-w-5xl mx-auto w-full overflow-hidden">
                 <div class="lg:px-10 w-full flex flex-col justify-between max-w-5xl mx-auto lg:mt-0" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
-                    <Link :href="route('welcome')" >
-                        <img class="w-24 lg:w-36 h-auto" src="../../../../public/img/primary-logo-dark.png" alt="logo img">
-                    </Link >
                     <div class="flex lg:mt-0 flex-col gap-2 justify-center items-center text-center mb-5">
                         <div class="flex items-center justify-center gap-2">
                             <h2 class="text-3xl lg:text-4xl font-bold">
@@ -131,10 +128,9 @@ const rules = {
                                 </div>
                                 <div class="w-full flex items-center justify-center lg:ml-[170px] mt-12">
                                         <div class='flex items-center justify-center relative'>
-                                            <div class="animate-ping absolute inline-flex h-12 w-20 lg:h-12 lg:w-24 rounded-lg bg-orange-500 opacity-75"></div>
                                             <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                                <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700">Log in</v-btn>
-                                                <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700">Log in</v-btn>
+                                                <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Log in</v-btn>
+                                                <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Log in</v-btn>
                                             </div>
                                         </div>
                                     </div>
