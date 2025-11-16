@@ -883,42 +883,42 @@ const facebookTestimonials = [
                 </div>
                 <h2 class="text-3xl lg:text-4xl font-bold">What We Provide</h2>
             </div>
-            <div class="px-4 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto gap-5 mt-5 mb-0">
+            <div data-aos-duration="2000" data-aos-once="true" class="px-4 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto gap-5 mt-5 mb-0">
 
-                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="overflow-hidden relative bg-center bg-cover w-full shadow-xl mx-auto card2 lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer rounded-xl rounded-xl">
+                <div class="relative bg-center bg-cover w-full shadow-xl mx-auto card2 lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
                    <div class="w-full h-full px-10 py-12 flex flex-col gap-3 items-center justify-center text-center">
-                    <div><span class="material-symbols-outlined text-5xl text-green-500">real_estate_agent</span></div>
+                    <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">real_estate_agent</span></div>
                     <h3 class="text-xl font-bold">Excellent Customer Experience!</h3>
                     <p class="text-xs">We are dedicated to providing you with the best customer experience in the industry.</p>
                    </div>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer rounded-xl">
-                    <div><span class="material-symbols-outlined text-5xl text-green-500">nest_clock_farsight_analog</span></div>
+                <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
+                    <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">nest_clock_farsight_analog</span></div>
                     <h3 class="text-xl font-bold">Fast Closing Times</h3>
                     <p class="text-xs">Our streamlined process ensures that you can close your loan quickly and efficiently, saving you time and hassle.</p>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer rounded-xl">
-                    <div><span class="material-symbols-outlined text-5xl text-green-500">productivity</span></div>
+                <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
+                    <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">productivity</span></div>
                     <h3 class="text-xl font-bold">Open Line of Communication</h3>
                     <p class="text-xs">e maintain an open line of communication throughout the entire process, ensuring you are always informed and your questions are promptly answered.</p>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer rounded-xl">
-                    <div><span class="material-symbols-outlined text-5xl text-green-500">support_agent</span></div>
+                <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
+                    <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">support_agent</span></div>
                     <h3 class="text-xl font-bold">Free Consulting Services</h3>
                     <p class="text-xs">Take advantage of our free consulting services to get expert advice and guidance tailored to your specific financial needs and goals.</p>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer rounded-xl">
-                    <div><span class="material-symbols-outlined text-5xl text-green-500">location_away</span></div>
+                <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
+                    <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">location_away</span></div>
                     <h3 class="text-xl font-bold">Access to Wholesale Lenders, Investors, and Products</h3>
                     <p class="text-xs">Gain exclusive access to a wide range of wholesale lenders, investors, and products to find the best options for your needs.</p>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer rounded-xl">
-                    <div><span class="material-symbols-outlined text-5xl text-green-500">badge</span></div>
+                <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
+                    <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">badge</span></div>
                     <h3 class="text-xl font-bold">Credit Repair Guidance</h3>
                     <p class="text-xs">ur experts provide personalized guidance to help you repair and improve your credit score, making it easier to secure favorable loan terms.</p>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:hover:scale-105 lg:transition-all lg:duration-700 cursor-pointer rounded-xl">
-                    <div><span class="material-symbols-outlined text-5xl text-green-500">card_travel</span></div>
+                <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
+                    <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">card_travel</span></div>
                     <h3 class="text-xl font-bold">Residential, Investment, and Commercial Loans</h3>
                     <p class="text-xs">We offer a variety of loan options to meet your residential, investment, and commercial needs, ensuring you get the best terms and rates available.</p>
                 </div>

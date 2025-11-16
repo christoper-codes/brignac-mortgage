@@ -197,20 +197,19 @@ onUnmounted(() => {
             <h2 class="text-3xl lg:text-4xl font-bold">Contact us</h2>
          </div>
          <div class="px-4 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5 mt-10 mb-0">
-            <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green_persistent lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-lg">
+            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green_persistent lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
                 <div><span class="material-symbols-outlined text-5xl text-green-500">location_on</span></div>
                 <h3 class="text-2xl font-bold">Office Address</h3>
                 <p class="text-sm">12481 Home Port Dr Suite 101, Maurepas, LA 70449, United States</p>
                 <p class="text-sm">66XH+RC Maurepas, Louisiana, USA</p>
-
             </div>
-            <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-lg">
+            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
                 <div><span class="material-symbols-outlined text-5xl text-green-500">perm_phone_msg</span></div>
                 <h3 class="text-2xl font-bold">Phone Number</h3>
                 <p class="text-sm">+1 225-435-9287</p>
                 <p class="text-sm">NMLS ID: 2401214</p>
             </div>
-            <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-lg">
+            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
                 <div><span class="material-symbols-outlined text-5xl text-green-500">group</span></div>
                 <h3 class="text-2xl font-bold">Our team</h3>
                 <Link :href="route('our-team.index')">
