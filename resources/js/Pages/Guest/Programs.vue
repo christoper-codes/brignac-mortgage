@@ -25,25 +25,22 @@ import { Head, Link } from '@inertiajs/vue3';
 
     <div class="max-w-7xl mx-auto grid items-start grid-cols-1 lg:grid-cols-2 w-full gap-10 mt-20">
 
-        <div class="shadow-xl py-6 mx-4 p-4 rounded-lg" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+        <div class="border-4 border-neutral-100 py-6 mx-4 p-4 rounded-xl">
             <!-- Imagen principal -->
-            <div class="w-full h-[270px] bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-3a39861.png')] bg-center bg-cover">
-                <div class="h-full w-full flex items-start justify-end bg-black/20">
-                    <div class="h-16 w-8 bg-green-500 mr-5"></div>
+            <div class="w-full h-[270px] rounded-lg bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-3a39861.png')] bg-center bg-cover">
+                <div class="h-full w-full flex items-start justify-end bg-black/20 rounded-lg">
+                    <div class="h-16 w-8 bg-green-500 mr-5 rounded-b-md"></div>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
-                    <div class="size-10 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-green-500">deployed_code</span>
-                    </div>
                     <h3 class="font-bold text-xl">Federal Housing Administration Loan</h3>
                 </div>
 
                 <!-- Título del programa -->
-                <div class="py-2 px-5 border-l-[4px] border-l-green-500 bg-green-100">
+                <div class="py-2 px-5 border-l-[4px] border-l-green-500">
                     <h3 class="text-xs">General FHA Loans Program</h3>
                 </div>
 
@@ -91,25 +88,22 @@ import { Head, Link } from '@inertiajs/vue3';
             </div>
         </div>
 
-        <div class="shadow-xl py-6 mx-4 p-4 rounded-lg" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+        <div class="border-4 border-neutral-100 py-6 mx-4 p-4 rounded-xl">
             <!-- Imagen principal -->
-            <div class="w-full h-[270px] bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-0772a60.png')] bg-center bg-cover">
-                <div class="h-full w-full flex items-start justify-end bg-black/20">
-                    <div class="h-16 w-8 bg-green-500 mr-5"></div>
+            <div class="w-full h-[270px] rounded-lg bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-0772a60.png')] bg-center bg-cover">
+                <div class="h-full w-full flex items-start justify-end bg-black/20 rounded-lg">
+                    <div class="h-16 w-8 bg-green-500 mr-5 rounded-b-md"></div>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
-                    <div class="size-10 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-green-500">deployed_code</span>
-                    </div>
                     <h3 class="font-bold text-xl">Conventional Loan</h3>
                 </div>
 
                 <!-- Título del programa -->
-                <div class="py-2 px-5 border-l-[4px] border-l-green-500 bg-green-100">
+                <div class="py-2 px-5 border-l-[4px] border-l-green-500">
                     <h3 class="text-xs">General Conventional Loan Program</h3>
                 </div>
 
@@ -144,25 +138,22 @@ import { Head, Link } from '@inertiajs/vue3';
             </div>
         </div>
 
-        <div class="shadow-xl py-6 mx-4 p-4 rounded-lg" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+        <div class="border-4 border-neutral-100 py-6 mx-4 p-4 rounded-xl">
             <!-- Imagen principal -->
-            <div class="w-full h-[270px] bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-2f983ad.png')] bg-center bg-cover">
-                <div class="h-full w-full flex items-start justify-end bg-black/20">
-                    <div class="h-16 w-8 bg-green-500 mr-5"></div>
+            <div class="w-full h-[270px] rounded-lg bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-2f983ad.png')] bg-center bg-cover">
+                <div class="h-full w-full flex items-start justify-end bg-black/20 rounded-lg">
+                    <div class="h-16 w-8 bg-green-500 mr-5 rounded-b-md"></div>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
-                    <div class="size-10 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-green-500">deployed_code</span>
-                    </div>
                     <h3 class="font-bold text-xl">Veteran Affairs Loan</h3>
                 </div>
 
                 <!-- Título del programa -->
-                <div class="py-2 px-5 border-l-[4px] border-l-green-500 bg-green-100">
+                <div class="py-2 px-5 border-l-[4px] border-l-green-500">
                     <h3 class="text-xs">General Eligibility Requirements</h3>
                 </div>
 
@@ -198,25 +189,22 @@ import { Head, Link } from '@inertiajs/vue3';
             </div>
         </div>
 
-        <div class="shadow-xl py-6 mx-4 p-4 rounded-lg" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+        <div class="border-4 border-neutral-100 py-6 mx-4 p-4 rounded-xl">
             <!-- Imagen principal -->
-            <div class="w-full h-[270px] bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-3a39861.png')] bg-center bg-cover">
-                <div class="h-full w-full flex items-start justify-end bg-black/20">
-                    <div class="h-16 w-8 bg-orange-500 mr-5"></div>
+            <div class="w-full h-[270px] rounded-lg bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-3a39861.png')] bg-center bg-cover">
+                <div class="h-full w-full flex items-start justify-end bg-black/20 rounded-lg">
+                    <div class="h-16 w-8 bg-orange-500 mr-5 rounded-b-md"></div>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
-                    <div class="size-10 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-orange-500">deployed_code</span>
-                    </div>
                     <h3 class="font-bold text-xl">USDA LOAN</h3>
                 </div>
 
                 <!-- Título del programa -->
-                <div class="py-2 px-5 border-l-[4px] border-l-orange-500 bg-orange-100">
+                <div class="py-2 px-5 border-l-[4px] border-l-orange-500">
                     <h3 class="text-xs">General USDA Loan Program</h3>
                 </div>
 
@@ -248,25 +236,22 @@ import { Head, Link } from '@inertiajs/vue3';
             </div>
         </div>
 
-        <div class="shadow-xl py-6 mx-4 p-4 rounded-lg" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+        <div class="border-4 border-neutral-100 py-6 mx-4 p-4 rounded-xl">
             <!-- Imagen principal -->
-            <div class="w-full h-[270px] bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-10681fa.png')] bg-center bg-cover">
-                <div class="h-full w-full flex items-start justify-end bg-black/20">
-                    <div class="h-16 w-8 bg-orange-500 mr-5"></div>
+            <div class="w-full h-[270px] rounded-lg bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-10681fa.png')] bg-center bg-cover">
+                <div class="h-full w-full flex items-start justify-end bg-black/20 rounded-lg">
+                    <div class="h-16 w-8 bg-orange-500 mr-5 rounded-b-md"></div>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
-                    <div class="size-10 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-orange-500">deployed_code</span>
-                    </div>
                     <h3 class="font-bold text-xl">ARM LOAN</h3>
                 </div>
 
                 <!-- Título del programa -->
-                <div class="py-2 px-5 border-l-[4px] border-l-orange-500 bg-orange-100">
+                <div class="py-2 px-5 border-l-[4px] border-l-orange-500">
                     <h3 class="text-xs">General Adjustable Rate Mortgage Program</h3>
                 </div>
 
@@ -305,25 +290,22 @@ import { Head, Link } from '@inertiajs/vue3';
             </div>
         </div>
 
-        <div class="shadow-xl py-6 mx-4 p-4 rounded-lg" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+        <div class="border-4 border-neutral-100 py-6 mx-4 p-4 rounded-xl">
             <!-- Imagen principal -->
-            <div class="w-full h-[270px] bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-e000abc.png')] bg-center bg-cover">
-                <div class="h-full w-full flex items-start justify-end bg-black/20">
-                    <div class="h-16 w-8 bg-orange-500 mr-5"></div>
+            <div class="w-full h-[270px] rounded-lg bg-[url('https://img1.wsimg.com/isteam/ip/6ea216e3-2cb3-4597-a890-f1be29a5c17b/blob-e000abc.png')] bg-center bg-cover">
+                <div class="h-full w-full flex items-start justify-end bg-black/20 rounded-lg">
+                    <div class="h-16 w-8 bg-orange-500 mr-5 rounded-b-md"></div>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 flex-col mt-5 lg:p-5">
                 <!-- Icono y título -->
                 <div class="flex items-center justify-center lg:gap-2">
-                    <div class="size-10 shadow-xl lg:flex items-center justify-center hidden">
-                        <span class="material-symbols-outlined block text-orange-500">deployed_code</span>
-                    </div>
                     <h3 class="font-bold text-xl">JUMBO LOAN</h3>
                 </div>
 
                 <!-- Título del programa -->
-                <div class="py-2 px-5 border-l-[4px] border-l-orange-500 bg-orange-100">
+                <div class="py-2 px-5 border-l-[4px] border-l-orange-500">
                     <h3 class="text-xs">General Jumbo Mortgage Program</h3>
                 </div>
 
@@ -357,9 +339,6 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
     <section class="mt-60">

@@ -87,8 +87,8 @@ const rules = {
     </Breadcrumb>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-10 max-w-7xl mx-auto mt-20 px-4 lg:px-0">
-        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden hover:scale-[130%] transition-all duration-500">
+        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500">
+            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
                 <img class="w-full h-full" src="../../../../public/img/company-seo-img.jpg" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
@@ -116,8 +116,8 @@ const rules = {
             </div>
         </div>
 
-        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden hover:scale-[130%] transition-all duration-500">
+        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500">
+            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
                 <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-allie.png" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
@@ -144,8 +144,8 @@ const rules = {
             </div>
         </div>
 
-        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden hover:scale-[130%] transition-all duration-500">
+        <div class="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center justify-between lg:hover:scale-105 transition-all duration-500">
+            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
                 <img class="w-full h-full" src="../../../../public/img/team-jennifer.jpg" alt="team img">
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
@@ -177,8 +177,8 @@ const rules = {
     </div>
 
     <div class="bg-white">
-        <div class="w-full h-auto bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
-        <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/80 py-28 px-4 lg:px-0">
+        <div class="w-full h-auto bg-[url('/storage/img/header-5.jpg')] bg-center bg-cover mt-[73px] lg:mt-[100px]">
+        <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/70 py-28 px-4 lg:px-0">
             <div class="w-full flex flex-col justify-between max-w-3xl mx-auto" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                 <div class="flex flex-col gap-2 justify-center mb-5">
                     <h2 class="text-3xl lg:text-4xl font-bold">
@@ -235,10 +235,9 @@ const rules = {
 
                                 <div class="w-full flex items-center justify-end mt-12">
                                     <div class='flex items-center justify-center relative'>
-                                        <div class="animate-ping absolute inline-flex h-12 w-24 lg:h-14 lg:w-32 rounded-lg bg-green-500 opacity-75"></div>
                                         <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                            <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Send now</v-btn>
-                                            <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700">Send now</v-btn>
+                                            <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
+                                            <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
                                         </div>
                                     </div>
                                 </div>
