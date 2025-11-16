@@ -830,7 +830,7 @@ const facebookTestimonials = [
             <div class="bg-gray-50 border-y lg:my-10 w-full py-20 lg:mb-10">
                 <div class="max-w-6xl mx-auto gap-16 flex flex-col-reverse lg:flex-row items-center justify-between px-4 lg:px-0 overflow-hidden">
                     <div class="w-full lg:w-[40%] px-2">
-                        <div class="relative h-[400px] lg:h-[600px] border-[10px] shadow-lg rounded-xl border-white w-full after:w-[20px] lg:after:w-[30px] after:h-[250px] lg:after:h-[500px] after:absolute after:top-1/2 after:-left-[20px] lg:after:-left-[30px] after:-translate-y-1/2 after:bg-orange-500 after:rounded-l-xl">
+                        <div class="relative h-[400px] lg:h-[600px] rounded-xl w-full after:w-[20px] lg:after:w-[30px] after:h-[250px] lg:after:h-[500px] after:absolute after:top-1/2 after:-left-[20px] lg:after:-left-[30px] after:-translate-y-1/2 after:bg-orange-500 after:rounded-l-xl">
                             <img class="w-full h-full object-cover rounded-xl" src="/storage/img/header-5.jpg" alt="">
                         </div>
                     </div>
@@ -988,7 +988,7 @@ const facebookTestimonials = [
         <main class="bg-white relative z-10">
             <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-xl p-4 lg:p-10 bg-white">
                 <div class="relative">
-                    <div class="w-full p-6 bg-gray-100/70 rounded-lg flex items-center justify-between">
+                    <div class="w-full p-6 bg-gray-100/70 rounded-lg flex flex-col md:flex-row gap-5 items-center justify-between">
                         <div class="flex flex-col gap-3">
                             <h2 class="font-bold text-xl text-blue-600">Facebook <span class="text-lg text-neutral-800">Reviews</span></h2>
                             <div class="flex items-center gap-1">
