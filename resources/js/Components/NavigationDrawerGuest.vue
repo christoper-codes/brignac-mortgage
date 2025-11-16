@@ -90,7 +90,6 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', onScroll);
 });
-
 </script>
 
 <template>
@@ -109,16 +108,16 @@ onUnmounted(() => {
                             Home
                         </div>
                     </Link>
-                    <div @click="navigateToTestimonialsAndScroll" class="border-b border-b-neutral-50 py-4">
-                        <div class="card_green cursor-pointer flex items-center gap-1">
-                            <span class="block">Testimonials</span>
-                        </div>
-                    </div>
                     <Link :href="route('programs.index')" @click="drawerNavState = !drawerNavState" class="border-b border-b-neutral-50 py-4">
                         <div class="card_green cursor-pointer">
                             Loan programs
                         </div>
                     </Link>
+                    <div @click="navigateToTestimonialsAndScroll" class="border-b border-b-neutral-50 py-4">
+                        <div class="card_green cursor-pointer flex items-center gap-1">
+                            <span class="block">Testimonials</span>
+                        </div>
+                    </div>
                     <div>
                         <v-menu
                             v-model="menuServices"
