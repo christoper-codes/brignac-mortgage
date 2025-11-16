@@ -340,7 +340,7 @@ const facebookTestimonials = [
             </div> -->
             <!-- End Announcement Banner -->
             <div class="py-2 border-b-[1px] border-b-gray-500">
-                <div class="flex items-center justify-between max-w-7xl mx-auto px-4 lg:px-0">
+                <div class="flex lg:items-center justify-between max-w-7xl mx-auto px-4 lg:px-0">
                     <div class="flex flex-col lg:flex-row lg:items-center lg:gap-6">
                         <a href="mailto:Shaun@brignacmortgage.com"  class="flex items-center gap-1 text-xs lg:text-sm">
                             <span class="material-symbols-outlined text-lg text-green-500">mail</span>
@@ -353,21 +353,6 @@ const facebookTestimonials = [
                     </div>
 
                     <div class="flex flex-col items-end lg:flex-row lg:items-center gap-1 lg:gap-6">
-                        <div class="flex items-center gap-1 text-xs lg:text-sm">
-                            <div class="text-center">
-                                <v-menu
-                                    open-on-hover
-                                    location="bottom center"
-                                    origin="top center"
-                                >
-                                <template v-slot:activator="{ props }">
-                                    <p v-bind="props" class="cursor-pointer">English</p>
-                                </template>
-
-                                <div class="w-32 h-10 bg-white shadow-xl rounded-sm flex items-center justify-center text-center mt-2">English</div>
-                                </v-menu>
-                            </div>
-                        </div>
                         <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank" class="flex items-center gap-1 text-xs lg:text-sm">
                             <span class="material-symbols-outlined text-lg text-green-500">location_on</span>
                             <p> 12481, Maurepas, LA</p>
@@ -564,8 +549,8 @@ const facebookTestimonials = [
                 <div class="flex items-center justify-center">
                     <img class="w-32" src="../../../../public/img/primary-logo-dark.png" alt="">
                 </div>
-                <div @click="drawerNavState = !drawerNavState" class="flex items-center justify-center h-12 w-12 bg-white rounded-md">
-                    <span class="material-symbols-outlined block">menu</span>
+                <div @click="drawerNavState = !drawerNavState" class="flex items-center justify-center h-12 w-12 bg-white/30 backdrop-blur-md rounded-md">
+                    <span class="material-symbols-outlined block text-white">menu</span>
                 </div>
             </div>
         </nav>
@@ -587,8 +572,8 @@ const facebookTestimonials = [
                         </div>
                         <div>
                             <Link :href="route('our-team.index')">
-                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Apply now for a mortgage</v-btn>
-                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Apply now for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Apply for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Apply for a mortgage</v-btn>
                             </Link >
                         </div>
                    </div>
@@ -608,8 +593,8 @@ const facebookTestimonials = [
                         </div>
                         <div>
                             <Link :href="route('our-team.index')">
-                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Apply now for a mortgage</v-btn>
-                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Apply now for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Apply for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Apply for a mortgage</v-btn>
                             </Link >
                         </div>
                    </div>
@@ -1106,28 +1091,15 @@ const facebookTestimonials = [
 
                     <template v-slot:default="{ isActive }">
                         <v-card>
-                        <v-card-text>
-                            <div class="flex flex-col gap-5 items-center justify-center text-center">
-                                <h2 class="font-bold text-xl my-2">About Brignac Mortgage</h2>
-                                <div class="tw-mx-auto tw-absolute w-full">
-                                    <video class="tw-max-w-full tw-w-full tw-h-auto" controls playsinline>
-                                        <source type="video/mp4" src="../../../../public/video/about-us-video.mp4">
-                                    </video>
+                            <v-card-text class="!p-0">
+                                <div class="flex flex-col gap-5 items-center justify-center text-center">
+                                    <div class="tw-mx-auto tw-absolute w-full">
+                                        <video class="tw-max-w-full tw-w-full tw-h-auto" controls playsinline>
+                                            <source type="video/mp4" src="../../../../public/video/about-us-video.mp4">
+                                        </video>
+                                    </div>
                                 </div>
-                            </div>
-                        </v-card-text>
-
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-
-                            <v-btn
-                            color="red"
-                            variant="tonal"
-                            text="Close"
-                            class="text-none mr-2 mb-2"
-                            @click="isActive.value = false"
-                            ></v-btn>
-                        </v-card-actions>
+                            </v-card-text>
                         </v-card>
                     </template>
                 </v-dialog>
@@ -1156,28 +1128,15 @@ const facebookTestimonials = [
 
                         <template v-slot:default="{ isActive }">
                             <v-card>
-                            <v-card-text>
-                                <div class="flex flex-col gap-5 items-center justify-center text-center">
-                                    <h2 class="font-bold text-xl my-2">About Brignac Mortgage</h2>
-                                    <div class="tw-mx-auto tw-absolute w-full">
-                                        <video class="tw-max-w-full tw-w-full tw-h-auto" controls playsinline>
-                                            <source type="video/mp4" src="../../../../public/video/about-us-video.mp4">
-                                        </video>
+                                <v-card-text class="!p-0">
+                                    <div class="flex flex-col gap-5 items-center justify-center text-center">
+                                        <div class="tw-mx-auto tw-absolute w-full">
+                                            <video class="tw-max-w-full tw-w-full tw-h-auto" controls playsinline>
+                                                <source type="video/mp4" src="../../../../public/video/about-us-video.mp4">
+                                            </video>
+                                        </div>
                                     </div>
-                                </div>
-                            </v-card-text>
-
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-
-                                <v-btn
-                                color="red"
-                                variant="tonal"
-                                text="Close"
-                                class="text-none mr-2 mb-2"
-                                @click="isActive.value = false"
-                                ></v-btn>
-                            </v-card-actions>
+                                </v-card-text>
                             </v-card>
                         </template>
                     </v-dialog>
