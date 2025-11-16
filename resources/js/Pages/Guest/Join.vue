@@ -76,26 +76,16 @@ const rules = {
     },
     description: value => value.length <= 255 || 'The description must be less than 255 characters.'
 }
-
-
 </script>
 
 <template>
     <Head title="Join" />
     <NavigationDrawerGuest />
     <GuestNav />
-
-
     <div class="bg-white">
-        <div class="w-full relative h-auto bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
-            <div class="absolute top-0 lg:mt-10 w-full lg:right-10 lg:w-[30%] gap-5 bg-black/30 backdrop-blur-sm p-10 flex items-center flex-col justify-center rounded-md text-white">
-                <p class="font-bold">If you already have an account, log in.</p>
-                <Link :href="route('login')">
-                    <v-btn type="submit" rounded="xs" size="large" variant="tonal" class="text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700">Log in</v-btn>
-                </Link>
-            </div>
-            <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/80 lg:w-[65%] py-28 px-4 lg:px-0">
-                <div class="w-full flex flex-col justify-between max-w-3xl mx-auto mt-32 lg:mt-0" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
+        <div class="w-full relative h-auto bg-[url('/storage/img/header-6.jpg')] bg-center bg-cover mt-[73px] lg:mt-[90px]">
+            <div class="d-flex flex-column fill-height justify-center align-center text-white bg-black/70 py-28 px-4 lg:px-0 w-full">
+                <div class="w-full flex flex-col justify-between max-w-3xl mx-auto mt-32 lg:mt-0 mb-20" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                     <div class="flex flex-col gap-2 justify-center mb-5">
                         <h2 class="text-3xl lg:text-4xl font-bold">
                             We're Hiring!
@@ -104,6 +94,11 @@ const rules = {
                         <p class="max-w-[600px] text-xs lg:text-base">
                             If you're interested in one of our open positions, apply here and attach your resume. We're taking applications for self-motivated and experienced Loan Officers. Work hard, be excited about your career, and make money doing it. We hold our associates to a high standard, and we only hire the bes
                         </p>
+                        <div>
+                            <Link :href="route('login')">
+                                <v-btn type="submit" rounded="xs" size="large" variant="tonal" class="text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Log in</v-btn>
+                            </Link>
+                        </div>
                     </div>
 
                     <div class="relative">
@@ -174,17 +169,14 @@ const rules = {
                                         :rules="[rules.required, rules.description]"
                                         color="orange"
                                     ></v-textarea>
-
                                     <div class="w-full flex items-center justify-end mt-12">
                                         <div class='flex items-center justify-center relative'>
-                                            <div class="animate-ping absolute inline-flex h-12 w-24 lg:h-14 lg:w-32 rounded-lg bg-orange-500 opacity-75"></div>
                                             <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                                <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700">Send now</v-btn>
-                                                <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700">Send now</v-btn>
+                                                <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
+                                                <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
                                             </div>
                                         </div>
                                     </div>
-
                                 </v-form>
                             </div>
                         </div>
@@ -192,8 +184,7 @@ const rules = {
         </div>
     </div>
 
-
-    <section class="mt-40 lg:mt-[200px]">
+    <section>
         <Footer />
     </section>
    </div>
