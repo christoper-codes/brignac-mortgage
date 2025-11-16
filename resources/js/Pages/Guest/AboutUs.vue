@@ -68,10 +68,13 @@ const rules = {
 }
 
 const contactUs = ref(null);
+const isInternalNavigation = ref(false);
+
 const scrollContactUsSection = () => {
-    const offset = 100;
+    const offset = isInternalNavigation.value ? 100 : -900;
     const elementPosition = contactUs.value.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+    isInternalNavigation.value = true;
 };
 onMounted(() => {
     window.addEventListener('scroll-contact-us-section', scrollContactUsSection);
@@ -197,20 +200,20 @@ onUnmounted(() => {
             <h2 class="text-3xl lg:text-4xl font-bold">Contact us</h2>
          </div>
          <div class="px-4 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5 mt-10 mb-0">
-            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green_persistent lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
-                <div><span class="material-symbols-outlined text-5xl text-green-500">location_on</span></div>
+            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green_persistent lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
+                <div class="flex items-center justify-center rounded-full size-14 border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">location_on</span></div>
                 <h3 class="text-2xl font-bold">Office Address</h3>
                 <p class="text-sm">12481 Home Port Dr Suite 101, Maurepas, LA 70449, United States</p>
                 <p class="text-sm">66XH+RC Maurepas, Louisiana, USA</p>
             </div>
-            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
-                <div><span class="material-symbols-outlined text-5xl text-green-500">perm_phone_msg</span></div>
+            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
+                <div class="flex items-center justify-center rounded-full size-14 border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">perm_phone_msg</span></div>
                 <h3 class="text-2xl font-bold">Phone Number</h3>
                 <p class="text-sm">+1 225-435-9287</p>
                 <p class="text-sm">NMLS ID: 2401214</p>
             </div>
-            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:hover:scale-105 lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
-                <div><span class="material-symbols-outlined text-5xl text-green-500">group</span></div>
+            <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
+                <div class="flex items-center justify-center rounded-full size-14 border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">group</span></div>
                 <h3 class="text-2xl font-bold">Our team</h3>
                 <Link :href="route('our-team.index')">
                     <div class="cursor-pointer flex items-center gap-1 py-2 px-4 rounded-full bg-green-100 text-green-600">
