@@ -93,7 +93,7 @@ const rules = {
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
                 <h2 class="text-xl font-bold">Shaun Brignac, MBA</h2>
-                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 border-2 border-orange-100 rounded-full">President and CEO</h2>
+                <h2 class="text-xs font-bold text-orange-400 py-2 px-7 rounded-full shadow-lg">President and CEO</h2>
             </div>
             <div class="mt-7 w-full">
                 <a href="mailto:Shaun@brignacmortgage.com" class="flex items-center lg:gap-2">
@@ -109,7 +109,7 @@ const rules = {
                         </ul>
                     </div>
                 </div>
-                <v-btn href="https://2401214.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5 !rounded-full !flex !items-center !justify-center !py-5">Apply</v-btn>
+                <v-btn href="https://2401214.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5 !rounded-full !flex !items-center !justify-center !py-5 !border !border-yellow-500">Apply</v-btn>
             </div>
         </div>
 
@@ -119,7 +119,7 @@ const rules = {
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
                 <h2 class="text-xl font-bold">Allison Ratcliff</h2>
-                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 border-2 border-orange-100 rounded-full">Chief of Operations</h2>
+                <h2 class="text-xs font-bold text-orange-400 py-2 px-7 rounded-full shadow-lg">Chief of Operations</h2>
             </div>
             <div class="mt-7 w-full">
                 <a href="mailto:Allie@brignacmortgage.com" class="flex items-center lg:gap-2">
@@ -134,7 +134,7 @@ const rules = {
                         </ul>
                     </div>
                 </div>
-                <v-btn href="https://allieratcliff.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5 !rounded-full !flex !items-center !justify-center !py-5">Apply</v-btn>
+                <v-btn href="https://allieratcliff.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5 !rounded-full !flex !items-center !justify-center !py-5 !border !border-yellow-500">Apply</v-btn>
             </div>
         </div>
 
@@ -144,7 +144,7 @@ const rules = {
             </div>
             <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
                 <h2 class="text-xl font-bold">Jennifer McMinn-Griffin </h2>
-                <h2 class="text-xs font-bold text-orange-500 py-2 px-7 border-2 border-orange-100 rounded-full">Loan Processor</h2>
+                <h2 class="text-xs font-bold text-orange-400 py-2 px-7 rounded-full shadow-lg">Loan Processor</h2>
             </div>
             <div class="mt-7 w-full">
                 <a href="mailto:jen@tigerprocessingllc.com" class="flex items-center lg:gap-2">
