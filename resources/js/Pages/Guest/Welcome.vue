@@ -994,7 +994,7 @@ const facebookTestimonials = [
                             </a>
                         </div>
                     </div>
-                    <div class="my-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+                    <div class="my-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                         <div v-for="testimonial in facebookTestimonials" :key="testimonial.name" class="bg-gray-100/70 rounded-lg flex flex-col gap-5 p-7">
                             <div class="text-center flex flex-col items-center justify-center gap-1">
                                 <div class="flex gap-0 items-center text-yellow-500">

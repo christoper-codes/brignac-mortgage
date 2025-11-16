@@ -80,12 +80,12 @@ onUnmounted(() => {
     <div @click="scrollToTop" class="animate__animated animate__fadeInDown fixed bottom-10 right-5 size-12 bg-orange-500 z-40 rounded-full flex items-center justify-center floating-shadow lg:hover:scale-110 duration-500 transition-transform cursor-pointer">
         <span class="material-symbols-outlined text-white">keyboard_arrow_up</span>
     </div>
-    <nav :class="['fixed top-0 left-0 w-full transition-all z-40 bg-white shadow-xl', { 'hidden': !scrolledDown, 'animate__animated animate__fadeInDown': scrolledDown }]">
+    <nav :class="['fixed top-0 left-0 w-full transition-all z-40 bg-white/80 backdrop-blur-xl backdrop-brightness-150 shadow-xl', { 'hidden': !scrolledDown, 'animate__animated animate__fadeInDown': scrolledDown }]">
         <section class="w-full text-gray-600 hidden lg:block">
             <div class="py-5 max-w-7xl mx-auto flex items-center justify-between">
                 <Link :href="route('welcome')">
                     <div class="flex items-center justify-center cursor-pointer">
-                    <img class="w-40" src="../../../../public/img/primary-logo-light.jpg" alt="">
+                    <img class="w-40" src="/img/darklogo.png" alt="">
                 </div>
                 </Link>
                 <div class="flex items-center gap-6 font-bold text-lg">
@@ -274,11 +274,11 @@ onUnmounted(() => {
         <section class="py-3 w-full mx-auto flex items-center justify-between lg:hidden px-4 lg:px-0 shadow-xl">
             <Link :href="route('welcome')">
                 <div class="flex items-center justify-center">
-                    <img class="w-28" src="../../../../public/img/primary-logo-light.jpg" alt="">
+                    <img class="w-28" src="/img/darklogo.png" alt="">
                 </div>
             </Link>
-            <div @click="drawerNavState = !drawerNavState" class="flex items-center justify-center h-12 w-12 bg-white shadow-xl rounded-lg">
-                <span class="material-symbols-outlined block">menu</span>
+            <div @click="drawerNavState = !drawerNavState" class="flex items-center justify-center h-12 w-12 bg-white/20 backdrop-blur-lg shadow-xl rounded-lg">
+                <span class="material-symbols-outlined block text-black">menu</span>
             </div>
         </section>
     </nav>
