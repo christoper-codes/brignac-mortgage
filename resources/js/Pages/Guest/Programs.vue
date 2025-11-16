@@ -45,10 +45,10 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
 
                 <!-- Detalles del programa -->
-                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px]">
+                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px] space-y-2">
                     <p><strong>Credit Score:</strong> 500+</p>
                     <p><strong>Down Payment:</strong> There is no minimum down payment required under certain conditions:</p>
-                    <ul class="list-disc pl-5">
+                    <ul class="list-disc pl-5 space-y-3 mt-3">
                         <li>Credit Score 500-560: 10% Down</li>
                         <li>Credit Score 560+: 3.5% Down</li>
                     </ul>
@@ -57,7 +57,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         <!-- Opciones de préstamos -->
                         <div class="mt-4">
                             <h4 class="font-semibold text-md">Loan Options:</h4>
-                            <ul class="list-disc pl-5">
+                            <ul class="list-disc pl-5 space-y-3 mt-3">
                                 <li>Primary Home Residence</li>
                                 <li>Refinance Options</li>
                                 <li>Fixed Rate Loan</li>
@@ -72,7 +72,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         <!-- Programas especiales -->
                         <div class="mt-4">
                             <h4 class="font-semibold text-md">Special Programs for:</h4>
-                            <ul class="list-disc pl-5">
+                            <ul class="list-disc pl-5 space-y-3 mt-3">
                                 <li>Law Enforcement</li>
                                 <li>Teachers</li>
                                 <li>Firefighters</li>
@@ -108,7 +108,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
 
                 <!-- Detalles del programa -->
-                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px]">
+                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px] space-y-2">
                     <p><strong>FICO Score:</strong> 620+</p>
                     <p><strong>Minimum Down Payment:</strong> 3% down payment solution for first-time homebuyers.</p>
                     <p><strong>Conventional 1% Down Program</strong></p>
@@ -119,7 +119,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         <!-- Opciones de préstamos -->
                         <div class="mt-4">
                             <h4 class="font-semibold text-md">Eligible Properties:</h4>
-                            <ul class="list-disc pl-5">
+                            <ul class="list-disc pl-5 space-y-3 mt-3">
                                 <li>Primary, second, and investment properties</li>
                                 <li>Manufactured Homes</li>
                                 <li>Adjustable Rate Program (ARM)</li>
@@ -158,7 +158,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
 
                 <!-- Detalles del programa -->
-                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px]">
+                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px] space-y-2">
                     <p><strong>Active Duty Service:</strong> A Veteran is eligible for VA home loan benefits if they served on active duty in the Army, Navy, Air Force, Marine Corps, or Coast Guard.</p>
                     <p><strong>Discharged Veterans:</strong> The DD214 Form, Certificate of Release or Discharge from Active Duty</p>
                     <p><strong>Surviving Spouses</strong></p>
@@ -171,7 +171,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         <!-- Opciones de préstamos -->
                         <div class="mt-4">
                             <h4 class="font-semibold text-md">Eligible Properties:</h4>
-                            <ul class="list-disc pl-5">
+                            <ul class="list-disc pl-5 space-y-3 mt-3">
                                 <li>Single Family Home</li>
                                 <li>Condo</li>
                                 <li>Manufactured Home</li>
@@ -209,7 +209,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
 
                 <!-- Detalles del programa -->
-                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px]">
+                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px] space-y-2">
                     <p><strong>Credit Score:</strong> 620+</p>
                     <p>Under 620 Might Be Able To Qualify Under Conditions.</p>
                     <p><strong>ZERO Down Payment</strong></p>
@@ -220,7 +220,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         <!-- Opciones de préstamos -->
                         <div class="mt-4">
                             <h4 class="font-semibold text-md">Eligible Properties:</h4>
-                            <ul class="list-disc pl-5">
+                            <ul class="list-disc pl-5 space-y-3 mt-3">
                                 <li>Primary Residence</li>
                                 <li>Single Family Homes</li>
                                 <li>Manufactured Properties</li>
@@ -256,7 +256,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
 
                 <!-- Detalles del programa -->
-                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px]">
+                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px] space-y-2">
                     <p><strong>Credit Score Requirements:</strong></p>
                     <p>Minimum: 580+</p>
                     <p>Conventional ARM: 620</p>
@@ -270,7 +270,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         <!-- Opciones de préstamos -->
                         <div class="mt-4">
                             <h4 class="font-semibold text-md">Eligible Properties:</h4>
-                            <ul class="list-disc pl-5">
+                            <ul class="list-disc pl-5 space-y-3 mt-3">
                                 <li>Primary Residence</li>
                                 <li>Second Home Properties</li>
                                 <li>Investment Properties</li>
@@ -310,7 +310,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 </div>
 
                 <!-- Detalles del programa -->
-                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px]">
+                <div class="mt-2 pt-4 text-sm text-gray-700 border-t-[2px] space-y-2">
                     <p><strong>Minimum Credit Score:</strong> 680</p>
                     <p><strong>Average Credit Score:</strong> 700 or higher</p>
                     <p><strong>Minimum Down Payment:</strong> 3% to 5%</p>
@@ -321,7 +321,7 @@ import { Head, Link } from '@inertiajs/vue3';
                         <!-- Opciones de préstamos -->
                         <div class="mt-4">
                             <h4 class="font-semibold text-md">Eligible Properties:</h4>
-                            <ul class="list-disc pl-5">
+                            <ul class="list-disc pl-5 space-y-3 mt-3">
                                 <li>Single Family Home Outside Conforming Limit</li>
                                 <li>Vacation Properties</li>
                                 <li>Investment Properties</li>
