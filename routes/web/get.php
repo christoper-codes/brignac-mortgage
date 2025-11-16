@@ -29,27 +29,21 @@ Route::get('/mortgage', function () {
 })->name('mortgage');
 
 Route::get('/migrate-fresh', function () {
-
     Artisan::call('migrate:fresh');
 
     return "migrate-fresh";
-
 });
 
 Route::get('/storage-fresh', function () {
-
     Artisan::call('storage:link');
 
-    return "migrate-fresh";
-
+    return "storage-fresh";
 });
 
 Route::get('/optimize-fresh', function () {
-
     Artisan::call('optimize:clear');
 
-    return "migrate-fresh";
-
+    return "optimize-fresh";
 });
 
 /*
@@ -69,9 +63,7 @@ Route::get('/terms-of-use-for-website', [LegalController::class, 'termsOfUseForW
 * |Auth | dashboard
 */
 Route::middleware('auth')->group(function () {
-
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/interested-clients', [DashboardController::class, 'indexInterestedClients'])->name('interested-clients.index');
     Route::get('/candidates-for-hiring', [DashboardController::class, 'indexCandidatesForHiring'])->name('candidates-for-hiring.index');
-
 });
