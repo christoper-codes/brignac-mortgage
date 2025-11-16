@@ -100,7 +100,7 @@ onUnmounted(() => {
         <div class="w-full flex flex-col-reverse lg:flex-col lg:mt-10">
             <div class="w-full pt-14 pb-14 lg:mb-10">
                 <div class="max-w-6xl mx-auto gap-16 flex flex-col-reverse lg:flex-row items-center justify-between px-4 lg:px-0 overflow-hidden">
-                    <div class="w-full lg:w-[40%] px-2"  data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
+                    <div class="w-full lg:w-[40%] px-2">
                         <div class="relative h-[400px] lg:h-[600px] border-[10px] shadow-lg rounded-xl border-white w-full after:w-[20px] lg:after:w-[30px] after:h-[250px] lg:after:h-[500px] after:absolute after:top-1/2 after:-left-[20px] lg:after:-left-[30px] after:-translate-y-1/2 after:bg-orange-500 after:rounded-l-xl">
                             <img class="w-full h-full object-cover rounded-xl" src="/storage/img/header-5.jpg" alt="">
                         </div>
