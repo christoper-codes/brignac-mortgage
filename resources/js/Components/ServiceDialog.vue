@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 
-
 const slides = ref([
     'Conventional and Construction Loans',
     'FHA Loans',
@@ -79,7 +78,6 @@ const slides = ref([
 </template>
 
 <style>
-
 .w-controls .v-window__controls .v-btn--icon.v-btn--density-default {
     background: #fff !important;
     border: 1px solid #22c55e !important;
@@ -87,9 +85,6 @@ const slides = ref([
     margin-left: 0px !important;
     margin-right: 0px !important;
 }
-/* .w-controls .v-btn--icon.v-btn--density-default{
-    color: #afafaf !important;
-} */
 .animate-ping {
     animation: ping 1s cubic-bezier(0, 0, 0.7, 1) infinite !important;
 }
