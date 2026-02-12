@@ -28,7 +28,7 @@ const user = usePage().props.auth.user;
                 </Link>
                 <Link :href="route('welcome')" class="flex gap-1 flex-col">
                     <h1 class="bg-clip-text bg-gradient-to-r from-green-600 to-green-500 text-transparent text-lg md:text-2xl font-bold">Brignac Mortgage</h1>
-                    <p class="text-gray-500 text-xs">12481 Home Port Dr Suite 101, Maurepas, LA</p>
+                    <p class="text-gray-500 text-xs">21121 Waterfront East Dr, Maurepas, LA 70449</p>
                 </Link>
             </div>
             <div class="lg:flex items-center gap-4 lg:gap-10 text-gray-500 hidden">

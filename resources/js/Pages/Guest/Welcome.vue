@@ -311,7 +311,8 @@ const facebookTestimonials = [
                     <div class="flex flex-col items-end lg:flex-row lg:items-center gap-1 lg:gap-6">
                         <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank" class="flex items-center gap-1 text-xs lg:text-sm">
                             <span class="material-symbols-outlined text-lg text-green-500">location_on</span>
-                            <p> 12481, Maurepas, LA</p>
+                            <p class="hidden lg:block">21121 Waterfront East Dr, Maurepas, LA</p>
+                            <p class="lg:hidden">21121, Maurepas, LA</p>
                         </a>
                     </div>
                 </div>
