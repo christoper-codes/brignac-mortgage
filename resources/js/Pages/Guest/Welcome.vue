@@ -304,7 +304,7 @@ const facebookTestimonials = [
                         </a>
                         <a href="tel:+12254359287" class="flex items-center gap-1 text-xs lg:text-sm">
                             <span class="material-symbols-outlined text-lg text-green-500">phone</span>
-                            <p>+1 225-435-9287</p>
+                            <p>+1 504-559-2821</p>
                         </a>
                     </div>
 

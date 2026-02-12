@@ -190,7 +190,7 @@ onUnmounted(() => {
                 </div>
                 <p class="mt-3 text-xs lg:text-sm text-gray-500">
                     Subscribe to our newsletter to hear about the latest mortgage news.
-                    <span class="block mt-2 lg:mt-0">21121 Waterfront East Dr. Maurepas LA 70449 | 225-435-9287</span>
+                    <span class="block mt-2 lg:mt-0">21121 Waterfront East Dr. Maurepas LA 70449 | 504-559-2821</span>
                 </p>
                 </form>
             </div>

@@ -209,7 +209,7 @@ onUnmounted(() => {
             <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
                 <div class="flex items-center justify-center rounded-full size-14 border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">perm_phone_msg</span></div>
                 <h3 class="text-2xl font-bold">Phone Number</h3>
-                <p class="text-sm">+1 225-435-9287</p>
+                <p class="text-sm">+1 504-559-2821</p>
                 <p class="text-sm">NMLS ID: 2401214</p>
             </div>
             <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green lg:transition-all lg:duration-700 rounded-xl overflow-hidden">

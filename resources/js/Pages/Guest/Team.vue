@@ -105,7 +105,7 @@ const rules = {
                         <ul class="list-disc pl-5 space-y-3">
                             <li>NMLS# 1928157</li>
                             <li><span>C:</span> 504-559-2821</li>
-                            <li><span>O:</span> 225-435-9287</li>
+                            <li><span>O:</span> 504-559-2821</li>
                         </ul>
                     </div>
                 </div>

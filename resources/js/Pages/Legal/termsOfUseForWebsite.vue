@@ -121,7 +121,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
         <p class="mt-2">
           Brignac Mortgage<br />
           <a href="mailto:Shaun@brignacmortgage.com" class="underline text-blue-500">Shaun@brignacmortgage.com</a><br />
-          <a href="tel:2254359287" class="underline text-blue-500">225-435-9287</a>
+          <a href="tel:2254359287" class="underline text-blue-500">504-559-2821</a>
         </p>
       </div>
 
