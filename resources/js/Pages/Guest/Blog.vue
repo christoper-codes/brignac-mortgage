@@ -5,8 +5,9 @@ import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import useCurrentYear from '@/composables/currentYear';
 
-
+const { currentYear } = useCurrentYear();
 </script>
 
 <template>

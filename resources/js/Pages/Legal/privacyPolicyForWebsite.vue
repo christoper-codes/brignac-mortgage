@@ -4,6 +4,9 @@ import AvgWelcomeSection from '@/Components/AvgWelcomeSection.vue';
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
+import useCurrentYear from '@/composables/currentYear';
+
+const { currentYear } = useCurrentYear();
 const date = new Date();
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -142,7 +145,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
             <a href="https://www.brignacmortgage.com/privacy-policy-for-website" target="_blank" class="underline text-blue-500">Privacy policy</a>
             <a href="https://www.brignacmortgage.com/terms-of-use-for-website" target="_blank" class="underline text-blue-500">Terms of use</a>
         </div>
-        <p class="text-center mt-5 lg:mt-7 inline-block mx-auto">Brignac Mortgage | 2025</p>
+        <p class="text-center mt-5 lg:mt-7 inline-block mx-auto">Brignac Mortgage | {{ currentYear }}</p>
       </div>
     </div>
   </main>

@@ -3,7 +3,9 @@ import { Link, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { drawerNavState, draweAppNavState } from '@/composables/drawersStates';
 import NavegationDrawerApp from '@/Components/NavegationDrawerApp.vue';
+import useCurrentYear from '@/composables/currentYear';
 
+const { currentYear } = useCurrentYear();
 const fav = ref(true);
 const menu = ref(false);
 const message = ref(false);
@@ -60,7 +62,7 @@ const user = usePage().props.auth.user;
             </div>
         </main>
         <div class="p-10 bg-slate-200 text-center">
-            <h3 class="">Brignac Mortgage | 2025 </h3>
+            <h3 class="">Brignac Mortgage | {{ currentYear }} </h3>
         </div>
    </div>
 

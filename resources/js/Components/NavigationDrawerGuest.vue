@@ -2,7 +2,9 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { drawerNavState } from '@/composables/drawersStates';
+import useCurrentYear from '@/composables/currentYear';
 
+const { currentYear } = useCurrentYear();
 const scrolledDown = ref(false);
 const menuServices = ref(false);
 const menuTeam = ref(false);
@@ -281,7 +283,7 @@ onUnmounted(() => {
                 </div>
 
                 <div class="mt-5 flex items-center justify-center gap-3 px-5 text-center">
-                    <p class="text-xs">Copyright © 2025 Brignac Mortgage</p>
+                    <p class="text-xs">Copyright © {{ currentYear }} Brignac Mortgage</p>
                 </div>
             </v-navigation-drawer>
         </v-layout>

@@ -3,6 +3,9 @@ import { Link, router, usePage } from '@inertiajs/vue3';
 import axios from 'axios';
 import { onMounted, ref, onUnmounted } from 'vue';
 import { toast } from 'vue3-toastify'
+import useCurrentYear from '@/composables/currentYear';
+
+const { currentYear } = useCurrentYear();
 
 const form = ref(false);
 const name = ref('I request information');
@@ -201,7 +204,7 @@ onUnmounted(() => {
             <div class="mt-5 sm:mt-12 grid gap-y-2 sm:gap-y-0 sm:flex sm:justify-between sm:items-center">
             <div class="flex justify-between items-center">
                 <p class="text-sm text-gray-500">
-                    © 2025 Brignac Mortgage.
+                    © {{ currentYear }} Brignac Mortgage.
                 </p>
             </div>
             <!-- End Col -->
@@ -234,7 +237,7 @@ onUnmounted(() => {
     </footer>
     <!-- ========== END FOOTER ========== -->
     <div class="w-full p-5 text-center flex-col gap-3 flex items-center justify-center bg-white border-t-4 text-gray-400 text-xs">
-        <p>Copyright © 2025 Brignac Mortgage and Consulting Services LLC - All Rights reserved. NMLS #2401214</p>
+        <p>Copyright © {{ currentYear }} Brignac Mortgage and Consulting Services LLC - All Rights reserved. NMLS #2401214</p>
         <p class="py-1 px-4 rounded-full bg-gray-100">Equal Housing Opportunity Lender</p>
     </div>
 </template>
