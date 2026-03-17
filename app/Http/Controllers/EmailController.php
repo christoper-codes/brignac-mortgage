@@ -20,6 +20,7 @@ class EmailController extends Controller
 
             $request->validate([
                 'email' => 'required|email',
+                'phone' => 'nullable',
                 'name' => 'required',
                 'message' => 'required',
                 'is_hiring' => 'required',
@@ -28,6 +29,7 @@ class EmailController extends Controller
 
             $details = [
                 'email' => $request->email,
+                'phone' => $request->phone ?? 'N/A',
                 'title' => $request->name,
                 'body' => $request->message,
                 'is_hiring' => $request->is_hiring,
@@ -46,6 +48,7 @@ class EmailController extends Controller
 
             Email::create([
                 'email' => $request->email,
+                'phone' => $request->phone ?? 'N/A',
                 'subject' => $request->name,
                 'message' => $request->message,
                 'is_hiring' => $request->is_hiring ? 1 : 0,

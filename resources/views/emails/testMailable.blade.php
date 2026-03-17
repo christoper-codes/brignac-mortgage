@@ -25,6 +25,9 @@
 
 <h2>• Email Address:</h2>
 <p>{{ $details['email'] }}</p>
+<h2>• Phone Number:</h2>
+<p>{{ $details['phone'] }}</p>
+
 <h2>• Subject:</h2>
 <p>{{ $details['title'] }}</p>
 <h2>• Description:</h2>
