@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\LegalController;
@@ -18,6 +19,7 @@ use Inertia\Inertia;
 * | Welcome | GUEST ROUTES
 */
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us.index');
+Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us.index');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/loan-programs', [ProgramsController::class, 'index'])->name('programs.index');
 Route::get('/our-team', [TeamController::class, 'index'])->name('our-team.index');

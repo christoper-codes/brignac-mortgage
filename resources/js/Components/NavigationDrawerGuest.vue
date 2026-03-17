@@ -61,18 +61,7 @@ const navigateToTestimonialsAndScroll = () => {
 
 const navigateToAboutUsAndScroll = () => {
     drawerNavState.value = drawerNavState.value ? !drawerNavState.value : drawerNavState.value;
-
-    if (routeName.value == '/about-us') {
-        emits('scroll-contact-us-section');
-    } else {
-        router.visit('/about-us', {
-            onSuccess: () => {
-                setTimeout(() => {
-                    window.dispatchEvent(new CustomEvent('scroll-contact-us-section'));
-                }, 500);
-            },
-        });
-    }
+    router.visit('/contact-us');
 }
 
 const onScroll = () => {

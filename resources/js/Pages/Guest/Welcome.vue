@@ -16,7 +16,9 @@ const dialog = ref(false);
 const form = ref(false);
 const name = ref('');
 const email = ref('');
+const phone = ref('');
 const message = ref('');
+const optIn = ref(false);
 const loading = ref(false);
 const menuServices = ref(false);
 const menuTeam = ref(false);
@@ -63,46 +65,31 @@ onUnmounted(() => {
 
 const onSubmit = () => {
     if(!form.value){
-        toast('All fields are required', {
-            "theme": "auto",
-            "type": "error",
-            "dangerouslyHTMLString": true
-        })
+        toast('All fields are required', { "theme": "auto", "type": "error", "dangerouslyHTMLString": true })
+        return;
+    }
+    if (!optIn.value) {
+        toast('You must consent to receive text messages before submitting.', { "theme": "auto", "type": "error", "dangerouslyHTMLString": true })
         return;
     }
 
     loading.value = true;
 
-    const data = {
-        name: name.value,
-        email: email.value,
-        message: message.value,
-        is_hiring: false
-    }
-
-    axios.post(route('send-email'), data)
+    axios.post(route('send-email'), { name: name.value, email: email.value, phone: phone.value, message: message.value, is_hiring: false })
         .then(response => {
-            console.log(response)
-            toast(response.data.message, {
-                "theme": "auto",
-                "type": "success",
-                "dangerouslyHTMLString": true
-            })
+            toast(response.data.message, { "theme": "auto", "type": "success", "dangerouslyHTMLString": true })
         })
         .catch(error => {
-            toast(error.response.data.message, {
-                "theme": "auto",
-                "type": "error",
-                "dangerouslyHTMLString": true
-            })
+            toast(error.response.data.message, { "theme": "auto", "type": "error", "dangerouslyHTMLString": true })
         })
         .finally(() => {
             loading.value = false;
-            name.value = ' ';
-            email.value = ' ';
-            message.value = ' ';
+            name.value = '';
+            email.value = '';
+            phone.value = '';
+            message.value = '';
+            optIn.value = false;
         });
-
 }
 
 const rules = {
@@ -112,17 +99,12 @@ const rules = {
         const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return pattern.test(value) || 'Invalid email address';
     },
-    description: value => value.length <= 255 || 'The description must be less than 255 characters.'
+    description: value => value.length <= 255 || 'The description must be less than 255 characters.',
+    phone: value => /^[0-9+\-\s()]{7,20}$/.test(value) || 'Invalid phone number'
 }
 
 const navigateToAboutUsAndScroll = () => {
-    router.visit('/about-us', {
-        onSuccess: () => {
-            setTimeout(() => {
-                window.dispatchEvent(new CustomEvent('scroll-contact-us-section'));
-            }, 700);
-        },
-    });
+    router.visit('/contact-us');
 }
 
 const props = defineProps({
@@ -1120,35 +1102,49 @@ const facebookTestimonials = [
 
                     <div class="mt-10 lg:px-10">
                         <v-form v-model="form" @submit.prevent="onSubmit" lazy-validation>
-                           <div class="flex flex-col lg:flex-row items-center justify-between gap-7 mt-3">
-                            <v-text-field
-                                label="Name"
-                                color="green"
-                                append-inner-icon="mdi-account"
-                                variant="solo"
-                                clearable
-                                class="w-full lg:w-[50%]"
-                                hint="Its recommended to use your full name"
-                                persistent-hint=""
-                                v-model="name"
-                                :rules="[rules.required, rules.description]"
-                            ></v-text-field>
+                            <div class="flex flex-col lg:flex-row items-center justify-between gap-7 mt-3">
+                                <v-text-field
+                                    label="Name"
+                                    color="green"
+                                    append-inner-icon="mdi-account"
+                                    variant="solo"
+                                    clearable
+                                    class="w-full lg:w-[50%]"
+                                    hint="Its recommended to use your full name"
+                                    persistent-hint=""
+                                    v-model="name"
+                                    :rules="[rules.required, rules.description]"
+                                ></v-text-field>
+
+                                <v-text-field
+                                    append-inner-icon="mdi-email"
+                                    variant="solo"
+                                    label="Email"
+                                    autocomplete="email"
+                                    color="green"
+                                    clearable
+                                    class="w-full lg:w-[50%]"
+                                    hint="Your email address"
+                                    persistent-hint=""
+                                    v-model="email"
+                                    :rules="[rules.required, rules.email]"
+                                ></v-text-field>
+                            </div>
 
                             <v-text-field
-                                append-inner-icon="mdi-email"
+                                append-inner-icon="mdi-phone"
                                 variant="solo"
-                                label="Email"
-                                autocomplete="email"
+                                label="Phone Number"
+                                autocomplete="tel"
                                 color="green"
                                 clearable
-                                class="w-full lg:w-[50%]"
-                                hint="Your email to subscribe"
+                                class="mt-3"
+                                hint="Your phone number"
                                 persistent-hint=""
-                                v-model="email"
-                                :rules="[rules.required, rules.email]"
+                                v-model="phone"
+                                :rules="[rules.required, rules.phone]"
                             ></v-text-field>
 
-                           </div>
                             <v-textarea
                                 append-inner-icon="mdi-message"
                                 variant="solo"
@@ -1163,13 +1159,31 @@ const facebookTestimonials = [
                                 color="green"
                             ></v-textarea>
 
-                            <div class="w-full flex items-center justify-end mt-12">
-                                <div class='flex items-center justify-center relative'>
-                                    <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                        <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Send Now</v-btn>
-                                        <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Send Now</v-btn>
+                            <!-- SMS Opt-In -->
+                            <div class="mt-5 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                                <p class="text-xs text-gray-400 mb-3 font-medium uppercase tracking-wide">
+                                    <Link :href="route('terms-of-use-website')" class="underline hover:text-green-600 transition-colors">Terms of Use</Link>
+                                    &amp;
+                                    <Link :href="route('privacy-policy-website')" class="underline hover:text-green-600 transition-colors">Privacy Policy</Link>
+                                </p>
+                                <div class="flex items-start gap-3">
+                                    <div class="-mt-3 flex-shrink-0">
+                                        <v-checkbox color="success" v-model="optIn"></v-checkbox>
                                     </div>
+                                    <p class="text-sm text-gray-700 leading-relaxed">
+                                        By checking this box, you agree to Brignac Mortgage's
+                                        <Link :href="route('terms-of-use-website')" class="font-semibold underline hover:text-green-600 transition-colors">Terms of Use</Link>
+                                        and
+                                        <Link :href="route('privacy-policy-website')" class="font-semibold underline hover:text-green-600 transition-colors">Privacy Policy</Link>,
+                                        and provide consent to receive text messages for important notifications about our services, updates on upcoming meetings, and replies from your dedicated representative.
+                                        Message frequency varies. Message and data rates may apply.
+                                        You can opt out at any time by replying <strong>"STOP"</strong> to any message. Reply <strong>HELP</strong> for assistance.
+                                    </p>
                                 </div>
+                            </div>
+
+                            <div class="w-full flex items-center justify-end mt-8">
+                                <v-btn type="submit" :loading="loading" :disabled="!optIn" size="x-large" class="text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !px-10 disabled:!opacity-40">Send Now</v-btn>
                             </div>
                         </v-form>
                     </div>

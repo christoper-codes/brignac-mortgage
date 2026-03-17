@@ -51,17 +51,7 @@ const navigateToTestimonialsAndScroll = () => {
 }
 
 const navigateToAboutUsAndScroll = () => {
-    if (routeName.value == '/about-us') {
-        emits('scroll-contact-us-section');
-    } else {
-        router.visit('/about-us', {
-            onSuccess: () => {
-                setTimeout(() => {
-                    window.dispatchEvent(new CustomEvent('scroll-contact-us-section'));
-                }, 700);
-            },
-        });
-    }
+    router.visit('/contact-us');
 }
 
 const scrollToTop = () => {
