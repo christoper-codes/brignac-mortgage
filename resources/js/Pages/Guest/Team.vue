@@ -68,8 +68,6 @@ const rules = {
     },
     description: value => value.length <= 255 || 'The description must be less than 255 characters.'
 }
-
-
 </script>
 
 <template>
@@ -86,85 +84,99 @@ const rules = {
         </template>
     </Breadcrumb>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start w-full gap-10 max-w-7xl mx-auto mt-20 px-4 lg:px-0">
-        <div class="bg-white border-2 p-6 rounded-lg flex flex-col items-center justify-between transition-all duration-500">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
-                <img class="w-full h-full" src="../../../../public/img/company-seo-img.jpg" alt="team img">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch w-full gap-8 max-w-7xl mx-auto mt-20 px-4 lg:px-0">
+
+        <!-- Shaun Brignac -->
+        <div class="bg-white border border-orange-100 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center p-8 h-full">
+            <div class="size-40 rounded-full border-4 border-orange-400 shadow-lg overflow-hidden flex-shrink-0">
+                <img class="w-full h-full object-cover object-top" src="../../../../public/img/company-seo-img.jpg" alt="Shaun Brignac">
             </div>
-            <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
-                <h2 class="text-xl font-bold">Shaun Brignac, MBA</h2>
-                <h2 class="text-xs font-bold text-orange-400 py-2 px-7 rounded-full shadow-lg">President and CEO</h2>
+            <div class="flex flex-col items-center text-center mt-5 w-full">
+                <h2 class="text-xl font-bold text-gray-800">Shaun Brignac, MBA</h2>
+                <span class="mt-2 text-xs font-semibold text-orange-500 bg-orange-50 border border-orange-200 py-1 px-4 rounded-full">President and CEO</span>
             </div>
-            <div class="mt-7 w-full">
-                <a href="mailto:Shaun@brignacmortgage.com" class="flex items-center lg:gap-2">
-                    <h3 class="text-sm">Shaun@brignacmortgage.com</h3>
+            <div class="mt-6 w-full flex-1">
+                <a href="mailto:Shaun@brignacmortgage.com" class="text-sm text-gray-600 hover:text-orange-500 transition-colors truncate">
+                    Shaun@brignacmortgage.com
                 </a>
-                <div class="flex flex-col lg:flex-row items-start gap-3 justify-between w-full">
-                    <!-- Opciones de préstamos -->
-                    <div class="mt-4 text-sm">
-                        <ul class="list-disc pl-5 space-y-3">
-                            <li>NMLS# 1928157</li>
-                            <li><span>C:</span> 504-559-2821</li>
-                            <li><span>O:</span> 504-559-2821</li>
-                        </ul>
-                    </div>
-                </div>
-                <v-btn href="https://2401214.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5 !rounded-full !flex !items-center !justify-center !py-5 !border !border-yellow-500">Apply</v-btn>
+                <ul class="mt-4 text-sm text-gray-600 space-y-2">
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">NMLS#</span> 1928157</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">C:</span> 504-559-2821</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">O:</span> 504-559-2821</li>
+                </ul>
+            </div>
+            <div class="mt-6 w-full shrink-0">
+                <v-btn href="https://2401214.my1003app.com" target="_blank" color="orange" variant="tonal" block class="text-none !rounded-full !border !border-orange-400 !h-12">Apply Now</v-btn>
             </div>
         </div>
 
-        <div class="bg-white border-2 p-6 rounded-lg flex flex-col items-center justify-between transition-all duration-500">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
-                <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-allie.png" alt="team img">
+        <!-- Allison Ratcliff -->
+        <div class="bg-white border border-orange-100 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center p-8 h-full">
+            <div class="size-40 rounded-full border-4 border-orange-400 shadow-lg overflow-hidden flex-shrink-0">
+                <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-allie.png" alt="Allison Ratcliff">
             </div>
-            <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
-                <h2 class="text-xl font-bold">Allison Ratcliff</h2>
-                <h2 class="text-xs font-bold text-orange-400 py-2 px-7 rounded-full shadow-lg">Chief of Operations</h2>
+            <div class="flex flex-col items-center text-center mt-5 w-full">
+                <h2 class="text-xl font-bold text-gray-800">Allison Ratcliff</h2>
+                <span class="mt-2 text-xs font-semibold text-orange-500 bg-orange-50 border border-orange-200 py-1 px-4 rounded-full">Chief of Operations</span>
             </div>
-            <div class="mt-7 w-full">
-                <a href="mailto:Allie@brignacmortgage.com" class="flex items-center lg:gap-2">
-                    <h3 class="text-sm">Allie@brignacmortgage.com</h3>
+            <div class="mt-6 w-full flex-1">
+                <a href="mailto:Allie@brignacmortgage.com" class="text-sm text-gray-600 hover:text-orange-500 transition-colors truncate">
+                    Allie@brignacmortgage.com
                 </a>
-                <div class="flex flex-col lg:flex-row items-start gap-3 justify-between w-full">
-                    <!-- Opciones de préstamos -->
-                    <div class="mt-4 text-sm">
-                        <ul class="list-disc pl-5 space-y-3">
-                            <li>NMLS #2405703 </li>
-                            <li><span>C:</span> 225-718-3978</li>
-                        </ul>
-                    </div>
-                </div>
-                <v-btn href="https://allieratcliff.my1003app.com" target="_blank" rounded="xs" color="orange" size="large" variant="tonal" block class="text-none !mt-5 !rounded-full !flex !items-center !justify-center !py-5 !border !border-yellow-500">Apply</v-btn>
+                <ul class="mt-4 text-sm text-gray-600 space-y-2">
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">NMLS#</span> 2405703</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">C:</span> 225-718-3978</li>
+                </ul>
+            </div>
+            <div class="mt-6 w-full shrink-0">
+                <v-btn href="https://allieratcliff.my1003app.com" target="_blank" color="orange" variant="tonal" block class="text-none !rounded-full !border !border-orange-400 !h-12">Apply Now</v-btn>
             </div>
         </div>
 
-        <div class="bg-white border-2 p-6 rounded-lg flex flex-col items-center justify-between transition-all duration-500">
-            <div class="size-48 rounded-full border-8 border-white shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500">
-                <img class="w-full h-full" src="../../../../public/img/team-jennifer.jpg" alt="team img">
+        <!-- Cynthia Roman -->
+        <div class="bg-white border border-orange-100 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center p-8 h-full">
+            <div class="size-40 rounded-full border-4 border-orange-400 shadow-lg overflow-hidden flex-shrink-0">
+                <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-cynthia.jpg" alt="Cynthia Roman">
             </div>
-            <div class="flex flex-col gap-1 text-center items-center justify-center mt-5 w-full">
-                <h2 class="text-xl font-bold">Jennifer McMinn-Griffin </h2>
-                <h2 class="text-xs font-bold text-orange-400 py-2 px-7 rounded-full shadow-lg">Loan Processor</h2>
+            <div class="flex flex-col items-center text-center mt-5 w-full">
+                <h2 class="text-xl font-bold text-gray-800">Cynthia Roman</h2>
+                <span class="mt-2 text-xs font-semibold text-orange-500 bg-orange-50 border border-orange-200 py-1 px-4 rounded-full">Loan Officer</span>
             </div>
-            <div class="mt-7 w-full">
-                <a href="mailto:jen@tigerprocessingllc.com" class="flex items-center lg:gap-2">
-                    <h3 class="text-sm">jen@tigerprocessingllc.com</h3>
-                </a>
-                <div class="flex flex-col lg:flex-row items-start gap-3 justify-between w-full">
-                    <!-- Opciones de préstamos -->
-                    <div class="mt-4 text-sm">
-                        <ul class="list-disc pl-5 space-y-3">
-                            <li><span>Owner of Tiger Processing Services LLC</span></li>
-                            <li><span>Third Party Processor</span></li>
-                            <li><span>Office</span> 225-469-6858</li>
-                            <li><span>Individual NMLS # 1409144</span></li>
-                            <li><span>Company NMLS # 2407930 </span></li>
-                            <li><span>Licensed in LA</span></li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="mt-6 w-full flex-1">
+                <ul class="mt-4 text-sm text-gray-600 space-y-2">
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">NMLS#</span> 1661775</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">C:</span> 314-319-0499</li>
+                </ul>
+            </div>
+            <div class="mt-6 w-full shrink-0">
+                <v-btn href="https://cynthiaroman.my1003app.com" target="_blank" color="orange" variant="tonal" block class="text-none !rounded-full !border !border-orange-400 !h-12">Apply Now</v-btn>
             </div>
         </div>
+
+        <!-- Jennifer McMinn-Griffin -->
+        <div class="bg-white border border-orange-100 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center p-8 h-full">
+            <div class="size-40 rounded-full border-4 border-orange-400 shadow-lg overflow-hidden flex-shrink-0">
+                <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-jennifer.jpg" alt="Jennifer McMinn-Griffin">
+            </div>
+            <div class="flex flex-col items-center text-center mt-5 w-full">
+                <h2 class="text-xl font-bold text-gray-800">Jennifer McMinn-Griffin</h2>
+                <span class="mt-2 text-xs font-semibold text-orange-500 bg-orange-50 border border-orange-200 py-1 px-4 rounded-full">Loan Processor</span>
+            </div>
+            <div class="mt-6 w-full flex flex-col flex-1">
+                <a href="mailto:jen@tigerprocessingllc.com" class="text-sm text-gray-600 hover:text-orange-500 transition-colors truncate">
+                    jen@tigerprocessingllc.com
+                </a>
+                <ul class="mt-4 text-sm text-gray-600 space-y-2">
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">Owner</span> Tiger Processing Services LLC</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">Role:</span> Third Party Processor</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">O:</span> 225-469-6858</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">NMLS#</span> 1409144 (Individual)</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">NMLS#</span> 2407930 (Company)</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">Licensed in LA</span></li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <div class="bg-white">
