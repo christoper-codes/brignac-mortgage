@@ -11,7 +11,7 @@ const { currentYear } = useCurrentYear();
 </script>
 
 <template>
-    <Head title="Loan programs" />
+    <Head title="Loan Programs" />
     <NavigationDrawerGuest />
     <GuestNav />
 

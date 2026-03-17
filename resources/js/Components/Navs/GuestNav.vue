@@ -110,7 +110,7 @@ onUnmounted(() => {
                     </Link>
                     <Link :href="route('programs.index')">
                         <div class="card_green cursor-pointer">
-                            Loan programs
+                            Loan Programs
                         </div>
                     </Link>
                     <div>
@@ -172,7 +172,7 @@ onUnmounted(() => {
                             >
                             <template v-slot:activator="{ props }">
                                 <div v-bind="props" class="flex items-center card_green cursor-pointer">
-                                    <span class="block">Our team</span>
+                                    <span class="block">Our Team</span>
                                     <span class="material-symbols-outlined block text-gray-500 text-xl">keyboard_arrow_down</span>
                                 </div>
                             </template>
@@ -195,7 +195,7 @@ onUnmounted(() => {
                                                 <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
                                                     <span class="material-symbols-outlined text-2xl text-orange-500">group</span>
                                                 </div>
-                                                <h3 class="flex-grow text-base">Our team</h3>
+                                                <h3 class="flex-grow text-base">Our Team</h3>
                                             </div>
                                         </Link>
                                         <Link :href="route('about-us.index')">
@@ -246,7 +246,7 @@ onUnmounted(() => {
                                                 <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
                                                     <span class="material-symbols-outlined text-2xl text-orange-500">contract</span>
                                                 </div>
-                                                <h3 class="flex-grow text-base">Privacy policy</h3>
+                                                <h3 class="flex-grow text-base">Privacy Policy</h3>
                                             </div>
                                         </Link>
                                         <Link :href="route('disclaimers-website')">
@@ -262,7 +262,7 @@ onUnmounted(() => {
                                                 <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
                                                     <span class="material-symbols-outlined text-2xl text-orange-500">contract_edit</span>
                                                 </div>
-                                                <h3 class="flex-grow text-base">Terms of use</h3>
+                                                <h3 class="flex-grow text-base">Terms of Use</h3>
                                             </div>
                                         </Link>
                                     </div>

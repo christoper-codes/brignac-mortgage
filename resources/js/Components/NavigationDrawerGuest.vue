@@ -112,7 +112,7 @@ onUnmounted(() => {
                     </Link>
                     <Link :href="route('programs.index')" @click="drawerNavState = !drawerNavState" class="border-b border-b-neutral-50 py-4">
                         <div class="card_green cursor-pointer">
-                            Loan programs
+                            Loan Programs
                         </div>
                     </Link>
                     <div @click="navigateToTestimonialsAndScroll" class="border-b border-b-neutral-50 py-4">
@@ -177,7 +177,7 @@ onUnmounted(() => {
                             >
                             <template v-slot:activator="{ props }">
                                 <div v-bind="props" class="flex items-center card_green cursor-pointer border-b border-b-neutral-50 py-4">
-                                    <span class="block">Our team</span>
+                                    <span class="block">Our Team</span>
                                     <span class="material-symbols-outlined block text-gray-500 text-xl">keyboard_arrow_down</span>
                                 </div>
                             </template>
@@ -200,7 +200,7 @@ onUnmounted(() => {
                                                 <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
                                                     <span class="material-symbols-outlined text-xl text-orange-500">group</span>
                                                 </div>
-                                                <h3 class="flex-grow text-xs">Our team</h3>
+                                                <h3 class="flex-grow text-xs">Our Team</h3>
                                             </div>
                                         </Link>
                                         <Link :href="route('about-us.index')" @click="drawerNavState = !drawerNavState">
@@ -208,7 +208,7 @@ onUnmounted(() => {
                                                 <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
                                                     <span class="material-symbols-outlined text-xl text-orange-500">apartment</span>
                                                 </div>
-                                                <h3 class="flex-grow text-xs">About</h3>
+                                                <h3 class="flex-grow text-xs">About Us</h3>
                                             </div>
                                         </Link>
                                         <Link :href="route('join-our-team.index')" @click="drawerNavState = !drawerNavState">
@@ -260,7 +260,7 @@ onUnmounted(() => {
                                                 <div class="flex-shrink-0 h-10 w-10 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
                                                     <span class="material-symbols-outlined text-xl text-orange-500">contract_edit</span>
                                                 </div>
-                                                <h3 class="flex-grow text-xs">Terms of use</h3>
+                                                <h3 class="flex-grow text-xs">Terms of Use</h3>
                                             </div>
                                         </Link>
                                     </div>

@@ -145,8 +145,8 @@ onUnmounted(() => {
                 <h4 class="font-semibold mt-5">Legal</h4>
                 <div class="mt-3 grid space-y-3">
                     <a href="https://www.brignacmortgage.com/disclaimers-for-website" target="_blank" class="underline text-gray-700 hover:text-gray-900">Disclaimers</a>
-                    <a href="https://www.brignacmortgage.com/privacy-policy-for-website" target="_blank" class="underline text-gray-700 hover:text-gray-900">Privacy policy</a>
-                    <a href="https://www.brignacmortgage.com/terms-of-use-for-website" target="_blank" class="underline text-gray-700 hover:text-gray-900">Terms of use</a>
+                    <a href="https://www.brignacmortgage.com/privacy-policy-for-website" target="_blank" class="underline text-gray-700 hover:text-gray-900">Privacy Policy</a>
+                    <a href="https://www.brignacmortgage.com/terms-of-use-for-website" target="_blank" class="underline text-gray-700 hover:text-gray-900">Terms of Use</a>
                 </div>
             </div>
             <!-- End Col -->
