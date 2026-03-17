@@ -155,7 +155,7 @@ onUnmounted(() => {
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
                                                 <div @click="navigateToMortgageLoanCalculatorAndScroll" class="bg-black/20 cursor-pointer rounded-full py-2 px-5 inline-flex text-white text-xs text-center items-center justify-center">
                                                     <span class="material-symbols-outlined text-2xl">web_traffic</span>
-                                                    <span>Mortgage loan calculator</span>
+                                                    <span>Mortgage Loan Calculator</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -184,7 +184,7 @@ onUnmounted(() => {
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
                                                 <div @click="navigateToMortgageLoanCalculatorAndScroll" class="bg-black/20 cursor-pointer rounded-full py-2 px-5 inline-flex text-white text-xs text-center items-center justify-center">
                                                     <span class="material-symbols-outlined text-2xl">web_traffic</span>
-                                                    <span>Mortgage loan calculator</span>
+                                                    <span>Mortgage Loan Calculator</span>
                                                 </div>
                                             </div>
                                         </div>

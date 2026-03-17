@@ -71,13 +71,13 @@ const rules = {
 </script>
 
 <template>
-    <Head title="Our team" />
+    <Head title="Our Team" />
     <NavigationDrawerGuest />
     <GuestNav />
 
     <Breadcrumb>
         <template #title>
-            <span>Our team</span>
+            <span>Our Team</span>
         </template>
         <template #description>
             <span>We are a team of professionals who are dedicated to providing you with the best service and rates in the industry.</span>
@@ -185,7 +185,7 @@ const rules = {
             <div class="w-full flex flex-col justify-between max-w-3xl mx-auto" data-aos="fade-right" data-aos-duration="2000" data-aos-once="true">
                 <div class="flex flex-col gap-2 justify-center mb-5">
                     <h2 class="text-3xl lg:text-4xl font-bold">
-                        Contact us!
+                        Contact Us
                     </h2>
                     <div class="h-1 w-14 bg-orange-500 rounded-full"></div>
                     <p class="max-w-[600px] text-xs lg:text-base">
@@ -239,8 +239,8 @@ const rules = {
                                 <div class="w-full flex items-center justify-end mt-12">
                                     <div class='flex items-center justify-center relative'>
                                         <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                            <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
-                                            <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
+                                            <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send Now</v-btn>
+                                            <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send Now</v-btn>
                                         </div>
                                     </div>
                                 </div>

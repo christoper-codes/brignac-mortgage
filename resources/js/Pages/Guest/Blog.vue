@@ -17,7 +17,7 @@ const { currentYear } = useCurrentYear();
 
     <Breadcrumb>
         <template #title>
-            <span>Blog and news</span>
+            <span>Blog And News</span>
         </template>
         <template #description>
             <span>A space for news on mortgage issues.</span>

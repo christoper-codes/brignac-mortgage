@@ -374,7 +374,7 @@ const facebookTestimonials = [
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
                                                 <div @click="scrollMortgageLoanCalculatorSection" class="bg-black/20 cursor-pointer rounded-full py-2 px-5 inline-flex text-white text-xs text-center items-center justify-center">
                                                     <span class="material-symbols-outlined text-2xl">web_traffic</span>
-                                                    <span>Mortgage loan calculator</span>
+                                                    <span>Mortgage Loan Calculator</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -403,7 +403,7 @@ const facebookTestimonials = [
                                             <div class="h-full w-full bg-black/60 flex items-center justify-center">
                                                 <div @click="scrollMortgageLoanCalculatorSection" class="bg-black/20 cursor-pointer rounded-full py-2 px-5 inline-flex text-white text-xs text-center items-center justify-center">
                                                     <span class="material-symbols-outlined text-2xl">web_traffic</span>
-                                                    <span>Mortgage loan calculator</span>
+                                                    <span>Mortgage Loan Calculator</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -530,8 +530,8 @@ const facebookTestimonials = [
                         </div>
                         <div>
                             <Link :href="route('our-team.index')">
-                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Apply for a mortgage</v-btn>
-                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Apply for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Get Pre-Qualified</v-btn>
+                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Get Pre-Qualified</v-btn>
                             </Link >
                         </div>
                    </div>
@@ -551,8 +551,8 @@ const facebookTestimonials = [
                         </div>
                         <div>
                             <Link :href="route('our-team.index')">
-                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Apply for a mortgage</v-btn>
-                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Apply for a mortgage</v-btn>
+                                <v-btn rounded="xs" size="x-large" class="!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-8 lg:!flex !items-center !justify-center">Get Pre-Qualified</v-btn>
+                                <v-btn rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full !py-7 !flex !items-center !justify-center">Get Pre-Qualified</v-btn>
                             </Link >
                         </div>
                    </div>
@@ -626,7 +626,7 @@ const facebookTestimonials = [
                         <div class="bg-white/20 rounded-full py-2 px-5 inline-flex">
                             <span>Simulator</span>
                         </div>
-                        <h2 class="text-3xl lg:text-4xl font-bold text-center">Mortgage <span class="text-orange-500">loan</span> calculator</h2>
+                        <h2 class="text-3xl lg:text-4xl font-bold text-center">Mortgage <span class="text-orange-500">Loan</span> Calculator</h2>
                         <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5 justify-center text-xs">
                             <p class="font-bold">Average interest rate in the United States. Sources:</p>
                             <a class="underline" href="https://fred.stlouisfed.org/series/MORTGAGE30US/" target="_blank">fred.stlouisfed.org</a>
@@ -700,7 +700,7 @@ const facebookTestimonials = [
                     <div class="mt-10">
                         <div class='flex items-center justify-center relative'>
                             <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                <v-btn type="submit"  :loading="loadingCalculate" rounded="xs" size="large" class="text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !flex !items-center !justify-center !py-5 !px-7 lg:!py-7 lg:!px-10 !rounded-full">Calculate the credit payment</v-btn>
+                                <v-btn type="submit"  :loading="loadingCalculate" rounded="xs" size="large" class="text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !flex !items-center !justify-center !py-5 !px-7 lg:!py-7 lg:!px-10 !rounded-full">Calculate Payment</v-btn>
                             </div>
                         </div>
                     </div>
@@ -888,7 +888,7 @@ const facebookTestimonials = [
                     </h2>
                     <a href="https://maps.app.goo.gl/6YyqmAGQ8nJtZ9Jk6" target="_blank">
                         <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700 !flex !items-center !justify-center !p-5 lg:!py-7 lg:!px-8 !rounded-full !mb-3">
-                            Read more reviews
+                            Read More Reviews
                             <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
                         </v-btn>
                     </a>
@@ -918,7 +918,7 @@ const facebookTestimonials = [
                     </h2>
                     <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank">
                         <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700 !flex !items-center !justify-center !p-5 lg:!py-7 lg:!px-8 !rounded-full !mb-3">
-                            Read more reviews
+                            Read More Reviews
                             <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
                         </v-btn>
                     </a>
@@ -964,7 +964,7 @@ const facebookTestimonials = [
                                 <p class="line-clamp-3">{{ testimonial.content }}</p>
                                 <v-dialog max-width="600">
                                     <template v-slot:activator="{ props: activatorProps }">
-                                        <p v-bind="activatorProps" class="text-blue-500 cursor-pointer">Read more</p>
+                                        <p v-bind="activatorProps" class="text-blue-500 cursor-pointer">Read More</p>
                                     </template>
 
                                     <template v-slot:default="{ isActive }">
@@ -1166,8 +1166,8 @@ const facebookTestimonials = [
                             <div class="w-full flex items-center justify-end mt-12">
                                 <div class='flex items-center justify-center relative'>
                                     <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                        <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Send now</v-btn>
-                                        <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Send now</v-btn>
+                                        <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Send Now</v-btn>
+                                        <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white !transition-all !duration-700 !rounded-full">Send Now</v-btn>
                                     </div>
                                 </div>
                             </div>

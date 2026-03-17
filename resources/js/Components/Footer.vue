@@ -188,7 +188,7 @@ onUnmounted(() => {
                                 v-model="email"
                                 :rules="[rules.required, rules.email]"
                             ></v-text-field>
-                            <v-btn type="submit" :loading="loading" rounded="xs" class="text-none lg:!w-[35%] !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
+                            <v-btn type="submit" :loading="loading" rounded="xs" class="text-none lg:!w-[35%] !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send Now</v-btn>
                     </v-form>
                 </div>
                 <p class="mt-3 text-xs lg:text-sm text-gray-500">

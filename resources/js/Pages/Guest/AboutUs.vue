@@ -92,7 +92,7 @@ onUnmounted(() => {
 
     <Breadcrumb>
         <template #title>
-            <span>About us</span>
+            <span>About Us</span>
         </template>
         <template #description>
             <span>We believe that life is for living and you should be passionate about what you do.</span>
@@ -112,7 +112,7 @@ onUnmounted(() => {
                         <div class="flex flex-col gap-5">
                             <div>
                                 <div class="bg-orange-100 rounded-full py-2 px-5 inline-flex text-orange-600">
-                                    <span class="inline-flex">About us</span>
+                                    <span class="inline-flex">About Us</span>
                                 </div>
                             </div>
                             <h2 class="text-3xl lg:text-4xl font-bold">Brignac Mortgage And Consulting Services</h2>
@@ -174,7 +174,7 @@ onUnmounted(() => {
                     </h2>
                     <a href="https://maps.app.goo.gl/6YyqmAGQ8nJtZ9Jk6" target="_blank">
                         <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700 !flex !items-center !justify-center !p-5 lg:!py-7 lg:!px-8 !rounded-full !mb-3">
-                            Read more reviews
+                            Read More Reviews
                             <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
                         </v-btn>
                     </a>
@@ -197,7 +197,7 @@ onUnmounted(() => {
             <div class="bg-green-100 rounded-full py-2 px-5 inline-flex text-green-600">
                 <span>Contact</span>
             </div>
-            <h2 class="text-3xl lg:text-4xl font-bold">Contact us</h2>
+            <h2 class="text-3xl lg:text-4xl font-bold">Contact Us</h2>
          </div>
          <div class="px-4 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5 mt-10 mb-0">
             <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card_green_persistent lg:transition-all lg:duration-700 rounded-xl overflow-hidden">
@@ -286,7 +286,7 @@ onUnmounted(() => {
                                     <div class='flex items-center justify-center relative'>
                                         <div class="h-10 flex items-center justify-center w-full relative z-5">
                                             <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
-                                            <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
+                                            <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-green-500 !text-white hover:!bg-white hover:!text-green-600 !transition-all !duration-700 !rounded-full">Send Now</v-btn>
                                         </div>
                                     </div>
                                 </div>

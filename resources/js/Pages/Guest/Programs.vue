@@ -17,7 +17,7 @@ const { currentYear } = useCurrentYear();
 
     <Breadcrumb>
         <template #title>
-            <span>Loans programs</span>
+            <span>Loans Programs</span>
         </template>
         <template #description>
             <span>Explore our diverse range of loan products and programs designed to meet your unique financial needs.</span>
@@ -83,7 +83,7 @@ const { currentYear } = useCurrentYear();
                         </div>
                     </div>
 
-                    <v-btn href="https://www.hud.gov/buying/loans" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See more</v-btn>
+                    <v-btn href="https://www.hud.gov/buying/loans" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See More</v-btn>
 
                 </div>
             </div>
@@ -133,7 +133,7 @@ const { currentYear } = useCurrentYear();
                         </div>
                     </div>
 
-                    <v-btn href="https://www.consumerfinance.gov/owning-a-home/conventional-loans/" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See more</v-btn>
+                    <v-btn href="https://www.consumerfinance.gov/owning-a-home/conventional-loans/" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See More</v-btn>
 
                 </div>
             </div>
@@ -185,7 +185,7 @@ const { currentYear } = useCurrentYear();
                         </div>
                     </div>
 
-                    <v-btn href="https://www.va.gov/housing-assistance/home-loans/eligibility/" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See more</v-btn>
+                    <v-btn href="https://www.va.gov/housing-assistance/home-loans/eligibility/" target="_blank" rounded="xs" color="green" size="large" variant="tonal" block class="text-none !mt-10 !rounded-full !flex !items-center !justify-center !py-6 !border !border-green-500">See More</v-btn>
                 </div>
             </div>
         </div>

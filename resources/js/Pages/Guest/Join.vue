@@ -172,8 +172,8 @@ const rules = {
                                     <div class="w-full flex items-center justify-end mt-12">
                                         <div class='flex items-center justify-center relative'>
                                             <div class="h-10 flex items-center justify-center w-full relative z-5">
-                                                <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
-                                                <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Send now</v-btn>
+                                                <v-btn type="submit" :loading="loading" rounded="xs" size="x-large" class="!hidden lg:!block text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Send Now</v-btn>
+                                                <v-btn type="submit" :loading="loading" rounded="xs" size="large" class="lg:!hidden text-none !bg-orange-500 !text-white hover:!bg-white hover:!text-orange-600 !transition-all !duration-700 !rounded-full">Send Now</v-btn>
                                             </div>
                                         </div>
                                     </div>
