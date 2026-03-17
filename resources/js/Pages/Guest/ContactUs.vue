@@ -279,8 +279,6 @@ const rules = {
                                     and
                                     <Link :href="route('privacy-policy-website')" class="font-semibold underline hover:text-green-600 transition-colors">Privacy Policy</Link>,
                                     and provide consent to receive text messages for important notifications about our services, updates on upcoming meetings, and replies from your dedicated representative.
-                                    Message frequency varies. Message and data rates may apply.
-                                    You can opt out at any time by replying <strong>"STOP"</strong> to any message. Reply <strong>HELP</strong> for assistance.
                                 </p>
                             </div>
                         </div>
