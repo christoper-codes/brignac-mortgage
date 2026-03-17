@@ -214,6 +214,12 @@ const calculatePaymentDetails = (principal, annualInterestRate, years) => {
 
 const facebookTestimonials = [
     {
+        name: 'Jordan O\'Bryant',
+        content: 'Great experience refinancing with Brignac Mortgage. The process was smooth, communication was clear, and the team was professional and responsive throughout. Highly recommend!',
+        image: '/storage/facebookprofiles/profile-10.jpg',
+        createdAt: 'Dic 17, 2025'
+    },
+    {
         name: 'Tim Huynh',
         content: 'Shaun and Allie are an amazing team at Brignac Mortgage. They got my refi deal done in under a week and cut down my loan in half the time and cost! They are fast, efficient, and made the process an amazing experience. They definitely have my business and referrals going forward.',
         image: '/storage/facebookprofiles/profile-1.jpg',
