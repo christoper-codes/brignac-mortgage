@@ -837,11 +837,6 @@ const facebookTestimonials = [
                     <p class="text-xs">Gain exclusive access to a wide range of wholesale lenders, investors, and products to find the best options for your needs.</p>
                 </div>
                 <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
-                    <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">badge</span></div>
-                    <h3 class="text-xl font-bold">Credit Repair Guidance</h3>
-                    <p class="text-xs">ur experts provide personalized guidance to help you repair and improve your credit score, making it easier to secure favorable loan terms.</p>
-                </div>
-                <div class="w-full px-10 py-12 shadow-xl mx-auto flex flex-col gap-3 items-center justify-center text-center card lg:transition-all lg:duration-700 cursor-pointer rounded-xl overflow-hidden">
                     <div class="flex items-center justify-center text-center size-14 rounded-full border-2 border-green-200"><span class="material-symbols-outlined text-3xl text-green-500">card_travel</span></div>
                     <h3 class="text-xl font-bold">Residential, Investment, and Commercial Loans</h3>
                     <p class="text-xs">We offer a variety of loan options to meet your residential, investment, and commercial needs, ensuring you get the best terms and rates available.</p>
