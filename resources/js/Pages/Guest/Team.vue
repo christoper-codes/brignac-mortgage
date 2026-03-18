@@ -143,9 +143,12 @@ const rules = {
                 <span class="mt-2 text-xs font-semibold text-orange-500 bg-orange-50 border border-orange-200 py-1 px-4 rounded-full">Loan Officer</span>
             </div>
             <div class="mt-6 w-full flex-1">
+                <a href="mailto:Cynthia@brignacmortgage.com" class="mt-3 flex items-center gap-2 text-sm text-gray-600 hover:text-orange-500 transition-colors">
+                    Cynthia@brignacmortgage.com
+                </a>
                 <ul class="mt-4 text-sm text-gray-600 space-y-2">
                     <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">NMLS#</span> 1661775</li>
-                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">C:</span> 314-319-0499</li>
+                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">C:</span> 318-319-0499</li>
                 </ul>
             </div>
             <div class="mt-6 w-full shrink-0">
@@ -164,7 +167,7 @@ const rules = {
             </div>
             <div class="mt-6 w-full flex flex-col flex-1">
                 <a href="mailto:jen@tigerprocessingllc.com" class="text-sm text-gray-600 hover:text-orange-500 transition-colors truncate">
-                    jen@tigerprocessingllc.com
+                    Jen@tigerprocessingllc.com
                 </a>
                 <ul class="mt-4 text-sm text-gray-600 space-y-2">
                     <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">Owner</span> Tiger Processing Services LLC</li>
