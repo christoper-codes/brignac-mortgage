@@ -1,154 +1,101 @@
 <script setup>
-import AvgWelcomeSection from '@/Components/AvgWelcomeSection.vue';
 import Breadcrumb from '@/Components/Breadcrumb.vue';
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
 import { Head } from '@inertiajs/vue3';
-
 </script>
 
 <template>
-    <Head title="About us" />
+    <Head title="About Us" />
     <NavigationDrawerGuest />
     <GuestNav />
 
     <Breadcrumb>
-        <template #title>
-            <span>About Us</span>
-        </template>
-        <template #description>
-            <span>We believe that life is for living and you should be passionate about what you do.</span>
-        </template>
+        <template #title>About Us</template>
+        <template #description>We believe that life is for living and you should be passionate about what you do.</template>
     </Breadcrumb>
 
-    <section class="lg:mt-14">
-        <div class="w-full flex flex-col-reverse lg:flex-col lg:mt-10">
-            <div class="w-full pt-14 pb-14 lg:mb-10">
-                <div class="max-w-6xl mx-auto gap-16 flex flex-col-reverse lg:flex-row items-center justify-between px-4 lg:px-0 overflow-hidden">
-                    <div class="w-full lg:w-[40%] px-2">
-                        <div class="relative h-[400px] lg:h-[600px] rounded-xl w-full after:w-[20px] lg:after:w-[30px] after:h-[250px] lg:after:h-[500px] after:absolute after:top-1/2 after:-left-[20px] lg:after:-left-[30px] after:-translate-y-1/2 after:bg-orange-500 after:rounded-l-xl">
-                            <img class="w-full h-full object-cover rounded-xl" src="/storage/img/header-5.jpg" alt="brignac logo">
+    <!-- About Section -->
+    <section class="py-20">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col-reverse lg:flex-row items-center gap-16">
+
+            <!-- Image with accent bar -->
+            <div class="w-full lg:w-2/5">
+                <div class="relative h-96 lg:h-150">
+                    <div class="absolute top-1/2 -left-3 lg:-left-4 -translate-y-1/2 w-2.5 h-64 lg:h-120 bg-green-500 rounded-l-xl z-10"></div>
+                    <img class="w-full h-full object-cover rounded-xl" src="/storage/img/header-5.jpg" alt="Brignac Mortgage Office">
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="w-full lg:w-3/5 flex flex-col gap-5">
+                <div>
+                    <span class="bg-green-100 text-green-700 rounded-full py-1.5 px-5 text-sm font-semibold inline-block">About Us</span>
+                </div>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800">Brignac Mortgage And Consulting Services</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Shaun Brignac, President and CEO welcomes you to our site. We believe that life is for living and you should be passionate about what you do.
+                    We hold our team to a high standard, and we only hire the best! We look forward to working with you and your family.
+                </p>
+
+                <div class="border-l-4 border-green-500 pl-4 py-2 bg-green-50 rounded-r-lg">
+                    <p class="text-sm text-gray-700">Explore our diverse range of loan products and programs <strong>designed to meet your unique financial needs.</strong></p>
+                </div>
+
+                <!-- Feature Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-2">
+                    <div class="flex items-center gap-3">
+                        <div class="shrink-0 h-14 w-14 rounded-full flex items-center justify-center border-2 border-green-200 bg-green-50">
+                            <span class="material-symbols-outlined text-2xl text-green-500">real_estate_agent</span>
                         </div>
+                        <h3 class="text-sm text-gray-700">Conventional and Construction Loans</h3>
                     </div>
-                    <div class="w-full lg:w-[60%]">
-                        <div class="flex flex-col gap-5">
-                            <div>
-                                <div class="bg-orange-100 rounded-full py-2 px-5 inline-flex text-orange-600">
-                                    <span class="inline-flex">About Us</span>
-                                </div>
-                            </div>
-                            <h2 class="text-3xl lg:text-4xl font-bold">Brignac Mortgage And Consulting Services</h2>
-                            <p class="text-sm lg:text-base">Shaun Brignac, President and CEO welcomes you to our site.  We believe that life is for living and you should be passionate about what you do. We hold our team to a high standard, and we only hire the best!  We look forward to working with you and your family.</p>
-                            <p></p>
+                    <div class="flex items-center gap-3">
+                        <div class="shrink-0 h-14 w-14 rounded-full flex items-center justify-center border-2 border-green-200 bg-green-50">
+                            <span class="material-symbols-outlined text-2xl text-green-500">support_agent</span>
                         </div>
-                        <div class="border-l-8 border-l-orange-500 p-3">
-                            <p class="text-sm lg:text-sm">Explore our diverse range of loan products and programs <span class="font-bold">designed to meet your unique financial needs.</span></p>
+                        <h3 class="text-sm text-gray-700">Mobile Home Loans – Single and Double Wide</h3>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="shrink-0 h-14 w-14 rounded-full flex items-center justify-center border-2 border-green-200 bg-green-50">
+                            <span class="material-symbols-outlined text-2xl text-green-500">location_away</span>
                         </div>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-5 mt-6">
-                            <div class="flex items-center justify-between gap-3">
-                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex border-2 border-orange-200">
-                                    <span class="material-symbols-outlined text-2xl text-orange-500">real_estate_agent</span>
-                                </div>
-                                <h3 class="text-sm flex-grow">Conventional and Construction Loans</h3>
-                            </div>
-                            <div class="flex items-center justify-between gap-3">
-                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex border-2 border-orange-200">
-                                    <span class="material-symbols-outlined text-2xl text-orange-500">support_agent</span>
-                                </div>
-                                <h3 class="text-sm flex-grow">Mobile Home Loans - Single and Double Wide</h3>
-                            </div>
-                            <div class="flex items-center justify-between gap-3">
-                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex border-2 border-orange-200">
-                                    <span class="material-symbols-outlined text-2xl text-orange-500">location_away</span>
-                                </div>
-                                <h3 class="text-sm flex-grow">Fixed, ARMs, 3-2-1, 2-1, 1-1 and 1-0 Buydowns</h3>
-                            </div>
-                            <div class="flex items-center justify-between gap-3">
-                                <div class="flex-shrink-0 h-14 w-14 overflow-hidden rounded-full items-center justify-center flex border-2 border-orange-200">
-                                    <span class="material-symbols-outlined text-2xl text-orange-500">badge</span>
-                                </div>
-                                <h3 class="text-sm flex-grow">Home Equity Line of Credit Loans</h3>
-                            </div>
+                        <h3 class="text-sm text-gray-700">Fixed, ARMs, 3-2-1, 2-1, 1-1 and 1-0 Buydowns</h3>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="shrink-0 h-14 w-14 rounded-full flex items-center justify-center border-2 border-green-200 bg-green-50">
+                            <span class="material-symbols-outlined text-2xl text-green-500">badge</span>
                         </div>
-                    <ServiceDialog />
+                        <h3 class="text-sm text-gray-700">Home Equity Line of Credit Loans</h3>
+                    </div>
                 </div>
             </div>
         </div>
-         </div>
     </section>
 
-    <section class="mt-10">
-        <div class="w-full">
-            <div class="h-full w-full pt-14 px-4 lg:px-0">
-                <div class="flex flex-col gap-3 items-center justify-center">
-                    <div class="bg-black/10 rounded-full py-2 px-5 inline-flex">
-                        <span>Testimonials</span>
-                    </div>
-                    <h2 class="text-3xl lg:text-4xl font-bold text-center">
-                        Our
-                        <span style="color: #4285F4;">G</span>
-                        <span style="color: #EA4335;">o</span>
-                        <span style="color: #FBBC05;">o</span>
-                        <span style="color: #4285F4;">g</span>
-                        <span style="color: #34A853;">l</span>
-                        <span style="color: #EA4335;">e</span>
-                        Testimonials
-                    </h2>
-                    <a href="https://maps.app.goo.gl/6YyqmAGQ8nJtZ9Jk6" target="_blank">
-                        <v-btn rounded="xs" size="large" class="text-none !bg-blue-600 mt-3 !text-white hover:!bg-white hover:!text-blue-600 !transition-all !duration-700 !flex !items-center !justify-center !p-5 lg:!py-7 lg:!px-8 !rounded-full !mb-3">
-                            Read More Reviews
-                            <span class="material-symbols-outlined block text-lg mr-2">arrow_outward</span>
-                        </v-btn>
-                    </a>
-                </div>
+    <!-- Google Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col items-center gap-4 mb-10">
+                <span class="bg-black/10 text-gray-700 rounded-full py-1.5 px-5 text-sm font-medium">Testimonials</span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-center">
+                    Our
+                    <span style="color: #4285F4;">G</span><span style="color: #EA4335;">o</span><span style="color: #FBBC05;">o</span><span style="color: #4285F4;">g</span><span style="color: #34A853;">l</span><span style="color: #EA4335;">e</span>
+                    Testimonials
+                </h2>
+                <a href="https://maps.app.goo.gl/6YyqmAGQ8nJtZ9Jk6" target="_blank"
+                   class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-7 py-3 rounded-full transition-colors duration-200">
+                    Read More Reviews
+                    <span class="material-symbols-outlined text-base">arrow_outward</span>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-6 lg:p-10">
+                <div class="elfsight-app-ebce6ca8-0720-4595-b6cd-c4d2cb07e6df" data-elfsight-app-lazy></div>
             </div>
         </div>
-
-        <main class="bg-white relative z-10">
-            <div class="w-[90%] lg:w-[80%] mx-auto shadow-xl rounded-sm p-4 lg:p-10 bg-white">
-                <div class="relative">
-                    <!--  <iframe class="h-[450px] z-50 w-full" src="https://widget.tagembed.com/2135662" style="border:none;"></iframe> -->
-                    <div class="elfsight-app-ebce6ca8-0720-4595-b6cd-c4d2cb07e6df" data-elfsight-app-lazy></div>
-                </div>
-            </div>
-        </main>
     </section>
 
-    <section class="mt-20">
-        <Footer />
-    </section>
+    <Footer />
 </template>
-
-<style scoped>
-.card_green_persistent {
-position: relative;
-}
-.card_green_persistent::after {
-content: '';
-position: absolute;
-bottom: 0;
-left: 0;
-width: 0;
-height: 0.25rem;
-background-color: #22c55e;
-width: 100%;
-}
-
-.card_green {
-position: relative;
-}
-.card_green::after {
-content: '';
-position: absolute;
-bottom: 0;
-left: 0;
-width: 0;
-height: 0.25rem;
-background-color: #22c55e;
-transition: width 0.5s ease-in-out;
-}
-.card_green:hover::after {
-width: 100%;
-}
-</style>
