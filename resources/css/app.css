@@ -14,7 +14,7 @@
 
     /* Tailwind utility classes: bg-dark, text-primary, border-secondary … */
     --color-dark:      #141211;
-    --color-light:     #F0EEE8;
+    --color-light:     #ffffff;
     --color-primary:   #E37A52;
     --color-secondary: #2BC764;
 }
@@ -28,7 +28,7 @@
         color: #F0EEE8;
     }
     html.light {
-        background-color: #F0EEE8;
+        background-color: #ffffff;
         color: #141211;
     }
     html.system {

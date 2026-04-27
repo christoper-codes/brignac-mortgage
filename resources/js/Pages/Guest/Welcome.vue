@@ -117,26 +117,16 @@ const services = [
     <!-- ═══════════════════════════════════════
          HERO — dark
     ════════════════════════════════════════ -->
-    <section class="relative min-h-screen bg-dark flex items-center overflow-hidden -mt-24 pt-24">
-        <!-- Ambient gradient orbs -->
-        <div class="absolute -top-20 -left-40 w-120 h-120 bg-primary/12 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-0 -right-40 w-120 h-120 bg-secondary/8 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full py-24 lg:py-36">
+    <section class="relative min-h-screen flex items-center overflow-hidden -mt-24 pt-24">
+        <div class="absolute inset-0 bg-linear-to-r from-light dark:from-black via-light/90 dark:via-black/90 to-transparent z-10"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://cdn.prod.website-files.com/68ca862ab7731d937b02a0a8/68cbc7bfc1d01041b79a1059_68c3df750b9aa805a499f0dc-min-p-1600.avif');"></div>
+        <div class="relative z-20 max-w-7xl mx-auto px-6 w-full py-24 lg:py-36">
             <div class="max-w-4xl">
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-2 border border-primary/30 bg-primary/8 rounded-full px-4 py-1.5 text-xs font-semibold text-primary mb-10">
-                    <span class="material-symbols-outlined" style="font-size:13px">verified</span>
-                    Louisiana's #1 Wholesale Mortgage Broker
-                </div>
-
                 <!-- Heading -->
-                <h1 class="text-6xl md:text-7xl lg:text-9xl font-bold leading-none tracking-tight text-light mb-10">
-                    Your Path<br>
-                    to <em class="not-italic text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary">Home</em>
+                <h1 class="text-6xl md:text-7xl font-semibold leading-none tracking-tight mb-10">
+                    Your Path to <br> Home
                 </h1>
-
-                <p class="text-light/50 text-lg md:text-xl max-w-lg leading-relaxed mb-12">
+                <p class="text-lg font-thin max-w-lg leading-relaxed mb-12">
                     Expert mortgage guidance for purchases, refinancing, and home equity.
                     Fast closings. Wholesale rates. Exceptional service.
                 </p>
@@ -151,37 +141,13 @@ const services = [
                     </Link>
                     <SecondaryButton @click="scrollTo(mortgageLoanCalculator)">
                         <span>Calculate Payment</span>
-                        <span class="material-symbols-outlined align-middle ml-1" style="font-size:18px">calculate</span>
                     </SecondaryButton>
-                </div>
-
-                <!-- Trust badges -->
-                <div class="flex flex-wrap items-center gap-6 mt-16 text-xs text-light/35 uppercase tracking-widest">
-                    <span class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-secondary" style="font-size:16px">verified_user</span>
-                        Licensed &amp; Insured
-                    </span>
-                    <span class="w-px h-3 bg-light/10"></span>
-                    <span class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-secondary" style="font-size:16px">speed</span>
-                        Fast Closings
-                    </span>
-                    <span class="w-px h-3 bg-light/10"></span>
-                    <span class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-secondary" style="font-size:16px">thumb_up</span>
-                        5-Star Rated
-                    </span>
-                    <span class="w-px h-3 bg-light/10"></span>
-                    <span class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-secondary" style="font-size:16px">support_agent</span>
-                        Free Consultation
-                    </span>
                 </div>
             </div>
         </div>
 
         <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-light/20 animate-bounce">
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce">
             <span class="text-xs tracking-widest uppercase" style="font-size:9px">Scroll</span>
             <span class="material-symbols-outlined" style="font-size:18px">keyboard_arrow_down</span>
         </div>
