@@ -52,8 +52,8 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
     <div class="fixed top-0 left-0 right-0 z-40">
 
         <!-- Top info bar (desktop) -->
-        <div class="bg-dark/95 border-b border-light/5 text-light/50 py-1.5 px-4 text-xs hidden lg:block">
-            <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="py-1.5 px-4 text-xs hidden lg:block transition-all duration-300" :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'">
+            <div class="max-w-6xl mx-auto flex items-center justify-between">
                 <div class="flex items-center gap-5">
                     <a href="mailto:Shaun@brignacmortgage.com"
                        class="flex items-center gap-1.5 hover:text-primary transition-colors duration-200">
@@ -75,23 +75,14 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
         </div>
 
         <!-- Main nav -->
-        <nav :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-dark/80 backdrop-blur-md'"
+        <nav :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'"
              class="transition-all duration-300">
-            <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="max-w-6xl mx-auto px-4 lg:px-0 h-16 flex items-center justify-between">
 
                 <!-- Logo -->
                 <Link :href="route('welcome')" class="shrink-0">
                     <img src="/img/primary-logo-dark.png" alt="Brignac Mortgage" class="h-9 w-auto">
                 </Link>
-
-                <!-- Desktop links — no underline animation, just color transition -->
-                <div class="hidden lg:flex items-center gap-8 text-sm font-medium">
-                    <Link v-for="link in navLinks" :key="link.route"
-                          :href="route(link.route)"
-                          class="text-light/65 hover:text-primary transition-colors duration-200">
-                        {{ link.label }}
-                    </Link>
-                </div>
 
                 <!-- Right controls -->
                 <div class="flex items-center gap-2">
