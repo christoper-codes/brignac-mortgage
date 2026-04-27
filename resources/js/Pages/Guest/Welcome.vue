@@ -7,7 +7,7 @@ import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
 import { drawerNavState } from '@/composables/drawersStates';
 import axios from 'axios';
-import { toast } from 'vue3-toastify';
+const toast = (msg) => {}
 import usePriceFormat from '@/composables/priceFormat';
 
 const { formatPrice } = usePriceFormat();
@@ -110,7 +110,11 @@ const navigateToAboutUsAndScroll = () => {
 const props = defineProps({
     about_us: {
         type: Object,
-        required: true
+        default: () => ({
+            welcome_title: 'Your Path to Homeownership Starts Here',
+            welcome_subtitle: 'Expert mortgage guidance from people who care.',
+            welcome_presentation: 'Shaun Brignac, President and CEO welcomes you to our site.',
+        })
     }
 });
 
@@ -348,14 +352,6 @@ const facebookTestimonials = [
                                             </div>
                                             <h3 class="flex-grow text-base">Contact us</h3>
                                         </div>
-                                        <Link :href="route('blog.index')">
-                                            <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
-                                                <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
-                                                    <span class="material-symbols-outlined text-2xl text-orange-500">bookmark</span>
-                                                </div>
-                                                <h3 class="flex-grow text-base">Blog</h3>
-                                            </div>
-                                        </Link>
                                     </div>
                                     <div class="bg-gray-300 w-[40%] h-[240px] rounded-md overflow-hidden">
                                         <div class="w-full h-full bg-[url('/storage/img/header-4.jpg')] bg-center bg-cover rounded-md">
@@ -413,7 +409,7 @@ const facebookTestimonials = [
                                                 <h3 class="flex-grow text-base">About Us</h3>
                                             </div>
                                         </Link>
-                                        <Link :href="route('join-our-team.index')">
+                                        <Link :href="route('our-team.index')">
                                             <div class="flex items-center justify-between gap-3 p-3 rounded-md bg-orange-100 cursor-pointer hover:bg-orange-200 transition-colors duration-500">
                                                 <div class="flex-shrink-0 h-12 w-12 overflow-hidden rounded-full items-center justify-center flex bg-orange-200">
                                                     <span class="material-symbols-outlined text-2xl text-orange-500">key</span>

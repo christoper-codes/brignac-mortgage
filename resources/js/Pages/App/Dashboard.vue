@@ -2,7 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { onMounted, ref, watch } from 'vue';
-import { toast } from 'vue3-toastify'
+const toast = (msg) => {}
 
 const form = ref(false);
 const welcomeTitle = ref('');

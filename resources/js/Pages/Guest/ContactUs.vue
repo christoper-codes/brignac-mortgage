@@ -5,7 +5,7 @@ import GuestNav from '@/Components/Navs/GuestNav.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref } from 'vue';
-import { toast } from 'vue3-toastify';
+const toast = (msg) => {}
 
 const form = ref(false);
 const name = ref('');
