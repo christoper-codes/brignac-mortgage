@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import { useColorMode } from '@/composables/colorMode';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 const scrolled = ref(false);
 const menuOpen = ref(false);
@@ -103,9 +104,9 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
 
                     <!-- CTA (desktop) -->
                     <Link :href="route('contact-us.index')" class="hidden lg:inline-flex ml-2">
-                        <button class="bg-primary hover:bg-primary/90 text-dark text-sm font-bold px-5 py-2 rounded-full transition-colors duration-200 cursor-pointer">
-                            Get Pre-Qualified
-                        </button>
+                        <PrimaryButton>
+                            <span>Get Pre-Qualified</span>
+                        </PrimaryButton>
                     </Link>
 
                     <!-- Hamburger -->
@@ -201,9 +202,9 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
 
                     <div class="mt-10">
                         <Link :href="route('contact-us.index')" @click="closeMenu">
-                            <button class="w-full bg-primary hover:bg-primary/90 text-dark font-bold py-3.5 rounded-xl transition-colors duration-200 cursor-pointer">
-                                Get Pre-Qualified
-                            </button>
+                            <PrimaryButton class="w-full! py-4!">
+                                <span>Get Pre-Qualified</span>
+                            </PrimaryButton>
                         </Link>
                         <p class="text-light/20 text-xs text-center mt-4">NMLS #1928157 · Licensed in Louisiana</p>
                     </div>

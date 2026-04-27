@@ -4,6 +4,8 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
 import Footer from '@/Components/Footer.vue';
 import usePriceFormat from '@/composables/priceFormat';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 const { formatPrice } = usePriceFormat();
 
@@ -142,16 +144,15 @@ const services = [
                 <!-- CTAs — border style preserved -->
                 <div class="flex flex-col sm:flex-row gap-4 items-start">
                     <Link :href="route('contact-us.index')">
-                        <button class="bg-primary hover:bg-primary/90 text-dark font-bold px-9 py-4 rounded-full text-base transition-all duration-300 hover:scale-105 shadow-lg shadow-primary/20 cursor-pointer">
-                            Get Pre-Qualified
+                        <PrimaryButton>
+                            <span>Get Pre-Qualified</span>
                             <span class="material-symbols-outlined align-middle ml-1" style="font-size:18px">arrow_forward</span>
-                        </button>
+                        </PrimaryButton>
                     </Link>
-                    <button @click="scrollTo(mortgageLoanCalculator)"
-                            class="border border-light/20 hover:border-light/50 text-light/70 hover:text-light font-semibold px-9 py-4 rounded-full text-base transition-all duration-300 hover:bg-light/5 cursor-pointer">
-                        Calculate Payment
+                    <SecondaryButton @click="scrollTo(mortgageLoanCalculator)">
+                        <span>Calculate Payment</span>
                         <span class="material-symbols-outlined align-middle ml-1" style="font-size:18px">calculate</span>
-                    </button>
+                    </SecondaryButton>
                 </div>
 
                 <!-- Trust badges -->
