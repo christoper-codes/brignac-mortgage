@@ -1,39 +1,43 @@
 @import "tailwindcss";
 @import "animate.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-family-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
-    --primary: #E37A52;
+
+    /* Named CSS variables (accessible as var(--dark) etc.) */
+    --dark:      #141211;
+    --light:     #F0EEE8;
+    --primary:   #E37A52;
     --secondary: #2BC764;
-    --dark: #141211;
-    --light: #F0EEE8;
+
+    /* Tailwind utility classes: bg-dark, text-primary, border-secondary … */
+    --color-dark:      #141211;
+    --color-light:     #F0EEE8;
+    --color-primary:   #E37A52;
+    --color-secondary: #2BC764;
 }
 
 @layer base {
     *, *::before, *::after { box-sizing: border-box; }
 
-    html { color-scheme: light dark; }
-
-    body {
-        font-family: var(--font-family-sans);
-        -webkit-font-smoothing: antialiased;
+    /* Default = dark; .light class switches to light palette */
+    html {
+        background-color: #141211;
+        color: #F0EEE8;
+    }
+    html.light {
         background-color: #F0EEE8;
         color: #141211;
     }
-
-    @media (prefers-color-scheme: dark) {
-        body {
-            background-color: #141211;
-            color: #F0EEE8;
-        }
+    html.system {
+        color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: light) {
+        html.system { background-color: #F0EEE8; color: #141211; }
     }
 
-    input, textarea, select {
-        background: transparent;
-        outline: none;
-    }
-    input:focus, textarea:focus, select:focus {
-        outline: none;
-        box-shadow: none;
-    }
+    input, textarea, select { background: transparent; outline: none; }
+    input:focus, textarea:focus, select:focus { outline: none; box-shadow: none; }
 }

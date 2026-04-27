@@ -1,9 +1,11 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { drawerNavState } from '@/composables/drawersStates';
+import { useColorMode } from '@/composables/colorMode';
 
 const scrolled = ref(false);
+const menuOpen = ref(false);
+const { mode, init, cycle } = useColorMode();
 
 const emits = defineEmits([
     'scroll-our-services-section',
@@ -11,162 +13,236 @@ const emits = defineEmits([
     'scroll-testimonials-section',
 ]);
 
-const onScroll = () => { scrolled.value = window.scrollY > 50; };
-onMounted(() => window.addEventListener('scroll', onScroll));
+const onScroll = () => { scrolled.value = window.scrollY > 60; };
+onMounted(() => {
+    window.addEventListener('scroll', onScroll);
+    init();
+});
 onUnmounted(() => window.removeEventListener('scroll', onScroll));
+
+const openMenu = () => {
+    menuOpen.value = true;
+    document.body.style.overflow = 'hidden';
+};
+const closeMenu = () => {
+    menuOpen.value = false;
+    document.body.style.overflow = '';
+};
+
+const handleScroll = (event) => {
+    closeMenu();
+    emits(event);
+};
+
+const navLinks = [
+    { label: 'Home',          route: 'welcome' },
+    { label: 'Loan Programs', route: 'programs.index' },
+    { label: 'Our Team',      route: 'our-team.index' },
+    { label: 'About Us',      route: 'about-us.index' },
+    { label: 'Contact Us',    route: 'contact-us.index' },
+];
+
+const modeIcon  = { dark: 'dark_mode', light: 'light_mode', system: 'devices' };
+const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
 </script>
 
 <template>
-    <div class="fixed top-0 left-0 right-0 z-50">
-        <!-- Top contact bar -->
-        <div class="bg-[#141211] text-[#F0EEE8]/55 py-2 px-4 text-xs border-b border-white/5">
-            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+    <!-- ── Fixed nav wrapper ───────────────────────────── -->
+    <div class="fixed top-0 left-0 right-0 z-40">
+
+        <!-- Top info bar (desktop) -->
+        <div class="bg-dark/95 border-b border-light/5 text-light/50 py-1.5 px-4 text-xs hidden lg:block">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <div class="flex items-center gap-5">
-                    <a href="mailto:Shaun@brignacmortgage.com" class="flex items-center gap-1.5 hover:text-[#E37A52] transition-colors">
-                        <span class="material-symbols-outlined text-[#E37A52]" style="font-size:14px">mail</span>
+                    <a href="mailto:Shaun@brignacmortgage.com"
+                       class="flex items-center gap-1.5 hover:text-primary transition-colors duration-200">
+                        <span class="material-symbols-outlined text-primary" style="font-size:14px">mail</span>
                         Shaun@brignacmortgage.com
                     </a>
-                    <a href="tel:+15045592821" class="flex items-center gap-1.5 hover:text-[#E37A52] transition-colors">
-                        <span class="material-symbols-outlined text-[#E37A52]" style="font-size:14px">phone</span>
+                    <a href="tel:+15045592821"
+                       class="flex items-center gap-1.5 hover:text-primary transition-colors duration-200">
+                        <span class="material-symbols-outlined text-primary" style="font-size:14px">phone</span>
                         +1 504-559-2821
                     </a>
                 </div>
-                <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank" class="hidden lg:flex items-center gap-1.5 hover:text-[#E37A52] transition-colors">
-                    <span class="material-symbols-outlined text-[#E37A52]" style="font-size:14px">location_on</span>
+                <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank"
+                   class="flex items-center gap-1.5 hover:text-primary transition-colors duration-200">
+                    <span class="material-symbols-outlined text-primary" style="font-size:14px">location_on</span>
                     21121 Waterfront East Dr, Maurepas, LA
                 </a>
             </div>
         </div>
-        <!-- Main nav — desktop -->
-        <nav :class="scrolled ? 'bg-[#F0EEE8]/98 shadow-sm' : 'bg-[#F0EEE8]/95 backdrop-blur-md'"
-             class="transition-all duration-300 hidden lg:block border-b border-[#141211]/8">
-            <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                <Link :href="route('welcome')">
+
+        <!-- Main nav -->
+        <nav :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-dark/80 backdrop-blur-md'"
+             class="transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+
+                <!-- Logo -->
+                <Link :href="route('welcome')" class="shrink-0">
                     <img src="/img/primary-logo-dark.png" alt="Brignac Mortgage" class="h-9 w-auto">
                 </Link>
 
-                <div class="flex items-center gap-8 text-sm font-medium text-[#141211]">
-                    <Link :href="route('welcome')" class="nav-link">Home</Link>
-                    <Link :href="route('programs.index')" class="nav-link">Loan Programs</Link>
-
-                    <div class="relative group">
-                        <button class="nav-link flex items-center gap-0.5">
-                            Services
-                            <span class="material-symbols-outlined opacity-40" style="font-size:16px">expand_more</span>
-                        </button>
-                        <div class="absolute top-full left-0 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 pt-3 min-w-52 z-50">
-                            <div class="bg-[#F0EEE8] rounded-xl shadow-xl border border-[#141211]/8 py-1.5 overflow-hidden">
-                                <button @click="$emit('scroll-our-services-section')" class="dropdown-item">Our Services</button>
-                                <Link :href="route('contact-us.index')" class="dropdown-item">Contact Us</Link>
-                                <button @click="$emit('scroll-mortgage-loan-calculator-section')" class="dropdown-item">Mortgage Calculator</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative group">
-                        <button class="nav-link flex items-center gap-0.5">
-                            Company
-                            <span class="material-symbols-outlined opacity-40" style="font-size:16px">expand_more</span>
-                        </button>
-                        <div class="absolute top-full left-0 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 pt-3 min-w-44 z-50">
-                            <div class="bg-[#F0EEE8] rounded-xl shadow-xl border border-[#141211]/8 py-1.5 overflow-hidden">
-                                <Link :href="route('our-team.index')" class="dropdown-item">Our Team</Link>
-                                <Link :href="route('about-us.index')" class="dropdown-item">About Us</Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative group">
-                        <button class="nav-link flex items-center gap-0.5">
-                            Legal
-                            <span class="material-symbols-outlined opacity-40" style="font-size:16px">expand_more</span>
-                        </button>
-                        <div class="absolute top-full left-0 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 pt-3 min-w-48 z-50">
-                            <div class="bg-[#F0EEE8] rounded-xl shadow-xl border border-[#141211]/8 py-1.5 overflow-hidden">
-                                <Link :href="route('privacy-policy-website')" class="dropdown-item">Privacy Policy</Link>
-                                <Link :href="route('disclaimers-website')" class="dropdown-item">Disclaimers</Link>
-                                <Link :href="route('terms-of-use-website')" class="dropdown-item">Terms of Use</Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button @click="$emit('scroll-testimonials-section')" class="nav-link">Testimonials</button>
+                <!-- Desktop links — no underline animation, just color transition -->
+                <div class="hidden lg:flex items-center gap-8 text-sm font-medium">
+                    <Link v-for="link in navLinks" :key="link.route"
+                          :href="route(link.route)"
+                          class="text-light/65 hover:text-primary transition-colors duration-200">
+                        {{ link.label }}
+                    </Link>
                 </div>
 
-                <Link :href="route('contact-us.index')">
-                    <button class="bg-[#E37A52] hover:bg-[#cc6b44] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors cursor-pointer">
-                        Apply Now
+                <!-- Right controls -->
+                <div class="flex items-center gap-2">
+                    <!-- Mode toggle -->
+                    <button @click="cycle"
+                            :title="modeLabel[mode] + ' mode'"
+                            class="h-9 w-9 rounded-lg border border-light/10 hover:border-primary/40 flex items-center justify-center text-light/50 hover:text-primary transition-all duration-200 cursor-pointer">
+                        <span class="material-symbols-outlined" style="font-size:17px">{{ modeIcon[mode] }}</span>
                     </button>
-                </Link>
-            </div>
-        </nav>
 
-        <!-- Mobile nav -->
-        <nav :class="scrolled ? 'bg-[#F0EEE8]/98 shadow-sm' : 'bg-[#F0EEE8]/95 backdrop-blur-md'"
-             class="transition-all duration-300 lg:hidden border-b border-[#141211]/8">
-            <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
-                <Link :href="route('welcome')">
-                    <img src="/img/primary-logo-dark.png" alt="Brignac Mortgage" class="h-8 w-auto">
-                </Link>
-                <button @click="drawerNavState = !drawerNavState" class="text-[#141211] p-1 cursor-pointer">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-                    </svg>
-                </button>
+                    <!-- CTA (desktop) -->
+                    <Link :href="route('contact-us.index')" class="hidden lg:inline-flex ml-2">
+                        <button class="bg-primary hover:bg-primary/90 text-dark text-sm font-bold px-5 py-2 rounded-full transition-colors duration-200 cursor-pointer">
+                            Get Pre-Qualified
+                        </button>
+                    </Link>
+
+                    <!-- Hamburger -->
+                    <button @click="openMenu"
+                            id="hamburger-btn"
+                            class="ml-2 h-9 w-9 flex flex-col items-center justify-center gap-1.25 cursor-pointer group"
+                            aria-label="Open menu">
+                        <span class="block w-6 h-px bg-light/70 group-hover:bg-primary transition-colors duration-200"></span>
+                        <span class="block w-4 h-px bg-light/70 group-hover:bg-primary transition-colors duration-200 self-end"></span>
+                    </button>
+                </div>
             </div>
         </nav>
     </div>
 
     <!-- Spacer -->
-    <div class="h-22 lg:h-24"></div>
+    <div class="h-24 lg:h-26"></div>
+
+    <!-- ── Full-screen overlay menu ─────────────────────── -->
+    <Transition name="ripple">
+        <div v-if="menuOpen"
+             class="fixed inset-0 z-50 bg-dark flex flex-col">
+
+            <!-- Menu header -->
+            <div class="flex items-center justify-between px-6 pt-5 pb-4 border-b border-light/6 shrink-0">
+                <Link :href="route('welcome')" @click="closeMenu">
+                    <img src="/img/primary-logo-dark.png" alt="Brignac Mortgage" class="h-8 w-auto">
+                </Link>
+                <button @click="closeMenu"
+                        class="h-10 w-10 rounded-lg border border-light/12 hover:border-primary/50 flex items-center justify-center text-light/60 hover:text-primary transition-all duration-200 cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Menu body -->
+            <div class="flex flex-col lg:flex-row flex-1 overflow-y-auto">
+
+                <!-- Nav links -->
+                <nav class="flex-1 flex flex-col justify-center px-8 lg:px-20 py-12">
+                    <p class="text-light/25 text-xs font-semibold tracking-widest uppercase mb-8">Navigation</p>
+                    <div class="flex flex-col">
+                        <Link v-for="(link, i) in navLinks" :key="link.route"
+                              :href="route(link.route)"
+                              @click="closeMenu"
+                              class="menu-link group flex items-center justify-between py-4 border-b border-light/6 text-light/75 hover:text-primary transition-colors duration-200"
+                              :style="{ animationDelay: `${0.08 + i * 0.07}s` }">
+                            <span class="text-4xl lg:text-6xl font-bold tracking-tight">{{ link.label }}</span>
+                            <span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0" style="font-size:28px">arrow_forward</span>
+                        </Link>
+                    </div>
+
+                    <!-- Quick scroll links -->
+                    <div class="mt-8 flex flex-wrap gap-2">
+                        <button @click="handleScroll('scroll-our-services-section')"
+                                class="text-xs text-light/35 hover:text-secondary border border-light/8 hover:border-secondary/40 px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer">
+                            Our Services
+                        </button>
+                        <button @click="handleScroll('scroll-mortgage-loan-calculator-section')"
+                                class="text-xs text-light/35 hover:text-secondary border border-light/8 hover:border-secondary/40 px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer">
+                            Calculator
+                        </button>
+                        <button @click="handleScroll('scroll-testimonials-section')"
+                                class="text-xs text-light/35 hover:text-secondary border border-light/8 hover:border-secondary/40 px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer">
+                            Testimonials
+                        </button>
+                    </div>
+                </nav>
+
+                <!-- Right panel -->
+                <div class="lg:w-76 border-t lg:border-t-0 lg:border-l border-light/6 px-8 lg:px-10 py-12 flex flex-col justify-between">
+                    <div>
+                        <p class="text-light/25 text-xs font-semibold tracking-widest uppercase mb-7">Contact</p>
+                        <div class="flex flex-col gap-5 menu-contact">
+                            <a href="tel:+15045592821"
+                               class="flex items-center gap-3 text-light/65 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-primary shrink-0" style="font-size:18px">phone</span>
+                                <span class="text-sm">+1 504-559-2821</span>
+                            </a>
+                            <a href="mailto:Shaun@brignacmortgage.com"
+                               class="flex items-center gap-3 text-light/65 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-primary shrink-0" style="font-size:18px">mail</span>
+                                <span class="text-sm">Shaun@brignacmortgage.com</span>
+                            </a>
+                            <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank"
+                               class="flex items-start gap-3 text-light/65 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-primary shrink-0 mt-0.5" style="font-size:18px">location_on</span>
+                                <span class="text-sm leading-relaxed">21121 Waterfront East Dr<br>Maurepas, LA 70449</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <Link :href="route('contact-us.index')" @click="closeMenu">
+                            <button class="w-full bg-primary hover:bg-primary/90 text-dark font-bold py-3.5 rounded-xl transition-colors duration-200 cursor-pointer">
+                                Get Pre-Qualified
+                            </button>
+                        </Link>
+                        <p class="text-light/20 text-xs text-center mt-4">NMLS #1928157 · Licensed in Louisiana</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </Transition>
 </template>
 
 <style scoped>
-.nav-link {
-    position: relative;
-    color: #141211;
-    padding-bottom: 2px;
-    opacity: 0.65;
-    transition: opacity 0.2s;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: inherit;
-    font-weight: inherit;
-    text-decoration: none;
+/* Ripple: circle grows from hamburger position (top-right) */
+.ripple-enter-active {
+    animation: rippleOpen 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-.nav-link:hover { opacity: 1; }
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1.5px;
-    background-color: #E37A52;
-    transition: width 0.25s ease;
+.ripple-leave-active {
+    animation: rippleClose 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-.nav-link:hover::after { width: 100%; }
+@keyframes rippleOpen {
+    from { clip-path: circle(0%   at calc(100% - 3.5rem) 3.5rem); }
+    to   { clip-path: circle(170% at calc(100% - 3.5rem) 3.5rem); }
+}
+@keyframes rippleClose {
+    from { clip-path: circle(170% at calc(100% - 3.5rem) 3.5rem); }
+    to   { clip-path: circle(0%   at calc(100% - 3.5rem) 3.5rem); }
+}
 
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 9px 16px;
-    font-size: 0.875rem;
-    color: #141211;
-    opacity: 0.75;
-    transition: opacity 0.15s, color 0.15s, background-color 0.15s;
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 450;
+/* Nav links stagger in */
+.menu-link {
+    animation: linkSlideUp 0.4s ease both;
 }
-.dropdown-item:hover {
-    opacity: 1;
-    background-color: rgba(227, 122, 82, 0.07);
-    color: #E37A52;
+@keyframes linkSlideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Contact items fade in */
+.menu-contact > * {
+    animation: linkSlideUp 0.4s ease both;
+    animation-delay: 0.45s;
 }
 </style>
