@@ -3,32 +3,37 @@
 
 @theme {
     --font-family-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
-
-    --color-primary-950: #0A0A0A;
-    --color-primary-900: #0D0D0D;
-    --color-primary-800: #141414;
-    --color-primary-700: #1B1B1B;
-    --color-primary-600: #222222;
-    --color-primary-500: #292929;
-    --color-primary-400: #4D4D4D;
-    --color-primary-300: #717171;
-    --color-primary-200: #959595;
-    --color-primary-100: #B9B9B9;
-    --color-primary-50: #DCDCDC;
+    --primary: #E37A52;
+    --secondary: #2BC764;
+    --dark: #141211;
+    --light: #F0EEE8;
 }
 
 @layer base {
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { color-scheme: light dark; }
+
+    body {
+        font-family: var(--font-family-sans);
+        -webkit-font-smoothing: antialiased;
+        background-color: #F0EEE8;
+        color: #141211;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        body {
+            background-color: #141211;
+            color: #F0EEE8;
+        }
+    }
+
     input, textarea, select {
         background: transparent;
+        outline: none;
     }
-
     input:focus, textarea:focus, select:focus {
-        background: transparent;
         outline: none;
         box-shadow: none;
-    }
-
-    thead {
-        background: #f5f5f5;
     }
 }

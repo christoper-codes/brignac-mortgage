@@ -27,7 +27,7 @@
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased text-gray-600">
+    <body class="min-h-screen bg-[#F0EEE8] dark:bg-[#141211] text-[#141211] dark:text-[#F0EEE8] antialiased overflow-x-hidden">
         @inertia
         <script src="https://widget.tagembed.com/embed.min.js" type="text/javascript"></script>
         <div id="fb-root"></div>
