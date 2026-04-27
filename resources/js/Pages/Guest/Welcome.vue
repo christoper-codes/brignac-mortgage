@@ -169,22 +169,22 @@ const submitContact = async () => {
 
         <!-- Desktop video background -->
         <div class="hidden lg:block absolute inset-0">
-            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-30">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-90">
                 <source src="/video/about-us-video.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 bg-dark/60"></div>
+            <div class="absolute inset-0 bg-linear-to-r from-black via-black to-transparent"></div>
         </div>
 
         <!-- Content -->
-        <div class="relative z-10 max-w-6xl mx-auto px-6 w-full py-24 lg:py-36">
+        <div class="text-light relative z-10 max-w-6xl mx-auto px-6 w-full py-24 lg:py-36">
             <div class="max-w-4xl">
-                <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-primary mb-8 reveal-title">
+                <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-primary mb-8">
                     Louisiana's Trusted Wholesale Mortgage Broker
                 </div>
-                <h1 class="reveal-title text-6xl md:text-7xl lg:text-8xl font-semibold leading-none tracking-tight mb-8">
+                <h1 class="text-6xl md:text-7xl lg:text-8xl font-semibold leading-none tracking-tight mb-8">
                     Your Path<br>to Home
                 </h1>
-                <p class="reveal-title text-lg font-light text-light/60 max-w-lg leading-relaxed mb-12">
+                <p class="text-lg font-light max-w-lg leading-relaxed mb-12">
                     Expert mortgage guidance for purchases, refinancing, and home equity.
                     Fast closings. Wholesale rates. Exceptional service.
                 </p>
@@ -195,7 +195,7 @@ const submitContact = async () => {
                             <span class="material-symbols-outlined" style="font-size:17px">arrow_forward</span>
                         </PrimaryButton>
                     </Link>
-                    <SecondaryButton @click="scrollTo(mortgageLoanCalculator)">
+                    <SecondaryButton @click="scrollTo(mortgageLoanCalculator)" class="bg-transparent! border-light/10! text-light!">
                         <span>Calculate Payment</span>
                     </SecondaryButton>
                 </div>

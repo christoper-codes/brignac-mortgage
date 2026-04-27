@@ -52,7 +52,7 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
     <div class="fixed top-0 left-0 right-0 z-40">
 
         <!-- Top info bar (desktop) -->
-        <div class="py-1.5 px-4 text-xs hidden lg:block transition-all duration-300" :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'">
+        <!-- <div class="py-1.5 px-4 text-xs hidden lg:block transition-all duration-300" :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'">
             <div class="max-w-6xl mx-auto flex items-center justify-between">
                 <div class="flex items-center gap-5">
                     <a href="mailto:Shaun@brignacmortgage.com"
@@ -72,7 +72,7 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
                     21121 Waterfront East Dr, Maurepas, LA
                 </a>
             </div>
-        </div>
+        </div> -->
 
         <!-- Main nav -->
         <nav :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'"
@@ -114,7 +114,7 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
     </div>
 
     <!-- Spacer -->
-    <div class="h-24 lg:h-26"></div>
+    <div class="h-24"></div>
 
     <!-- ── Full-screen overlay menu ─────────────────────── -->
     <Transition name="ripple">
