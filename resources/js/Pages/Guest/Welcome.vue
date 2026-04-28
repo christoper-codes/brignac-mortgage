@@ -354,7 +354,7 @@ const submitContact = async () => {
     <!-- ═══════════════════════════════════════
          OUR SERVICES — sticky scroll (dark)
     ════════════════════════════════════════ -->
-    <section ref="ourServices" class="bg-light flex flex-col lg:flex-row max-w-7xl mx-auto lg:gap-10">
+    <section ref="ourServices" class="bg-light flex flex-col lg:flex-row max-w-6xl 2xl:max-w-7xl mx-auto lg:gap-10">
         <!-- Sticky image panel -->
         <div class="w-full lg:w-[40%] lg:sticky lg:top-28 lg:h-screen overflow-hidden order-first">
             <div class="relative h-72 lg:h-[83%] lg:rounded-4xl lg:overflow-hidden">
@@ -451,7 +451,7 @@ const submitContact = async () => {
     <!-- ═══════════════════════════════════════
          HOW IT WORKS — sticky scroll (dark)
     ════════════════════════════════════════ -->
-    <section class="bg-light flex flex-col lg:flex-row-reverse lg:gap-10 max-w-7xl mx-auto">
+    <section class="bg-light flex flex-col lg:flex-row-reverse lg:gap-10 max-w-6xl 2xl:max-w-7xl mx-auto">
         <!-- Sticky info panel (right on desktop) -->
         <div class="w-full lg:w-[40%] lg:sticky lg:top-10 lg:h-screen overflow-hidden flex items-center">
             <div class="relative h-72 lg:h-[83%] w-full lg:rounded-4xl lg:overflow-hidden">

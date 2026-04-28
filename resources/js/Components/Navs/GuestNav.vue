@@ -89,8 +89,13 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
                     <!-- Mode toggle -->
                     <button @click="cycle"
                             :title="modeLabel[mode] + ' mode'"
-                            class="flex items-center justify-center text-light cursor-pointer">
-                        <span class="material-symbols-outlined w-12">{{ modeIcon[mode] }}</span>
+                            class="flex items-center justify-center text-light cursor-pointer h-10 w-10 border-2 border-light/20 rounded-lg">
+                        <span class="material-symbols-outlined scale-75">{{ modeIcon[mode] }}</span>
+                    </button>
+
+                    <!-- Language toggle -->
+                    <button class="flex items-center justify-center text-light cursor-pointer h-10 w-10 border-2 border-light/20 rounded-lg">
+                        <span>EN</span>
                     </button>
 
                     <!-- CTA (desktop) -->
