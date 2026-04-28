@@ -21,7 +21,7 @@ export function useColorMode() {
     };
 
     const cycle = () => {
-        const order = ['dark', 'light', 'system'];
+        const order = ['dark', 'light'];
         const next = order[(order.indexOf(mode.value) + 1) % order.length];
         setMode(next);
     };

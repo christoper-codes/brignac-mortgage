@@ -43,36 +43,13 @@ const navLinks = [
     { label: 'Contact Us',    route: 'contact-us.index' },
 ];
 
-const modeIcon  = { dark: 'dark_mode', light: 'light_mode', system: 'devices' };
-const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
+const modeIcon  = { dark: 'dark_mode', light: 'light_mode' };
+const modeLabel = { dark: 'Dark',      light: 'Light' };
 </script>
 
 <template>
     <!-- ── Fixed nav wrapper ───────────────────────────── -->
     <div class="fixed top-0 left-0 right-0 z-40">
-
-        <!-- Top info bar (desktop) -->
-        <!-- <div class="py-1.5 px-4 text-xs hidden lg:block transition-all duration-300" :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'">
-            <div class="max-w-6xl mx-auto flex items-center justify-between">
-                <div class="flex items-center gap-5">
-                    <a href="mailto:Shaun@brignacmortgage.com"
-                       class="flex items-center gap-1.5 hover:text-primary transition-colors duration-200">
-                        <span class="material-symbols-outlined text-primary" style="font-size:14px">mail</span>
-                        Shaun@brignacmortgage.com
-                    </a>
-                    <a href="tel:+15045592821"
-                       class="flex items-center gap-1.5 hover:text-primary transition-colors duration-200">
-                        <span class="material-symbols-outlined text-primary" style="font-size:14px">phone</span>
-                        +1 504-559-2821
-                    </a>
-                </div>
-                <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank"
-                   class="flex items-center gap-1.5 hover:text-primary transition-colors duration-200">
-                    <span class="material-symbols-outlined text-primary" style="font-size:14px">location_on</span>
-                    21121 Waterfront East Dr, Maurepas, LA
-                </a>
-            </div>
-        </div> -->
 
         <!-- Main nav -->
         <nav :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'"
