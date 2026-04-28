@@ -89,7 +89,7 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
                     <!-- Mode toggle -->
                     <button @click="cycle"
                             :title="modeLabel[mode] + ' mode'"
-                            class="flex items-center justify-center text-light/50 hover:text-primary transition-all duration-200 cursor-pointer">
+                            class="flex items-center justify-center text-light cursor-pointer">
                         <span class="material-symbols-outlined w-12">{{ modeIcon[mode] }}</span>
                     </button>
 
@@ -105,8 +105,8 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
                             id="hamburger-btn"
                             class="h-9 w-12 flex flex-col items-center justify-center gap-2 cursor-pointer group"
                             aria-label="Open menu">
-                        <span class="block w-7 h-1 bg-light/70 group-hover:bg-primary transition-colors duration-200"></span>
-                        <span class="block w-7 h-1 bg-light/70 group-hover:bg-primary transition-colors duration-200 self-end"></span>
+                        <span class="block w-7 h-1 bg-light"></span>
+                        <span class="block w-7 h-1 bg-light self-end"></span>
                     </button>
                 </div>
             </div>
