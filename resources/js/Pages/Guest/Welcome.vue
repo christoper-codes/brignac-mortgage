@@ -31,14 +31,10 @@ onMounted(() => {
     revealObserver = new IntersectionObserver(
         (entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                } else {
-                    entry.target.classList.remove('is-visible');
-                }
+                entry.target.classList.toggle('is-visible', entry.isIntersecting);
             });
         },
-        { threshold: 0.2, rootMargin: '0px 0px -40px 0px' }
+        { threshold: [0, 0.15] }
     );
     document.querySelectorAll('.reveal-title').forEach(el => revealObserver.observe(el));
 });
@@ -169,16 +165,17 @@ const submitContact = async () => {
 
         <!-- Desktop video background -->
         <div class="hidden lg:block absolute inset-0">
-            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-90">
-                <source src="/video/about-us-video.mp4" type="video/mp4">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-55">
+                <source src="/video/hero-1.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 bg-linear-to-r from-black via-black to-transparent"></div>
+            <!-- Oval cutout: left is fully dark, right has an elliptical transparent window -->
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse 52% 64% at 76% 50%, transparent 0%, transparent 36%, rgba(20,18,17,0.85) 80%, #141211 88%), linear-gradient(to right, #141211 0%, #141211 38%, rgba(20,18,17,0.12) 62%, transparent 82%);"></div>
         </div>
 
         <!-- Content -->
-        <div class="text-light relative z-10 max-w-6xl mx-auto px-6 w-full py-24 lg:py-36">
+        <div class="text-light relative z-10 max-w-6xl mx-auto px-6 w-full py-24 lg:pb-36 lg:pt-20">
             <div class="max-w-4xl">
-                <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-primary mb-8">
+                <div class="inline-flex items-center gap-2 border border-light/25 bg-light/5 rounded-lg px-4 py-1.5 text-xs font-semibold text-light mb-8">
                     Louisiana's Trusted Wholesale Mortgage Broker
                 </div>
                 <h1 class="text-6xl md:text-7xl lg:text-8xl font-semibold leading-none tracking-tight mb-8">
@@ -192,10 +189,10 @@ const submitContact = async () => {
                     <Link :href="route('contact-us.index')">
                         <PrimaryButton>
                             <span>Get Pre-Qualified</span>
-                            <span class="material-symbols-outlined" style="font-size:17px">arrow_forward</span>
+                            <span class="material-symbols-outlined w-4">arrow_forward</span>
                         </PrimaryButton>
                     </Link>
-                    <SecondaryButton @click="scrollTo(mortgageLoanCalculator)" class="bg-transparent! border-light/10! text-light!">
+                    <SecondaryButton @click="scrollTo(mortgageLoanCalculator)" class="bg-light/5! border-light/10! text-light!">
                         <span>Calculate Payment</span>
                     </SecondaryButton>
                 </div>
@@ -209,7 +206,7 @@ const submitContact = async () => {
         </div>
 
         <!-- Scroll indicator -->
-        <div class="z-20 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce text-light/30">
+        <div class="z-20 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce text-light">
             <span class="text-xs tracking-widest uppercase" style="font-size:9px">Scroll</span>
             <span class="material-symbols-outlined" style="font-size:18px">keyboard_arrow_down</span>
         </div>

@@ -77,11 +77,11 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
         <!-- Main nav -->
         <nav :class="scrolled ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'"
              class="transition-all duration-300">
-            <div class="max-w-6xl mx-auto px-4 lg:px-0 h-16 flex items-center justify-between">
+            <div class="max-w-6xl mx-auto px-4 lg:px-0 h-16 lg:h-20 flex items-center justify-between">
 
                 <!-- Logo -->
                 <Link :href="route('welcome')" class="shrink-0">
-                    <img src="/img/primary-logo-dark.png" alt="Brignac Mortgage" class="h-9 w-auto">
+                    <img src="/img/darklogo2.png" alt="Brignac Mortgage" class="h-10 w-auto">
                 </Link>
 
                 <!-- Right controls -->
@@ -89,13 +89,13 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
                     <!-- Mode toggle -->
                     <button @click="cycle"
                             :title="modeLabel[mode] + ' mode'"
-                            class="h-9 w-9 rounded-lg border border-light/10 hover:border-primary/40 flex items-center justify-center text-light/50 hover:text-primary transition-all duration-200 cursor-pointer">
-                        <span class="material-symbols-outlined" style="font-size:17px">{{ modeIcon[mode] }}</span>
+                            class="flex items-center justify-center text-light/50 hover:text-primary transition-all duration-200 cursor-pointer">
+                        <span class="material-symbols-outlined w-12">{{ modeIcon[mode] }}</span>
                     </button>
 
                     <!-- CTA (desktop) -->
                     <Link :href="route('contact-us.index')" class="hidden lg:inline-flex ml-2">
-                        <PrimaryButton>
+                        <PrimaryButton class="bg-light! text-dark!">
                             <span>Get Pre-Qualified</span>
                         </PrimaryButton>
                     </Link>
@@ -103,10 +103,10 @@ const modeLabel = { dark: 'Dark',      light: 'Light',      system: 'System' };
                     <!-- Hamburger -->
                     <button @click="openMenu"
                             id="hamburger-btn"
-                            class="ml-2 h-9 w-9 flex flex-col items-center justify-center gap-1.25 cursor-pointer group"
+                            class="h-9 w-12 flex flex-col items-center justify-center gap-2 cursor-pointer group"
                             aria-label="Open menu">
-                        <span class="block w-6 h-px bg-light/70 group-hover:bg-primary transition-colors duration-200"></span>
-                        <span class="block w-4 h-px bg-light/70 group-hover:bg-primary transition-colors duration-200 self-end"></span>
+                        <span class="block w-7 h-1 bg-light/70 group-hover:bg-primary transition-colors duration-200"></span>
+                        <span class="block w-7 h-1 bg-light/70 group-hover:bg-primary transition-colors duration-200 self-end"></span>
                     </button>
                 </div>
             </div>

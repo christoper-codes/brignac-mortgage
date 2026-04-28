@@ -9,13 +9,13 @@
     /* Named CSS variables (accessible as var(--dark) etc.) */
     --dark:      #141211;
     --light:     #F0EEE8;
-    --primary:   #E37A52;
+    --primary:   #51b003;
     --secondary: #2BC764;
 
     /* Tailwind utility classes: bg-dark, text-primary, border-secondary … */
     --color-dark:      #141211;
     --color-light:     #ffffff;
-    --color-primary:   #E37A52;
+    --color-primary:   #51b003;
     --color-secondary: #2BC764;
 }
 
