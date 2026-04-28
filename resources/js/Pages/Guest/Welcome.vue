@@ -14,6 +14,52 @@ const { formatPrice } = usePriceFormat();
 const ourServices            = ref(null);
 const mortgageLoanCalculator = ref(null);
 const testimonials           = ref(null);
+const heroVideo              = ref(null);
+
+/* ─── Video fade-loop ─────────────────────────── */
+const FADE_DURATION = 1; // seconds to fade out before end
+let videoFading = false;
+let videoFadeFrame = null;
+
+const onVideoTimeUpdate = () => {
+    const v = heroVideo.value;
+    if (!v || !v.duration) return;
+    const remaining = v.duration - v.currentTime;
+    if (remaining <= FADE_DURATION && !videoFading) {
+        videoFading = true;
+        const startOpacity = 0.55;
+        const startTime = performance.now();
+        const fadeOut = (now) => {
+            const elapsed = (now - startTime) / 1000;
+            const progress = Math.min(elapsed / FADE_DURATION, 1);
+            v.style.opacity = startOpacity * (1 - progress);
+            if (progress < 1) {
+                videoFadeFrame = requestAnimationFrame(fadeOut);
+            }
+        };
+        videoFadeFrame = requestAnimationFrame(fadeOut);
+    }
+};
+
+const onVideoEnded = () => {
+    const v = heroVideo.value;
+    if (!v) return;
+    cancelAnimationFrame(videoFadeFrame);
+    v.style.opacity = 0;
+    v.currentTime = 0;
+    v.play();
+    videoFading = false;
+    const startTime = performance.now();
+    const fadeIn = (now) => {
+        const elapsed = (now - startTime) / 1000;
+        const progress = Math.min(elapsed / FADE_DURATION, 1);
+        v.style.opacity = 0.55 * progress;
+        if (progress < 1) {
+            videoFadeFrame = requestAnimationFrame(fadeIn);
+        }
+    };
+    videoFadeFrame = requestAnimationFrame(fadeIn);
+};
 
 const scrollTo = (el, offset = 90) => {
     if (!el) return;
@@ -24,6 +70,10 @@ const scrollTo = (el, offset = 90) => {
 let revealObserver = null;
 
 onMounted(() => {
+    if (heroVideo.value) {
+        heroVideo.value.addEventListener('timeupdate', onVideoTimeUpdate);
+        heroVideo.value.addEventListener('ended',      onVideoEnded);
+    }
     window.addEventListener('scroll-our-services-section',             () => scrollTo(ourServices.value));
     window.addEventListener('scroll-mortgage-loan-calculator-section', () => scrollTo(mortgageLoanCalculator.value));
     window.addEventListener('scroll-testimonials-section',             () => scrollTo(testimonials.value));
@@ -40,6 +90,11 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+    cancelAnimationFrame(videoFadeFrame);
+    if (heroVideo.value) {
+        heroVideo.value.removeEventListener('timeupdate', onVideoTimeUpdate);
+        heroVideo.value.removeEventListener('ended',      onVideoEnded);
+    }
     window.removeEventListener('scroll-our-services-section',             () => {});
     window.removeEventListener('scroll-mortgage-loan-calculator-section', () => {});
     window.removeEventListener('scroll-testimonials-section',             () => {});
@@ -170,7 +225,7 @@ const submitContact = async () => {
 
         <!-- Desktop video background -->
         <div class="hidden lg:block absolute inset-0">
-            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-55">
+            <video ref="heroVideo" autoplay muted playsinline class="w-full h-full object-cover" style="opacity:0.55; transition:none;">
                 <source src="/video/hero-1.mp4" type="video/mp4">
             </video>
             <!-- Oval cutout: left is fully dark, right has an elliptical transparent window -->
