@@ -118,6 +118,8 @@ const services = [
     { icon: 'support_agent',     label: 'Mobile Home Loans', title: 'Manufactured & Mobile Home Financing',    desc: 'Financing solutions for manufactured and mobile homes, including land-home packages tailored to your specific needs.' },
     { icon: 'location_away',     label: 'Fixed / ARMs',      title: 'Stability or Flexibility — Your Choice',  desc: 'Choose the stability of a fixed rate or the flexibility of an adjustable rate to perfectly fit your long-term strategy.' },
     { icon: 'badge',             label: 'HELOC',             title: 'Tap Into Your Home Equity',               desc: 'A revolving line of credit for renovations, emergencies, and major purchases — powered by the equity you have already built.' },
+    { icon: 'account_balance',    label: 'Jumbo Loans',       title: 'Financing for High-Value Properties',     desc: 'Specialized loans for properties that exceed conforming limits, with competitive rates and flexible terms.' },
+    { icon: 'handshake',         label: 'FHA / VA',         title: 'Government-Backed Loans',                 desc: 'Low down payment options and flexible credit requirements for first-time buyers, veterans, and those with less-than-perfect credit.' },
 ];
 
 /* ─── Process steps ─────────────────────────────── */
@@ -126,6 +128,9 @@ const processSteps = [
     { step: '02', icon: 'manage_search', title: 'We Shop 50+ Lenders',   desc: 'Our team compares rates and programs across our wholesale network to secure the sharpest deal available for your profile.' },
     { step: '03', icon: 'handshake',     title: 'Get Your Approval',     desc: 'We walk you through your options, lock your rate, and handle all the paperwork from application to the closing table.' },
     { step: '04', icon: 'celebration',   title: 'Close & Move In',       desc: 'Sign at closing, receive your keys, and start living. Fast closings are our standard — not an exception.' },
+    { step: '05', icon: 'support_agent', title: 'Here for You Always',   desc: 'Our relationship doesn\'t end at closing. We\'re here for questions, future refinancing, and your next home purchase.' },
+    { step: '06', icon: 'star',          title: '5-Star Service',        desc: 'Our clients consistently rave about our responsiveness, transparency, and dedication to getting the best deal.' },
+    { step: '07', icon: 'groups',        title: 'Family-Owned & Operated', desc: 'As a local family business, we treat you like one of our own — with honesty, integrity, and a commitment to your best interests.' },
 ];
 
 /* ─── Contact form ──────────────────────────────── */
@@ -391,22 +396,22 @@ const submitContact = async () => {
     <!-- ═══════════════════════════════════════
          HOW IT WORKS — sticky scroll (dark)
     ════════════════════════════════════════ -->
-    <section class="bg-dark flex flex-col lg:flex-row-reverse">
+    <section class="bg-light flex flex-col lg:flex-row-reverse lg:gap-10 max-w-7xl mx-auto">
         <!-- Sticky info panel (right on desktop) -->
-        <div class="w-full lg:w-1/2 lg:sticky lg:top-0 lg:h-screen overflow-hidden flex items-center">
-            <div class="relative h-72 lg:h-full w-full">
-                <img src="/storage/img/header-6.jpg" alt="Our Process"
-                     class="w-full h-full object-cover opacity-40">
-                <div class="absolute inset-0 bg-dark/70"></div>
+        <div class="w-full lg:w-[40%] lg:sticky lg:top-10 lg:h-screen overflow-hidden flex items-center lg:p-10">
+            <div class="relative h-72 lg:h-[90%] w-full lg:rounded-4xl lg:overflow-hidden">
+                <img src="/storage/img/newimg-2.jpg" alt="Our Process"
+                     class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-light/10"></div>
                 <div class="absolute inset-0 flex items-center justify-center px-10 lg:px-14">
                     <div>
-                        <div class="inline-flex items-center gap-2 border border-secondary/25 bg-secondary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-secondary mb-6">
+                        <div class="inline-flex items-center gap-2 border border-dark/25 bg-dark/5 rounded-lg px-4 py-1.5 text-xs font-semibold text-dark mb-6">
                             Simple Process
                         </div>
-                        <h2 class="text-3xl lg:text-5xl font-bold text-light leading-tight mb-5">
+                        <h2 class="text-3xl lg:text-5xl font-bold text-dark leading-tight mb-5">
                             How It<br>Works
                         </h2>
-                        <p class="text-light/40 text-sm leading-relaxed max-w-sm">
+                        <p class="text-dark/40 text-lg leading-relaxed max-w-sm">
                             From your first inquiry to closing day, we keep every step clear, fast, and stress-free.
                         </p>
                         <div class="mt-8">
@@ -423,28 +428,28 @@ const submitContact = async () => {
         </div>
 
         <!-- Scrolling steps -->
-        <div class="w-full lg:w-1/2 flex flex-col">
+        <div class="w-full lg:w-[60%] flex flex-col">
             <!-- Intro spacer on desktop -->
-            <div class="hidden lg:block lg:h-24 border-b border-light/6"></div>
+            <div class="hidden lg:block lg:h-24 border-b border-dark/6"></div>
 
             <div v-for="(step, i) in processSteps" :key="step.step"
-                 class="border-b border-light/6 group hover:bg-light/3 transition-colors duration-300">
+                 class="border-b border-dark/6 group hover:bg-dark/5 transition-colors duration-300 rounded-3xl">
                 <div class="p-8 lg:p-14 flex gap-6 items-start">
                     <div class="shrink-0 flex flex-col items-center gap-3">
                         <span class="text-primary font-bold text-xs tracking-widest">{{ step.step }}</span>
-                        <div class="h-11 w-11 rounded-xl border border-light/8 group-hover:border-primary/35 bg-light/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
-                            <span class="material-symbols-outlined text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:20px">{{ step.icon }}</span>
+                        <div class="h-11 w-11 rounded-xl border border-dark/8 group-hover:border-primary/35 bg-dark/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
+                            <span class="material-symbols-outlined text-dark/35 group-hover:text-primary transition-colors duration-300" style="font-size:20px">{{ step.icon }}</span>
                         </div>
-                        <div v-if="i < processSteps.length - 1" class="w-px h-8 bg-light/8"></div>
+                        <div v-if="i < processSteps.length - 1" class="w-px h-8 bg-dark/8"></div>
                     </div>
                     <div class="flex-1 pt-1">
-                        <h3 class="text-light text-xl font-bold mb-2">{{ step.title }}</h3>
-                        <p class="text-light/40 text-sm leading-relaxed">{{ step.desc }}</p>
+                        <h3 class="text-dark text-xl font-bold mb-2">{{ step.title }}</h3>
+                        <p class="text-dark/40 text-sm leading-relaxed">{{ step.desc }}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="hidden lg:block lg:h-24 border-b border-light/6"></div>
+            <div class="hidden lg:block lg:h-24 border-b border-dark/6"></div>
         </div>
     </section>
 
