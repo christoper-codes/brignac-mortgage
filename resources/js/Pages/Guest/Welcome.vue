@@ -173,13 +173,13 @@ const submitContact = async () => {
         </div>
 
         <!-- Content -->
-        <div class="text-light relative z-10 max-w-6xl mx-auto px-6 w-full py-24 lg:pb-36 lg:pt-20">
+        <div class="text-light relative z-10 max-w-6xl mx-auto px-6 lg:px-0 w-full py-24 lg:pb-36 lg:pt-20">
             <div class="max-w-4xl">
                 <div class="inline-flex items-center gap-2 border border-light/25 bg-light/5 rounded-lg px-4 py-1.5 text-xs font-semibold text-light mb-8">
                     Louisiana's Trusted Wholesale Mortgage Broker
                 </div>
                 <h1 class="text-6xl md:text-7xl lg:text-8xl font-semibold leading-none tracking-tight mb-8">
-                    Your Path<br>to Home
+                    The Smarter Way<br>to Own Your Home
                 </h1>
                 <p class="text-lg font-light max-w-lg leading-relaxed mb-12">
                     Expert mortgage guidance for purchases, refinancing, and home equity.
@@ -221,9 +221,9 @@ const submitContact = async () => {
                 { value: '500+', label: 'Families Helped' },
                 { value: '15+',  label: 'Years Experience' },
                 { value: '50+',  label: 'Wholesale Lenders' },
-                { value: '5.0★', label: 'Average Rating' },
+                { value: '5.0', label: 'Average Rating' },
             ]" :key="stat.label">
-                <p class="text-4xl lg:text-5xl font-bold text-primary mb-1">{{ stat.value }}</p>
+                <p class="text-4xl lg:text-5xl font-bold mb-1 text-light">{{ stat.value }}</p>
                 <p class="text-light/35 text-xs uppercase tracking-wider">{{ stat.label }}</p>
             </div>
         </div>
