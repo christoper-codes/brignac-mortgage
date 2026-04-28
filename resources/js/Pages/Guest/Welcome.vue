@@ -356,14 +356,14 @@ const submitContact = async () => {
     <!-- ═══════════════════════════════════════
          WHAT WE PROVIDE — light
     ════════════════════════════════════════ -->
-    <section class="bg-white dark:bg-dark py-24">
-        <div class="max-w-7xl mx-auto px-6">
+    <section class="bg-dark py-24">
+        <div class="max-w-6xl mx-auto px-6">
             <div class="mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
                 <div>
-                    <p class="text-dark/35 dark:text-light/30 text-xs font-semibold uppercase tracking-widest mb-5 reveal-title">Why Choose Us</p>
-                    <h2 class="reveal-title text-4xl lg:text-5xl font-bold text-dark dark:text-light leading-tight">What We Provide</h2>
+                    <p class="text-light/35 text-xs font-semibold uppercase tracking-widest mb-5 reveal-title">Why Choose Us</p>
+                    <h2 class="reveal-title text-4xl lg:text-5xl font-bold text-light leading-tight">What We Provide</h2>
                 </div>
-                <p class="text-dark/40 dark:text-light/35 max-w-xs text-sm leading-relaxed lg:text-right">
+                <p class="text-light/40 max-w-xs text-sm leading-relaxed lg:text-right">
                     Everything you need to close with confidence and get the best rate.
                 </p>
             </div>
@@ -377,12 +377,12 @@ const submitContact = async () => {
                     { icon: 'location_away',              title: 'Wholesale Lender Access',              desc: 'Exclusive access to 50+ wholesale lenders so you always get the best price.' },
                     { icon: 'card_travel',                title: 'Residential, Investment & Commercial', desc: 'Loan options across residential, investment, and commercial property types.' },
                 ]" :key="card.title"
-                     class="group bg-white hover:bg-white dark:bg-light/4 dark:hover:bg-light/7 border border-dark/8 dark:border-light/6 hover:border-dark/12 dark:hover:border-primary/20 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-dark/5">
-                    <div class="h-11 w-11 rounded-xl border border-dark/6 dark:border-light/8 group-hover:border-primary/25 bg-dark/3 dark:bg-light/4 group-hover:bg-primary/8 flex items-center justify-center mb-5 transition-all duration-300">
-                        <span class="material-symbols-outlined text-dark/35 dark:text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:20px">{{ card.icon }}</span>
+                     class="group bg-light/4 hover:bg-light/7 border border-light/6 hover:border-primary/20 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-dark/5">
+                    <div class="h-11 w-11 rounded-xl border border-light/8 group-hover:border-primary/25 bg-light/4 group-hover:bg-primary/8 flex items-center justify-center mb-5 transition-all duration-300">
+                        <span class="material-symbols-outlined text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:20px">{{ card.icon }}</span>
                     </div>
-                    <h3 class="font-bold text-dark dark:text-light mb-2 text-sm">{{ card.title }}</h3>
-                    <p class="text-dark/40 dark:text-light/35 text-xs leading-relaxed">{{ card.desc }}</p>
+                    <h3 class="font-bold text-light mb-2 text-sm">{{ card.title }}</h3>
+                    <p class="text-light/40 text-xs leading-relaxed">{{ card.desc }}</p>
                 </div>
             </div>
         </div>
