@@ -398,8 +398,8 @@ const submitContact = async () => {
     ════════════════════════════════════════ -->
     <section class="bg-light flex flex-col lg:flex-row-reverse lg:gap-10 max-w-7xl mx-auto">
         <!-- Sticky info panel (right on desktop) -->
-        <div class="w-full lg:w-[40%] lg:sticky lg:top-10 lg:h-screen overflow-hidden flex items-center lg:p-10">
-            <div class="relative h-72 lg:h-[90%] w-full lg:rounded-4xl lg:overflow-hidden">
+        <div class="w-full lg:w-[40%] lg:sticky lg:top-10 lg:h-screen overflow-hidden flex items-center">
+            <div class="relative h-72 lg:h-[83%] w-full lg:rounded-4xl lg:overflow-hidden">
                 <img src="/storage/img/newimg-2.jpg" alt="Our Process"
                      class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-light/10"></div>
