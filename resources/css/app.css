@@ -8,7 +8,7 @@
 
     /* Named CSS variables (accessible as var(--dark) etc.) */
     --dark:      #141211;
-    --light:     #F0EEE8;
+    --light:     #ffffff;
     --primary:   #51b003;
     --secondary: #2BC764;
 
@@ -25,7 +25,7 @@
     /* Default = dark; .light class switches to light palette */
     html {
         background-color: #141211;
-        color: #F0EEE8;
+        color: #ffffff;
     }
     html.light {
         background-color: #ffffff;
@@ -35,7 +35,7 @@
         color-scheme: light dark;
     }
     @media (prefers-color-scheme: light) {
-        html.system { background-color: #F0EEE8; color: #141211; }
+        html.system { background-color: #ffffff; color: #141211; }
     }
 
     input, textarea, select { background: transparent; outline: none; }

@@ -294,32 +294,32 @@ const submitContact = async () => {
     <!-- ═══════════════════════════════════════
          OUR SERVICES — sticky scroll (dark)
     ════════════════════════════════════════ -->
-    <section ref="ourServices" class="bg-dark flex flex-col lg:flex-row">
+    <section ref="ourServices" class="bg-light flex flex-col lg:flex-row max-w-7xl mx-auto lg:gap-10">
         <!-- Sticky image panel -->
-        <div class="w-full lg:w-1/2 lg:sticky lg:top-0 lg:h-screen overflow-hidden order-first">
-            <div class="relative h-72 lg:h-full">
-                <img src="/storage/img/header-5.jpg" alt="Our Services"
+        <div class="w-full lg:w-[40%] lg:sticky lg:top-28 lg:h-screen overflow-hidden order-first">
+            <div class="relative h-72 lg:h-[83%] lg:rounded-4xl lg:overflow-hidden">
+                <img src="/storage/img/newimg-1.jpg" alt="Our Services"
                      class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-dark/40"></div>
-                <div class="absolute bottom-8 left-8 bg-dark/85 backdrop-blur-md border border-light/8 rounded-2xl p-5 max-w-52">
-                    <p class="text-light/35 text-xs uppercase tracking-widest mb-1">Wholesale Access</p>
-                    <p class="text-light font-bold text-xl">50+ Lenders</p>
-                    <p class="text-secondary text-sm mt-1 font-medium">Best rates guaranteed</p>
+                <div class="absolute inset-0 bg-light/10"></div>
+                <div class="absolute bottom-8 left-8 bg-light border border-dark/8 rounded-2xl p-5 max-w-52">
+                    <p class="text-dark/50 text-xs uppercase tracking-widest mb-1">Wholesale Access</p>
+                    <p class="text-dark font-bold text-xl">50+ Lenders</p>
+                    <p class="text-dark/50 text-sm mt-1 font-medium">Best rates guaranteed</p>
                 </div>
             </div>
         </div>
 
         <!-- Scrolling content -->
-        <div class="w-full lg:w-1/2 flex flex-col">
+        <div class="w-full lg:w-[60%] flex flex-col">
             <!-- Section intro -->
-            <div class="p-8 lg:p-14 border-b border-light/6">
+            <div class="p-8 lg:py-14 border-b border-dark/20 mb-5">
                 <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-primary mb-6">
                     Our Services
                 </div>
-                <h2 class="reveal-title text-3xl lg:text-5xl font-bold text-light leading-tight mb-4">
+                <h2 class="reveal-title text-3xl lg:text-5xl font-bold text-dark leading-tight mb-4">
                     Loan Products<br>&amp; Programs
                 </h2>
-                <p class="text-light/40 leading-relaxed">
+                <p class="text-dark/40 leading-relaxed">
                     We shop 50+ wholesale lenders so you get the best rate without the legwork.
                     Every loan, every scenario — we have a solution.
                 </p>
@@ -327,24 +327,24 @@ const submitContact = async () => {
 
             <!-- Service rows -->
             <div v-for="svc in services" :key="svc.label"
-                 class="border-b border-light/6 group hover:bg-light/3 transition-colors duration-300 cursor-default">
+                 class="border-b border-dark/10 group hover:bg-dark/5 transition-colors duration-300 cursor-default rounded-3xl">
                 <div class="p-8 lg:p-14 flex gap-6 items-start">
-                    <div class="shrink-0 h-12 w-12 rounded-xl border border-light/8 group-hover:border-primary/35 bg-light/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
-                        <span class="material-symbols-outlined text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:22px">{{ svc.icon }}</span>
+                    <div class="shrink-0 h-12 w-12 rounded-xl border border-dark/8 group-hover:border-primary/35 bg-dark/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
+                        <span class="material-symbols-outlined text-dark/35 group-hover:text-primary transition-colors duration-300" style="font-size:22px">{{ svc.icon }}</span>
                     </div>
                     <div class="flex-1">
                         <p class="text-primary text-xs font-semibold uppercase tracking-widest mb-2">{{ svc.label }}</p>
-                        <h3 class="text-light text-xl font-bold mb-2">{{ svc.title }}</h3>
-                        <p class="text-light/40 text-sm leading-relaxed">{{ svc.desc }}</p>
+                        <h3 class="text-dark text-xl font-bold mb-2">{{ svc.title }}</h3>
+                        <p class="text-dark/40 text-sm leading-relaxed">{{ svc.desc }}</p>
                     </div>
-                    <span class="material-symbols-outlined text-light/10 group-hover:text-primary/35 transition-colors duration-300 self-center shrink-0" style="font-size:24px">arrow_forward</span>
+                    <span class="material-symbols-outlined text-dark/10 group-hover:text-primary transition-colors duration-300 self-center shrink-0" style="font-size:24px">arrow_forward</span>
                 </div>
             </div>
 
             <!-- CTA row -->
             <div class="p-8 lg:p-14">
                 <Link :href="route('programs.index')">
-                    <button class="inline-flex items-center gap-2 border border-light/15 hover:border-primary text-light/50 hover:text-primary font-semibold px-7 py-3 rounded-lg transition-all duration-200 cursor-pointer">
+                    <button class="inline-flex items-center gap-2 border border-dark/15 hover:border-primary text-dark/50 hover:text-primary font-semibold px-7 py-3 rounded-lg transition-all duration-200 cursor-pointer">
                         View All Programs
                         <span class="material-symbols-outlined" style="font-size:17px">arrow_outward</span>
                     </button>
