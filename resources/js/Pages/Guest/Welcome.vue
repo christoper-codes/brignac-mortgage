@@ -183,10 +183,10 @@ const submitContact = async () => {
                 <div class="inline-flex items-center gap-2 border border-light/25 bg-light/5 rounded-lg px-4 py-1.5 text-xs font-semibold text-light mb-8">
                     Louisiana's Trusted Wholesale Mortgage Broker
                 </div>
-                <h1 class="text-6xl md:text-7xl lg:text-8xl font-semibold leading-none tracking-tight mb-8">
+                <h1 class="reveal-title text-6xl md:text-7xl lg:text-8xl font-semibold leading-none tracking-tight mb-8">
                     The Smarter Way<br>to Own Your Home
                 </h1>
-                <p class="text-lg font-light max-w-lg leading-relaxed mb-12">
+                <p class="reveal-title text-lg font-light max-w-lg leading-relaxed mb-12">
                     Expert mortgage guidance for purchases, refinancing, and home equity.
                     Fast closings. Wholesale rates. Exceptional service.
                 </p>
