@@ -803,52 +803,82 @@ const submitContact = async () => {
     </section>
 
     <!-- ═══════════════════════════════════════
-         CONTACT FORM — light
+         CONTACT FORM
     ════════════════════════════════════════ -->
-    <section class="bg-white dark:bg-light/4 py-32 border-t border-dark/6 dark:border-light/6">
+    <section class="bg-white dark:bg-dark py-24">
         <div class="max-w-6xl mx-auto px-6">
-            <div class="flex flex-col lg:flex-row gap-16">
-                <!-- Left info -->
-                <div class="lg:w-80 shrink-0">
-                    <p class="text-dark/35 dark:text-light/30 text-xs font-semibold uppercase tracking-widest mb-5 reveal-title">Get In Touch</p>
-                    <h2 class="reveal-title text-3xl lg:text-4xl font-bold text-dark dark:text-light leading-tight mb-6">
-                        Ready to Get<br>Pre-Qualified?
-                    </h2>
-                    <p class="text-dark/45 dark:text-light/40 text-sm leading-relaxed mb-10">
-                        Fill out the form and our team will reach out within one business day. No obligation, no pressure.
-                    </p>
-                    <div class="flex flex-col gap-5">
-                        <a href="tel:+15045592821"
-                           class="flex items-center gap-3 text-dark/60 dark:text-light/50 hover:text-primary transition-colors">
-                            <div class="h-10 w-10 rounded-xl border border-dark/8 dark:border-light/8 bg-dark/3 dark:bg-light/4 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary" style="font-size:18px">phone</span>
-                            </div>
-                            <span class="text-sm">+1 504-559-2821</span>
-                        </a>
-                        <a href="mailto:Shaun@brignacmortgage.com"
-                           class="flex items-center gap-3 text-dark/60 dark:text-light/50 hover:text-primary transition-colors">
-                            <div class="h-10 w-10 rounded-xl border border-dark/8 dark:border-light/8 bg-dark/3 dark:bg-light/4 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary" style="font-size:18px">mail</span>
-                            </div>
-                            <span class="text-sm">Shaun@brignacmortgage.com</span>
-                        </a>
-                        <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank"
-                           class="flex items-start gap-3 text-dark/60 dark:text-light/50 hover:text-primary transition-colors">
-                            <div class="h-10 w-10 rounded-xl border border-dark/8 dark:border-light/8 bg-dark/3 dark:bg-light/4 flex items-center justify-center shrink-0 mt-0.5">
-                                <span class="material-symbols-outlined text-primary" style="font-size:18px">location_on</span>
-                            </div>
-                            <span class="text-sm leading-relaxed">21121 Waterfront East Dr<br>Maurepas, LA 70449</span>
-                        </a>
+
+            <!-- Section header -->
+            <div class="text-center mb-14">
+                <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-primary mb-5">
+                    Free Consultation
+                </div>
+                <h2 class="reveal-title text-4xl lg:text-5xl font-bold text-dark dark:text-light leading-tight mb-4">
+                    Let's Talk Mortgages
+                </h2>
+                <p class="text-dark/40 dark:text-light/35 text-sm max-w-sm mx-auto leading-relaxed">
+                    No obligation, no pressure. Fill in your details and we'll reach out within one business day.
+                </p>
+            </div>
+
+            <!-- Card -->
+            <div class="border border-dark/10 dark:border-light/8 rounded-3xl overflow-hidden grid lg:grid-cols-5">
+
+                <!-- ── Left panel ─────────────────── -->
+                <div class="lg:col-span-2 bg-dark/3 dark:bg-light/3 border-b lg:border-b-0 lg:border-r border-dark/10 dark:border-light/8 p-10 lg:p-12 flex flex-col justify-between">
+                    <div>
+                        <!-- Photo -->
+                        <div class="w-16 h-16 rounded-2xl overflow-hidden mb-7 border border-dark/10 dark:border-light/10">
+                            <img src="/img/company-seo-img.jpg" alt="Shaun Brignac"
+                                 class="w-full h-full object-cover object-top">
+                        </div>
+                        <h3 class="text-dark dark:text-light font-bold text-lg mb-1">Shaun Brignac, MBA</h3>
+                        <p class="text-dark/40 dark:text-light/35 text-xs mb-8">President &amp; CEO · NMLS #1928157</p>
+
+                        <!-- Contact links -->
+                        <div class="flex flex-col gap-4">
+                            <a href="tel:+15045592821"
+                               class="flex items-center gap-3 group">
+                                <div class="h-9 w-9 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center shrink-0 group-hover:bg-primary/18 transition-colors duration-200">
+                                    <span class="material-symbols-outlined text-primary" style="font-size:16px">phone</span>
+                                </div>
+                                <span class="text-dark/55 dark:text-light/50 text-sm group-hover:text-primary transition-colors duration-200">+1 504-559-2821</span>
+                            </a>
+                            <a href="mailto:Shaun@brignacmortgage.com"
+                               class="flex items-center gap-3 group">
+                                <div class="h-9 w-9 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center shrink-0 group-hover:bg-primary/18 transition-colors duration-200">
+                                    <span class="material-symbols-outlined text-primary" style="font-size:16px">mail</span>
+                                </div>
+                                <span class="text-dark/55 dark:text-light/50 text-sm group-hover:text-primary transition-colors duration-200">Shaun@brignacmortgage.com</span>
+                            </a>
+                            <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank"
+                               class="flex items-start gap-3 group">
+                                <div class="h-9 w-9 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary/18 transition-colors duration-200">
+                                    <span class="material-symbols-outlined text-primary" style="font-size:16px">location_on</span>
+                                </div>
+                                <span class="text-dark/55 dark:text-light/50 text-sm group-hover:text-primary transition-colors duration-200 leading-relaxed">21121 Waterfront East Dr<br>Maurepas, LA 70449</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Trust bar -->
+                    <div class="mt-10 pt-8 border-t border-dark/10 dark:border-light/8">
+                        <div class="flex gap-0.5 mb-2">
+                            <svg v-for="n in 5" :key="n" class="w-3.5 h-3.5 fill-yellow-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="text-dark/35 dark:text-light/25 text-xs leading-relaxed">500+ families helped · Licensed in Louisiana</p>
                     </div>
                 </div>
 
-                <!-- Form -->
-                <div class="flex-1">
+                <!-- ── Right form ──────────────────── -->
+                <div class="lg:col-span-3 p-10 lg:p-12">
+
+                    <!-- Success state -->
                     <Transition name="fade">
                         <div v-if="contactSuccess"
-                             class="flex flex-col items-center justify-center text-center py-20 border border-secondary/20 bg-secondary/5 rounded-2xl">
-                            <div class="h-14 w-14 rounded-2xl bg-secondary/10 border border-secondary/20 flex items-center justify-center mb-4">
-                                <span class="material-symbols-outlined text-secondary" style="font-size:28px">check_circle</span>
+                             class="h-full flex flex-col items-center justify-center text-center py-16">
+                            <div class="h-16 w-16 rounded-2xl bg-secondary/10 border border-secondary/20 flex items-center justify-center mb-5">
+                                <span class="material-symbols-outlined text-secondary" style="font-size:30px">check_circle</span>
                             </div>
                             <h3 class="text-dark dark:text-light font-bold text-xl mb-2">Message Sent!</h3>
                             <p class="text-dark/45 dark:text-light/40 text-sm max-w-xs">
@@ -857,6 +887,7 @@ const submitContact = async () => {
                         </div>
                     </Transition>
 
+                    <!-- Form -->
                     <form v-if="!contactSuccess" @submit.prevent="submitContact"
                           class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -888,14 +919,14 @@ const submitContact = async () => {
                         </div>
                         <div class="md:col-span-2 flex items-start gap-3">
                             <input v-model="contactForm.opt_in_sms" type="checkbox" id="sms-opt-in"
-                                   class="mt-0.5 h-4 w-4 accent-primary rounded shrink-0 cursor-pointer">
-                            <label for="sms-opt-in" class="text-xs text-dark/45 dark:text-light/35 leading-relaxed cursor-pointer">
-                                I agree to receive SMS text messages from Brignac Mortgage regarding my inquiry. Reply STOP to unsubscribe.
+                                   class="mt-0.5 h-4 w-4 accent-primary shrink-0 cursor-pointer">
+                            <label for="sms-opt-in" class="text-xs text-dark/40 dark:text-light/30 leading-relaxed cursor-pointer">
+                                I agree to receive SMS text messages from Brignac Mortgage. Reply STOP to unsubscribe.
                             </label>
                         </div>
                         <div class="md:col-span-2">
-                            <p v-if="contactError" class="text-red-500 text-sm mb-3">{{ contactError }}</p>
-                            <PrimaryButton type="submit" :disabled="contactLoading" class="py-4! bg-dark! dark:bg-light! text-light! dark:text-dark!">
+                            <p v-if="contactError" class="text-red-500 dark:text-red-400 text-sm mb-3">{{ contactError }}</p>
+                            <PrimaryButton type="submit" :disabled="contactLoading" class="w-full! py-3.5!">
                                 <span class="material-symbols-outlined" :class="contactLoading ? 'animate-spin' : ''" style="font-size:18px">
                                     {{ contactLoading ? 'progress_activity' : 'send' }}
                                 </span>
@@ -967,28 +998,6 @@ const submitContact = async () => {
         </div>
     </Transition>
 
-    <!-- ═══════════════════════════════════════
-         VIDEO MODAL
-    ════════════════════════════════════════ -->
-    <Transition name="fade">
-        <div v-if="showVideo"
-             class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark/90 backdrop-blur-sm"
-             @click.self="showVideo = false">
-            <div class="w-full max-w-3xl bg-dark border border-light/8 rounded-2xl overflow-hidden animate__animated animate__fadeIn animate__faster">
-                <div class="flex justify-end p-3 border-b border-light/6">
-                    <button @click="showVideo = false"
-                            class="text-light/35 hover:text-light transition-colors cursor-pointer">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-                <video class="w-full" controls autoplay playsinline>
-                    <source type="video/mp4" src="/video/about-us-video.mp4">
-                </video>
-            </div>
-        </div>
-    </Transition>
 </template>
 
 <style scoped>
