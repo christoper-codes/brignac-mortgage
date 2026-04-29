@@ -525,8 +525,8 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
          CTA BANNER
     ═══════════════════════════════════════ -->
     <section class="bg-light dark:bg-dark pb-40">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="reveal-item bg-primary rounded-3xl p-10 lg:p-16 text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="reveal-item bg-primary rounded-4xl p-10 lg:p-16 text-center">
                 <div>
                     <div class="inline-flex items-center gap-2 border border-white/20 bg-white/10 rounded-full px-4 py-1.5 text-xs font-semibold text-light mb-6">
                         Free Consultation
