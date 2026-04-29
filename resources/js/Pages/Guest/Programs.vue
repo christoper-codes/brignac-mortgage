@@ -2,6 +2,7 @@
 import Footer from '@/Components/Footer.vue';
 import NavigationDrawerGuest from '@/Components/NavigationDrawerGuest.vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import useCurrentYear from '@/composables/currentYear';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
@@ -9,25 +10,35 @@ import { ref, computed, onMounted, onUnmounted } from 'vue';
 const { currentYear } = useCurrentYear();
 const expanded   = ref(null);
 const currentIdx = ref(0);
+const carouselRef = ref(null);
 
 const toggleExpand = (id) => {
     expanded.value = expanded.value === id ? null : id;
 };
 
+const scrollToCard = (idx) => {
+    const el = carouselRef.value;
+    if (!el) return;
+    const card = Array.from(el.children)[idx];
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+};
+
 const goTo = (i) => {
     currentIdx.value = i;
     expanded.value   = null;
+    scrollToCard(i);
 };
 const prev = () => { if (currentIdx.value > 0) goTo(currentIdx.value - 1); };
 const next = () => { if (currentIdx.value < programs.value.length - 1) goTo(currentIdx.value + 1); };
 
-/* Touch swipe */
-let touchStartX = 0;
-const onTouchStart = (e) => { touchStartX = e.touches[0].clientX; };
-const onTouchEnd   = (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 48) diff > 0 ? next() : prev();
+const onCarouselScroll = () => {
+    const el = carouselRef.value;
+    if (!el || !el.children[0]) return;
+    const cardW = el.children[0].offsetWidth + 12;
+    currentIdx.value = Math.min(Math.round(el.scrollLeft / cardW), programs.value.length - 1);
 };
+
+const currentColor = computed(() => programs.value[currentIdx.value]?.color ?? 'green');
 
 /* ── SVG icon paths (stroke, viewBox 0 0 24 24) ── */
 const icons = {
@@ -206,6 +217,7 @@ const programs = computed(() => [
         subtitle: 'High-Value Mortgage Program',
         icon: 'gem',
         color: 'orange',
+        img: '/img/programs/program6.webp',
         stats: [
             { label: 'Min. Credit Score', value: '680' },
             { label: 'Avg. Down Payment', value: '10%' },
@@ -256,10 +268,10 @@ const variantExpandBtn = {
     blue:   'border-blue-500/25 bg-blue-500/5 text-blue-400',
     orange: 'border-orange-500/25 bg-orange-500/5 text-orange-400',
 };
-const variantCta = {
-    green:  'bg-emerald-500/10 hover:bg-emerald-500 text-emerald-600 dark:text-emerald-400 hover:text-white border border-emerald-500/25 hover:border-emerald-500',
-    blue:   'bg-blue-500/10 hover:bg-blue-500 text-blue-600 dark:text-blue-400 hover:text-white border border-blue-500/25 hover:border-blue-500',
-    orange: 'bg-orange-500/10 hover:bg-orange-500 text-orange-600 dark:text-orange-400 hover:text-white border border-orange-500/25 hover:border-orange-500',
+const variantHeaderFallback = {
+    green:  'bg-emerald-900',
+    blue:   'bg-blue-900',
+    orange: 'bg-orange-900',
 };
 
 /* ── Scroll reveal ── */
@@ -314,42 +326,44 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
          PROGRAMS CAROUSEL
     ═══════════════════════════════════════ -->
     <section class="bg-light dark:bg-dark pb-24">
-        <div class="max-w-3xl mx-auto px-6">
+        <div class="max-w-5xl mx-auto px-6">
 
             <!-- Track -->
-            <div class="overflow-hidden rounded-3xl"
-                 @touchstart.passive="onTouchStart"
-                 @touchend.passive="onTouchEnd">
-                <div class="flex transition-transform duration-500"
-                     style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);"
-                     :style="{ transform: `translateX(-${currentIdx * 100}%)` }">
+            <div ref="carouselRef"
+                 class="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-1"
+                 style="scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;"
+                 @scroll.passive="onCarouselScroll">
 
                     <div v-for="p in programs" :key="p.id"
-                         class="w-full shrink-0 bg-white/80 dark:bg-white/[0.03] border border-dark/8 dark:border-light/8 rounded-3xl overflow-hidden">
+                         class="snap-start shrink-0 w-[88%] md:w-[calc(50%-0.375rem)] bg-white dark:bg-light/4 border border-dark/8 dark:border-light/8 rounded-3xl overflow-hidden">
 
-                        <!-- ── Card Header ── -->
-                        <div class="p-7 pb-5">
-                            <div class="flex items-start justify-between gap-4 mb-5">
-                                <div class="h-13 w-13 rounded-2xl flex items-center justify-center border shrink-0"
+                        <!-- ── Image Header ── -->
+                        <div class="relative h-52 overflow-hidden">
+                            <img v-if="p.img" :src="p.img" :alt="p.title" class="w-full h-full object-cover">
+                            <div v-else class="w-full h-full" :class="variantHeaderFallback[p.color]"></div>
+                            <div class="absolute inset-0 bg-linear-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                            <!-- Icon + badge -->
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <div class="h-9 w-9 rounded-xl flex items-center justify-center border backdrop-blur-sm shrink-0"
                                      :class="variantIconBg[p.color]">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                         class="w-6 h-6" :class="variantIconText[p.color]">
+                                         class="w-4 h-4" :class="variantIconText[p.color]">
                                         <path v-for="d in icons[p.icon]" :key="d" :d="d"/>
                                     </svg>
                                 </div>
-                                <span class="text-xs font-semibold px-3 py-1.5 rounded-full border"
+                                <span class="text-xs font-semibold px-3 py-1.5 rounded-full border backdrop-blur-sm"
                                       :class="variantBadge[p.color]">
                                     {{ p.subtitle }}
                                 </span>
                             </div>
-                            <h3 class="text-dark dark:text-light text-2xl font-bold leading-tight">{{ p.title }}</h3>
+                            <!-- Title -->
+                            <div class="absolute bottom-4 left-5 right-5">
+                                <h3 class="text-white text-xl lg:text-2xl font-bold leading-tight">{{ p.title }}</h3>
+                            </div>
                         </div>
 
-                        <!-- Divider -->
-                        <div class="h-px mx-7 bg-dark/8 dark:bg-light/8"></div>
-
                         <!-- ── Stat Chips ── -->
-                        <div class="px-7 py-5 flex flex-wrap gap-2">
+                        <div class="px-5 py-4 flex flex-wrap gap-2 border-b border-dark/8 dark:border-light/8">
                             <div v-for="stat in p.stats" :key="stat.label"
                                  class="flex items-center gap-2 bg-dark/4 dark:bg-light/4 border border-dark/8 dark:border-light/7 rounded-full px-3.5 py-1.5">
                                 <span class="text-dark/40 dark:text-light/35 text-xs">{{ stat.label }}:</span>
@@ -358,7 +372,7 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
                         </div>
 
                         <!-- ── Highlights ── -->
-                        <div class="px-7 pb-5 space-y-2.5">
+                        <div class="px-5 py-4 space-y-2.5">
                             <div v-for="item in p.highlights" :key="item"
                                  class="flex items-start gap-2.5">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -370,7 +384,7 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
                         </div>
 
                         <!-- ── Expandable Details ── -->
-                        <div class="mx-7 mb-5">
+                        <div class="mx-5 mb-4">
                             <button @click="toggleExpand(p.id)"
                                     class="w-full flex items-center justify-between py-2.5 px-4 rounded-xl border transition-all duration-200 cursor-pointer"
                                     :class="expanded === p.id
@@ -405,38 +419,46 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
                         </div>
 
                         <!-- ── CTA Button ── -->
-                        <div class="px-7 pb-7">
+                        <div class="px-5 pb-5">
                             <template v-if="p.cta.external">
-                                <a :href="p.cta.href" target="_blank"
-                                   class="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-200"
-                                   :class="variantCta[p.color]">
-                                    {{ p.cta.label }}
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
-                                        <path v-for="d in icons.external" :key="d" :d="d"/>
-                                    </svg>
+                                <a :href="p.cta.href" target="_blank" rel="noopener" class="block">
+                                    <SecondaryButton class="w-full! py-4! bg-dark! dark:bg-light! border-dark/20! dark:border-light/20! text-light! dark:text-dark!">
+                                        {{ p.cta.label }}
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                        </svg>
+                                    </SecondaryButton>
                                 </a>
                             </template>
                             <template v-else>
-                                <Link :href="route('contact-us.index')"
-                                      class="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-200 bg-primary hover:bg-primary/90 text-light">
-                                    {{ p.cta.label }}
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
-                                        <path v-for="d in icons.arrow_right" :key="d" :d="d"/>
-                                    </svg>
+                                <Link :href="route('contact-us.index')" class="block">
+                                    <SecondaryButton class="w-full! py-4! bg-dark! dark:bg-light! border-dark/20! dark:border-light/20! text-light! dark:text-dark!">
+                                        {{ p.cta.label }}
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                                        </svg>
+                                    </SecondaryButton>
                                 </Link>
                             </template>
                         </div>
                     </div>
 
+            </div>
+
+            <!-- Progress bar -->
+            <div class="mt-5 h-px bg-dark/8 dark:bg-light/8 rounded-full overflow-hidden">
+                <div class="h-full rounded-full transition-all duration-500"
+                     :class="variantDot[currentColor]"
+                     :style="{ width: `${((currentIdx + 1) / programs.length) * 100}%` }">
                 </div>
             </div>
 
             <!-- Controls -->
-            <div class="mt-8 flex items-center justify-between">
+            <div class="mt-4 flex items-center justify-between">
 
                 <!-- Prev -->
                 <button @click="prev" :disabled="currentIdx === 0"
-                        class="h-10 w-10 rounded-2xl border border-dark/8 dark:border-light/8 flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-25 disabled:cursor-not-allowed hover:border-dark/20 dark:hover:border-light/20 hover:bg-dark/4 dark:hover:bg-light/4">
+                        class="h-10 w-10 rounded-xl border border-dark/8 dark:border-light/8 flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-25 disabled:cursor-not-allowed hover:border-dark/25 dark:hover:border-light/25 hover:bg-dark/4 dark:hover:bg-light/4">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark dark:text-light">
                         <path d="M15 19l-7-7 7-7"/>
                     </svg>
@@ -448,14 +470,14 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
                             @click="goTo(i)"
                             class="rounded-full transition-all duration-300 cursor-pointer"
                             :class="currentIdx === i
-                                ? ['w-6 h-2', variantDot[programs[currentIdx].color]]
+                                ? ['w-6 h-2', variantDot[currentColor]]
                                 : 'w-2 h-2 bg-dark/15 dark:bg-light/15 hover:bg-dark/30 dark:hover:bg-light/30'">
                     </button>
                 </div>
 
                 <!-- Next -->
                 <button @click="next" :disabled="currentIdx === programs.length - 1"
-                        class="h-10 w-10 rounded-2xl border border-dark/8 dark:border-light/8 flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-25 disabled:cursor-not-allowed hover:border-dark/20 dark:hover:border-light/20 hover:bg-dark/4 dark:hover:bg-light/4">
+                        class="h-10 w-10 rounded-xl border border-dark/8 dark:border-light/8 flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-25 disabled:cursor-not-allowed hover:border-dark/25 dark:hover:border-light/25 hover:bg-dark/4 dark:hover:bg-light/4">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark dark:text-light">
                         <path d="M9 5l7 7-7 7"/>
                     </svg>
@@ -465,7 +487,7 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
 
             <!-- Counter -->
             <p class="text-center text-dark/30 dark:text-light/25 text-xs mt-4 uppercase tracking-widest">
-                {{ currentIdx + 1 }} / {{ programs.length }}
+                {{ programs[currentIdx].subtitle }} &mdash; {{ currentIdx + 1 }} / {{ programs.length }}
             </p>
 
         </div>
