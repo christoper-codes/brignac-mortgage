@@ -265,6 +265,7 @@ const submitContact = async () => {
     <Head title="Welcome" />
 
     <GuestNav
+        transparent-on-top
         @scroll-our-services-section="scrollTo(ourServices)"
         @scroll-mortgage-loan-calculator-section="scrollTo(mortgageLoanCalculator)"
         @scroll-testimonials-section="scrollTo(testimonials)"
