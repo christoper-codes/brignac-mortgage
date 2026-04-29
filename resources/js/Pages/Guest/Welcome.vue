@@ -656,35 +656,35 @@ const submitContact = async () => {
 
             <!-- Results -->
             <Transition name="slide-up">
-                <div v-if="showResults" class="mt-5 bg-light rounded-2xl text-dark p-7 lg:p-10">
+                <div v-if="showResults" class="mt-5 bg-light dark:bg-dark/60 border border-transparent dark:border-light/8 rounded-2xl text-dark dark:text-light p-7 lg:p-10">
                     <div class="flex items-center justify-between mb-7">
-                        <h3 class="font-bold text-dark text-lg">Calculation Results</h3>
+                        <h3 class="font-bold text-dark dark:text-light text-lg">Calculation Results</h3>
                         <button @click="resetCalc"
-                                class="flex items-center gap-1 text-xs text-dark/40 hover:text-primary transition-colors cursor-pointer">
+                                class="flex items-center gap-1 text-xs text-dark/40 dark:text-light/40 hover:text-primary transition-colors cursor-pointer">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Reset
                         </button>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                         <div class="bg-primary/10 border border-primary/12 rounded-xl p-4 text-center">
-                            <p class="text-xs text-dark/40 mb-1">Monthly Payment</p>
+                            <p class="text-xs text-dark/40 dark:text-light/40 mb-1">Monthly Payment</p>
                             <p class="text-2xl font-bold text-primary">${{ monthlyPayment }}</p>
                         </div>
-                        <div class="bg-dark/4 rounded-xl p-4 text-center">
-                            <p class="text-xs text-dark/40 mb-1">Loan Term</p>
-                            <p class="text-2xl font-bold">{{ creditTerm }} yrs</p>
+                        <div class="bg-dark/4 dark:bg-light/6 rounded-xl p-4 text-center">
+                            <p class="text-xs text-dark/40 dark:text-light/40 mb-1">Loan Term</p>
+                            <p class="text-2xl font-bold text-dark dark:text-light">{{ creditTerm }} yrs</p>
                         </div>
-                        <div class="bg-dark/4 rounded-xl p-4 text-center">
-                            <p class="text-xs text-dark/40 mb-1">Loan Amount</p>
-                            <p class="text-2xl font-bold">${{ formatPrice(loanNeeded) }}</p>
+                        <div class="bg-dark/4 dark:bg-light/6 rounded-xl p-4 text-center">
+                            <p class="text-xs text-dark/40 dark:text-light/40 mb-1">Loan Amount</p>
+                            <p class="text-2xl font-bold text-dark dark:text-light">${{ formatPrice(loanNeeded) }}</p>
                         </div>
-                        <div class="bg-dark/4 rounded-xl p-4 text-center">
-                            <p class="text-xs text-dark/40 mb-1">Interest Rate</p>
-                            <p class="text-2xl font-bold">{{ interestRate.toFixed(2) }}%</p>
+                        <div class="bg-dark/4 dark:bg-light/6 rounded-xl p-4 text-center">
+                            <p class="text-xs text-dark/40 dark:text-light/40 mb-1">Interest Rate</p>
+                            <p class="text-2xl font-bold text-dark dark:text-light">{{ interestRate.toFixed(2) }}%</p>
                         </div>
                     </div>
-                    <div class="overflow-x-auto rounded-xl border border-dark/6">
+                    <div class="overflow-x-auto rounded-xl border border-dark/6 dark:border-light/8">
                         <table class="w-full text-sm">
-                            <thead class="bg-dark/5 text-dark/50 text-xs uppercase tracking-wider font-semibold">
+                            <thead class="bg-dark/5 dark:bg-light/6 text-dark/50 dark:text-light/50 text-xs uppercase tracking-wider font-semibold">
                                 <tr>
                                     <th class="px-4 py-3 text-left">Month</th>
                                     <th class="px-4 py-3 text-right">Principal</th>
@@ -695,16 +695,16 @@ const submitContact = async () => {
                             </thead>
                             <tbody>
                                 <tr v-for="row in paymentDetails.slice(0, 12)" :key="row.month"
-                                    class="border-t border-dark/4 hover:bg-primary/3 transition-colors">
-                                    <td class="px-4 py-2.5 font-medium">{{ row.month }}</td>
-                                    <td class="px-4 py-2.5 text-right">${{ row.principalPayment }}</td>
-                                    <td class="px-4 py-2.5 text-right">${{ row.interestPayment }}</td>
+                                    class="border-t border-dark/4 dark:border-light/6 hover:bg-primary/3 dark:hover:bg-primary/5 transition-colors">
+                                    <td class="px-4 py-2.5 font-medium text-dark dark:text-light">{{ row.month }}</td>
+                                    <td class="px-4 py-2.5 text-right text-dark dark:text-light">${{ row.principalPayment }}</td>
+                                    <td class="px-4 py-2.5 text-right text-dark dark:text-light">${{ row.interestPayment }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold text-primary">${{ row.monthlyPayment }}</td>
-                                    <td class="px-4 py-2.5 text-right text-dark/40">${{ row.remainingBalance }}</td>
+                                    <td class="px-4 py-2.5 text-right text-dark/40 dark:text-light/40">${{ row.remainingBalance }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p class="text-center text-xs text-dark/30 py-3 border-t border-dark/4">
+                        <p class="text-center text-xs text-dark/30 dark:text-light/30 py-3 border-t border-dark/4 dark:border-light/6">
                             First 12 of {{ paymentDetails.length }} total payments
                         </p>
                     </div>
