@@ -352,19 +352,19 @@ const submitContact = async () => {
     </section>
 
     <!-- ═══════════════════════════════════════
-         OUR SERVICES — sticky scroll (dark)
+         OUR SERVICES — sticky scroll
     ════════════════════════════════════════ -->
-    <section ref="ourServices" class="bg-light flex flex-col lg:flex-row max-w-6xl 2xl:max-w-7xl mx-auto lg:gap-10">
+    <section ref="ourServices" class="bg-light dark:bg-dark flex flex-col lg:flex-row max-w-6xl 2xl:max-w-7xl mx-auto lg:gap-10">
         <!-- Sticky image panel -->
         <div class="w-full lg:w-[40%] lg:sticky lg:top-28 lg:h-screen overflow-hidden order-first">
             <div class="relative h-72 lg:h-[83%] lg:rounded-4xl lg:overflow-hidden">
                 <img src="/storage/img/newimg-1.jpg" alt="Our Services"
                      class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-light/10"></div>
-                <div class="absolute bottom-8 left-8 bg-light border border-dark/8 rounded-2xl p-5 max-w-52">
-                    <p class="text-dark/50 text-xs uppercase tracking-widest mb-1">Wholesale Access</p>
-                    <p class="text-dark font-bold text-xl">50+ Lenders</p>
-                    <p class="text-dark/50 text-sm mt-1 font-medium">Best rates guaranteed</p>
+                <div class="absolute inset-0 bg-light/10 dark:bg-dark/10"></div>
+                <div class="absolute bottom-8 left-8 bg-light dark:bg-dark border border-dark/8 dark:border-light/8 rounded-2xl p-5 max-w-52">
+                    <p class="text-dark/50 dark:text-light/50 text-xs uppercase tracking-widest mb-1">Wholesale Access</p>
+                    <p class="text-dark dark:text-light font-bold text-xl">50+ Lenders</p>
+                    <p class="text-dark/50 dark:text-light/50 text-sm mt-1 font-medium">Best rates guaranteed</p>
                 </div>
             </div>
         </div>
@@ -372,14 +372,14 @@ const submitContact = async () => {
         <!-- Scrolling content -->
         <div class="w-full lg:w-[60%] flex flex-col">
             <!-- Section intro -->
-            <div class="p-8 lg:py-14 border-b border-dark/20 mb-5">
+            <div class="p-8 lg:py-14 border-b border-dark/20 dark:border-light/20 mb-5">
                 <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-primary mb-6">
                     Our Services
                 </div>
-                <h2 class="reveal-title text-3xl lg:text-5xl font-bold text-dark leading-tight mb-4">
+                <h2 class="reveal-title text-3xl lg:text-5xl font-bold text-dark dark:text-light leading-tight mb-4">
                     Loan Products<br>&amp; Programs
                 </h2>
-                <p class="text-dark/40 leading-relaxed">
+                <p class="text-dark/40 dark:text-light/40 leading-relaxed">
                     We shop 50+ wholesale lenders so you get the best rate without the legwork.
                     Every loan, every scenario — we have a solution.
                 </p>
@@ -387,24 +387,24 @@ const submitContact = async () => {
 
             <!-- Service rows -->
             <div v-for="svc in services" :key="svc.label"
-                 class="border-b border-dark/10 group hover:bg-dark/5 transition-colors duration-300 cursor-default rounded-3xl">
+                 class="border-b border-dark/10 dark:border-light/10 group hover:bg-dark/5 dark:hover:bg-light/5 transition-colors duration-300 cursor-default rounded-3xl">
                 <div class="p-8 lg:p-14 flex gap-6 items-start">
-                    <div class="shrink-0 h-12 w-12 rounded-xl border border-dark/8 group-hover:border-primary/35 bg-dark/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
-                        <span class="material-symbols-outlined text-dark/35 group-hover:text-primary transition-colors duration-300" style="font-size:22px">{{ svc.icon }}</span>
+                    <div class="shrink-0 h-12 w-12 rounded-xl border border-dark/8 dark:border-light/8 group-hover:border-primary/35 bg-dark/4 dark:bg-light/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
+                        <span class="material-symbols-outlined text-dark/35 dark:text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:22px">{{ svc.icon }}</span>
                     </div>
                     <div class="flex-1">
                         <p class="text-primary text-xs font-semibold uppercase tracking-widest mb-2">{{ svc.label }}</p>
-                        <h3 class="text-dark text-xl font-bold mb-2">{{ svc.title }}</h3>
-                        <p class="text-dark/40 text-sm leading-relaxed">{{ svc.desc }}</p>
+                        <h3 class="text-dark dark:text-light text-xl font-bold mb-2">{{ svc.title }}</h3>
+                        <p class="text-dark/40 dark:text-light/40 text-sm leading-relaxed">{{ svc.desc }}</p>
                     </div>
-                    <span class="material-symbols-outlined text-dark/10 group-hover:text-primary transition-colors duration-300 self-center shrink-0" style="font-size:24px">arrow_forward</span>
+                    <span class="material-symbols-outlined text-dark/10 dark:text-light/10 group-hover:text-primary transition-colors duration-300 self-center shrink-0" style="font-size:24px">arrow_forward</span>
                 </div>
             </div>
 
             <!-- CTA row -->
             <div class="p-8 lg:p-14">
                 <Link :href="route('programs.index')">
-                    <button class="inline-flex items-center gap-2 border border-dark/15 hover:border-primary text-dark/50 hover:text-primary font-semibold px-7 py-3 rounded-lg transition-all duration-200 cursor-pointer">
+                    <button class="inline-flex items-center gap-2 border border-dark/15 dark:border-light/15 hover:border-primary text-dark/50 dark:text-light/50 hover:text-primary font-semibold px-7 py-3 rounded-lg transition-all duration-200 cursor-pointer">
                         View All Programs
                         <span class="material-symbols-outlined" style="font-size:17px">arrow_outward</span>
                     </button>
@@ -449,24 +449,24 @@ const submitContact = async () => {
     </section>
 
     <!-- ═══════════════════════════════════════
-         HOW IT WORKS — sticky scroll (dark)
+         HOW IT WORKS — sticky scroll
     ════════════════════════════════════════ -->
-    <section class="bg-light flex flex-col lg:flex-row-reverse lg:gap-10 max-w-6xl 2xl:max-w-7xl mx-auto">
+    <section class="bg-light dark:bg-dark flex flex-col lg:flex-row-reverse lg:gap-10 max-w-6xl 2xl:max-w-7xl mx-auto">
         <!-- Sticky info panel (right on desktop) -->
         <div class="w-full lg:w-[40%] lg:sticky lg:top-10 lg:h-screen overflow-hidden flex items-center">
             <div class="relative h-72 lg:h-[83%] w-full lg:rounded-4xl lg:overflow-hidden">
                 <img src="/storage/img/newimg-2.jpg" alt="Our Process"
                      class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-light/10"></div>
+                <div class="absolute inset-0 bg-light/10 dark:bg-dark/10"></div>
                 <div class="absolute inset-0 flex items-center justify-center px-10 lg:px-14">
                     <div>
-                        <div class="inline-flex items-center gap-2 border border-dark/25 bg-dark/5 rounded-lg px-4 py-1.5 text-xs font-semibold text-dark mb-6">
+                        <div class="inline-flex items-center gap-2 border border-dark/25 dark:border-light/25 bg-dark/5 dark:bg-light/5 rounded-lg px-4 py-1.5 text-xs font-semibold text-dark dark:text-light mb-6">
                             Simple Process
                         </div>
-                        <h2 class="text-3xl lg:text-5xl font-bold text-dark leading-tight mb-5">
+                        <h2 class="text-3xl lg:text-5xl font-bold text-dark dark:text-light leading-tight mb-5">
                             How It<br>Works
                         </h2>
-                        <p class="text-dark/40 text-lg leading-relaxed max-w-sm">
+                        <p class="text-dark/40 dark:text-light/40 text-lg leading-relaxed max-w-sm">
                             From your first inquiry to closing day, we keep every step clear, fast, and stress-free.
                         </p>
                         <div class="mt-8">
@@ -485,26 +485,26 @@ const submitContact = async () => {
         <!-- Scrolling steps -->
         <div class="w-full lg:w-[60%] flex flex-col">
             <!-- Intro spacer on desktop -->
-            <div class="hidden lg:block lg:h-24 border-b border-dark/6"></div>
+            <div class="hidden lg:block lg:h-24 border-b border-dark/6 dark:border-light/6"></div>
 
             <div v-for="(step, i) in processSteps" :key="step.step"
-                 class="border-b border-dark/6 group hover:bg-dark/5 transition-colors duration-300 rounded-3xl">
+                 class="border-b border-dark/6 dark:border-light/6 group hover:bg-dark/5 dark:hover:bg-light/5 transition-colors duration-300 rounded-3xl">
                 <div class="p-8 lg:p-14 flex gap-6 items-start">
                     <div class="shrink-0 flex flex-col items-center gap-3">
                         <span class="text-primary font-bold text-xs tracking-widest">{{ step.step }}</span>
-                        <div class="h-11 w-11 rounded-xl border border-dark/8 group-hover:border-primary/35 bg-dark/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
-                            <span class="material-symbols-outlined text-dark/35 group-hover:text-primary transition-colors duration-300" style="font-size:20px">{{ step.icon }}</span>
+                        <div class="h-11 w-11 rounded-xl border border-dark/8 dark:border-light/8 group-hover:border-primary/35 bg-dark/4 dark:bg-light/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
+                            <span class="material-symbols-outlined text-dark/35 dark:text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:20px">{{ step.icon }}</span>
                         </div>
-                        <div v-if="i < processSteps.length - 1" class="w-px h-8 bg-dark/8"></div>
+                        <div v-if="i < processSteps.length - 1" class="w-px h-8 bg-dark/8 dark:bg-light/8"></div>
                     </div>
                     <div class="flex-1 pt-1">
-                        <h3 class="text-dark text-xl font-bold mb-2">{{ step.title }}</h3>
-                        <p class="text-dark/40 text-sm leading-relaxed">{{ step.desc }}</p>
+                        <h3 class="text-dark dark:text-light text-xl font-bold mb-2">{{ step.title }}</h3>
+                        <p class="text-dark/40 dark:text-light/40 text-sm leading-relaxed">{{ step.desc }}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="hidden lg:block lg:h-24 border-b border-dark/6"></div>
+            <div class="hidden lg:block lg:h-24 border-b border-dark/6 dark:border-light/6"></div>
         </div>
     </section>
 
@@ -634,35 +634,12 @@ const submitContact = async () => {
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════
-         VIDEO BANNER — dark
-    ════════════════════════════════════════ -->
-    <section class="relative bg-dark overflow-hidden border-y border-light/6">
-        <div class="h-72 lg:h-80 relative flex items-center justify-center">
-            <img src="/storage/img/header-6.jpg" alt="About Brignac"
-                 class="absolute inset-0 w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-dark/70"></div>
-            <div class="relative z-10 text-center px-6">
-                <p class="text-light/30 text-xs uppercase tracking-widest mb-3">Our Story</p>
-                <h2 class="reveal-title text-3xl lg:text-4xl font-bold text-light mb-7">
-                    Learn About Brignac Mortgage
-                </h2>
-                <button @click="showVideo = true"
-                        class="relative inline-flex items-center justify-center cursor-pointer group">
-                    <span class="animate-ping absolute inline-flex h-14 w-14 rounded-full bg-primary/25"></span>
-                    <span class="relative h-14 w-14 rounded-full bg-primary group-hover:bg-primary/90 flex items-center justify-center shadow-xl shadow-primary/25 transition-colors duration-200">
-                        <svg class="w-5 h-5 fill-dark ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </span>
-                </button>
-            </div>
-        </div>
-    </section>
 
     <!-- ═══════════════════════════════════════
          GOOGLE TESTIMONIALS — dark
     ════════════════════════════════════════ -->
     <section ref="testimonials" class="bg-dark py-24">
-        <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-6xl mx-auto px-6">
             <!-- Header -->
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
                 <div>
