@@ -1,6 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import GuestNav from '@/Components/Navs/GuestNav.vue';
 import Footer from '@/Components/Footer.vue';
 import usePriceFormat from '@/composables/priceFormat';
@@ -134,7 +134,7 @@ const calcDetails = (p, r, y) => {
     });
 };
 const onSubmitCalc = () => {
-    if (!loanNeeded.value || !creditTerm.value) return;
+    if (!canCalculate.value) return;
     loadingCalc.value = true;
     setTimeout(() => {
         monthlyPayment.value = calcMortgage(+loanNeeded.value, interestRate.value, +creditTerm.value);
@@ -148,6 +148,26 @@ const resetCalc = () => {
     interestRate.value  = 6.91; monthlyPayment.value = null;
     paymentDetails.value = []; showResults.value = false;
 };
+
+const canCalculate = computed(() => {
+    const loan = parseFloat(String(loanNeeded.value));
+    const term = parseFloat(String(creditTerm.value));
+    return !isNaN(loan) && loan > 0 && !isNaN(term) && term > 0 && !loadingCalc.value;
+});
+
+const ltv = computed(() => {
+    const prop = parseFloat(String(propertyValue.value));
+    const loan = parseFloat(String(loanNeeded.value));
+    if (!prop || !loan || prop <= 0) return null;
+    return Math.min((loan / prop) * 100, 100).toFixed(1);
+});
+
+const downPayment = computed(() => {
+    const prop = parseFloat(String(propertyValue.value));
+    const loan = parseFloat(String(loanNeeded.value));
+    if (!prop || !loan || prop <= loan) return null;
+    return formatPrice((prop - loan).toFixed(2));
+});
 
 /* ─── Testimonials ────────────────────────────── */
 const activeTestimonial = ref(null);
@@ -243,7 +263,7 @@ const submitContact = async () => {
                     Louisiana's Trusted Wholesale Mortgage Broker
                 </div>
                 <h1 class="reveal-title text-6xl md:text-7xl lg:text-8xl font-semibold leading-none tracking-tight mb-8">
-                    The Smarter Way<br>to Own Your Home
+                    The Smarter Way<br>to Own <span class="text-primary">Your Home</span>
                 </h1>
                 <p class="reveal-title text-lg font-light max-w-lg leading-relaxed mb-12">
                     Expert mortgage guidance for purchases, refinancing, and home equity.
@@ -251,12 +271,12 @@ const submitContact = async () => {
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 items-start">
                     <Link :href="route('contact-us.index')">
-                        <PrimaryButton>
+                        <PrimaryButton class="py-4!">
                             <span>Get Pre-Qualified</span>
                             <span class="material-symbols-outlined w-4">arrow_forward</span>
                         </PrimaryButton>
                     </Link>
-                    <SecondaryButton @click="scrollTo(mortgageLoanCalculator)" class="bg-light/5! border-light/10! text-light!">
+                    <SecondaryButton @click="scrollTo(mortgageLoanCalculator)" class="py-4! bg-light/5! border-light/10! text-light!">
                         <span>Calculate Payment</span>
                     </SecondaryButton>
                 </div>
@@ -533,22 +553,44 @@ const submitContact = async () => {
 
             <!-- Inputs -->
             <div class="bg-light/4 border border-light/7 rounded-2xl p-7 lg:p-10">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-7">
+
+                <!-- Row 1: Property Value + Loan Amount -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                     <div>
                         <label class="calc-label">Property Value ($)</label>
-                        <input v-model="propertyValue" type="number" placeholder="350,000" class="calc-input">
+                        <input v-model="propertyValue" type="number" min="0" placeholder="350000" class="calc-input">
                     </div>
                     <div>
                         <label class="calc-label">Loan Amount ($)</label>
-                        <input v-model="loanNeeded" type="number" placeholder="280,000" class="calc-input">
-                        <p class="text-light/22 text-xs mt-1.5">Min. 5% of property value</p>
+                        <input v-model="loanNeeded" type="number" min="1" placeholder="280000" class="calc-input">
                     </div>
+                </div>
+
+                <!-- Row 2: Loan Term + LTV indicator -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-7">
                     <div>
                         <label class="calc-label">Loan Term</label>
                         <select v-model="creditTerm" class="calc-input">
                             <option value="" disabled>Select term</option>
                             <option v-for="y in plazoOptions" :key="y" :value="y">{{ y }} years</option>
                         </select>
+                    </div>
+                    <div class="flex flex-col justify-center bg-light/3 border border-light/6 rounded-xl px-5 py-3">
+                        <template v-if="ltv">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="calc-label mb-0">Loan-to-Value</span>
+                                <span :class="parseFloat(ltv) > 80 ? 'text-orange-400' : 'text-emerald-400'" class="text-xs font-bold">{{ ltv }}%</span>
+                            </div>
+                            <div class="w-full h-1.5 rounded-full bg-light/10 overflow-hidden">
+                                <div class="h-full rounded-full transition-all duration-500"
+                                     :class="parseFloat(ltv) > 80 ? 'bg-orange-400' : 'bg-emerald-400'"
+                                     :style="{ width: ltv + '%' }"></div>
+                            </div>
+                            <p v-if="downPayment" class="text-light/30 text-xs mt-1.5">Down payment: ${{ downPayment }}</p>
+                        </template>
+                        <template v-else>
+                            <span class="text-light/20 text-xs">Enter property &amp; loan values to see LTV</span>
+                        </template>
                     </div>
                 </div>
 
@@ -569,8 +611,8 @@ const submitContact = async () => {
 
                 <div class="flex justify-center">
                     <button @click="onSubmitCalc"
-                            :disabled="loadingCalc || !loanNeeded || !creditTerm"
-                            class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed text-dark font-bold px-10 py-3.5 rounded-lg transition-all duration-200 cursor-pointer">
+                            :disabled="!canCalculate"
+                            class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-35 disabled:cursor-not-allowed text-dark font-bold px-10 py-3.5 rounded-lg transition-all duration-200 cursor-pointer">
                         <span class="material-symbols-outlined" :class="loadingCalc ? 'animate-spin' : ''" style="font-size:18px">
                             {{ loadingCalc ? 'progress_activity' : 'calculate' }}
                         </span>
