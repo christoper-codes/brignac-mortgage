@@ -56,7 +56,7 @@ const modeLabel = { dark: 'Dark',      light: 'Light' };
     <div class="fixed top-0 left-0 right-0 z-40">
 
         <!-- Main nav -->
-        <nav :class="(scrolled || !props.transparentOnTop) ? 'bg-dark shadow-2xl shadow-dark/50' : 'bg-transparent'"
+        <nav :class="(scrolled || !props.transparentOnTop) ? 'bg-dark shadow-2xl' : 'bg-transparent'"
              class="transition-all duration-300">
             <div class="max-w-6xl mx-auto px-4 lg:px-0 h-16 lg:h-20 flex items-center justify-between">
 
