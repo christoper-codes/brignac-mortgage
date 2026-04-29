@@ -8,37 +8,29 @@ import useCurrentYear from '@/composables/currentYear';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const { currentYear } = useCurrentYear();
-const expanded   = ref(null);
-const currentIdx = ref(0);
-const carouselRef = ref(null);
+const expanded       = ref(null);
+const currentIdx     = ref(0);
+const slideDir       = ref('forward');
+const showImageModal = ref(false);
 
 const toggleExpand = (id) => {
     expanded.value = expanded.value === id ? null : id;
 };
-
-const scrollToCard = (idx) => {
-    const el = carouselRef.value;
-    if (!el) return;
-    const card = Array.from(el.children)[idx];
-    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-};
-
 const goTo = (i) => {
+    slideDir.value   = i > currentIdx.value ? 'forward' : 'back';
     currentIdx.value = i;
     expanded.value   = null;
-    scrollToCard(i);
 };
 const prev = () => { if (currentIdx.value > 0) goTo(currentIdx.value - 1); };
 const next = () => { if (currentIdx.value < programs.value.length - 1) goTo(currentIdx.value + 1); };
 
-const onCarouselScroll = () => {
-    const el = carouselRef.value;
-    if (!el || !el.children[0]) return;
-    const cardW = el.children[0].offsetWidth + 12;
-    currentIdx.value = Math.min(Math.round(el.scrollLeft / cardW), programs.value.length - 1);
+/* Touch swipe */
+let touchStartX = 0;
+const onTouchStart = (e) => { touchStartX = e.touches[0].clientX; };
+const onTouchEnd   = (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 48) diff > 0 ? next() : prev();
 };
-
-const currentColor = computed(() => programs.value[currentIdx.value]?.color ?? 'green');
 
 /* ── SVG icon paths (stroke, viewBox 0 0 24 24) ── */
 const icons = {
@@ -244,35 +236,43 @@ const programs = computed(() => [
 
 /* ── Color variant helpers (full static strings for Tailwind JIT) ── */
 const variantIconBg = {
-    green:  'bg-emerald-500/10 border-emerald-500/25',
-    blue:   'bg-blue-500/10 border-blue-500/25',
-    orange: 'bg-orange-500/10 border-orange-500/25',
+    green:  'bg-primary/10 border-primary/25',
+    blue:   'bg-primary/10 border-primary/25',
+    orange: 'bg-primary/10 border-primary/25',
 };
 const variantIconText = {
-    green:  'text-emerald-500',
-    blue:   'text-blue-400',
-    orange: 'text-orange-400',
+    green:  'text-primary',
+    blue:   'text-primary',
+    orange: 'text-primary',
 };
 const variantBadge = {
-    green:  'bg-emerald-500/8 text-emerald-600 dark:text-emerald-400 border-emerald-500/20',
-    blue:   'bg-blue-500/8 text-blue-600 dark:text-blue-400 border-blue-500/20',
-    orange: 'bg-orange-500/8 text-orange-600 dark:text-orange-400 border-orange-500/20',
+    green:  'bg-primary/8 text-primary dark:text-primary border-primary/20',
+    blue:   'bg-primary/8 text-primary dark:text-primary border-primary/20',
+    orange: 'bg-primary/8 text-primary dark:text-primary border-primary/20',
 };
 const variantDot = {
-    green:  'bg-emerald-500',
-    blue:   'bg-blue-400',
-    orange: 'bg-orange-400',
+    green:  'bg-primary',
+    blue:   'bg-primary',
+    orange: 'bg-primary',
 };
 const variantExpandBtn = {
-    green:  'border-emerald-500/25 bg-emerald-500/5 text-emerald-500',
-    blue:   'border-blue-500/25 bg-blue-500/5 text-blue-400',
-    orange: 'border-orange-500/25 bg-orange-500/5 text-orange-400',
+    green:  'border-primary/25 bg-primary/5 text-primary',
+    blue:   'border-primary/25 bg-primary/5 text-primary',
+    orange: 'border-primary/25 bg-primary/5 text-primary',
+};
+const variantCta = {
+    green:  'bg-primary/10 hover:bg-primary text-primary dark:text-primary hover:text-white border border-primary/25 hover:border-primary',
+    blue:   'bg-primary/10 hover:bg-primary text-primary dark:text-primary hover:text-white border border-primary/25 hover:border-primary',
+    orange: 'bg-primary/10 hover:bg-primary text-primary dark:text-primary hover:text-white border border-primary/25 hover:border-primary',
 };
 const variantHeaderFallback = {
-    green:  'bg-emerald-900',
-    blue:   'bg-blue-900',
-    orange: 'bg-orange-900',
+    green:  'bg-primary',
+    blue:   'bg-primary',
+    orange: 'bg-primary',
 };
+
+/* ── Safe current program accessor ── */
+const currentProgram = computed(() => programs.value[currentIdx.value] ?? programs.value[0]);
 
 /* ── Scroll reveal ── */
 let revealObserver = null;
@@ -294,7 +294,7 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
     <!-- ══════════════════════════════════════
          HERO HEADER
     ═══════════════════════════════════════ -->
-    <section class="bg-light dark:bg-dark pt-36 pb-20">
+    <section class="bg-light dark:bg-dark py-20">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <!-- Pill badge -->
             <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs font-semibold text-primary mb-7 reveal-item">
@@ -326,177 +326,205 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
          PROGRAMS CAROUSEL
     ═══════════════════════════════════════ -->
     <section class="bg-light dark:bg-dark pb-24">
-        <div class="max-w-5xl mx-auto px-6">
+        <div class="max-w-3xl mx-auto px-6">
 
-            <!-- Track -->
-            <div ref="carouselRef"
-                 class="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-1"
-                 style="scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;"
-                 @scroll.passive="onCarouselScroll">
+            <!-- ── Tab icon strip ── -->
+            <div class="flex items-stretch bg-dark/4 dark:bg-light/4 border border-dark/8 dark:border-light/8 rounded-2xl p-1 mb-8 gap-0.5">
+                <button v-for="(p, i) in programs" :key="p.id"
+                        @click="goTo(i)"
+                        class="flex-1 flex flex-col items-center justify-center gap-1.5 py-2.5 px-1 rounded-xl transition-all duration-250 cursor-pointer relative"
+                        :class="currentIdx === i
+                            ? 'bg-white dark:bg-dark/80 shadow-sm'
+                            : 'hover:bg-dark/4 dark:hover:bg-light/4'">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                         class="w-4 h-4 transition-colors duration-200"
+                         :class="currentIdx === i ? variantIconText[p.color] : 'text-dark/25 dark:text-light/20'">
+                        <path v-for="d in icons[p.icon]" :key="d" :d="d"/>
+                    </svg>
+                    <span class="text-[9px] font-bold uppercase tracking-wide leading-none hidden sm:block transition-colors duration-200"
+                          :class="currentIdx === i ? 'text-dark dark:text-light' : 'text-dark/25 dark:text-light/20'">
+                        {{ p.title.split(' ')[0] }}
+                    </span>
+                </button>
+            </div>
 
-                    <div v-for="p in programs" :key="p.id"
-                         class="snap-start shrink-0 w-[88%] md:w-[calc(50%-0.375rem)] bg-white dark:bg-light/4 border border-dark/8 dark:border-light/8 rounded-3xl overflow-hidden">
+            <!-- ── Card (keyed, directional transition) ── -->
+            <Transition :name="slideDir === 'forward' ? 'slide-fwd' : 'slide-back'" mode="out-in">
+                <div :key="currentIdx"
+                     class="bg-white/90 dark:bg-white/[0.04] border border-dark/8 dark:border-light/8 rounded-3xl overflow-hidden"
+                     @touchstart.passive="onTouchStart"
+                     @touchend.passive="onTouchEnd">
 
-                        <!-- ── Image Header ── -->
-                        <div class="relative h-52 overflow-hidden">
-                            <img v-if="p.img" :src="p.img" :alt="p.title" class="w-full h-full object-cover">
-                            <div v-else class="w-full h-full" :class="variantHeaderFallback[p.color]"></div>
-                            <div class="absolute inset-0 bg-linear-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                    <!-- Header -->
+                    <div class="p-7 pb-5">
+                        <div class="flex items-start justify-between gap-4 mb-5">
                             <!-- Icon + badge -->
-                            <div class="absolute top-4 left-4 flex items-center gap-2">
-                                <div class="h-9 w-9 rounded-xl flex items-center justify-center border backdrop-blur-sm shrink-0"
-                                     :class="variantIconBg[p.color]">
+                            <div class="flex items-center gap-3">
+                                <div class="h-10 w-10 rounded-xl flex items-center justify-center border shrink-0"
+                                     :class="variantIconBg[currentProgram.color]">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                         class="w-4 h-4" :class="variantIconText[p.color]">
-                                        <path v-for="d in icons[p.icon]" :key="d" :d="d"/>
+                                         class="w-5 h-5" :class="variantIconText[currentProgram.color]">
+                                        <path v-for="d in icons[currentProgram.icon]" :key="d" :d="d"/>
                                     </svg>
                                 </div>
-                                <span class="text-xs font-semibold px-3 py-1.5 rounded-full border backdrop-blur-sm"
-                                      :class="variantBadge[p.color]">
-                                    {{ p.subtitle }}
+                                <span class="text-xs font-semibold px-3 py-1.5 rounded-full border"
+                                      :class="variantBadge[currentProgram.color]">
+                                    {{ currentProgram.subtitle }}
                                 </span>
                             </div>
-                            <!-- Title -->
-                            <div class="absolute bottom-4 left-5 right-5">
-                                <h3 class="text-white text-xl lg:text-2xl font-bold leading-tight">{{ p.title }}</h3>
-                            </div>
-                        </div>
-
-                        <!-- ── Stat Chips ── -->
-                        <div class="px-5 py-4 flex flex-wrap gap-2 border-b border-dark/8 dark:border-light/8">
-                            <div v-for="stat in p.stats" :key="stat.label"
-                                 class="flex items-center gap-2 bg-dark/4 dark:bg-light/4 border border-dark/8 dark:border-light/7 rounded-full px-3.5 py-1.5">
-                                <span class="text-dark/40 dark:text-light/35 text-xs">{{ stat.label }}:</span>
-                                <span class="font-bold text-xs text-dark dark:text-light">{{ stat.value }}</span>
-                            </div>
-                        </div>
-
-                        <!-- ── Highlights ── -->
-                        <div class="px-5 py-4 space-y-2.5">
-                            <div v-for="item in p.highlights" :key="item"
-                                 class="flex items-start gap-2.5">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                     class="w-4 h-4 mt-0.5 shrink-0" :class="variantIconText[p.color]">
-                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                <span class="text-dark/65 dark:text-light/55 text-sm leading-snug">{{ item }}</span>
-                            </div>
-                        </div>
-
-                        <!-- ── Expandable Details ── -->
-                        <div class="mx-5 mb-4">
-                            <button @click="toggleExpand(p.id)"
-                                    class="w-full flex items-center justify-between py-2.5 px-4 rounded-xl border transition-all duration-200 cursor-pointer"
-                                    :class="expanded === p.id
-                                        ? variantExpandBtn[p.color]
-                                        : 'border-dark/8 dark:border-light/7 bg-dark/2 dark:bg-light/2 hover:bg-dark/4 dark:hover:bg-light/4 text-dark/45 dark:text-light/35'">
-                                <span class="text-xs font-semibold uppercase tracking-wider">
-                                    {{ expanded === p.id ? 'Hide Details' : 'View All Details' }}
-                                </span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                     class="w-4 h-4 transition-transform duration-300"
-                                     :class="expanded === p.id ? 'rotate-180' : ''">
-                                    <path d="M6 9l6 6 6-6"/>
+                            <!-- Discrete image button -->
+                            <button @click="showImageModal = true"
+                                    class="h-8 w-8 rounded-xl border border-dark/8 dark:border-light/8 flex items-center justify-center text-dark/30 dark:text-light/25 hover:text-dark/60 dark:hover:text-light/50 hover:border-dark/20 dark:hover:border-light/20 transition-all duration-200 cursor-pointer shrink-0">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+                                    <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </button>
-
-                            <Transition name="accordion">
-                                <div v-if="expanded === p.id" class="pt-4 space-y-5">
-                                    <div v-for="section in p.sections" :key="section.title">
-                                        <p class="text-xs font-bold uppercase tracking-widest mb-3" :class="variantIconText[p.color]">
-                                            {{ section.title }}
-                                        </p>
-                                        <ul class="grid grid-cols-1 gap-1.5">
-                                            <li v-for="item in section.items" :key="item"
-                                                class="flex items-center gap-2.5 text-sm text-dark/65 dark:text-light/50">
-                                                <span class="w-1.5 h-1.5 rounded-full shrink-0" :class="variantDot[p.color]"></span>
-                                                {{ item }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </Transition>
                         </div>
+                        <h3 class="text-dark dark:text-light text-2xl font-bold leading-tight">
+                            {{ currentProgram.title }}
+                        </h3>
+                    </div>
 
-                        <!-- ── CTA Button ── -->
-                        <div class="px-5 pb-5">
-                            <template v-if="p.cta.external">
-                                <a :href="p.cta.href" target="_blank" rel="noopener" class="block">
-                                    <SecondaryButton class="w-full! py-4! bg-dark! dark:bg-light! border-dark/20! dark:border-light/20! text-light! dark:text-dark!">
-                                        {{ p.cta.label }}
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
-                                            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                        </svg>
-                                    </SecondaryButton>
-                                </a>
-                            </template>
-                            <template v-else>
-                                <Link :href="route('contact-us.index')" class="block">
-                                    <SecondaryButton class="w-full! py-4! bg-dark! dark:bg-light! border-dark/20! dark:border-light/20! text-light! dark:text-dark!">
-                                        {{ p.cta.label }}
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
-                                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                                        </svg>
-                                    </SecondaryButton>
-                                </Link>
-                            </template>
+                    <!-- Divider -->
+                    <div class="h-px mx-7 bg-dark/8 dark:bg-light/8"></div>
+
+                    <!-- Stat chips -->
+                    <div class="px-7 py-5 flex flex-wrap gap-2">
+                        <div v-for="stat in currentProgram.stats" :key="stat.label"
+                             class="flex items-center gap-2 bg-dark/4 dark:bg-light/4 border border-dark/8 dark:border-light/7 rounded-full px-3.5 py-1.5">
+                            <span class="text-dark/40 dark:text-light/35 text-xs">{{ stat.label }}:</span>
+                            <span class="font-bold text-xs text-dark dark:text-light">{{ stat.value }}</span>
                         </div>
                     </div>
 
-            </div>
+                    <!-- Highlights -->
+                    <div class="px-7 pb-5 space-y-2.5">
+                        <div v-for="item in currentProgram.highlights" :key="item"
+                             class="flex items-start gap-2.5">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="w-4 h-4 mt-0.5 shrink-0" :class="variantIconText[currentProgram.color]">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span class="text-dark/65 dark:text-light/55 text-sm leading-snug">{{ item }}</span>
+                        </div>
+                    </div>
 
-            <!-- Progress bar -->
-            <div class="mt-5 h-px bg-dark/8 dark:bg-light/8 rounded-full overflow-hidden">
-                <div class="h-full rounded-full transition-all duration-500"
-                     :class="variantDot[currentColor]"
-                     :style="{ width: `${((currentIdx + 1) / programs.length) * 100}%` }">
+                    <!-- Expandable details -->
+                    <div class="mx-7 mb-5">
+                        <button @click="toggleExpand(currentProgram.id)"
+                                class="w-full flex items-center justify-between py-2.5 px-4 rounded-xl border transition-all duration-200 cursor-pointer"
+                                :class="expanded === currentProgram.id
+                                    ? variantExpandBtn[currentProgram.color]
+                                    : 'border-dark/8 dark:border-light/7 bg-dark/2 dark:bg-light/2 hover:bg-dark/4 dark:hover:bg-light/4 text-dark/45 dark:text-light/35'">
+                            <span class="text-xs font-semibold uppercase tracking-wider">
+                                {{ expanded === currentProgram.id ? 'Hide Details' : 'View All Details' }}
+                            </span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                 class="w-4 h-4 transition-transform duration-300"
+                                 :class="expanded === currentProgram.id ? 'rotate-180' : ''">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </button>
+                        <Transition name="accordion">
+                            <div v-if="expanded === currentProgram.id" class="pt-4 space-y-5">
+                                <div v-for="section in currentProgram.sections" :key="section.title">
+                                    <p class="text-xs font-bold uppercase tracking-widest mb-3"
+                                       :class="variantIconText[currentProgram.color]">
+                                        {{ section.title }}
+                                    </p>
+                                    <ul class="grid grid-cols-1 gap-1.5">
+                                        <li v-for="item in section.items" :key="item"
+                                            class="flex items-center gap-2.5 text-sm text-dark/65 dark:text-light/50">
+                                            <span class="w-1.5 h-1.5 rounded-full shrink-0"
+                                                  :class="variantDot[currentProgram.color]"></span>
+                                            {{ item }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </Transition>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="px-7 pb-7">
+                        <template v-if="currentProgram.cta.external">
+                            <a :href="currentProgram.cta.href" target="_blank"
+                               class="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-200 bg-dark dark:bg-light text-light dark:text-dark hover:bg-dark/90 dark:hover:bg-light/90 border border-dark/20 dark:border-light/20 hover:border-dark/30 dark:hover:border-light/30">
+                                {{ currentProgram.cta.label }}
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+                                    <path v-for="d in icons.external" :key="d" :d="d"/>
+                                </svg>
+                            </a>
+                        </template>
+                        <template v-else>
+                            <Link :href="route('contact-us.index')"
+                                  class="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-200 bg-primary hover:bg-primary/90 text-light">
+                                {{ currentProgram.cta.label }}
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+                                    <path v-for="d in icons.arrow_right" :key="d" :d="d"/>
+                                </svg>
+                            </Link>
+                        </template>
+                    </div>
                 </div>
-            </div>
+            </Transition>
 
             <!-- Controls -->
-            <div class="mt-4 flex items-center justify-between">
-
-                <!-- Prev -->
+            <div class="mt-6 flex items-center justify-between">
                 <button @click="prev" :disabled="currentIdx === 0"
-                        class="h-10 w-10 rounded-xl border border-dark/8 dark:border-light/8 flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-25 disabled:cursor-not-allowed hover:border-dark/25 dark:hover:border-light/25 hover:bg-dark/4 dark:hover:bg-light/4">
+                        class="h-9 w-9 rounded-xl border border-dark/8 dark:border-light/8 flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed hover:bg-dark/4 dark:hover:bg-light/4">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark dark:text-light">
                         <path d="M15 19l-7-7 7-7"/>
                     </svg>
                 </button>
 
-                <!-- Dots -->
-                <div class="flex items-center gap-2">
-                    <button v-for="(p, i) in programs" :key="p.id"
-                            @click="goTo(i)"
-                            class="rounded-full transition-all duration-300 cursor-pointer"
-                            :class="currentIdx === i
-                                ? ['w-6 h-2', variantDot[currentColor]]
-                                : 'w-2 h-2 bg-dark/15 dark:bg-light/15 hover:bg-dark/30 dark:hover:bg-light/30'">
-                    </button>
-                </div>
+                <span class="text-dark/30 dark:text-light/25 text-xs uppercase tracking-widest tabular-nums">
+                    {{ currentIdx + 1 }} / {{ programs.length }}
+                </span>
 
-                <!-- Next -->
                 <button @click="next" :disabled="currentIdx === programs.length - 1"
-                        class="h-10 w-10 rounded-xl border border-dark/8 dark:border-light/8 flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-25 disabled:cursor-not-allowed hover:border-dark/25 dark:hover:border-light/25 hover:bg-dark/4 dark:hover:bg-light/4">
+                        class="h-9 w-9 rounded-xl border border-dark/8 dark:border-light/8 flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed hover:bg-dark/4 dark:hover:bg-light/4">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark dark:text-light">
                         <path d="M9 5l7 7-7 7"/>
                     </svg>
                 </button>
-
             </div>
-
-            <!-- Counter -->
-            <p class="text-center text-dark/30 dark:text-light/25 text-xs mt-4 uppercase tracking-widest">
-                {{ programs[currentIdx].subtitle }} &mdash; {{ currentIdx + 1 }} / {{ programs.length }}
-            </p>
 
         </div>
     </section>
 
     <!-- ══════════════════════════════════════
+         IMAGE MODAL
+    ═══════════════════════════════════════ -->
+    <Transition name="fade">
+        <div v-if="showImageModal"
+             class="fixed inset-0 z-50 flex items-center justify-center p-6 bg-dark/75 backdrop-blur-sm"
+             @click.self="showImageModal = false">
+            <div class="relative w-full max-w-lg rounded-3xl overflow-hidden border border-light/10 shadow-2xl">
+                <img :src="currentProgram.img"
+                     :alt="currentProgram.title"
+                     class="w-full object-cover max-h-[70vh]">
+                <!-- Caption bar -->
+                <div class="absolute bottom-0 inset-x-0 px-6 py-4 bg-dark/60 backdrop-blur-md flex items-center justify-between">
+                    <div>
+                        <p class="text-light text-sm font-semibold">{{ currentProgram.title }}</p>
+                        <p class="text-light/45 text-xs">{{ currentProgram.subtitle }}</p>
+                    </div>
+                    <button @click="showImageModal = false"
+                            class="h-8 w-8 rounded-xl bg-light/10 hover:bg-light/20 border border-light/15 flex items-center justify-center text-light/70 hover:text-light transition-all cursor-pointer">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                            <path d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </Transition>
+
+    <!-- ══════════════════════════════════════
          CTA BANNER
     ═══════════════════════════════════════ -->
-    <section class="bg-light dark:bg-dark pb-24">
+    <section class="bg-light dark:bg-dark pb-40">
         <div class="max-w-5xl mx-auto px-6">
             <div class="reveal-item bg-primary rounded-3xl p-10 lg:p-16 text-center">
                 <div>
@@ -562,4 +590,20 @@ onUnmounted(() => { if (revealObserver) revealObserver.disconnect(); });
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Directional card transitions */
+.slide-fwd-enter-active,
+.slide-fwd-leave-active,
+.slide-back-enter-active,
+.slide-back-leave-active {
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.slide-fwd-enter-from  { opacity: 0; transform: translateX(28px); }
+.slide-fwd-leave-to    { opacity: 0; transform: translateX(-28px); }
+.slide-back-enter-from { opacity: 0; transform: translateX(-28px); }
+.slide-back-leave-to   { opacity: 0; transform: translateX(28px); }
+
+/* Image modal fade */
+.fade-enter-active, .fade-leave-active { transition: opacity 0.2s ease; }
+.fade-enter-from,   .fade-leave-to     { opacity: 0; }
 </style>
