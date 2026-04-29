@@ -406,7 +406,7 @@ const submitContact = async () => {
     <!-- ═══════════════════════════════════════
          OUR SERVICES — sticky scroll
     ════════════════════════════════════════ -->
-    <section ref="ourServices" class="bg-light dark:bg-dark flex flex-col lg:flex-row max-w-6xl 2xl:max-w-7xl mx-auto lg:gap-10">
+    <section ref="ourServices" class="bg-light dark:bg-dark flex flex-col lg:flex-row max-w-6xl 2xl:max-w-7xl mx-auto lg:gap-10 py-20">
         <!-- Sticky image panel -->
         <div class="w-full lg:w-[40%] lg:sticky lg:top-28 lg:h-screen overflow-hidden order-first">
             <div class="relative h-72 lg:h-[83%] lg:rounded-4xl lg:overflow-hidden">
@@ -424,7 +424,7 @@ const submitContact = async () => {
         <!-- Scrolling content -->
         <div class="w-full lg:w-[60%] flex flex-col">
             <!-- Section intro -->
-            <div class="p-8 lg:py-14 border-b border-dark/20 dark:border-light/20 mb-5">
+            <div class="p-8 lg:py-14">
                 <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-primary mb-6">
                     Our Services
                 </div>
@@ -439,7 +439,7 @@ const submitContact = async () => {
 
             <!-- Service rows -->
             <div v-for="svc in services" :key="svc.label"
-                 class="border-b border-dark/10 dark:border-light/10 group hover:bg-dark/5 dark:hover:bg-light/5 transition-colors duration-300 cursor-default rounded-3xl">
+                 class="border-b border-dark/10 dark:border-light/10 group hover:bg-dark/5 dark:hover:bg-light/5 transition-colors duration-300 cursor-default">
                 <div class="p-8 lg:p-14 flex gap-6 items-start">
                     <div class="shrink-0 h-12 w-12 rounded-xl border border-dark/8 dark:border-light/8 group-hover:border-primary/35 bg-dark/4 dark:bg-light/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-dark/35 dark:text-light/35 group-hover:text-primary transition-colors duration-300">
@@ -458,10 +458,10 @@ const submitContact = async () => {
             <!-- CTA row -->
             <div class="p-8 lg:p-14">
                 <Link :href="route('programs.index')">
-                    <button class="inline-flex items-center gap-2 border border-dark/15 dark:border-light/15 hover:border-primary text-dark/50 dark:text-light/50 hover:text-primary font-semibold px-7 py-3 rounded-lg transition-all duration-200 cursor-pointer">
+                    <SecondaryButton class="py-4! bg-dark! dark:bg-light! border-dark/20! dark:border-light/20! text-light! dark:text-dark!">
                         View All Programs
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                    </button>
+                    </SecondaryButton>
                 </Link>
             </div>
         </div>
@@ -646,7 +646,7 @@ const submitContact = async () => {
                 <div class="flex justify-center">
                     <button @click="onSubmitCalc"
                             :disabled="!canCalculate"
-                            class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-35 disabled:cursor-not-allowed text-dark font-bold px-10 py-3.5 rounded-lg transition-all duration-200 cursor-pointer">
+                            class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-35 disabled:cursor-not-allowed text-light font-bold px-10 py-3.5 rounded-full transition-all duration-200 cursor-pointer">
                         <svg v-if="loadingCalc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 animate-spin"><path d="M12 3C7.03 3 3 7.03 3 12"/></svg>
                         <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M9 7H7a2 2 0 00-2 2v9a2 2 0 002 2h10a2 2 0 002-2V9a2 2 0 00-2-2h-2M9 7V5a2 2 0 014 0v2M9 7h6"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>
                         {{ loadingCalc ? 'Calculating…' : 'Calculate Payment' }}
@@ -656,35 +656,35 @@ const submitContact = async () => {
 
             <!-- Results -->
             <Transition name="slide-up">
-                <div v-if="showResults" class="mt-5 bg-light dark:bg-dark/60 border border-transparent dark:border-light/8 rounded-2xl text-dark dark:text-light p-7 lg:p-10">
+                <div v-if="showResults" class="mt-5 bg-light/4 border border-light/8 rounded-2xl text-light p-7 lg:p-10">
                     <div class="flex items-center justify-between mb-7">
-                        <h3 class="font-bold text-dark dark:text-light text-lg">Calculation Results</h3>
+                        <h3 class="font-bold text-light text-lg">Calculation Results</h3>
                         <button @click="resetCalc"
-                                class="flex items-center gap-1 text-xs text-dark/40 dark:text-light/40 hover:text-primary transition-colors cursor-pointer">
+                                class="flex items-center gap-1 text-xs text-light/40 hover:text-primary transition-colors cursor-pointer">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Reset
                         </button>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                         <div class="bg-primary/10 border border-primary/12 rounded-xl p-4 text-center">
-                            <p class="text-xs text-dark/40 dark:text-light/40 mb-1">Monthly Payment</p>
+                            <p class="text-xs text-light/40 mb-1">Monthly Payment</p>
                             <p class="text-2xl font-bold text-primary">${{ monthlyPayment }}</p>
                         </div>
                         <div class="bg-dark/4 dark:bg-light/6 rounded-xl p-4 text-center">
-                            <p class="text-xs text-dark/40 dark:text-light/40 mb-1">Loan Term</p>
-                            <p class="text-2xl font-bold text-dark dark:text-light">{{ creditTerm }} yrs</p>
+                            <p class="text-xs text-light/40 mb-1">Loan Term</p>
+                            <p class="text-2xl font-bold text-light">{{ creditTerm }} yrs</p>
                         </div>
                         <div class="bg-dark/4 dark:bg-light/6 rounded-xl p-4 text-center">
-                            <p class="text-xs text-dark/40 dark:text-light/40 mb-1">Loan Amount</p>
-                            <p class="text-2xl font-bold text-dark dark:text-light">${{ formatPrice(loanNeeded) }}</p>
+                            <p class="text-xs text-light/40 mb-1">Loan Amount</p>
+                            <p class="text-2xl font-bold text-light">${{ formatPrice(loanNeeded) }}</p>
                         </div>
                         <div class="bg-dark/4 dark:bg-light/6 rounded-xl p-4 text-center">
-                            <p class="text-xs text-dark/40 dark:text-light/40 mb-1">Interest Rate</p>
-                            <p class="text-2xl font-bold text-dark dark:text-light">{{ interestRate.toFixed(2) }}%</p>
+                            <p class="text-xs text-light/40 mb-1">Interest Rate</p>
+                            <p class="text-2xl font-bold text-light">{{ interestRate.toFixed(2) }}%</p>
                         </div>
                     </div>
-                    <div class="overflow-x-auto rounded-xl border border-dark/6 dark:border-light/8">
+                    <div class="overflow-x-auto rounded-xl border border-light/8">
                         <table class="w-full text-sm">
-                            <thead class="bg-dark/5 dark:bg-light/6 text-dark/50 dark:text-light/50 text-xs uppercase tracking-wider font-semibold">
+                            <thead class="bg-light/6 text-light/50 text-xs uppercase tracking-wider font-semibold">
                                 <tr>
                                     <th class="px-4 py-3 text-left">Month</th>
                                     <th class="px-4 py-3 text-right">Principal</th>
@@ -695,16 +695,16 @@ const submitContact = async () => {
                             </thead>
                             <tbody>
                                 <tr v-for="row in paymentDetails.slice(0, 12)" :key="row.month"
-                                    class="border-t border-dark/4 dark:border-light/6 hover:bg-primary/3 dark:hover:bg-primary/5 transition-colors">
-                                    <td class="px-4 py-2.5 font-medium text-dark dark:text-light">{{ row.month }}</td>
-                                    <td class="px-4 py-2.5 text-right text-dark dark:text-light">${{ row.principalPayment }}</td>
-                                    <td class="px-4 py-2.5 text-right text-dark dark:text-light">${{ row.interestPayment }}</td>
+                                    class="border-t border-light/8 hover:bg-primary/3 transition-colors">
+                                    <td class="px-4 py-2.5 font-medium text-light">{{ row.month }}</td>
+                                    <td class="px-4 py-2.5 text-right text-light">${{ row.principalPayment }}</td>
+                                    <td class="px-4 py-2.5 text-right text-light">${{ row.interestPayment }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold text-primary">${{ row.monthlyPayment }}</td>
-                                    <td class="px-4 py-2.5 text-right text-dark/40 dark:text-light/40">${{ row.remainingBalance }}</td>
+                                    <td class="px-4 py-2.5 text-right text-light/40">${{ row.remainingBalance }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p class="text-center text-xs text-dark/30 dark:text-light/30 py-3 border-t border-dark/4 dark:border-light/6">
+                        <p class="text-center text-xs text-light/30 py-3 border-t border-light/6">
                             First 12 of {{ paymentDetails.length }} total payments
                         </p>
                     </div>
