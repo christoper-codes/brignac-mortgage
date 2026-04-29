@@ -212,6 +212,34 @@ const processSteps = [
     { step: '07', icon: 'groups',        title: 'Family-Owned & Operated', desc: 'As a local family business, we treat you like one of our own — with honesty, integrity, and a commitment to your best interests.' },
 ];
 
+/* ─── Icon map (SVG stroke paths, viewBox 0 0 24 24) ── */
+const iconMap = {
+    arrow_forward:              ['M5 12h14', 'M12 5l7 7-7 7'],
+    keyboard_arrow_down:        ['M6 9l6 6 6-6'],
+    arrow_outward:              ['M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'],
+    refresh:                    ['M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15'],
+    calculate:                  ['M9 7H7a2 2 0 00-2 2v9a2 2 0 002 2h10a2 2 0 002-2V9a2 2 0 00-2-2h-2M9 7V5a2 2 0 014 0v2M9 7h6', 'M9 12h6', 'M9 16h4'],
+    send:                       ['M22 2L11 13', 'M22 2L15 22 11 13 2 9l20-7z'],
+    phone:                      ['M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'],
+    mail:                       ['M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
+    location_on:                ['M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z', 'M15 11a3 3 0 11-6 0 3 3 0 016 0z'],
+    check_circle:               ['M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'],
+    real_estate_agent:          ['M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z', 'M9 22V12h6v10'],
+    support_agent:              ['M3 18v-6a9 9 0 0118 0v6', 'M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3z', 'M3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z'],
+    location_away:              ['M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'],
+    badge:                      ['M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z'],
+    account_balance:            ['M3 21h18', 'M3 7l9-4 9 4', 'M4 10h16v11H4z', 'M9 10v11M15 10v11'],
+    handshake:                  ['M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'],
+    contact_page:               ['M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'],
+    manage_search:              ['M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'],
+    celebration:                ['M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'],
+    star:                       ['M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'],
+    groups:                     ['M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
+    nest_clock_farsight_analog: ['M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
+    productivity:               ['M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'],
+    card_travel:                ['M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
+};
+
 /* ─── Contact form ──────────────────────────────── */
 const contactForm    = ref({ name: '', email: '', phone: '', loan_purpose: '', message: '', opt_in_sms: false });
 const contactLoading = ref(false);
@@ -273,7 +301,7 @@ const submitContact = async () => {
                     <Link :href="route('contact-us.index')">
                         <PrimaryButton class="py-4!">
                             <span>Get Pre-Qualified</span>
-                            <span class="material-symbols-outlined w-4">arrow_forward</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
                         </PrimaryButton>
                     </Link>
                     <SecondaryButton @click="scrollTo(mortgageLoanCalculator)" class="py-4! bg-light/5! border-light/10! text-light!">
@@ -292,7 +320,7 @@ const submitContact = async () => {
         <!-- Scroll indicator -->
         <div class="z-20 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce text-light">
             <span class="text-xs tracking-widest uppercase" style="font-size:9px">Scroll</span>
-            <span class="material-symbols-outlined" style="font-size:18px">keyboard_arrow_down</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M6 9l6 6 6-6"/></svg>
         </div>
     </section>
 
@@ -414,14 +442,16 @@ const submitContact = async () => {
                  class="border-b border-dark/10 dark:border-light/10 group hover:bg-dark/5 dark:hover:bg-light/5 transition-colors duration-300 cursor-default rounded-3xl">
                 <div class="p-8 lg:p-14 flex gap-6 items-start">
                     <div class="shrink-0 h-12 w-12 rounded-xl border border-dark/8 dark:border-light/8 group-hover:border-primary/35 bg-dark/4 dark:bg-light/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
-                        <span class="material-symbols-outlined text-dark/35 dark:text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:22px">{{ svc.icon }}</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-dark/35 dark:text-light/35 group-hover:text-primary transition-colors duration-300">
+                            <path v-for="d in iconMap[svc.icon]" :key="d" :d="d"/>
+                        </svg>
                     </div>
                     <div class="flex-1">
                         <p class="text-primary text-xs font-semibold uppercase tracking-widest mb-2">{{ svc.label }}</p>
                         <h3 class="text-dark dark:text-light text-xl font-bold mb-2">{{ svc.title }}</h3>
                         <p class="text-dark/40 dark:text-light/40 text-sm leading-relaxed">{{ svc.desc }}</p>
                     </div>
-                    <span class="material-symbols-outlined text-dark/10 dark:text-light/10 group-hover:text-primary transition-colors duration-300 self-center shrink-0" style="font-size:24px">arrow_forward</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-dark/10 dark:text-light/10 group-hover:text-primary transition-colors duration-300 self-center shrink-0"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
                 </div>
             </div>
 
@@ -430,7 +460,7 @@ const submitContact = async () => {
                 <Link :href="route('programs.index')">
                     <button class="inline-flex items-center gap-2 border border-dark/15 dark:border-light/15 hover:border-primary text-dark/50 dark:text-light/50 hover:text-primary font-semibold px-7 py-3 rounded-lg transition-all duration-200 cursor-pointer">
                         View All Programs
-                        <span class="material-symbols-outlined" style="font-size:17px">arrow_outward</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                     </button>
                 </Link>
             </div>
@@ -463,7 +493,9 @@ const submitContact = async () => {
                 ]" :key="card.title"
                      class="group bg-light/4 hover:bg-light/7 border border-light/6 hover:border-primary/20 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-dark/5">
                     <div class="h-11 w-11 rounded-xl border border-light/8 group-hover:border-primary/25 bg-light/4 group-hover:bg-primary/8 flex items-center justify-center mb-5 transition-all duration-300">
-                        <span class="material-symbols-outlined text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:20px">{{ card.icon }}</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-light/35 group-hover:text-primary transition-colors duration-300">
+                            <path v-for="d in iconMap[card.icon]" :key="d" :d="d"/>
+                        </svg>
                     </div>
                     <h3 class="font-bold text-light mb-2 text-sm">{{ card.title }}</h3>
                     <p class="text-light/40 text-xs leading-relaxed">{{ card.desc }}</p>
@@ -497,7 +529,7 @@ const submitContact = async () => {
                             <Link :href="route('contact-us.index')">
                                 <PrimaryButton>
                                     <span>Start Today</span>
-                                    <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
                                 </PrimaryButton>
                             </Link>
                         </div>
@@ -517,7 +549,9 @@ const submitContact = async () => {
                     <div class="shrink-0 flex flex-col items-center gap-3">
                         <span class="text-primary font-bold text-xs tracking-widest">{{ step.step }}</span>
                         <div class="h-11 w-11 rounded-xl border border-dark/8 dark:border-light/8 group-hover:border-primary/35 bg-dark/4 dark:bg-light/4 group-hover:bg-primary/8 flex items-center justify-center transition-all duration-300">
-                            <span class="material-symbols-outlined text-dark/35 dark:text-light/35 group-hover:text-primary transition-colors duration-300" style="font-size:20px">{{ step.icon }}</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-dark/35 dark:text-light/35 group-hover:text-primary transition-colors duration-300">
+                                <path v-for="d in iconMap[step.icon]" :key="d" :d="d"/>
+                            </svg>
                         </div>
                         <div v-if="i < processSteps.length - 1" class="w-px h-8 bg-dark/8 dark:bg-light/8"></div>
                     </div>
@@ -539,7 +573,7 @@ const submitContact = async () => {
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-12">
                 <div class="inline-flex items-center gap-2 border border-primary/25 bg-primary/8 rounded-lg px-4 py-1.5 text-xs font-semibold text-primary mb-5">
-                    <span class="material-symbols-outlined" style="font-size:13px">calculate</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M9 7H7a2 2 0 00-2 2v9a2 2 0 002 2h10a2 2 0 002-2V9a2 2 0 00-2-2h-2M9 7V5a2 2 0 014 0v2M9 7h6"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>
                     Payment Simulator
                 </div>
                 <h2 class="reveal-title text-4xl lg:text-5xl font-bold text-light mb-3">Mortgage Calculator</h2>
@@ -613,9 +647,8 @@ const submitContact = async () => {
                     <button @click="onSubmitCalc"
                             :disabled="!canCalculate"
                             class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-35 disabled:cursor-not-allowed text-dark font-bold px-10 py-3.5 rounded-lg transition-all duration-200 cursor-pointer">
-                        <span class="material-symbols-outlined" :class="loadingCalc ? 'animate-spin' : ''" style="font-size:18px">
-                            {{ loadingCalc ? 'progress_activity' : 'calculate' }}
-                        </span>
+                        <svg v-if="loadingCalc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 animate-spin"><path d="M12 3C7.03 3 3 7.03 3 12"/></svg>
+                        <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M9 7H7a2 2 0 00-2 2v9a2 2 0 002 2h10a2 2 0 002-2V9a2 2 0 00-2-2h-2M9 7V5a2 2 0 014 0v2M9 7h6"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>
                         {{ loadingCalc ? 'Calculating…' : 'Calculate Payment' }}
                     </button>
                 </div>
@@ -628,7 +661,7 @@ const submitContact = async () => {
                         <h3 class="font-bold text-dark text-lg">Calculation Results</h3>
                         <button @click="resetCalc"
                                 class="flex items-center gap-1 text-xs text-dark/40 hover:text-primary transition-colors cursor-pointer">
-                            <span class="material-symbols-outlined" style="font-size:15px">refresh</span> Reset
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Reset
                         </button>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -714,7 +747,7 @@ const submitContact = async () => {
                     <a href="https://www.google.com/maps/search/Brignac+Mortgage" target="_blank"
                        class="inline-flex items-center gap-2 border border-light/10 hover:border-primary/40 text-light/40 hover:text-primary px-5 py-2.5 rounded-lg text-xs font-semibold transition-all duration-200">
                         All Reviews
-                        <span class="material-symbols-outlined" style="font-size:13px">arrow_outward</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                     </a>
                 </div>
             </div>
@@ -799,7 +832,7 @@ const submitContact = async () => {
                     <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank"
                        class="inline-flex items-center gap-2 border border-light/10 hover:border-primary/40 text-light/40 hover:text-primary px-5 py-2.5 rounded-lg text-xs font-semibold transition-all duration-200">
                         All Reviews
-                        <span class="material-symbols-outlined" style="font-size:13px">arrow_outward</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                     </a>
                 </div>
             </div>
@@ -882,21 +915,21 @@ const submitContact = async () => {
                             <a href="tel:+15045592821"
                                class="flex items-center gap-3 group">
                                 <div class="h-9 w-9 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center shrink-0 group-hover:bg-primary/18 transition-colors duration-200">
-                                    <span class="material-symbols-outlined text-primary" style="font-size:16px">phone</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-primary"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                                 </div>
                                 <span class="text-dark/55 dark:text-light/50 text-sm group-hover:text-primary transition-colors duration-200">+1 504-559-2821</span>
                             </a>
                             <a href="mailto:Shaun@brignacmortgage.com"
                                class="flex items-center gap-3 group">
                                 <div class="h-9 w-9 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center shrink-0 group-hover:bg-primary/18 transition-colors duration-200">
-                                    <span class="material-symbols-outlined text-primary" style="font-size:16px">mail</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-primary"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                                 </div>
                                 <span class="text-dark/55 dark:text-light/50 text-sm group-hover:text-primary transition-colors duration-200">Shaun@brignacmortgage.com</span>
                             </a>
                             <a href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A" target="_blank"
                                class="flex items-start gap-3 group">
                                 <div class="h-9 w-9 rounded-xl bg-primary/8 border border-primary/15 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary/18 transition-colors duration-200">
-                                    <span class="material-symbols-outlined text-primary" style="font-size:16px">location_on</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-primary"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                 </div>
                                 <span class="text-dark/55 dark:text-light/50 text-sm group-hover:text-primary transition-colors duration-200 leading-relaxed">21121 Waterfront East Dr<br>Maurepas, LA 70449</span>
                             </a>
@@ -920,7 +953,7 @@ const submitContact = async () => {
                         <div v-if="contactSuccess"
                              class="h-full flex flex-col items-center justify-center text-center py-16">
                             <div class="h-16 w-16 rounded-2xl bg-secondary/10 border border-secondary/20 flex items-center justify-center mb-5">
-                                <span class="material-symbols-outlined text-secondary" style="font-size:30px">check_circle</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-secondary"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
                             <h3 class="text-dark dark:text-light font-bold text-xl mb-2">Message Sent!</h3>
                             <p class="text-dark/45 dark:text-light/40 text-sm max-w-xs">
@@ -969,9 +1002,8 @@ const submitContact = async () => {
                         <div class="md:col-span-2">
                             <p v-if="contactError" class="text-red-500 dark:text-red-400 text-sm mb-3">{{ contactError }}</p>
                             <PrimaryButton type="submit" :disabled="contactLoading" class="w-full! py-3.5!">
-                                <span class="material-symbols-outlined" :class="contactLoading ? 'animate-spin' : ''" style="font-size:18px">
-                                    {{ contactLoading ? 'progress_activity' : 'send' }}
-                                </span>
+                                <svg v-if="contactLoading" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 animate-spin"><path d="M12 3C7.03 3 3 7.03 3 12"/></svg>
+                                <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
                                 {{ contactLoading ? 'Sending…' : 'Send Message' }}
                             </PrimaryButton>
                         </div>
@@ -998,7 +1030,7 @@ const submitContact = async () => {
                 </Link>
                 <a href="tel:+15045592821">
                     <SecondaryButton class="py-4! bg-light/10! text-light! border-neutral-200!">
-                        <span class="material-symbols-outlined" style="font-size:18px">phone</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                         (504) 559 2821
                     </SecondaryButton>
                 </a>
