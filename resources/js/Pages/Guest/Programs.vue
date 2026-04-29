@@ -53,6 +53,7 @@ const programs = computed(() => [
         subtitle: 'FHA Loan Program',
         icon: 'shield_home',
         color: 'green',
+        img: '/img/programs/program1.webp',
         stats: [
             { label: 'Min. Credit Score', value: '500+' },
             { label: 'Min. Down Payment', value: '3.5%' },
@@ -88,6 +89,7 @@ const programs = computed(() => [
         subtitle: 'Conventional Program',
         icon: 'bank',
         color: 'green',
+        img: '/img/programs/program2.webp',
         stats: [
             { label: 'FICO Score', value: '620+' },
             { label: 'Min. Down Payment', value: '3%' },
@@ -119,6 +121,7 @@ const programs = computed(() => [
         subtitle: 'VA Loan Program',
         icon: 'medal',
         color: 'blue',
+        img: '/img/programs/program3.webp',
         stats: [
             { label: 'Down Payment', value: '0%' },
             { label: 'Funding Fee', value: '2.3% / 3.3%' },
@@ -150,6 +153,7 @@ const programs = computed(() => [
         subtitle: 'Rural Development Program',
         icon: 'leaf',
         color: 'orange',
+        img: '/img/programs/program4.webp',
         stats: [
             { label: 'Down Payment', value: '0%' },
             { label: 'Funding Fee', value: '1%' },
@@ -172,6 +176,7 @@ const programs = computed(() => [
         subtitle: 'Adjustable Rate Mortgage',
         icon: 'trending_up',
         color: 'orange',
+        img: '/img/programs/program5.webp',
         stats: [
             { label: 'Min. Down Payment', value: '3%–5%' },
             { label: 'Buy-down Tiers', value: '3-2-1, 2-1' },
