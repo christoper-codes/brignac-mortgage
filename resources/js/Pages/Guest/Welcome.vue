@@ -167,6 +167,10 @@ const testimonialList = [
 /* ─── Video modal ──────────────────────────────── */
 const showVideo = ref(false);
 
+/* ─── Reviews load more ────────────────────────── */
+const googleShowAll = ref(false);
+const fbShowAll     = ref(false);
+
 /* ─── Loan products (Our Services) ──────────────── */
 const services = [
     { icon: 'real_estate_agent', label: 'Conventional',      title: 'Standard Loans, Competitive Rates',       desc: 'Ideal for borrowers with good credit and a 5%–20% down payment. We shop 50+ wholesale lenders to find your best rate.' },
@@ -673,9 +677,9 @@ const submitContact = async () => {
                 </div>
             </div>
 
-            <!-- Bento grid -->
+            <!-- Bento grid — shows 5 initially -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                <div v-for="(t, i) in testimonialList" :key="t.name"
+                <div v-for="(t, i) in (googleShowAll ? testimonialList : testimonialList.slice(0, 5))" :key="t.name"
                      :class="{ 'lg:col-span-2': i === 0 }"
                      class="group bg-light/4 hover:bg-light/7 border border-light/6 hover:border-primary/20 rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
                      @click="activeTestimonial = t">
@@ -707,13 +711,101 @@ const submitContact = async () => {
                     </div>
                 </div>
             </div>
+
+            <!-- Load More -->
+            <div v-if="!googleShowAll" class="mt-10 flex justify-center">
+                <button @click="googleShowAll = true"
+                        class="inline-flex items-center gap-2 border border-light/12 hover:border-primary/40 text-light/45 hover:text-primary font-semibold px-8 py-3 rounded-lg transition-all duration-200 cursor-pointer">
+                    <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Load More Reviews ({{ testimonialList.length - 5 }} more)
+                </button>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="max-w-6xl mx-auto px-6 mt-20 mb-20">
+            <div class="h-px bg-light/8"></div>
+        </div>
+
+        <!-- Facebook Reviews -->
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Header -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+                <div>
+                    <div class="flex items-center gap-2 mb-5">
+                        <!-- Facebook icon -->
+                        <svg class="w-5 h-5 fill-[#1877F2]" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        <span class="text-light/40 text-xs font-semibold uppercase tracking-widest">Facebook Reviews</span>
+                    </div>
+                    <h2 class="reveal-title text-4xl lg:text-5xl font-bold text-light leading-tight">
+                        Heard From Our<br>Community
+                    </h2>
+                </div>
+                <div class="flex items-center gap-5">
+                    <div>
+                        <div class="flex items-center gap-1 mb-1">
+                            <svg v-for="n in 5" :key="n" class="w-4 h-4 fill-primary" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="text-light text-sm font-bold">5.0 / 5.0</p>
+                        <p class="text-light/30 text-xs">{{ testimonialList.length }} Facebook reviews</p>
+                    </div>
+                    <a href="https://www.facebook.com/BrignacMortgage/reviews" target="_blank"
+                       class="inline-flex items-center gap-2 border border-light/10 hover:border-primary/40 text-light/40 hover:text-primary px-5 py-2.5 rounded-lg text-xs font-semibold transition-all duration-200">
+                        All Reviews
+                        <span class="material-symbols-outlined" style="font-size:13px">arrow_outward</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Grid — shows 5 initially -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div v-for="(t, i) in (fbShowAll ? testimonialList : testimonialList.slice(0, 5))" :key="'fb-' + t.name"
+                    :class="{ 'lg:col-span-2': i === 1 }"
+                     class="group bg-light/4 hover:bg-light/7 border border-light/6 hover:border-[#1877F2]/30 rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+                     @click="activeTestimonial = t">
+                    <!-- Stars + Facebook icon -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex gap-0.5">
+                            <svg v-for="n in t.rating" :key="n" class="w-3 h-3 fill-primary" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <svg class="w-4 h-4 fill-[#1877F2] opacity-60" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </div>
+                    <!-- Quote -->
+                    <p class="text-light/60 text-sm leading-relaxed flex-1">
+                        "{{ t.content.length > 180 ? t.content.slice(0, 180) + '…' : t.content }}"
+                    </p>
+                    <!-- Author -->
+                    <div class="flex items-center gap-3 pt-4 border-t border-light/6">
+                        <img :src="t.avatar" :alt="t.name"
+                             class="h-9 w-9 rounded-lg object-cover shrink-0 border border-light/8">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-light text-sm font-semibold truncate">{{ t.name }}</p>
+                            <p class="text-light/28 text-xs">{{ t.date }} · Facebook</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More -->
+            <div v-if="!fbShowAll" class="mt-10 flex justify-center">
+                <button @click="fbShowAll = true"
+                        class="inline-flex items-center gap-2 border border-light/12 hover:border-[#1877F2]/50 text-light/45 hover:text-[#1877F2] font-semibold px-8 py-3 rounded-lg transition-all duration-200 cursor-pointer">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Load More Reviews ({{ testimonialList.length - 5 }} more)
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- ═══════════════════════════════════════
          CONTACT FORM — light
     ════════════════════════════════════════ -->
-    <section class="bg-white dark:bg-light/4 py-24 border-t border-dark/6 dark:border-light/6">
+    <section class="bg-white dark:bg-light/4 py-32 border-t border-dark/6 dark:border-light/6">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex flex-col lg:flex-row gap-16">
                 <!-- Left info -->
@@ -803,7 +895,7 @@ const submitContact = async () => {
                         </div>
                         <div class="md:col-span-2">
                             <p v-if="contactError" class="text-red-500 text-sm mb-3">{{ contactError }}</p>
-                            <PrimaryButton type="submit" :disabled="contactLoading" class="w-full! py-3.5!">
+                            <PrimaryButton type="submit" :disabled="contactLoading" class="py-4! bg-dark! dark:bg-light! text-light! dark:text-dark!">
                                 <span class="material-symbols-outlined" :class="contactLoading ? 'animate-spin' : ''" style="font-size:18px">
                                     {{ contactLoading ? 'progress_activity' : 'send' }}
                                 </span>
@@ -819,22 +911,23 @@ const submitContact = async () => {
     <!-- ═══════════════════════════════════════
          CTA — solid dark
     ════════════════════════════════════════ -->
-    <section class="bg-primary py-24">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="reveal-title text-4xl lg:text-5xl font-bold text-dark mb-5">Ready to Get Started?</h2>
-            <p class="text-dark/60 text-lg mb-10 max-w-xl mx-auto">
+    <section class="py-32">
+        <div class="max-w-4xl mx-auto px-6 text-center bg-primary py-24 rounded-4xl">
+            <h2 class="reveal-title text-4xl lg:text-5xl font-bold text-light mb-5">Ready to Get Started?</h2>
+            <p class="text-light/80 text-lg mb-10 max-w-xl mx-auto">
                 Talk to our team today and find the mortgage solution that's right for you and your family.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link :href="route('contact-us.index')">
-                    <button class="bg-dark hover:bg-dark/85 text-light font-bold px-10 py-4 rounded-lg transition-all duration-200 hover:scale-105 cursor-pointer">
+                    <PrimaryButton class="bg-light! text-dark! py-4!">
                         Get Pre-Qualified Today
-                    </button>
+                    </PrimaryButton>
                 </Link>
-                <a href="tel:+15045592821"
-                   class="border border-dark/25 hover:border-dark/50 text-dark font-semibold px-10 py-4 rounded-lg transition-all duration-200 hover:bg-dark/8 inline-flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined" style="font-size:18px">phone</span>
-                    +1 504-559-2821
+                <a href="tel:+15045592821">
+                    <SecondaryButton class="py-4! bg-light/10! text-light! border-neutral-200!">
+                        <span class="material-symbols-outlined" style="font-size:18px">phone</span>
+                        (504) 559 2821
+                    </SecondaryButton>
                 </a>
             </div>
         </div>
