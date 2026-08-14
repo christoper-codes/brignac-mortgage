@@ -133,29 +133,6 @@ const rules = {
             </div>
         </div>
 
-        <!-- Cynthia Roman -->
-        <div class="bg-white border border-orange-100 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center p-8 h-full">
-            <div class="size-40 rounded-full border-4 border-orange-400 shadow-lg overflow-hidden flex-shrink-0">
-                <img class="w-full h-full object-cover object-top" src="../../../../public/img/team-cynthia.jpg" alt="Cynthia Roman">
-            </div>
-            <div class="flex flex-col items-center text-center mt-5 w-full">
-                <h2 class="text-xl font-bold text-gray-800">Cynthia Roman</h2>
-                <span class="mt-2 text-xs font-semibold text-orange-500 bg-orange-50 border border-orange-200 py-1 px-4 rounded-full">Loan Officer</span>
-            </div>
-            <div class="mt-6 w-full flex-1">
-                <a href="mailto:Cynthia@brignacmortgage.com" class="mt-3 flex items-center gap-2 text-sm text-gray-600 hover:text-orange-500 transition-colors">
-                    Cynthia@brignacmortgage.com
-                </a>
-                <ul class="mt-4 text-sm text-gray-600 space-y-2">
-                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">NMLS#</span> 1661775</li>
-                    <li class="flex items-center gap-2"><span class="font-semibold text-gray-700">C:</span> 318-319-0499</li>
-                </ul>
-            </div>
-            <div class="mt-6 w-full shrink-0">
-                <v-btn href="https://cynthiaroman.my1003app.com" target="_blank" color="orange" variant="tonal" block class="text-none !rounded-full !border !border-orange-400 !h-12">Apply Now</v-btn>
-            </div>
-        </div>
-
         <!-- Jennifer McMinn-Griffin -->
         <div class="bg-white border border-orange-100 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center p-8 h-full">
             <div class="size-40 rounded-full border-4 border-orange-400 shadow-lg overflow-hidden flex-shrink-0">
