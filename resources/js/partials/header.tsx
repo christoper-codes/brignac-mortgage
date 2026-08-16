@@ -1,8 +1,8 @@
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { KeyRound, Menu, Phone, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { MagneticButton } from '@/components/amicro/magnetic-button';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
@@ -13,12 +13,11 @@ const NAV_LINKS = [
 ];
 
 export function Header() {
-    const [scrolled, setScrolled] = useState(false);
+    const [scrolled, setScrolled] = useState(() => typeof window !== 'undefined' && window.scrollY > 24);
     const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 24);
-        onScroll();
         window.addEventListener('scroll', onScroll, { passive: true });
 
         return () => window.removeEventListener('scroll', onScroll);
@@ -27,6 +26,7 @@ export function Header() {
     return (
         <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4">
             <motion.div
+                initial={false}
                 animate={scrolled ? 'scrolled' : 'top'}
                 variants={{
                     top: { maxWidth: '80rem', marginTop: '0rem', borderRadius: '0rem' },
@@ -68,9 +68,9 @@ export function Header() {
                             <Phone className="size-4" />
                             (504) 559-2821
                         </a>
-                        <Button asChild className="rounded-full">
-                            <Link href="/apply">Get Pre-Qualified</Link>
-                        </Button>
+                        <MagneticButton onClick={() => router.visit('/apply')} className="h-10 px-5 text-sm">
+                            Get Pre-Qualified
+                        </MagneticButton>
                     </div>
 
                     <button
@@ -94,9 +94,9 @@ export function Header() {
                                 {link.label}
                             </Link>
                         ))}
-                        <Button asChild className="mt-3 rounded-full">
-                            <Link href="/apply">Get Pre-Qualified</Link>
-                        </Button>
+                        <MagneticButton onClick={() => router.visit('/apply')} className="mt-3 w-full">
+                            Get Pre-Qualified
+                        </MagneticButton>
                     </div>
                 )}
             </motion.div>
