@@ -5,7 +5,7 @@ import { ZoomIn } from '@/components/amicro/zoom-in';
 
 export function Hero() {
     return (
-        <section className="relative isolate overflow-hidden max-h-[950px] 2xl:max-h-[1000px]">
+        <section className="force-light relative isolate max-h-[950px] overflow-hidden bg-background text-foreground 2xl:max-h-[1000px]">
             <ZoomIn delay={0.15} className="absolute inset-x-0 bottom-0 -z-10 h-[56vw] min-h-80 w-full">
                 <img
                     src="/img/hero.png"

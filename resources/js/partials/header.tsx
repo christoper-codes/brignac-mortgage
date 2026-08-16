@@ -34,7 +34,7 @@ export function Header() {
                 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                    'w-full border transition-colors duration-300',
+                    'force-light w-full border text-foreground transition-colors duration-300',
                     scrolled ? 'border-border bg-background/80 shadow-lg shadow-black/5 backdrop-blur-md' : 'border-transparent bg-transparent',
                 )}
             >

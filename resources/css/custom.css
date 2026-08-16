@@ -21,3 +21,30 @@
     --secondary-foreground: #14170f;
     --border: #262624;
 }
+
+/*
+ * Forces a subtree to render with the light-mode tokens regardless of the .dark class on <html>.
+ * Tailwind's `--color-*` theme variables (generated from these) inherit as already-resolved
+ * values, not live var() references, so they must be re-declared here too, not just the base tokens.
+ */
+.force-light {
+    --background: #ffffff;
+    --foreground: #14170f;
+    --card: #F6F7F9;
+    --card-foreground: #14170f;
+    --primary: #51b003;
+    --primary-foreground: #ffffff;
+    --secondary: #14170f;
+    --secondary-foreground: #ffffff;
+    --border: #e7e9ea;
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-border: var(--border);
+}

@@ -16,7 +16,7 @@ export function StatsMarquee() {
 
     return (
         <section
-            className="relative overflow-hidden bg-background py-7"
+            className="force-light relative overflow-hidden bg-background py-7 text-foreground"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
         >
