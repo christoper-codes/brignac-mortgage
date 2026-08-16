@@ -15,6 +15,13 @@ export default defineConfig({
                 bunny('Instrument Sans', {
                     weights: [400, 500, 600],
                 }),
+                bunny('Bricolage Grotesque', {
+                    weights: [700, 800],
+                }),
+                bunny('Instrument Serif', {
+                    weights: [400],
+                    styles: ['normal', 'italic'],
+                }),
             ],
         }),
         inertia(),

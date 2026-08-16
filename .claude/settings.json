@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs -I{} echo {})",
+      "Bash(curl -s -o /dev/null -w \"Bricolage Grotesque: %{http_code}\\\\n\" \"https://fonts.bunny.net/css?family=bricolage-grotesque:400,500,600,700,800\" --max-time 10)",
+      "Bash(curl -s -o /dev/null -w \"Instrument Serif: %{http_code}\\\\n\" \"https://fonts.bunny.net/css?family=instrument-serif:400,400i\" --max-time 10)",
+      "Bash(npx eslint *)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}
