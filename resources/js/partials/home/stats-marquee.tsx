@@ -16,7 +16,7 @@ export function StatsMarquee() {
 
     return (
         <section
-            className="relative overflow-hidden border-y border-border bg-card py-7"
+            className="relative overflow-hidden bg-background py-7"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
         >
@@ -34,8 +34,8 @@ export function StatsMarquee() {
                 ))}
             </motion.div>
 
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-card to-transparent sm:w-32" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-card to-transparent sm:w-32" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-background via-background/80 to-transparent sm:w-64" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-background via-background/80 to-transparent sm:w-64" />
         </section>
     );
 }
