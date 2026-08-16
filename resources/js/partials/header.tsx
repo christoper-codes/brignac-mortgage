@@ -1,10 +1,9 @@
 import { Link, router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { Menu, Phone, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { MagneticButton } from '@/components/amicro/magnetic-button';
 import { cn } from '@/lib/utils';
-import { ZoomIn } from '@/components/amicro/zoom-in';
 
 const NAV_LINKS = [
     { label: 'Home', href: '/' },
