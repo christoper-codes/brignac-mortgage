@@ -1,9 +1,10 @@
 import { Link, router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { KeyRound, Menu, Phone, X } from 'lucide-react';
+import { Menu, Phone, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { MagneticButton } from '@/components/amicro/magnetic-button';
 import { cn } from '@/lib/utils';
+import { ZoomIn } from '@/components/amicro/zoom-in';
 
 const NAV_LINKS = [
     { label: 'Home', href: '/' },
@@ -40,12 +41,12 @@ export function Header() {
             >
                 <div className="flex items-center justify-between gap-6 px-5 py-3 sm:px-6 lg:px-8">
                     <Link href="/" className="flex items-center gap-2 shrink-0">
-                        <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                            <KeyRound className="size-4.5" />
-                        </span>
-                        <span className="text-lg font-semibold tracking-tight text-foreground">
-                            Brignac <span className="text-primary">Mortgage</span>
-                        </span>
+                        <img
+                            src="/img/darklogo.png"
+                            alt="Brignac Mortgage"
+                            className="w-32"
+                            fetchPriority="high"
+                        />
                     </Link>
 
                     <nav className="hidden items-center gap-8 lg:flex">
