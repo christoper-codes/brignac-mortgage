@@ -62,16 +62,27 @@ export function Header() {
                     </nav>
 
                     <div className="hidden items-center gap-3 lg:flex">
-                        <a
-                            href="tel:+15045592821"
-                            className="flex items-center gap-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+                        <Link
+                            href="/apply"
+                            className="group inline-flex h-11.75 items-center justify-center rounded-[40px] bg-[#080a10] pr-1.5 pl-5 text-base font-medium tracking-tighter text-white shadow-[inset_0_4px_19px_rgba(255,255,255,0.55),0_2px_14px_rgba(129,141,151,0.35)] transition-[transform,box-shadow,filter] duration-200 ease-out hover:shadow-[inset_0_4px_19px_rgba(255,255,255,0.65),0_6px_20px_rgba(129,141,151,0.45)] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:outline-none"
                         >
-                            <Phone className="size-4" />
-                            (504) 559-2821
-                        </a>
-                        <MagneticButton onClick={() => router.visit('/apply')} className="h-10 px-5 text-sm">
                             Get Pre-Qualified
-                        </MagneticButton>
+                            <span className="ml-2 grid size-9 shrink-0 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/15 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                                <svg
+                                    viewBox="0 0 16 16"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.6}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    aria-hidden="true"
+                                    className="size-3.5"
+                                >
+                                    <path d="M5 11 11 5" />
+                                    <path d="M5.5 5H11v5.5" />
+                                </svg>
+                            </span>
+                        </Link>
                     </div>
 
                     <button
