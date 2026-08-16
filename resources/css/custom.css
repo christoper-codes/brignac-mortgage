@@ -1,23 +1,23 @@
 :root {
     --background: #ffffff;
-    --foreground: #F6F7F9;
+    --foreground: #14170f;
     --card: #F6F7F9;
-    --card-foreground: #F6F7F9;
+    --card-foreground: #14170f;
     --primary: #51b003;
-    --primary-foreground: #51b003;
-    --secondary: #51b003;
-    --secondary-foreground: #51b003;
-    --border: #F6F7F9;
+    --primary-foreground: #ffffff;
+    --secondary: #14170f;
+    --secondary-foreground: #ffffff;
+    --border: #e7e9ea;
 }
 
 .dark {
     --background: #141211;
-    --foreground: #131313;
+    --foreground: #F6F7F9;
     --card: #131313;
-    --card-foreground: #131313;
+    --card-foreground: #F6F7F9;
     --primary: #51b003;
-    --primary-foreground: #51b003;
-    --secondary: #51b003;
-    --secondary-foreground: #51b003;
-    --border: #1C1C1C;
+    --primary-foreground: #ffffff;
+    --secondary: #F6F7F9;
+    --secondary-foreground: #14170f;
+    --border: #262624;
 }
