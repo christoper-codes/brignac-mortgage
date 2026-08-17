@@ -182,9 +182,9 @@ export function LoanPrograms() {
                                                 <motion.span
                                                     animate={{ x: [0, 10, 10, 0], y: [0, 6, 6, 0], scale: [1, 1, 0.85, 1] }}
                                                     transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut', times: [0, 0.5, 0.65, 1] }}
-                                                    className="pointer-events-none absolute -right-1 -bottom-1"
+                                                    className="pointer-events-none absolute -right-8 -bottom-8"
                                                 >
-                                                    <MousePointer2 className="h-4 w-4 fill-white text-white drop-shadow-[0_2px_4px_rgba(8,10,16,0.5)]" />
+                                                    <MousePointer2 className="h-5 w-5 fill-white text-white drop-shadow-[0_2px_4px_rgba(8,10,16,0.5)]" />
                                                 </motion.span>
                                             </span>
                                         </div>
@@ -304,8 +304,8 @@ export function LoanPrograms() {
 
                         <div className="relative flex h-full flex-col p-7 sm:p-10 md:p-[45px]">
                             <motion.div
-                                animate={{ y: [0, -10, 0], rotate: [-3, -1.5, -3] }}
-                                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+                                animate={{ y: [0, -24, 0], rotate: [-3, -1.5, -3] }}
+                                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                                 className="pointer-events-none absolute top-[63px] left-[-18px] z-0 flex w-[242px] items-center gap-2.5 rounded-[11px] bg-white/60 p-2.5 backdrop-blur-sm md:top-[172px] md:left-[18px]"
                             >
                                 <span className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-full bg-white text-primary shadow-[0_1px_5px_0_rgba(90,91,107,0.09),inset_2px_7px_2px_0_rgba(255,255,255,0.4)]">
@@ -324,8 +324,8 @@ export function LoanPrograms() {
                             </motion.div>
 
                             <motion.div
-                                animate={{ y: [0, -8, 0], rotate: [1.2, 2.6, 1.2] }}
-                                transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                                animate={{ y: [0, -16, 0], rotate: [1.2, 2.6, 1.2] }}
+                                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
                                 className="pointer-events-none absolute top-[204px] right-[-6px] z-0 flex w-[242px] items-center gap-2.5 rounded-[11px] bg-white/60 p-2.5 backdrop-blur-sm md:top-[194px] md:right-[20px]"
                             >
                                 <span className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-full bg-white text-primary shadow-[0_1px_5px_0_rgba(90,91,107,0.09),inset_2px_7px_2px_0_rgba(255,255,255,0.4)]">
