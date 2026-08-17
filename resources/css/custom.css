@@ -48,3 +48,26 @@
     --color-secondary-foreground: var(--secondary-foreground);
     --color-border: var(--border);
 }
+
+/* Forces a subtree to render with the dark-mode tokens regardless of the .dark class on <html>. */
+.force-dark {
+    --background: #141211;
+    --foreground: #F6F7F9;
+    --card: #131313;
+    --card-foreground: #F6F7F9;
+    --primary: #51b003;
+    --primary-foreground: #ffffff;
+    --secondary: #F6F7F9;
+    --secondary-foreground: #14170f;
+    --border: #262624;
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-border: var(--border);
+}

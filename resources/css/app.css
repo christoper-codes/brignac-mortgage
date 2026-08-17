@@ -18,6 +18,9 @@
     --font-heading: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     --font-elegant: 'Instrument Serif', ui-serif, Georgia, serif;
 
+    --animate-marquee: marquee 32s linear infinite;
+    --animate-marquee-reverse: marquee-reverse 36s linear infinite;
+
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
@@ -131,5 +134,23 @@
     h1,
     h2 {
         @apply font-heading font-extrabold tracking-tighter;
+    }
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes marquee-reverse {
+    from {
+        transform: translateX(-50%);
+    }
+    to {
+        transform: translateX(0);
     }
 }
