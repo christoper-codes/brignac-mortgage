@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, BadgeCheck, MousePointer2, Search, Sparkle } from 'lucide-react';
+import { ArrowUpRight, BadgeCheck, MousePointer2, Search, Sparkle, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 const LOAN_TYPES = ['Conventional', 'FHA', 'VA', 'USDA', 'Jumbo', 'Construction', 'Investment Property', 'Cash-Out Refinance'];
@@ -35,33 +35,89 @@ function TagPill({ label, keyPrefix }: { label: string; keyPrefix: string }) {
     );
 }
 
+const TYPING_CURSOR = <span className="ml-px inline-block h-3.5 w-px translate-y-0.5 animate-pulse bg-white/70 align-middle" />;
+
+const VISITOR_QUESTION = 'What loan programs do you offer?';
+const SHAUN_ANSWER =
+    "We've got a program for just about every path — conventional, FHA, VA, jumbo, and more. Let's find the right fit for you.";
+
+const WORD_DELAY = 0.11;
+const questionWordCount = VISITOR_QUESTION.split(' ').length;
+const answerWordCount = SHAUN_ANSWER.split(' ').length;
+const questionTypeMs = questionWordCount * WORD_DELAY * 1000 + 300;
+const answerTypeMs = answerWordCount * WORD_DELAY * 1000 + 300;
+
+function TypedWords({ text }: { text: string }) {
+    const words = text.split(' ');
+
+    return (
+        <>
+            {words.map((word, index) => (
+                <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.18, delay: index * WORD_DELAY }}
+                    className="inline-block"
+                >
+                    {word}
+                    {index < words.length - 1 ? ' ' : ''}
+                </motion.span>
+            ))}
+        </>
+    );
+}
+
 function ChatTestimonial() {
-    const [showReply, setShowReply] = useState(false);
+    const [stage, setStage] = useState(0);
 
     useEffect(() => {
-        const timer = setTimeout(() => setShowReply(true), 1800);
+        let alive = true;
+        const timers: ReturnType<typeof setTimeout>[] = [];
+        const after = (fn: () => void, ms: number) => {
+            timers.push(setTimeout(() => alive && fn(), ms));
+        };
 
-        return () => clearTimeout(timer);
+        function playCycle() {
+            setStage(0);
+
+            const questionStart = 1000;
+            const shaunTypingStart = questionStart + questionTypeMs + 900;
+            const shaunAnswerStart = shaunTypingStart + 1300;
+            const cycleEnd = shaunAnswerStart + answerTypeMs + 2600;
+
+            after(() => setStage(1), questionStart);
+            after(() => setStage(2), shaunTypingStart);
+            after(() => setStage(3), shaunAnswerStart);
+            after(playCycle, cycleEnd);
+        }
+
+        playCycle();
+
+        return () => {
+            alive = false;
+            timers.forEach(clearTimeout);
+        };
     }, []);
 
     return (
         <div className="relative flex min-h-[260px] flex-col overflow-hidden rounded-[20px] bg-[rgba(243,245,248,0.05)] p-7 sm:p-10 md:h-[280px] md:min-h-0 md:p-[43px]">
             <h3 className="hidden text-[26px] font-medium leading-tight tracking-[-0.04em] text-white md:block">
-                A message from our founder
+                A message from our <span className="text-primary"> founder</span>
             </h3>
 
             <div className="space-y-3 pt-1 md:mt-auto md:pt-6">
                 <div className="flex items-end gap-2">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/10 text-xs font-semibold text-white/70 ring-1 ring-white/10">
-                        ?
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/10 text-white/70 ring-1 ring-white/10">
+                        <User className="h-4 w-4" />
                     </span>
 
                     <div className="rounded-2xl rounded-bl-md bg-white/10 px-4 py-2.5 text-[13px] text-white">
-                        <span className="ml-px inline-block h-3.5 w-px translate-y-0.5 animate-pulse bg-white/70 align-middle" />
+                        {stage >= 1 ? <TypedWords text={VISITOR_QUESTION} /> : TYPING_CURSOR}
                     </div>
                 </div>
 
-                {showReply && (
+                {stage >= 2 && (
                     <motion.div
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -69,20 +125,31 @@ function ChatTestimonial() {
                         className="flex items-end justify-end gap-2"
                     >
                         <div className="max-w-[85%] rounded-2xl rounded-br-md bg-white/[0.09] px-4 py-2.5 text-[13px] leading-snug text-white/85">
-                            <p>
-                                Shaun Brignac, President and CEO, welcomes you to our site. We believe that life is for living and
-                                you should be passionate about what you do. We hold our team to a high standard, and we only hire
-                                the best! We look forward to working with you and your family.
-                            </p>
-                            <p className="mt-2.5 text-[11px] font-medium text-white/50">
-                                Shaun Brignac
-                                <span className="block text-[10px] font-normal text-white/35">President and CEO · Brignac Mortgage</span>
-                            </p>
+                            {stage >= 3 ? (
+                                <>
+                                    <p>
+                                        <TypedWords text={SHAUN_ANSWER} />
+                                    </p>
+                                    <motion.p
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.3, delay: answerWordCount * WORD_DELAY + 0.2 }}
+                                        className="mt-2.5 text-[11px] font-medium text-white/50"
+                                    >
+                                        Shaun Brignac
+                                        <span className="block text-[10px] font-normal text-white/35">President and CEO · Brignac Mortgage</span>
+                                    </motion.p>
+                                </>
+                            ) : (
+                                TYPING_CURSOR
+                            )}
                         </div>
 
-                        <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-[11px] font-semibold text-primary-foreground ring-2 ring-background">
-                            SB
-                        </span>
+                        <img
+                            src="/img/shaun-ceo.jpg"
+                            alt="Shaun Brignac"
+                            className="h-9 w-9 shrink-0 rounded-xl object-cover ring-2 ring-background"
+                        />
                     </motion.div>
                 )}
             </div>
@@ -105,7 +172,7 @@ export function LoanPrograms() {
                 <path d="M0 0H1120V330C853 63 635 0 0 0Z" fill="#ffffff" />
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl">
                     <h2 className="text-3xl text-white sm:text-4xl lg:text-5xl">Loan Products &amp; Programs</h2>
                     <p className="mt-4 text-lg text-white/60">
@@ -180,9 +247,9 @@ export function LoanPrograms() {
                                             <span className="relative inline-flex items-center rounded-[7px] bg-neutral-900 px-2 py-[5px] text-[10px] font-medium leading-[12px] text-white">
                                                 View Offer
                                                 <motion.span
-                                                    animate={{ x: [0, 10, 10, 0], y: [0, 6, 6, 0], scale: [1, 1, 0.85, 1] }}
-                                                    transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut', times: [0, 0.5, 0.65, 1] }}
-                                                    className="pointer-events-none absolute -right-8 -bottom-8"
+                                                    animate={{ x: [0, -30, -30, 0], y: [0, -30, -30, 0], scale: [1, 1, 0.85, 1] }}
+                                                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', times: [0, 0.5, 0.65, 1] }}
+                                                    className="pointer-events-none absolute -right-10 -bottom-10"
                                                 >
                                                     <MousePointer2 className="h-5 w-5 fill-white text-white drop-shadow-[0_2px_4px_rgba(8,10,16,0.5)]" />
                                                 </motion.span>
@@ -338,7 +405,7 @@ export function LoanPrograms() {
                                 </div>
 
                                 <div className="ml-auto shrink-0 text-right leading-tight">
-                                    <p className="text-[13px] font-semibold text-primary">$412,000</p>
+                                    <p className="text-[13px] font-semibold text-neutral-800">$412,000</p>
                                     <p className="text-[11px] text-neutral-500">2 days ago</p>
                                 </div>
                             </motion.div>
