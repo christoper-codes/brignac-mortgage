@@ -87,7 +87,7 @@ return;
         <div className="bg-neutral-100/80 [background-image:radial-gradient(rgba(100,100,100,0.25)_1px,transparent_1px)] [background-size:14px_14px]">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="h-full overflow-hidden bg-white">
-                    <div className="px-4 text-neutral-900 sm:py-52">
+                    <div className="px-4 text-neutral-900 sm:pt-52">
                         <div className="mx-auto max-w-4xl">
                             <div className="flex flex-col items-center gap-4 text-center">
                                 <span className="inline-flex rounded-full bg-neutral-100 px-5 py-1.5 text-xs font-medium tracking-wide text-neutral-600 uppercase">
@@ -216,6 +216,14 @@ return;
                             </form>
                         </div>
                     </div>
+                </div>
+                <div className="relative mx-auto flex w-full items-center justify-center">
+                    <img
+                        src="/img/calculator.png"
+                        alt="lion Brignac Mortgage"
+                        className="h-full w-full"
+                    />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-white to-transparent" />
                 </div>
             </div>
 
