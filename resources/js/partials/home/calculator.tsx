@@ -129,7 +129,7 @@ return;
                                         {errors.property ? (
                                             <span className="mt-1 block text-xs text-red-500">{errors.property}</span>
                                         ) : (
-                                            <span className="mt-1 block text-xs text-neutral-400">Enter the property value to calculate</span>
+                                            <span className="mt-1 block text-xs text-neutral-400"></span>
                                         )}
                                     </label>
 
@@ -149,7 +149,6 @@ return;
                                             <span className="mt-1 block text-xs text-red-500">{errors.loan}</span>
                                         ) : (
                                             <span className="mt-1 block text-xs text-neutral-400">
-                                                The loan cannot be less than 5% of the property value
                                             </span>
                                         )}
                                     </label>
@@ -168,7 +167,7 @@ return;
                                                 ))}
                                             </SelectContent>
                                         </Select>
-                                        <span className="mt-1 block text-xs text-neutral-400">The most common term is 30 years</span>
+                                        <span className="mt-1 block text-xs text-neutral-400"></span>
                                     </label>
                                 </div>
 
