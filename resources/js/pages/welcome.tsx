@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { Footer } from '@/partials/footer';
 import { Header } from '@/partials/header';
+import { Calculator } from '@/partials/home/calculator';
 import { Hero } from '@/partials/home/hero';
 import { LoanPrograms } from '@/partials/home/loan-programs';
 import { StatsMarquee } from '@/partials/home/stats-marquee';
@@ -16,6 +17,7 @@ export default function Welcome() {
                     <Hero />
                     <StatsMarquee />
                     <LoanPrograms />
+                    <Calculator />
                     <Footer />
                 </main>
             </div>
