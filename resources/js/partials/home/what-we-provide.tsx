@@ -145,7 +145,7 @@ export function WhatWeProvide() {
                             <motion.div
                                 whileHover={{ y: -4 }}
                                 transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-                                className="flex h-full flex-col overflow-hidden rounded-[28px] bg-card p-6 pt-10 ring-1 ring-border"
+                                className="flex h-full flex-col overflow-hidden rounded-[28px] bg-card p-6 pt-10"
                             >
                                 <motion.div
                                     animate={{ y: [0, -5, 0] }}
