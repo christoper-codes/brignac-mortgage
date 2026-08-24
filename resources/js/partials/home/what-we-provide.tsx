@@ -105,8 +105,18 @@ function ClosingMockup() {
     );
 }
 
+const CHAT_MESSAGES = [
+    { from: 'client', text: "How's my rate looking?" },
+    { from: 'agent', text: 'Locked at 6.2%! 🎉' },
+] as const;
+
+const TYPING_SHOW_DELAY = 800;
+const POST_MESSAGE_PAUSE = 600;
+const LOOP_END_PAUSE = 2600;
+
 function ChatMockup() {
-    const [stage, setStage] = useState(0);
+    const [visibleCount, setVisibleCount] = useState(0);
+    const [typingIndex, setTypingIndex] = useState<number | null>(null);
 
     useEffect(() => {
         let alive = true;
@@ -116,11 +126,25 @@ function ChatMockup() {
         };
 
         function playCycle() {
-            setStage(0);
-            after(() => setStage(1), 900);
-            after(() => setStage(2), 900 + 1000);
-            after(() => setStage(3), 900 + 1000 + 900);
-            after(playCycle, 900 + 1000 + 900 + 900 + 2400);
+            setVisibleCount(0);
+            setTypingIndex(null);
+
+            let t = 600;
+
+            CHAT_MESSAGES.forEach((message, i) => {
+                after(() => setTypingIndex(i), t);
+                t += TYPING_SHOW_DELAY;
+
+                after(() => {
+                    setTypingIndex(null);
+                    setVisibleCount(i + 1);
+                }, t);
+
+                const typeDuration = message.text.split(' ').length * WORD_DELAY * 1000 + 400;
+                t += typeDuration + POST_MESSAGE_PAUSE;
+            });
+
+            after(playCycle, t + LOOP_END_PAUSE);
         }
 
         playCycle();
@@ -131,39 +155,47 @@ function ChatMockup() {
         };
     }, []);
 
-    return (
-        <div className="w-full max-w-56 p-2">
-            <div className="flex items-end gap-1.5">
-                <span className="grid size-6 shrink-0 place-items-center rounded-full bg-neutral-200 text-[10px] font-semibold text-neutral-500">
-                    S
-                </span>
-                <div className="rounded-2xl rounded-bl-md bg-neutral-100 px-3 py-1.5 text-[11px] text-neutral-700">
-                    {stage >= 1 ? <TypedText text="How's my rate looking?" /> : TYPING_CURSOR}
-                </div>
-            </div>
+    const shownThrough = Math.max(visibleCount, typingIndex !== null ? typingIndex + 1 : 0);
 
-            {stage >= 2 && (
-                <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="mt-2 flex items-end justify-end gap-1.5"
-                >
-                    <div className="rounded-2xl rounded-br-md bg-primary px-3 py-1.5 text-[11px] text-white">
-                        {stage >= 3 ? <TypedText text="Locked at 6.2%! 🎉" /> : TYPING_CURSOR}
-                    </div>
-                    <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary/15 text-[10px] font-semibold text-primary">
-                        SB
-                    </span>
-                </motion.div>
-            )}
+    return (
+        <div className="flex h-20 w-full max-w-56 flex-col justify-end space-y-2 p-2">
+            {CHAT_MESSAGES.slice(0, shownThrough).map((message, i) => {
+                const isAgent = message.from === 'agent';
+                const isShown = i < visibleCount;
+
+                return (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className={`flex items-end gap-1.5 ${isAgent ? 'justify-end' : ''}`}
+                    >
+                        {!isAgent && (
+                            <span className="grid size-6 shrink-0 place-items-center rounded-full bg-neutral-200 text-[10px] font-semibold text-neutral-500">
+                                S
+                            </span>
+                        )}
+                        <div
+                            className={`rounded-2xl px-3 py-1.5 text-[11px] ${isAgent ? 'rounded-br-md bg-primary text-white' : 'rounded-bl-md bg-neutral-100 text-neutral-700'}`}
+                        >
+                            {isShown ? <TypedText text={message.text} /> : TYPING_CURSOR}
+                        </div>
+                        {isAgent && (
+                            <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary/15 text-[10px] font-semibold text-primary">
+                                SB
+                            </span>
+                        )}
+                    </motion.div>
+                );
+            })}
         </div>
     );
 }
 
 function BookingMockup() {
     return (
-        <div className="w-full max-w-56 rounded-2xl bg-white p-4 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.2)] ring-1 ring-black/5">
+        <div className="relative w-full max-w-56 overflow-hidden rounded-2xl bg-white p-4 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.2)] ring-1 ring-black/5">
             <div className="flex items-center gap-1.5">
                 <Calendar className="size-3.5 text-neutral-400" />
                 <p className="text-[11px] font-medium text-neutral-500">Free Consultation</p>
@@ -188,22 +220,33 @@ function BookingMockup() {
                     <MousePointer2 className="h-4 w-4 fill-white text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
                 </motion.span>
             </div>
+
+            <motion.div
+                animate={{ opacity: [0, 0, 1, 1, 0], scale: [0.85, 0.85, 1, 1, 0.85] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', times: [0, 0.68, 0.75, 0.92, 1] }}
+                className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-white"
+            >
+                <span className="grid size-9 place-items-center rounded-full bg-primary/10 text-primary">
+                    <CheckCircle2 className="size-5" />
+                </span>
+                <span className="text-xs font-semibold text-neutral-900">Booked!</span>
+            </motion.div>
         </div>
     );
 }
 
 function MatchMockup() {
     return (
-        <div className="relative w-full max-w-56">
+        <div className="relative z-0 w-full max-w-56">
             <motion.div
-                animate={{ y: [0, -4, 0], rotate: [-7, -9, -7] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute inset-x-3 -top-2 -z-10 h-full rounded-2xl bg-primary/25"
+                animate={{ y: [0, -7, 0], rotate: [-11, -14, -11] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute inset-x-5 top-0 -z-20 h-full rounded-2xl bg-primary/20"
             />
             <motion.div
-                animate={{ y: [0, -3, 0], rotate: [5, 7, 5] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-                className="absolute inset-x-2 -top-1 -z-10 h-full rounded-2xl bg-primary/15"
+                animate={{ y: [0, -5, 0], rotate: [8, 11, 8] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.35 }}
+                className="absolute inset-x-3 top-0.5 -z-10 h-full rounded-2xl bg-primary/40"
             />
 
             <div className="relative rounded-2xl bg-linear-to-br from-primary to-emerald-700 p-4 text-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)]">

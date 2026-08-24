@@ -216,14 +216,14 @@ return;
                         </div>
                     </div>
                 </div>
-                <div className="relative mx-auto flex w-full items-center justify-center">
+                {/* <div className="relative mx-auto flex w-full items-center justify-center">
                     <img
                         src="/img/calculator.png"
                         alt="lion Brignac Mortgage"
                         className="h-full w-full"
                     />
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-white to-transparent" />
-                </div>
+                </div> */}
             </div>
 
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
