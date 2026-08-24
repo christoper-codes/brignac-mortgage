@@ -326,7 +326,7 @@ export function LoanTimeline() {
                                     className="absolute bottom-0 left-0 flex items-center gap-2 text-xs font-medium text-white/50 sm:pl-10"
                                 >
                                     <span className="grid size-8 place-items-center rounded-full bg-white/10">
-                                        <ChevronsDown className="size-4 animate-bounce" />
+                                        <ChevronsDown className="size-4" />
                                     </span>
                                     Scroll Down
                                 </motion.div>
