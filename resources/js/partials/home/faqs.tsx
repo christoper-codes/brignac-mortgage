@@ -25,18 +25,6 @@ const FAQ_ITEMS = [
         question: 'How long does closing take?',
         answer: 'Our streamlined process averages 18 days from application to closing, though timelines can vary based on the loan program and property.',
     },
-    {
-        question: 'Can I lock in my interest rate?',
-        answer: "Yes. Once you're under contract, we can lock your rate for a set period to protect you from market fluctuations while your loan is processed.",
-    },
-    {
-        question: 'Do you work with first-time homebuyers?',
-        answer: 'Absolutely. We offer FHA, conventional, and down payment assistance programs specifically designed to make homeownership more accessible for first-time buyers.',
-    },
-    {
-        question: "What if I don't see the loan program I need?",
-        answer: 'Give us a call. We work with a wide network of wholesale lenders and can often find or structure a solution that fits your specific situation.',
-    },
 ];
 
 export function Faqs() {
