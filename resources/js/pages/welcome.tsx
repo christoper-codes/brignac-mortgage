@@ -2,6 +2,7 @@ import { Head } from '@inertiajs/react';
 import { Footer } from '@/partials/footer';
 import { Header } from '@/partials/header';
 import { Calculator } from '@/partials/home/calculator';
+import { Faqs } from '@/partials/home/faqs';
 // import { GoogleTestimonials } from '@/partials/home/google-testimonials';
 import { Hero } from '@/partials/home/hero';
 import { LoanPrograms } from '@/partials/home/loan-programs';
@@ -24,6 +25,7 @@ export default function Welcome() {
                     <LoanTimeline />
                     <WhatWeProvide />
                     {/* <GoogleTestimonials /> */}
+                    <Faqs />
                     <Footer />
                 </main>
             </div>
