@@ -14,10 +14,23 @@ const NAV_LINKS = [
 
 export function Header() {
     const [scrolled, setScrolled] = useState(() => typeof window !== 'undefined' && window.scrollY > 24);
+    const [inDarkZone, setInDarkZone] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 24);
+        const onScroll = () => {
+            setScrolled(window.scrollY > 24);
+
+            const zones = document.querySelectorAll('[data-header-theme="dark"]');
+            const overDarkZone = Array.from(zones).some((zone) => {
+                const rect = zone.getBoundingClientRect();
+
+                return rect.top <= 0 && rect.bottom >= 0;
+            });
+            setInDarkZone(overDarkZone);
+        };
+
+        onScroll();
         window.addEventListener('scroll', onScroll, { passive: true });
 
         return () => window.removeEventListener('scroll', onScroll);
@@ -34,8 +47,15 @@ export function Header() {
                 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                    'force-light w-full border text-foreground transition-colors duration-300',
-                    scrolled ? 'border-border bg-background/80 shadow-lg shadow-black/5 backdrop-blur-md' : 'border-transparent bg-transparent',
+                    'w-full border transition-colors duration-300',
+                    inDarkZone
+                        ? 'force-dark border-white/10 bg-black/40 text-white shadow-lg shadow-black/20 backdrop-blur-xl'
+                        : cn(
+                              'force-light text-foreground',
+                              scrolled
+                                  ? 'border-border bg-background/80 shadow-lg shadow-black/5 backdrop-blur-md'
+                                  : 'border-transparent bg-transparent',
+                          ),
                 )}
             >
                 <div className="flex items-center justify-between gap-6 px-5 py-3 sm:px-6 lg:px-8">

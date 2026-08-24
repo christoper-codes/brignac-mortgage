@@ -255,7 +255,12 @@ export function LoanTimeline() {
             </div>
 
             <div className="mx-auto mt-16 max-w-384 px-4 sm:px-6 lg:px-8">
-                <div ref={sectionRef} className="relative" style={{ height: `${PROGRAM_GROUPS.length * 60}vh` }}>
+                <div
+                    ref={sectionRef}
+                    data-header-theme="dark"
+                    className="relative"
+                    style={{ height: `${PROGRAM_GROUPS.length * 60}vh` }}
+                >
                     <motion.div
                         style={{ scale: panelScale, borderRadius: panelRadius, transformOrigin: 'center top' }}
                         className="force-dark sticky top-8 h-[calc(100vh-4rem)] overflow-hidden bg-background text-foreground"

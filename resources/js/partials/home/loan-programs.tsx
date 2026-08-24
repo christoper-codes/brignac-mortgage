@@ -162,7 +162,7 @@ export function LoanPrograms() {
     const tags = [...PROGRAM_TAGS, ...PROGRAM_TAGS];
 
     return (
-        <section className="force-dark relative bg-background py-24 text-foreground sm:py-32">
+        <section data-header-theme="dark" className="force-dark relative bg-background py-24 text-foreground sm:py-32">
             <svg
                 aria-hidden="true"
                 viewBox="0 0 1120 330"
