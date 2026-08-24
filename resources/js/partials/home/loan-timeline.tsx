@@ -247,10 +247,8 @@ export function LoanTimeline() {
         <div className="bg-background py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
                 <h2 className="text-3xl text-foreground sm:text-4xl">Loan Products &amp; Programs</h2>
-                <p className="mt-4 text-lg text-foreground/60">
-                    Explore our diverse range of loan products and programs designed to meet your unique financial needs. Whether you're
-                    looking for a residential mortgage, an investment loan, or a commercial financing solution, we have the right options
-                    for you.
+                <p className="mt-4 text-base text-foreground/60">
+                    Explore our diverse range of loan products and programs
                 </p>
             </div>
 

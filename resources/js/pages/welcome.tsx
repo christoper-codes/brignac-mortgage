@@ -20,8 +20,8 @@ export default function Welcome() {
                     <Hero />
                     <StatsMarquee />
                     <LoanPrograms />
-                    <LoanTimeline />
                     <Calculator />
+                    <LoanTimeline />
                     <WhatWeProvide />
                     {/* <GoogleTestimonials /> */}
                     <Footer />
