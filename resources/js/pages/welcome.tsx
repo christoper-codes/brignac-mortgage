@@ -5,6 +5,7 @@ import { Calculator } from '@/partials/home/calculator';
 // import { GoogleTestimonials } from '@/partials/home/google-testimonials';
 import { Hero } from '@/partials/home/hero';
 import { LoanPrograms } from '@/partials/home/loan-programs';
+import { LoanTimeline } from '@/partials/home/loan-timeline';
 import { StatsMarquee } from '@/partials/home/stats-marquee';
 import { WhatWeProvide } from '@/partials/home/what-we-provide';
 
@@ -19,6 +20,7 @@ export default function Welcome() {
                     <Hero />
                     <StatsMarquee />
                     <LoanPrograms />
+                    <LoanTimeline />
                     <Calculator />
                     <WhatWeProvide />
                     {/* <GoogleTestimonials /> */}
