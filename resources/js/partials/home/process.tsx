@@ -35,7 +35,7 @@ function ProcessCard({ step, index }: { step: (typeof STEPS)[number]; index: num
     const Icon = step.icon;
 
     return (
-        <div className="relative flex h-95 w-105 shrink-0 flex-col overflow-hidden rounded-[20px] border border-border bg-card p-8">
+        <div className="relative flex h-95 w-105 shrink-0 flex-col overflow-hidden rounded-[20px] shadow bg-white p-8">
             <div className="flex items-center justify-between">
                 <span className="grid size-12 place-items-center rounded-2xl bg-primary/10 text-primary">
                     <Icon className="size-6" />
@@ -55,7 +55,7 @@ function ProcessCard({ step, index }: { step: (typeof STEPS)[number]; index: num
 }
 
 export function Process() {
-    const sectionRef = useRef<HTMLDivElement>(null);
+    const driverRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
     const [range, setRange] = useState({ start: RIGHT_OFFSET, end: -RIGHT_OFFSET });
@@ -75,21 +75,16 @@ export function Process() {
         return () => window.removeEventListener('resize', measure);
     }, []);
 
-    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });
+    // Pinning the row for a fixed viewport-relative scroll distance (rather than tying progress
+    // to the row's own short natural height) keeps the reveal pace consistent across screen sizes —
+    // on a short laptop viewport the row's own enter/exit window is tiny, which used to burn through
+    // the whole animation before card 1 was even fully visible.
+    const { scrollYProgress } = useScroll({ target: driverRef, offset: ['start start', 'end end'] });
     const rawX = useTransform(scrollYProgress, [0, 1], [range.start, range.end]);
     const x = useSpring(rawX, { stiffness: 300, damping: 40, mass: 0.5 });
 
     return (
-        <section ref={sectionRef} className="force-light relative overflow-hidden bg-background py-20 sm:py-24">
-            <img
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                decoding="async"
-                src="/img/features-glow.svg"
-                className="pointer-events-none absolute top-12.5 left-0 h-126.5 w-full object-cover select-none sm:top-[calc(429px-50vh)] sm:h-screen"
-            />
-
+        <section className="force-light relative bg-background py-20 sm:py-24">
             <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="text-center sm:text-left">
                     <p className="text-sm font-semibold tracking-wide text-primary uppercase">Process</p>
@@ -102,12 +97,25 @@ export function Process() {
                 </div>
             </div>
 
-            <div ref={containerRef} className="relative mx-auto mt-12 max-w-6xl px-4 sm:px-6 lg:px-8">
-                <motion.div ref={trackRef} style={{ x }} className="flex items-stretch gap-4">
-                    {STEPS.map((step, index) => (
-                        <ProcessCard key={step.title} step={step} index={index} />
-                    ))}
-                </motion.div>
+            <div ref={driverRef} className="relative mt-12" style={{ height: '180vh' }}>
+                <div className="sticky top-8 flex h-[calc(100vh-4rem)] items-center overflow-hidden">
+                    <img
+                        alt=""
+                        aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
+                        src="/img/features-glow.svg"
+                        className="pointer-events-none absolute inset-0 h-full w-full object-cover select-none"
+                    />
+
+                    <div ref={containerRef} className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+                        <motion.div ref={trackRef} style={{ x }} className="flex items-stretch gap-4">
+                            {STEPS.map((step, index) => (
+                                <ProcessCard key={step.title} step={step} index={index} />
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
             </div>
         </section>
     );
