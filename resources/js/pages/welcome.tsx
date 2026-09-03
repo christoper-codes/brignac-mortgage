@@ -10,7 +10,7 @@ import { LoanPrograms } from '@/partials/home/loan-programs';
 import { LoanTimeline } from '@/partials/home/loan-timeline';
 import { Process } from '@/partials/home/process';
 import { StatsMarquee } from '@/partials/home/stats-marquee';
-import { WhatWeProvide } from '@/partials/home/what-we-provide';
+// import { WhatWeProvide } from '@/partials/home/what-we-provide';
 
 export default function Welcome() {
     return (
@@ -25,7 +25,7 @@ export default function Welcome() {
                     <LoanPrograms />
                     <Calculator />
                     <LoanTimeline />
-                    <WhatWeProvide />
+                    {/* <WhatWeProvide /> */}
                     {/* <GoogleTestimonials /> */}
                     <Faqs />
                     <Process />

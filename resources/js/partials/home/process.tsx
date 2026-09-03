@@ -6,47 +6,106 @@ const STEPS = [
     {
         icon: BadgeCheck,
         title: 'Apply & Get Pre-Qualified',
-        description: 'Share a few details about your goals and finances — we give you a clear picture of what you can afford, with no impact to your credit.',
+        description: 'Takes just a few minutes online.',
         stat: { label: 'Turnaround', value: '24-48h' },
+        background: 'grid' as const,
     },
     {
         icon: ListChecks,
         title: 'Choose Your Program',
-        description: 'Pick from 14+ loan programs matched to your income, credit, and homeownership goals.',
+        description: 'Matched to your goals and credit.',
         stat: { label: 'Loan Programs', value: '14+' },
+        background: 'gradient' as const,
     },
     {
         icon: Lock,
         title: 'Lock Your Rate',
-        description: "Once you're under contract, we lock your rate to protect you from market fluctuations.",
+        description: 'Protected from market swings.',
         stat: { label: 'Rate Lock', value: 'Up to 60 days' },
     },
     {
         icon: KeyRound,
         title: 'Close With Confidence',
-        description: 'Sign your documents and get the keys — every step tracked and explained along the way.',
+        description: 'Every step tracked and explained.',
         stat: { label: 'Avg. Closing', value: '18 days' },
     },
 ];
 
 const RIGHT_OFFSET = 140;
 
+function CardGradientBackdrop() {
+    return (
+        <svg
+            viewBox="0 0 335 420"
+            preserveAspectRatio="xMidYMid slice"
+            className="pointer-events-none absolute inset-0 h-full w-full"
+        >
+            <defs>
+                <linearGradient id="process-card-gradient" gradientUnits="userSpaceOnUse" x1="337.85" y1="170.758" x2="337.5" y2="0">
+                    <stop offset="0%" stopColor="rgb(246,249,246)" />
+                    <stop offset="100%" stopColor="rgb(219,240,201)" />
+                </linearGradient>
+            </defs>
+            <g transform="matrix(-0.793034, 0.609177, -0.609177, -0.793034, 444.447, 7.608)">
+                <path fill="url(#process-card-gradient)" d="M675,0 C675,0 0,0 0,0 C0,0 0,299 0,299 C0,299 675,299 675,299 C675,299 675,0 675,0z" />
+            </g>
+        </svg>
+    );
+}
+
+// Simulates process-bg-card-1.png's fading grid pattern in the brand green instead of blue.
+function CardGridBackdrop() {
+    const rowOpacities = [1, 0.65, 0.35];
+    const cellWidth = 92;
+    const cellHeight = 36;
+    const gap = 3;
+
+    return (
+        <svg viewBox="0 0 336 480" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 h-full w-full">
+            <defs>
+                <linearGradient id="process-card-grid" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="rgb(81,176,3)" stopOpacity="0.55" />
+                    <stop offset="100%" stopColor="rgb(81,176,3)" stopOpacity="0" />
+                </linearGradient>
+            </defs>
+            {rowOpacities.map((rowOpacity, row) =>
+                [0, 1, 2].map((col) => (
+                    <rect
+                        key={`${row}-${col}`}
+                        x={col * (cellWidth + gap)}
+                        y={row * (cellHeight + gap)}
+                        width={cellWidth}
+                        height={cellHeight}
+                        fill="url(#process-card-grid)"
+                        opacity={rowOpacity}
+                    />
+                )),
+            )}
+        </svg>
+    );
+}
+
 function ProcessCard({ step, index }: { step: (typeof STEPS)[number]; index: number }) {
     const Icon = step.icon;
 
     return (
-        <div className="relative flex h-95 w-105 shrink-0 flex-col overflow-hidden rounded-[20px] shadow bg-white p-8">
-            <div className="flex items-center justify-between">
+        <div className="relative flex h-120 w-84 shrink-0 flex-col overflow-hidden rounded-4xl bg-white p-8 shadow-sm">
+            {step.background === 'grid' && <CardGridBackdrop />}
+            {step.background === 'gradient' && <CardGradientBackdrop />}
+
+            <div className="relative flex items-center justify-between">
                 <span className="grid size-12 place-items-center rounded-2xl bg-primary/10 text-primary">
                     <Icon className="size-6" />
                 </span>
                 <span className="text-xs font-semibold tracking-widest text-foreground/40 uppercase">Step {index + 1}</span>
             </div>
 
-            <h3 className="mt-6 text-xl font-semibold text-foreground">{step.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-foreground/60">{step.description}</p>
+            <div className="relative flex flex-1 flex-col justify-center">
+                <h3 className="text-xl font-semibold text-foreground">{step.title}</h3>
+                <p className="mt-2 text-sm text-foreground/60">{step.description}</p>
+            </div>
 
-            <div className="mt-auto flex items-center justify-between rounded-2xl bg-background p-4 ring-1 ring-border">
+            <div className="relative flex items-center justify-between rounded-2xl bg-background p-4 ring-1 ring-border">
                 <span className="text-xs text-foreground/50">{step.stat.label}</span>
                 <span className="text-sm font-semibold text-foreground">{step.stat.value}</span>
             </div>
