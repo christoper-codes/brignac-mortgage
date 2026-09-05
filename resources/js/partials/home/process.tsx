@@ -8,7 +8,7 @@ const STEPS = [
         title: 'Apply & Get Pre-Qualified',
         description: 'Takes just a few minutes online.',
         stat: { label: 'Turnaround', value: '24-48h' },
-        background: 'grid' as const,
+        background: 'glow' as const,
     },
     {
         icon: ListChecks,
@@ -33,54 +33,91 @@ const STEPS = [
 
 const RIGHT_OFFSET = 140;
 
-function CardGradientBackdrop() {
+// A branching node network fanning out from the bottom-left corner — echoes "choosing a path"
+// among several programs, while staying just as restrained (white first, green accent second).
+function CardNetworkBackdrop() {
+    const nodes = [
+        { x: 14, y: 468, r: 5 },
+        { x: 78, y: 402, r: 4 },
+        { x: 64, y: 452, r: 3.5 },
+        { x: 150, y: 356, r: 4.5 },
+        { x: 136, y: 414, r: 3 },
+        { x: 158, y: 452, r: 3.5 },
+        { x: 224, y: 320, r: 3 },
+    ];
+    const edges: [number, number][] = [
+        [0, 1],
+        [0, 2],
+        [1, 3],
+        [1, 4],
+        [2, 5],
+        [3, 6],
+    ];
+
     return (
-        <svg
-            viewBox="0 0 335 420"
-            preserveAspectRatio="xMidYMid slice"
-            className="pointer-events-none absolute inset-0 h-full w-full"
-        >
+        <svg viewBox="0 0 336 480" className="pointer-events-none absolute inset-0 h-full w-full">
             <defs>
-                <linearGradient id="process-card-gradient" gradientUnits="userSpaceOnUse" x1="337.85" y1="170.758" x2="337.5" y2="0">
-                    <stop offset="0%" stopColor="rgb(246,249,246)" />
-                    <stop offset="100%" stopColor="rgb(219,240,201)" />
-                </linearGradient>
+                <radialGradient id="process-card-network-glow" cx="0%" cy="100%" r="75%">
+                    <stop offset="0%" stopColor="rgb(81,176,3)" stopOpacity="0.14" />
+                    <stop offset="100%" stopColor="rgb(81,176,3)" stopOpacity="0" />
+                </radialGradient>
             </defs>
-            <g transform="matrix(-0.793034, 0.609177, -0.609177, -0.793034, 444.447, 7.608)">
-                <path fill="url(#process-card-gradient)" d="M675,0 C675,0 0,0 0,0 C0,0 0,299 0,299 C0,299 675,299 675,299 C675,299 675,0 675,0z" />
-            </g>
+
+            <rect width="336" height="480" fill="url(#process-card-network-glow)" />
+
+            {edges.map(([from, to]) => (
+                <line
+                    key={`${from}-${to}`}
+                    x1={nodes[from].x}
+                    y1={nodes[from].y}
+                    x2={nodes[to].x}
+                    y2={nodes[to].y}
+                    stroke="rgb(81,176,3)"
+                    strokeOpacity="0.2"
+                />
+            ))}
+
+            {nodes.map((node, index) => (
+                <circle key={index} cx={node.x} cy={node.y} r={node.r} fill="rgb(81,176,3)" fillOpacity="0.4" />
+            ))}
         </svg>
     );
 }
 
-// Simulates process-bg-card-1.png's fading grid pattern in the brand green instead of blue.
-function CardGridBackdrop() {
-    const rowOpacities = [1, 0.65, 0.35];
-    const cellWidth = 92;
-    const cellHeight = 36;
-    const gap = 3;
+// A soft glow layered with concentric rings and a few accent dots radiating from the corner —
+// more detail than a flat wash, while white still reads as the dominant surface.
+function CardGlowBackdrop() {
+    const rings = [50, 85, 120, 155, 190];
+    const dots = [
+        { angle: 100, radius: 70 },
+        { angle: 125, radius: 130 },
+        { angle: 145, radius: 90 },
+        { angle: 160, radius: 165 },
+        { angle: 175, radius: 115 },
+    ];
 
     return (
-        <svg viewBox="0 0 336 480" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 h-full w-full">
+        <svg viewBox="0 0 336 480" className="pointer-events-none absolute inset-0 h-full w-full">
             <defs>
-                <linearGradient id="process-card-grid" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="rgb(81,176,3)" stopOpacity="0.55" />
+                <radialGradient id="process-card-glow" cx="100%" cy="0%" r="75%">
+                    <stop offset="0%" stopColor="rgb(81,176,3)" stopOpacity="0.16" />
                     <stop offset="100%" stopColor="rgb(81,176,3)" stopOpacity="0" />
-                </linearGradient>
+                </radialGradient>
             </defs>
-            {rowOpacities.map((rowOpacity, row) =>
-                [0, 1, 2].map((col) => (
-                    <rect
-                        key={`${row}-${col}`}
-                        x={col * (cellWidth + gap)}
-                        y={row * (cellHeight + gap)}
-                        width={cellWidth}
-                        height={cellHeight}
-                        fill="url(#process-card-grid)"
-                        opacity={rowOpacity}
-                    />
-                )),
-            )}
+
+            <rect width="336" height="480" fill="url(#process-card-glow)" />
+
+            {rings.map((radius) => (
+                <circle key={radius} cx="336" cy="0" r={radius} fill="none" stroke="rgb(81,176,3)" strokeOpacity="0.14" />
+            ))}
+
+            {dots.map(({ angle, radius }) => {
+                const theta = (angle * Math.PI) / 180;
+                const cx = 336 + radius * Math.cos(theta);
+                const cy = radius * Math.sin(theta);
+
+                return <circle key={angle} cx={cx} cy={cy} r="3" fill="rgb(81,176,3)" fillOpacity="0.4" />;
+            })}
         </svg>
     );
 }
@@ -90,8 +127,8 @@ function ProcessCard({ step, index }: { step: (typeof STEPS)[number]; index: num
 
     return (
         <div className="relative flex h-120 w-84 shrink-0 flex-col overflow-hidden rounded-4xl bg-white p-8 shadow-sm">
-            {step.background === 'grid' && <CardGridBackdrop />}
-            {step.background === 'gradient' && <CardGradientBackdrop />}
+            {step.background === 'glow' && <CardGlowBackdrop />}
+            {step.background === 'gradient' && <CardNetworkBackdrop />}
 
             <div className="relative flex items-center justify-between">
                 <span className="grid size-12 place-items-center rounded-2xl bg-primary/10 text-primary">
