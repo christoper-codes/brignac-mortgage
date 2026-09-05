@@ -15,7 +15,7 @@ export default function LoanPrograms() {
                     <ProgramsHero />
                     <ProgramsList />
                 </main>
-                <Footer />
+                <Footer dark />
             </div>
         </>
     );

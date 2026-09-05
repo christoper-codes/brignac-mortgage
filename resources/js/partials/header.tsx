@@ -49,7 +49,12 @@ export function Header() {
                 className={cn(
                     'w-full border transition-colors duration-300',
                     inDarkZone
-                        ? 'force-dark border-white/10 bg-black/40 text-white shadow-lg shadow-black/20 backdrop-blur-xl'
+                        ? cn(
+                              'force-dark text-white',
+                              scrolled
+                                  ? 'border-white/10 bg-black/40 shadow-lg shadow-black/20 backdrop-blur-xl'
+                                  : 'border-transparent bg-transparent',
+                          )
                         : cn(
                               'force-light text-foreground',
                               scrolled
