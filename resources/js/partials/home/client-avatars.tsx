@@ -1,24 +1,24 @@
-import { User } from 'lucide-react';
-
 const TILES_PER_COLUMN = 6;
 
+const CLIENT_IMAGES = Array.from({ length: 10 }, (_, index) => `/img/facebook_clients/${index + 1}.jpg`);
+
 const COLUMNS = [
-    { direction: 'up', duration: 22 },
-    { direction: 'down', duration: 27 },
-    { direction: 'up', duration: 19 },
-    { direction: 'down', duration: 24 },
+    { direction: 'up', duration: 22, offset: 0 },
+    { direction: 'down', duration: 27, offset: 3 },
+    { direction: 'up', duration: 19, offset: 6 },
+    { direction: 'down', duration: 24, offset: 8 },
 ] as const;
 
-function AvatarTile() {
+function AvatarTile({ src }: { src: string }) {
     return (
-        <div className="grid size-28 shrink-0 place-items-center rounded-[26px] bg-gradient-to-b from-black/6 to-black/2 text-foreground/30 ring-1 ring-border">
-            <User className="size-10" />
+        <div className="size-28 shrink-0 overflow-hidden rounded-[26px] ring-1 ring-border">
+            <img src={src} alt="Happy Brignac Mortgage client" loading="lazy" className="h-full w-full object-cover" />
         </div>
     );
 }
 
-function AvatarColumn({ direction, duration }: { direction: 'up' | 'down'; duration: number }) {
-    const tiles = Array.from({ length: TILES_PER_COLUMN });
+function AvatarColumn({ direction, duration, offset }: { direction: 'up' | 'down'; duration: number; offset: number }) {
+    const tiles = Array.from({ length: TILES_PER_COLUMN }, (_, index) => CLIENT_IMAGES[(index + offset) % CLIENT_IMAGES.length]);
 
     return (
         <div className="relative h-full w-28 shrink-0 overflow-hidden">
@@ -26,11 +26,11 @@ function AvatarColumn({ direction, duration }: { direction: 'up' | 'down'; durat
                 className="flex flex-col gap-3"
                 style={{ animation: `avatars-${direction} ${duration}s linear infinite` }}
             >
-                {tiles.map((_, index) => (
-                    <AvatarTile key={`a-${index}`} />
+                {tiles.map((src, index) => (
+                    <AvatarTile key={`a-${index}`} src={src} />
                 ))}
-                {tiles.map((_, index) => (
-                    <AvatarTile key={`b-${index}`} />
+                {tiles.map((src, index) => (
+                    <AvatarTile key={`b-${index}`} src={src} />
                 ))}
             </div>
         </div>
@@ -53,7 +53,7 @@ export function ClientAvatars() {
                 style={{ maskImage: 'linear-gradient(transparent 0%, black 50%, transparent 100%)' }}
             >
                 {COLUMNS.map((column, index) => (
-                    <AvatarColumn key={index} direction={column.direction} duration={column.duration} />
+                    <AvatarColumn key={index} direction={column.direction} duration={column.duration} offset={column.offset} />
                 ))}
             </div>
         </section>
