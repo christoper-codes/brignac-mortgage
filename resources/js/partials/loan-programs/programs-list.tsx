@@ -399,7 +399,7 @@ export function ProgramsList() {
                         const isOpen = openIndex === index;
 
                         return (
-                            <div key={program.name} className="relative overflow-hidden rounded-4xl border border-white/10 bg-white/5">
+                            <div key={program.name} className="relative overflow-hidden rounded-4xl bg-white/5">
                                 {(() => {
                                     const Backdrop = CARD_BACKDROPS[index % CARD_BACKDROPS.length];
 

@@ -1,20 +1,30 @@
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, CalendarCheck, Handshake, ListChecks, Percent, Star, Timer } from 'lucide-react';
 
 const STATS = [
-    { label: 'Loan Programs', value: '6+' },
-    { label: 'Down Payment', value: 'From 0%' },
-    { label: 'Pre-Qualification', value: '24-48h' },
+    { icon: ListChecks, label: 'Loan Programs', value: '6+' },
+    { icon: Percent, label: 'Down Payment', value: 'From 0%' },
+    { icon: Timer, label: 'Pre-Qualification', value: '24-48h' },
+    { icon: CalendarCheck, label: 'Avg. Closing', value: '18 days' },
+    { icon: Star, label: 'Client Rating', value: '4.9/5' },
+    { icon: Handshake, label: 'Wholesale Partners', value: '50+' },
 ];
 
 const GLYPHS = ['Ω', 'β', 'λ', 'μ', 'φ', 'δ', 'Σ', 'π', 'θ', 'Δ', 'α', 'χ', '&', '+', '*', '%', '§', 'Ψ'];
 
 function StatChip({ stat }: { stat: (typeof STATS)[number] }) {
+    const Icon = stat.icon;
+
     return (
-        <div className="flex h-[104px] w-[176px] shrink-0 flex-col justify-center rounded-2xl border border-white/10 bg-white/5 px-4">
-            <p className="text-xl font-semibold text-white">{stat.value}</p>
-            <p className="mt-1 text-xs text-white/50">{stat.label}</p>
+        <div className="flex h-[150px] w-[230px] shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-5">
+            <span className="grid size-9 place-items-center rounded-xl bg-primary/15 text-primary">
+                <Icon className="size-4.5" />
+            </span>
+            <div>
+                <p className="text-2xl font-semibold text-white">{stat.value}</p>
+                <p className="mt-1 text-xs text-white/50">{stat.label}</p>
+            </div>
         </div>
     );
 }
@@ -23,7 +33,7 @@ function StatChip({ stat }: { stat: (typeof STATS)[number] }) {
 // needed. Each glyph is scattered with its own offset, rotation, size and opacity so it reads as
 // noise rather than a tidy table.
 function CipherChip() {
-    const cells = Array.from({ length: 26 }, (_, i) => {
+    const cells = Array.from({ length: 34 }, (_, i) => {
         const glyph = GLYPHS[(i * 7 + 5) % GLYPHS.length];
         const seed = (i * 37 + 11) % 100;
 
@@ -38,7 +48,7 @@ function CipherChip() {
     });
 
     return (
-        <div className="relative h-[104px] w-[176px] shrink-0 overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02]">
+        <div className="relative h-[150px] w-[230px] shrink-0 overflow-hidden rounded-2xl border border-white/5 bg-white/[0.01]">
             {cells.map((cell, index) => (
                 <span
                     key={index}
@@ -127,7 +137,7 @@ export function ProgramsHero() {
             />
 
             <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-4 text-center">
-                <h1 className="text-4xl leading-[1.05] font-medium tracking-tight text-white sm:text-5xl">
+                <h1 className="text-4xl leading-[1.1] sm:text-5xl text-white">
                     Find the Right Loan <span className="font-elegant text-primary italic">for Your Home</span>
                 </h1>
 
@@ -148,8 +158,8 @@ export function ProgramsHero() {
                 </div>
             </div>
 
-            <div className="relative z-10 mx-auto mt-24 w-full max-w-lg">
-                <div className="relative h-[104px] overflow-hidden">
+            <div className="relative z-10 mx-auto mt-36 w-full max-w-2xl">
+                <div className="relative h-[150px] overflow-hidden">
                     <div
                         className="absolute inset-0"
                         style={{
