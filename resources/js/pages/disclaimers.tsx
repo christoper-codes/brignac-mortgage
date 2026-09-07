@@ -11,7 +11,7 @@ export default function Disclaimers() {
 
             <div className="force-light min-h-screen bg-background">
                 <Header />
-                <main className="pt-44 pb-24 sm:pb-32">
+                <main className="pt-36 pb-24 sm:pb-32">
                     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
                         <div className="text-center">
                             <p className="text-sm font-semibold tracking-wide text-primary uppercase">Legal</p>
