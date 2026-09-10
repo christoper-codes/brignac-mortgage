@@ -1,14 +1,16 @@
-import { RotateCcw } from 'lucide-react';
-import {  useState } from 'react';
-import type {FormEvent} from 'react';
+import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import type { FormEvent } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
-const TERM_OPTIONS = [
-    { value: '15', label: '15 years' },
-    { value: '20', label: '20 years' },
-    { value: '30', label: '30 years' },
-];
+// Matches the reference simulator: any whole-year term from 5 through 35.
+const TERM_OPTIONS = Array.from({ length: 31 }, (_, index) => {
+    const years = index + 5;
+
+    return { value: String(years), label: `${years} years` };
+});
 
 const RATE_SOURCES = [
     { label: 'fred.stlouisfed.org', href: 'https://fred.stlouisfed.org/series/MORTGAGE30US/' },
@@ -19,9 +21,15 @@ const RATE_SOURCES = [
 const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const currencyPrecise = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
 
-type ScheduleRow = { month: number; payment: number; principal: number; interest: number; balance: number };
+const MONTHS_PER_PAGE = 12;
+const YEARS_PER_PAGE = 12;
 
-function calculateAmortization(principal: number, annualRatePct: number, years: number): { monthlyPayment: number; schedule: ScheduleRow[] } {
+type ScheduleRow = { month: number; payment: number; principal: number; interest: number; balance: number };
+type YearRow = { year: number; payment: number; principal: number; interest: number; balance: number };
+type CalcParams = { loan: number; years: number; rate: number; property: number };
+type CalcResult = { monthlyPayment: number; schedule: ScheduleRow[]; params: CalcParams };
+
+function calculateAmortization(principal: number, annualRatePct: number, years: number): Omit<CalcResult, 'params'> {
     const monthlyRate = annualRatePct / 100 / 12;
     const totalPayments = years * 12;
     const monthlyPayment =
@@ -42,14 +50,66 @@ function calculateAmortization(principal: number, annualRatePct: number, years: 
     return { monthlyPayment, schedule };
 }
 
+// Rolls the 12 monthly rows of each year into a single annual row for the "By Year" view.
+function toYearlySchedule(schedule: ScheduleRow[]): YearRow[] {
+    const rows: YearRow[] = [];
+
+    for (let index = 0; index < schedule.length; index += 12) {
+        const chunk = schedule.slice(index, index + 12);
+        rows.push({
+            year: index / 12 + 1,
+            payment: chunk.reduce((sum, row) => sum + row.payment, 0),
+            principal: chunk.reduce((sum, row) => sum + row.principal, 0),
+            interest: chunk.reduce((sum, row) => sum + row.interest, 0),
+            balance: chunk[chunk.length - 1].balance,
+        });
+    }
+
+    return rows;
+}
+
 export function Calculator() {
     const [propertyValue, setPropertyValue] = useState('450000');
     const [loanNeeded, setLoanNeeded] = useState('360000');
     const [termYears, setTermYears] = useState('30');
     const [interestRate, setInterestRate] = useState(6.91);
     const [errors, setErrors] = useState<{ property?: string; loan?: string }>({});
-    const [result, setResult] = useState<{ monthlyPayment: number; schedule: ScheduleRow[] } | null>(null);
+    const [result, setResult] = useState<CalcResult | null>(null);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [viewMode, setViewMode] = useState<'month' | 'year'>('month');
+    const [page, setPage] = useState(0);
+
+    const yearly = useMemo(() => (result ? toYearlySchedule(result.schedule) : []), [result]);
+
+    const totals = useMemo(() => {
+        if (!result) {
+            return null;
+        }
+
+        const totalInterest = result.schedule.reduce((sum, row) => sum + row.interest, 0);
+        const totalPrincipal = result.schedule.reduce((sum, row) => sum + row.principal, 0);
+        const payoff = new Date();
+        payoff.setMonth(payoff.getMonth() + result.params.years * 12);
+
+        return {
+            totalInterest,
+            totalPaid: totalInterest + totalPrincipal,
+            payoffLabel: payoff.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+            downPayment: Math.max(0, result.params.property - result.params.loan),
+            ltv: result.params.property > 0 ? (result.params.loan / result.params.property) * 100 : 0,
+        };
+    }, [result]);
+
+    const activeRows = result ? (viewMode === 'month' ? result.schedule : yearly) : [];
+    const pageSize = viewMode === 'month' ? MONTHS_PER_PAGE : YEARS_PER_PAGE;
+    const pageCount = Math.max(1, Math.ceil(activeRows.length / pageSize));
+    const safePage = Math.min(page, pageCount - 1);
+    const pagedRows = activeRows.slice(safePage * pageSize, safePage * pageSize + pageSize);
+
+    const changeView = (mode: 'month' | 'year') => {
+        setViewMode(mode);
+        setPage(0);
+    };
 
     const handleCalculate = (event: FormEvent) => {
         event.preventDefault();
@@ -71,10 +131,15 @@ export function Calculator() {
         setErrors(nextErrors);
 
         if (Object.keys(nextErrors).length > 0) {
-return;
-}
+            return;
+        }
 
-        setResult(calculateAmortization(loan, interestRate, Number(termYears)));
+        setResult({
+            ...calculateAmortization(loan, interestRate, Number(termYears)),
+            params: { loan, years: Number(termYears), rate: interestRate, property },
+        });
+        setViewMode('month');
+        setPage(0);
         setDialogOpen(true);
     };
 
@@ -216,33 +281,116 @@ return;
                         </div>
                     </div>
                 </div>
-                {/* <div className="relative mx-auto flex w-full items-center justify-center">
-                    <img
-                        src="/img/calculator.png"
-                        alt="lion Brignac Mortgage"
-                        className="h-full w-full"
-                    />
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-white to-transparent" />
-                </div> */}
             </div>
 
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <DialogContent className="max-h-[85vh] max-w-3xl overflow-y-auto">
+                <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-5xl">
                     <DialogHeader>
                         <DialogTitle className="text-2xl text-primary">Calculation Results</DialogTitle>
                     </DialogHeader>
 
-                    {result && (
+                    {result && totals && (
                         <div className="space-y-6">
-                            <div className="flex flex-wrap justify-center gap-3">
-                                <span className="rounded-full bg-muted px-4 py-2 text-sm font-medium">
-                                    Pay {currencyPrecise.format(result.monthlyPayment)} / month
-                                </span>
-                                <span className="rounded-full bg-muted px-4 py-2 text-sm font-medium">Term of {termYears} years</span>
-                                <span className="rounded-full bg-muted px-4 py-2 text-sm font-medium">
-                                    Loan of {currency.format(Number(loanNeeded))}
-                                </span>
-                                <span className="rounded-full bg-muted px-4 py-2 text-sm font-medium">Rate: {interestRate.toFixed(2)}%</span>
+                            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                                {[
+                                    { label: 'Monthly Payment', value: currencyPrecise.format(result.monthlyPayment) },
+                                    { label: 'Total of Payments', value: currency.format(totals.totalPaid) },
+                                    { label: 'Total Interest', value: currency.format(totals.totalInterest) },
+                                    { label: 'Payoff Date', value: totals.payoffLabel },
+                                    { label: 'Loan Amount', value: currency.format(result.params.loan) },
+                                    { label: 'Down Payment', value: currency.format(totals.downPayment) },
+                                    { label: 'Loan-to-Value', value: `${totals.ltv.toFixed(1)}%` },
+                                    { label: 'Rate / Term', value: `${result.params.rate.toFixed(2)}% · ${result.params.years} yrs` },
+                                ].map((card) => (
+                                    <div key={card.label} className="rounded-xl border border-border bg-muted/40 p-3">
+                                        <p className="text-[11px] tracking-wide text-muted-foreground uppercase">{card.label}</p>
+                                        <p className="mt-1 text-sm font-semibold text-foreground">{card.value}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex flex-wrap items-center justify-between gap-3">
+                                <div className="inline-flex rounded-full border border-border p-0.5 text-xs font-medium">
+                                    <button
+                                        type="button"
+                                        onClick={() => changeView('month')}
+                                        className={cn(
+                                            'rounded-full px-3.5 py-1.5 transition-colors',
+                                            viewMode === 'month'
+                                                ? 'bg-primary text-primary-foreground'
+                                                : 'text-muted-foreground hover:text-foreground',
+                                        )}
+                                    >
+                                        By Month
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => changeView('year')}
+                                        className={cn(
+                                            'rounded-full px-3.5 py-1.5 transition-colors',
+                                            viewMode === 'year'
+                                                ? 'bg-primary text-primary-foreground'
+                                                : 'text-muted-foreground hover:text-foreground',
+                                        )}
+                                    >
+                                        By Year
+                                    </button>
+                                </div>
+
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        type="button"
+                                        onClick={() => setPage(safePage - 1)}
+                                        disabled={safePage === 0}
+                                        className="inline-flex size-8 items-center justify-center rounded-full border border-border transition-colors hover:bg-accent disabled:pointer-events-none disabled:opacity-40"
+                                        aria-label="Previous"
+                                    >
+                                        <ChevronLeft className="size-4" />
+                                    </button>
+                                    <span className="min-w-40 text-center text-xs text-muted-foreground">
+                                        {viewMode === 'month'
+                                            ? `Year ${safePage + 1} · Months ${safePage * 12 + 1}–${Math.min((safePage + 1) * 12, activeRows.length)}`
+                                            : `Page ${safePage + 1} of ${pageCount}`}
+                                    </span>
+                                    <button
+                                        type="button"
+                                        onClick={() => setPage(safePage + 1)}
+                                        disabled={safePage >= pageCount - 1}
+                                        className="inline-flex size-8 items-center justify-center rounded-full border border-border transition-colors hover:bg-accent disabled:pointer-events-none disabled:opacity-40"
+                                        aria-label="Next"
+                                    >
+                                        <ChevronRight className="size-4" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="overflow-x-auto rounded-lg border border-border">
+                                <table className="w-full text-left text-sm">
+                                    <thead className="bg-muted text-xs uppercase text-muted-foreground">
+                                        <tr>
+                                            <th className="px-4 py-2.5">{viewMode === 'month' ? 'Month' : 'Year'}</th>
+                                            <th className="px-4 py-2.5">{viewMode === 'month' ? 'Monthly Payment' : 'Paid This Year'}</th>
+                                            <th className="px-4 py-2.5">Principal</th>
+                                            <th className="px-4 py-2.5">Interest</th>
+                                            <th className="px-4 py-2.5">Remaining Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {pagedRows.map((row) => {
+                                            const label = 'month' in row ? row.month : row.year;
+
+                                            return (
+                                                <tr key={label} className="border-t border-border">
+                                                    <td className="px-4 py-2.5 font-medium">{label}</td>
+                                                    <td className="px-4 py-2.5">{currencyPrecise.format(row.payment)}</td>
+                                                    <td className="px-4 py-2.5">{currencyPrecise.format(row.principal)}</td>
+                                                    <td className="px-4 py-2.5">{currencyPrecise.format(row.interest)}</td>
+                                                    <td className="px-4 py-2.5">{currencyPrecise.format(row.balance)}</td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
                             </div>
 
                             <div className="flex justify-center">
@@ -254,31 +402,6 @@ return;
                                     <RotateCcw className="size-4" />
                                     Reset
                                 </button>
-                            </div>
-
-                            <div className="max-h-80 overflow-auto rounded-lg border border-border">
-                                <table className="w-full text-left text-sm">
-                                    <thead className="bg-muted text-muted-foreground sticky top-0 text-xs uppercase">
-                                        <tr>
-                                            <th className="px-4 py-2">Month</th>
-                                            <th className="px-4 py-2">Payment</th>
-                                            <th className="px-4 py-2">Principal</th>
-                                            <th className="px-4 py-2">Interest</th>
-                                            <th className="px-4 py-2">Balance</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {result.schedule.map((row) => (
-                                            <tr key={row.month} className="border-t border-border">
-                                                <td className="px-4 py-2">{row.month}</td>
-                                                <td className="px-4 py-2">{currencyPrecise.format(row.payment)}</td>
-                                                <td className="px-4 py-2">{currencyPrecise.format(row.principal)}</td>
-                                                <td className="px-4 py-2">{currencyPrecise.format(row.interest)}</td>
-                                                <td className="px-4 py-2">{currencyPrecise.format(row.balance)}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     )}
