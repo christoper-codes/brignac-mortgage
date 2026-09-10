@@ -12,6 +12,13 @@ const TERM_OPTIONS = Array.from({ length: 31 }, (_, index) => {
     return { value: String(years), label: `${years} years` };
 });
 
+// 30-year fixed national average. Snapshot from Freddie Mac's Primary Mortgage Market Survey
+// (6.71%, week ending Sep 3 2026), nudged to 6.75% to sit between Freddie Mac and the slightly
+// higher Bankrate / U.S. News readings. Refresh this periodically — ideally feed it from the server.
+const AVERAGE_RATE = 6.75;
+const RATE_MIN = 5.5;
+const RATE_MAX = 8;
+
 const RATE_SOURCES = [
     { label: 'fred.stlouisfed.org', href: 'https://fred.stlouisfed.org/series/MORTGAGE30US/' },
     { label: 'www.bankrate.com', href: 'https://www.bankrate.com/mortgages/mortgage-rates/' },
@@ -72,7 +79,7 @@ export function Calculator() {
     const [propertyValue, setPropertyValue] = useState('450000');
     const [loanNeeded, setLoanNeeded] = useState('360000');
     const [termYears, setTermYears] = useState('30');
-    const [interestRate, setInterestRate] = useState(6.91);
+    const [interestRate, setInterestRate] = useState(AVERAGE_RATE);
     const [errors, setErrors] = useState<{ property?: string; loan?: string }>({});
     const [result, setResult] = useState<CalcResult | null>(null);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -162,7 +169,9 @@ export function Calculator() {
                                     Mortgage <span className="text-primary">Loan</span> Calculator
                                 </h2>
                                 <div className="flex flex-col items-center gap-2 text-xs text-neutral-500 sm:flex-row sm:gap-4">
-                                    <p className="font-medium">Average interest rate in the United States. Sources:</p>
+                                    <p className="font-medium">
+                                        30-year fixed national average (Freddie Mac Primary Mortgage Market Survey). Sources:
+                                    </p>
                                     {RATE_SOURCES.map((source) => (
                                         <a
                                             key={source.href}
@@ -247,8 +256,8 @@ export function Calculator() {
                                     <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
                                         <input
                                             type="range"
-                                            min={3.5}
-                                            max={7.5}
+                                            min={RATE_MIN}
+                                            max={RATE_MAX}
                                             step={0.01}
                                             value={interestRate}
                                             onChange={(event) => setInterestRate(Number(event.target.value))}
@@ -264,7 +273,8 @@ export function Calculator() {
 
                                     <div className="mt-4 flex justify-center">
                                         <span className="rounded-full bg-neutral-100 px-4 py-1.5 text-center text-xs text-neutral-600">
-                                            The average interest rate is 6.91% according to the U.S. national average.
+                                            The 30-year fixed national average is around {AVERAGE_RATE.toFixed(2)}% (Freddie Mac).
+                                            Your actual rate depends on credit, down payment and lender.
                                         </span>
                                     </div>
                                 </div>
