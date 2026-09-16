@@ -14,6 +14,7 @@ createInertiaApp({
         switch (true) {
             case name === 'welcome' ||
                 name === 'loan-programs' ||
+                name === 'testimonials' ||
                 name === 'disclaimers' ||
                 name === 'privacy-policy' ||
                 name === 'terms-and-conditions':
