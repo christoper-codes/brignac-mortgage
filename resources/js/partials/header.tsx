@@ -9,7 +9,7 @@ const NAV_LINKS = [
     { label: 'Home', href: '/' },
     { label: 'Loan Programs', href: '/programs' },
     { label: 'About Us', href: '/about' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Testimonials', href: '/testimonials' },
 ];
 
 export function Header() {
