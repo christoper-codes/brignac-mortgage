@@ -135,6 +135,13 @@
     h2 {
         @apply font-heading font-extrabold tracking-tighter;
     }
+
+    /* Added by <CustomCursor> only on fine-pointer (desktop) devices — hides the OS pointer so
+       the mix-blend-mode cursor dot/ring reads as the only cursor on screen. */
+    html.has-custom-cursor,
+    html.has-custom-cursor * {
+        cursor: none !important;
+    }
 }
 
 @keyframes marquee {

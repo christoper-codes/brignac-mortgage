@@ -227,6 +227,24 @@ function PlatformSummary({ platform }: { platform: Platform }) {
 
     return (
         <>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground">
+                {isFacebook ? (
+                    <ThumbsUp className="size-4 fill-primary text-primary" />
+                ) : (
+                    <Star className="size-4 fill-yellow-500 text-yellow-500" />
+                )}
+                {isFacebook ? '100% recommend Brignac Mortgage' : '5.0 rating on Google'}
+                <span className="text-foreground/40">· {count} reviews</span>
+            </span>
+
+            <a
+                href={PLATFORM_LINKS[platform]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-primary hover:underline"
+            >
+                See all reviews on {isFacebook ? 'Facebook' : 'Google'}
+            </a>
         </>
     );
 }
