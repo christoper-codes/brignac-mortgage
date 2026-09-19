@@ -3,7 +3,7 @@ import { Contact } from '@/partials/contact';
 import { Footer } from '@/partials/footer';
 import { Header } from '@/partials/header';
 import { TeamHero } from '@/partials/our-team/hero';
-import { TeamMembers } from '@/partials/our-team/team-members';
+import { TeamDirectory } from '@/partials/our-team/team-directory';
 
 export default function OurTeam() {
     return (
@@ -14,7 +14,7 @@ export default function OurTeam() {
                 <Header />
                 <main className="pt-36">
                     <TeamHero />
-                    <TeamMembers />
+                    <TeamDirectory />
                     <div className="mt-16">
                         <Contact />
                     </div>

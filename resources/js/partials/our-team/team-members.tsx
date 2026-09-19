@@ -3,7 +3,7 @@ import { ArrowUpRight, BadgeCheck, Mail, Phone } from 'lucide-react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-type Member = {
+export type Member = {
     name: string;
     title: string;
     image: string;
@@ -14,7 +14,7 @@ type Member = {
     apply?: string;
 };
 
-const MEMBERS: Member[] = [
+export const MEMBERS: Member[] = [
     {
         name: 'Shaun Brignac, MBA',
         title: 'President and CEO',
@@ -50,7 +50,7 @@ const MEMBERS: Member[] = [
     },
 ];
 
-const telHref = (value: string) => `tel:+1${value.replace(/\D/g, '')}`;
+export const telHref = (value: string) => `tel:+1${value.replace(/\D/g, '')}`;
 
 function MemberCard({ member, index }: { member: Member; index: number }) {
     return (
