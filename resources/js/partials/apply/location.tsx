@@ -47,13 +47,13 @@ export function Location() {
                 <h2 className="mt-4 text-3xl text-foreground sm:text-4xl">Find Our Office</h2>
             </motion.div>
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            <div className="mt-10 flex flex-col gap-6">
                 <motion.div
                     initial={{ opacity: 0, y: 60, scale: 0.96 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 1, ease: EASE }}
-                    className="relative h-[420px] overflow-hidden rounded-4xl border border-border bg-card p-2 sm:h-[540px] lg:col-span-2"
+                    className="relative h-[420px] overflow-hidden rounded-4xl border border-border bg-card p-2 sm:h-[540px]"
                 >
                     <iframe
                         title="Brignac Mortgage office location"
@@ -91,28 +91,33 @@ export function Location() {
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 1, ease: EASE, delay: 0.12 }}
-                    className="flex flex-col rounded-4xl border border-border bg-card p-8"
+                    className="rounded-4xl border border-border bg-card p-6 sm:p-8"
                 >
-                    <div className="flex items-center gap-3">
-                        <span className="grid size-11 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
-                            <Clock className="size-5" />
-                        </span>
-                        <h3 className="text-xl font-semibold text-foreground">Business Hours</h3>
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                            <span className="grid size-11 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                                <Clock className="size-5" />
+                            </span>
+                            <div>
+                                <h3 className="text-xl font-semibold text-foreground">Business Hours</h3>
+                                <p className="text-xs text-foreground/40">Central Time (Louisiana)</p>
+                            </div>
+                        </div>
+
+                        {today >= 0 && (
+                            <span
+                                className={cn(
+                                    'inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-medium',
+                                    open ? 'border-primary/30 bg-primary/10 text-primary' : 'border-border bg-background text-foreground/60',
+                                )}
+                            >
+                                <span className={cn('size-1.5 rounded-full', open ? 'animate-pulse bg-primary' : 'bg-foreground/30')} />
+                                {open ? 'Open now' : 'Closed right now'}
+                            </span>
+                        )}
                     </div>
 
-                    {today >= 0 && (
-                        <span
-                            className={cn(
-                                'mt-5 inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-medium',
-                                open ? 'border-primary/30 bg-primary/10 text-primary' : 'border-border bg-background text-foreground/60',
-                            )}
-                        >
-                            <span className={cn('size-1.5 rounded-full', open ? 'animate-pulse bg-primary' : 'bg-foreground/30')} />
-                            {open ? 'Open now' : 'Closed right now'}
-                        </span>
-                    )}
-
-                    <ul className="mt-6 space-y-3">
+                    <ul className="mt-6 grid gap-3 sm:grid-cols-3">
                         {HOURS.map((row) => {
                             const isToday = row.weekdays.includes(today);
 
@@ -130,8 +135,6 @@ export function Location() {
                             );
                         })}
                     </ul>
-
-                    <p className="mt-auto pt-6 text-xs text-foreground/40">Central Time (Louisiana)</p>
                 </motion.div>
             </div>
         </section>
