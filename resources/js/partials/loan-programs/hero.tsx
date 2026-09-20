@@ -159,7 +159,7 @@ export function ProgramsHero() {
                 className="pointer-events-none absolute inset-0"
                 style={{
                     ...DOT_GRID,
-                    backgroundImage: 'radial-gradient(rgba(81,176,3,0.5) 1.6px, transparent 1.6px)',
+                    backgroundImage: 'radial-gradient(rgba(81,176,3,0.32) 1.5px, transparent 1.5px)',
                     maskImage: 'radial-gradient(ellipse 85% 75% at 50% 25%, black 0%, transparent 85%)',
                 }}
             />
@@ -169,9 +169,9 @@ export function ProgramsHero() {
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500"
                 style={{
                     ...DOT_GRID,
-                    backgroundImage: 'radial-gradient(rgb(140,255,60) 2.2px, transparent 2.2px)',
-                    maskImage: 'radial-gradient(circle 190px at var(--mx, -999px) var(--my, -999px), black 0%, transparent 100%)',
-                    filter: 'drop-shadow(0 0 4px rgba(81,176,3,0.9))',
+                    backgroundImage: 'radial-gradient(rgba(110,220,40,0.75) 1.9px, transparent 1.9px)',
+                    maskImage: 'radial-gradient(circle 170px at var(--mx, -999px) var(--my, -999px), black 0%, transparent 100%)',
+                    filter: 'drop-shadow(0 0 3px rgba(81,176,3,0.5))',
                 }}
             />
 
