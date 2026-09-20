@@ -25,7 +25,7 @@ export const MEMBERS: Member[] = [
             { label: 'Office', value: '504-559-2821' },
         ],
         nmls: [{ value: '1928157' }],
-        apply: 'https://2401214.my1003app.com',
+        apply: 'https://2401214.my1003app.com/register',
     },
     {
         name: 'Allison Ratcliff',
@@ -34,7 +34,7 @@ export const MEMBERS: Member[] = [
         email: 'Allie@brignacmortgage.com',
         phones: [{ label: 'Cell', value: '225-718-3978' }],
         nmls: [{ value: '2405703' }],
-        apply: 'https://allieratcliff.my1003app.com',
+        apply: 'https://allieratcliff.my1003app.com/register',
     },
     {
         name: 'Jennifer McMinn-Griffin',
