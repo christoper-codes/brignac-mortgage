@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, CalendarCheck, Handshake, ListChecks, Percent, Star, Timer } from 'lucide-react';
+import { useRef } from 'react';
 
 const STATS = [
     { icon: ListChecks, label: 'Loan Programs', value: '6+' },
@@ -121,18 +122,56 @@ function GlowDivider() {
     );
 }
 
+const DOT_GRID = { backgroundSize: '28px 28px' };
+
 export function ProgramsHero() {
     const track = [...STATS, ...STATS, ...STATS];
+    const litRef = useRef<HTMLDivElement>(null);
+
+    // The pointer position drives a CSS mask on the bright dot layer, so the dots under the cursor
+    // light up without re-rendering React on every mouse move.
+    const handleMove = (event: React.MouseEvent<HTMLElement>) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        const lit = litRef.current;
+
+        if (lit) {
+            lit.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+            lit.style.setProperty('--my', `${event.clientY - rect.top}px`);
+            lit.style.opacity = '1';
+        }
+    };
+
+    const handleLeave = () => {
+        if (litRef.current) {
+            litRef.current.style.opacity = '0';
+        }
+    };
 
     return (
-        <section data-header-theme="dark" className="force-dark relative overflow-hidden bg-background pt-40 pb-20 sm:pt-48 sm:pb-24">
+        <section
+            data-header-theme="dark"
+            onMouseMove={handleMove}
+            onMouseLeave={handleLeave}
+            className="force-dark relative overflow-hidden bg-background pt-40 pb-20 sm:pt-48 sm:pb-24"
+        >
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 opacity-60"
+                className="pointer-events-none absolute inset-0"
                 style={{
-                    backgroundImage: 'radial-gradient(rgba(81,176,3,0.18) 1px, transparent 1px)',
-                    backgroundSize: '28px 28px',
-                    maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, black 0%, transparent 75%)',
+                    ...DOT_GRID,
+                    backgroundImage: 'radial-gradient(rgba(81,176,3,0.5) 1.6px, transparent 1.6px)',
+                    maskImage: 'radial-gradient(ellipse 85% 75% at 50% 25%, black 0%, transparent 85%)',
+                }}
+            />
+            <div
+                ref={litRef}
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500"
+                style={{
+                    ...DOT_GRID,
+                    backgroundImage: 'radial-gradient(rgb(140,255,60) 2.2px, transparent 2.2px)',
+                    maskImage: 'radial-gradient(circle 190px at var(--mx, -999px) var(--my, -999px), black 0%, transparent 100%)',
+                    filter: 'drop-shadow(0 0 4px rgba(81,176,3,0.9))',
                 }}
             />
 

@@ -285,18 +285,19 @@ export function ProgramsList() {
 
                 <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[340px_auto_1fr] lg:items-start lg:gap-12">
                     <div className="hidden lg:sticky lg:top-32 lg:block">
-                        <div className="relative aspect-3/4 w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+                        <div className="relative aspect-3/4 w-full overflow-hidden rounded-3xl bg-white/5">
                             <AnimatePresence>
-                                <motion.img
+                                <motion.div
                                     key={activeProgram.image}
-                                    src={activeProgram.image}
-                                    alt={activeProgram.name}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.5, ease: EASE }}
-                                    className="absolute inset-0 h-full w-full object-cover"
-                                />
+                                    className="absolute inset-0"
+                                >
+                                    <img src={activeProgram.image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-125 object-cover blur-2xl" />
+                                    <img src={activeProgram.image} alt={activeProgram.name} className="absolute inset-0 h-full w-full object-contain" />
+                                </motion.div>
                             </AnimatePresence>
                             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/90 via-black/10 to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-5">
@@ -322,8 +323,9 @@ export function ProgramsList() {
                                     }}
                                     className="lg:min-h-[60vh] lg:py-8"
                                 >
-                                    <div className="mb-6 overflow-hidden rounded-3xl border border-white/10 lg:hidden">
-                                        <img src={program.image} alt={program.name} className="aspect-3/2 w-full object-cover" />
+                                    <div className="relative mb-6 aspect-3/2 overflow-hidden rounded-3xl border border-white/10 lg:hidden">
+                                        <img src={program.image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-125 object-cover blur-2xl" />
+                                        <img src={program.image} alt={program.name} className="absolute inset-0 h-full w-full object-contain" />
                                     </div>
 
                                     <div className="flex items-center gap-4">
