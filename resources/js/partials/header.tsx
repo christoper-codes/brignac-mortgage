@@ -1,8 +1,8 @@
-import { Link, router } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, Info, LogIn, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Info, LogIn } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { MagneticButton } from '@/components/amicro/magnetic-button';
+import { createPortal } from 'react-dom';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
@@ -94,6 +94,111 @@ function CompanyMenu() {
                 )}
             </AnimatePresence>
         </div>
+    );
+}
+
+// Two slim bars that slide into an X — replaces the stock three-line hamburger.
+function MenuIcon({ open }: { open: boolean }) {
+    const bar = 'absolute right-0 h-[1.75px] rounded-full bg-current';
+
+    return (
+        <span className="relative block h-5 w-6">
+            <motion.span
+                className={bar}
+                style={{ top: 'calc(50% - 0.875px)' }}
+                initial={false}
+                animate={{ y: open ? 0 : -4, rotate: open ? 45 : 0, width: 24 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            />
+            <motion.span
+                className={bar}
+                style={{ top: 'calc(50% - 0.875px)' }}
+                initial={false}
+                animate={{ y: open ? 0 : 4, rotate: open ? -45 : 0, width: open ? 24 : 15 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            />
+        </span>
+    );
+}
+
+// Full-screen menu: blurred backdrop, links centered and staggered in. Rendered in a portal because
+// the header's own backdrop-filter would otherwise trap a fixed child inside the header box.
+function MobileMenu({ open, dark, onClose }: { open: boolean; dark: boolean; onClose: () => void }) {
+    useEffect(() => {
+        if (!open) {
+            return;
+        }
+
+        const previousOverflow = document.body.style.overflow;
+        const handleKey = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', handleKey);
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            document.removeEventListener('keydown', handleKey);
+        };
+    }, [open, onClose]);
+
+    const item = {
+        hidden: { opacity: 0, y: 24 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
+    };
+
+    return createPortal(
+        <AnimatePresence>
+            {open && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className={cn(
+                        'fixed inset-0 z-40 flex flex-col items-center justify-center bg-background/70 text-foreground backdrop-blur-2xl lg:hidden',
+                        dark ? 'force-dark' : 'force-light',
+                    )}
+                >
+                    <motion.nav
+                        initial="hidden"
+                        animate="show"
+                        exit="hidden"
+                        transition={{ staggerChildren: 0.07, delayChildren: 0.12 }}
+                        className="flex flex-col items-center gap-3 px-6 text-center"
+                    >
+                        {[...NAV_LINKS, ...COMPANY_LINKS].map((link) => (
+                            <motion.div key={link.href} variants={item}>
+                                <Link
+                                    href={link.href}
+                                    onClick={onClose}
+                                    className="block rounded-full px-6 py-2 font-heading text-4xl font-extrabold tracking-tighter text-foreground/80 transition-colors hover:bg-foreground/5 hover:text-foreground"
+                                >
+                                    {link.label}
+                                </Link>
+                            </motion.div>
+                        ))}
+
+                        <motion.div variants={item} className="mt-6">
+                            <Link
+                                href="/apply"
+                                onClick={onClose}
+                                className="group inline-flex items-center gap-2 rounded-full bg-primary py-3 pr-3 pl-7 text-base font-semibold text-primary-foreground"
+                            >
+                                Get Pre-Qualified
+                                <span className="grid size-9 place-items-center rounded-full bg-primary-foreground/15">
+                                    <ArrowUpRight className="size-4" />
+                                </span>
+                            </Link>
+                        </motion.div>
+                    </motion.nav>
+                </motion.div>
+            )}
+        </AnimatePresence>,
+        document.body,
     );
 }
 
@@ -201,27 +306,12 @@ export function Header() {
                         className="flex size-9 items-center justify-center rounded-full text-foreground lg:hidden"
                         aria-label="Toggle menu"
                     >
-                        {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+                        <MenuIcon open={mobileOpen} />
                     </button>
                 </div>
 
-                {mobileOpen && (
-                    <div className="flex flex-col gap-1 border-t border-border px-5 pt-3 pb-5 lg:hidden">
-                        {[...NAV_LINKS, ...COMPANY_LINKS].map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                        <MagneticButton onClick={() => router.visit('/apply')} className="mt-3 w-full">
-                            Get Pre-Qualified
-                        </MagneticButton>
-                    </div>
-                )}
             </motion.div>
+            <MobileMenu open={mobileOpen} dark={inDarkZone} onClose={() => setMobileOpen(false)} />
         </header>
     );
 }
