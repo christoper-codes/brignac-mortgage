@@ -1,16 +1,101 @@
 import { Link, router } from '@inertiajs/react';
-import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronDown, Info, LogIn, Menu, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { MagneticButton } from '@/components/amicro/magnetic-button';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
     { label: 'Home', href: '/' },
     { label: 'Loan Programs', href: '/programs' },
-    { label: 'About Us', href: '/apply' },
     { label: 'Testimonials', href: '/testimonials' },
 ];
+
+// The fourth nav item is a dropdown rather than a single link.
+const COMPANY_LINKS = [
+    { label: 'About Us', href: '/apply', icon: Info },
+    { label: 'Login', href: '/login', icon: LogIn },
+];
+
+function CompanyMenu() {
+    const [open, setOpen] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!open) {
+            return;
+        }
+
+        const handlePointer = (event: MouseEvent) => {
+            if (ref.current && !ref.current.contains(event.target as Node)) {
+                setOpen(false);
+            }
+        };
+        const handleKey = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handlePointer);
+        document.addEventListener('keydown', handleKey);
+
+        return () => {
+            document.removeEventListener('mousedown', handlePointer);
+            document.removeEventListener('keydown', handleKey);
+        };
+    }, [open]);
+
+    return (
+        <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+            <button
+                type="button"
+                onClick={() => setOpen((value) => !value)}
+                aria-expanded={open}
+                aria-haspopup="menu"
+                className="inline-flex items-center gap-1 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+            >
+                Company
+                <ChevronDown className={cn('size-3.5 transition-transform duration-300', open && 'rotate-180')} />
+            </button>
+
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        role="menu"
+                        initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                        style={{ transformOrigin: 'top center' }}
+                        className="absolute top-full left-1/2 z-50 w-52 -translate-x-1/2 pt-3"
+                    >
+                        <div className="rounded-3xl border border-border bg-background/90 p-2 shadow-xl shadow-black/10 backdrop-blur-xl">
+                            {COMPANY_LINKS.map((link) => {
+                                const Icon = link.icon;
+
+                                return (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        role="menuitem"
+                                        onClick={() => setOpen(false)}
+                                        className="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-foreground/80 transition-colors hover:bg-foreground/5 hover:text-foreground"
+                                    >
+                                        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                                            <Icon className="size-4" />
+                                        </span>
+                                        {link.label}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+}
 
 export function Header() {
     const [scrolled, setScrolled] = useState(() => typeof window !== 'undefined' && window.scrollY > 24);
@@ -83,6 +168,7 @@ export function Header() {
                                 {link.label}
                             </Link>
                         ))}
+                        <CompanyMenu />
                     </nav>
 
                     <div className="hidden items-center gap-3 lg:flex">
@@ -121,7 +207,7 @@ export function Header() {
 
                 {mobileOpen && (
                     <div className="flex flex-col gap-1 border-t border-border px-5 pt-3 pb-5 lg:hidden">
-                        {NAV_LINKS.map((link) => (
+                        {[...NAV_LINKS, ...COMPANY_LINKS].map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
