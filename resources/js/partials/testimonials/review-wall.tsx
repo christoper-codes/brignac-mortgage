@@ -197,17 +197,6 @@ function PlatformToggle({ active, onChange }: { active: Platform; onChange: (pla
         <div className="inline-flex items-center gap-1 rounded-full border border-border bg-card p-1">
             <button
                 type="button"
-                onClick={() => onChange('facebook')}
-                className={cn(
-                    'inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors',
-                    active === 'facebook' ? 'bg-primary text-primary-foreground' : 'text-foreground/60 hover:text-foreground',
-                )}
-            >
-                <FacebookMark className="size-4" />
-                Facebook
-            </button>
-            <button
-                type="button"
                 onClick={() => onChange('google')}
                 className={cn(
                     'inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors',
@@ -216,6 +205,17 @@ function PlatformToggle({ active, onChange }: { active: Platform; onChange: (pla
             >
                 <GoogleMark className="size-4" />
                 Google
+            </button>
+            <button
+                type="button"
+                onClick={() => onChange('facebook')}
+                className={cn(
+                    'inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors',
+                    active === 'facebook' ? 'bg-primary text-primary-foreground' : 'text-foreground/60 hover:text-foreground',
+                )}
+            >
+                <FacebookMark className="size-4" />
+                Facebook
             </button>
         </div>
     );
@@ -256,7 +256,7 @@ function ReviewCard({ review, index, platform }: { review: Review; index: number
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5, delay: (index % 3) * 0.08, ease: EASE }}
-            className="mb-6 break-inside-avoid rounded-3xl border border-border bg-card p-6"
+            className="mb-6 break-inside-avoid rounded-3xl border border-border bg-card/85 p-6 backdrop-blur-sm"
         >
             <div className="flex items-start gap-3">
                 <img
@@ -297,11 +297,21 @@ function ReviewCard({ review, index, platform }: { review: Review; index: number
 }
 
 export function ReviewWall() {
-    const [platform, setPlatform] = useState<Platform>('facebook');
+    const [platform, setPlatform] = useState<Platform>('google');
     const activeReviews = platform === 'facebook' ? FACEBOOK_REVIEWS : GOOGLE_REVIEWS;
 
     return (
-        <section className="relative mx-auto mt-12 max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mt-12 overflow-hidden pb-16">
+            {/* Soft house backdrop: low opacity, fading out toward both the top and the bottom. */}
+            <img
+                src="/img/hero.png"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-0 left-1/2 w-full max-w-[1800px] -translate-x-1/2 object-contain opacity-30"
+                style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 40%, black 70%, transparent 100%)' }}
+            />
+
+        <section className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center gap-4">
                 <PlatformToggle active={platform} onChange={setPlatform} />
 
@@ -339,5 +349,6 @@ export function ReviewWall() {
                 </AnimatePresence>
             </div>
         </section>
+        </div>
     );
 }

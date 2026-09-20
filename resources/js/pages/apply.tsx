@@ -1,5 +1,6 @@
 import { Head } from '@inertiajs/react';
 import { ApplyHero } from '@/partials/apply/hero';
+import { Location } from '@/partials/apply/location';
 import { TeamDirectory } from '@/partials/apply/team-directory';
 import { Contact } from '@/partials/contact';
 import { Footer } from '@/partials/footer';
@@ -18,6 +19,7 @@ export default function Apply() {
                     <div className="mt-16">
                         <Contact />
                     </div>
+                    <Location />
                 </main>
                 <Footer />
             </div>

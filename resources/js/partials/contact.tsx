@@ -1,5 +1,6 @@
+import { Link } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { CheckCircle2, Mail, MapPin, Phone } from 'lucide-react';
+import { Check, CheckCircle2, ChevronDown, Mail, MapPin, Phone } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 
@@ -7,7 +8,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const CONTACT_INFO = [
     { icon: Phone, label: 'Call or Text', value: '(504) 559-2821', href: 'tel:+15045592821' },
-    { icon: Mail, label: 'Email', value: 'info@brignacmortgage.com', href: 'mailto:info@brignacmortgage.com' },
+    { icon: Mail, label: 'Email', value: 'Shaun@brignacmortgage.com', href: 'mailto:Shaun@brignacmortgage.com' },
     { icon: MapPin, label: 'Office', value: 'Louisiana, USA', href: undefined },
 ];
 
@@ -17,6 +18,7 @@ export function Contact() {
     const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [consentOpen, setConsentOpen] = useState(false);
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
@@ -153,6 +155,51 @@ export function Contact() {
                                                 className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-primary"
                                             />
                                         </label>
+
+                                        <div className="rounded-2xl border border-border bg-background p-4">
+                                            <label className="flex cursor-pointer items-start gap-3">
+                                                <input type="checkbox" required className="peer sr-only" />
+                                                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border border-foreground/25 bg-card text-primary-foreground transition-colors peer-checked:border-primary peer-checked:bg-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40 [&>svg]:scale-50 [&>svg]:opacity-0 [&>svg]:transition-all peer-checked:[&>svg]:scale-100 peer-checked:[&>svg]:opacity-100">
+                                                    <Check className="size-3.5" strokeWidth={3} />
+                                                </span>
+                                                <span className="text-sm font-medium text-foreground/80">Terms of Use &amp; Privacy Policy</span>
+                                            </label>
+
+                                            <button
+                                                type="button"
+                                                onClick={() => setConsentOpen((open) => !open)}
+                                                aria-expanded={consentOpen}
+                                                className="mt-2 ml-8 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                                            >
+                                                {consentOpen ? 'Hide details' : 'Read full consent'}
+                                                <ChevronDown className={`size-3.5 transition-transform duration-300 ${consentOpen ? 'rotate-180' : ''}`} />
+                                            </button>
+
+                                            <AnimatePresence initial={false}>
+                                                {consentOpen && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: 'auto', opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.35, ease: EASE }}
+                                                        className="ml-8 overflow-hidden text-xs leading-relaxed text-foreground/60"
+                                                    >
+                                                        <p className="pt-2">
+                                                            By checking this box, you agree to Brignac Mortgage's{' '}
+                                                            <Link href="/terms-and-conditions" className="text-primary hover:underline">
+                                                                Terms of Use
+                                                            </Link>{' '}
+                                                            and{' '}
+                                                            <Link href="/privacy-policy" className="text-primary hover:underline">
+                                                                Privacy Policy
+                                                            </Link>
+                                                            , and provide consent to receive text messages for important notifications about our services, updates
+                                                            on upcoming meetings, and replies from your dedicated representative.
+                                                        </p>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
 
                                         <button
                                             type="submit"
