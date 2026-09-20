@@ -1,7 +1,6 @@
 import { Form, Head } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 import { GoogleMark } from '@/components/platform-marks';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
@@ -29,16 +28,25 @@ export default function Login({ status }: Props) {
                                 required
                                 autoFocus
                                 tabIndex={1}
+                                className="h-11 rounded-full px-5"
                                 autoComplete="email"
                                 placeholder="email@example.com"
                             />
                             <InputError message={errors.email} />
                         </div>
 
-                        <Button type="submit" className="w-full" tabIndex={2} disabled={processing} data-test="google-login-button">
-                            {processing ? <Spinner /> : <GoogleMark className="size-4 rounded-full bg-white p-px" />}
+                        <button
+                            type="submit"
+                            tabIndex={2}
+                            disabled={processing}
+                            data-test="google-login-button"
+                            className="group inline-flex h-11.75 w-full items-center justify-center rounded-[40px] bg-[#080a10] pr-1.5 pl-5 text-base font-medium tracking-tighter text-white shadow-[inset_0_4px_19px_rgba(255,255,255,0.55),0_2px_14px_rgba(129,141,151,0.35)] transition-[transform,box-shadow,filter] duration-200 ease-out hover:shadow-[inset_0_4px_19px_rgba(255,255,255,0.65),0_6px_20px_rgba(129,141,151,0.45)] focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] disabled:opacity-60"
+                        >
                             Continue with Google
-                        </Button>
+                            <span className="ml-2 grid size-9 shrink-0 place-items-center rounded-full bg-white ring-1 ring-white/15 transition-transform duration-200 ease-out group-hover:translate-x-0.5">
+                                {processing ? <Spinner className="text-black" /> : <GoogleMark className="size-4" />}
+                            </span>
+                        </button>
                     </div>
                 )}
             </Form>
