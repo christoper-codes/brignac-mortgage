@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, BadgeCheck, Check, Copy, Download, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { MEMBERS, telHref } from '@/partials/our-team/team-members';
-import type { Member } from '@/partials/our-team/team-members';
+import { MEMBERS, telHref } from '@/partials/apply/team-members';
+import type { Member } from '@/partials/apply/team-members';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 

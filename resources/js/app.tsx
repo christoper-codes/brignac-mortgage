@@ -16,7 +16,7 @@ createInertiaApp({
             case name === 'welcome' ||
                 name === 'loan-programs' ||
                 name === 'testimonials' ||
-                name === 'our-team' ||
+                name === 'apply' ||
                 name === 'disclaimers' ||
                 name === 'privacy-policy' ||
                 name === 'terms-and-conditions':

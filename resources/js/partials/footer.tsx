@@ -71,7 +71,7 @@ export function Footer({ dark = false }: { dark?: boolean }) {
 
             <div className="order-2 flex w-full flex-col items-center gap-5 text-center sm:order-0 sm:mb-5 sm:w-[20%] sm:items-end sm:text-right">
                 <Link
-                    href="/about"
+                    href="/apply"
                     className="group inline-flex items-center gap-2 rounded-full bg-primary py-2 pr-2 pl-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                     About Us

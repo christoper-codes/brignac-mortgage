@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'welcome')->name('home');
 Route::inertia('programs', 'loan-programs')->name('programs');
-Route::inertia('our-team', 'our-team')->name('our-team');
+Route::inertia('apply', 'apply')->name('apply');
 Route::inertia('testimonials', 'testimonials')->name('testimonials');
 Route::inertia('disclaimers', 'disclaimers')->name('disclaimers');
 Route::inertia('privacy-policy', 'privacy-policy')->name('privacy-policy');

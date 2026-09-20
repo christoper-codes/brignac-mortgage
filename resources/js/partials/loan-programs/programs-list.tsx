@@ -131,7 +131,7 @@ const PROGRAMS = [
             },
             { label: 'Eligible Properties', items: ['Primary Residence', 'Single Family Homes', 'Manufactured Properties', 'And More'] },
         ],
-        cta: { label: 'Click to Apply', href: '/our-team', external: false },
+        cta: { label: 'Click to Apply', href: '/apply', external: false },
     },
     {
         icon: Percent,
@@ -168,7 +168,7 @@ const PROGRAMS = [
                 ],
             },
         ],
-        cta: { label: 'Click to Apply', href: '/our-team', external: false },
+        cta: { label: 'Click to Apply', href: '/apply', external: false },
     },
     {
         icon: Building2,
@@ -197,7 +197,7 @@ const PROGRAMS = [
                 ],
             },
         ],
-        cta: { label: 'Click to Apply', href: '/our-team', external: false },
+        cta: { label: 'Click to Apply', href: '/apply', external: false },
     },
 ];
 

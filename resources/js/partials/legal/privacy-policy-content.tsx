@@ -96,7 +96,7 @@ export function PrivacyPolicyContent() {
                 />
                 <p>
                     To exercise these rights, please contact us via our{' '}
-                    <Link href="/about" className="text-primary hover:underline">
+                    <Link href="/apply" className="text-primary hover:underline">
                         About Us
                     </Link>{' '}
                     page.

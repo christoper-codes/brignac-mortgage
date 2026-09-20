@@ -1,19 +1,19 @@
 import { Head } from '@inertiajs/react';
+import { ApplyHero } from '@/partials/apply/hero';
+import { TeamDirectory } from '@/partials/apply/team-directory';
 import { Contact } from '@/partials/contact';
 import { Footer } from '@/partials/footer';
 import { Header } from '@/partials/header';
-import { TeamHero } from '@/partials/our-team/hero';
-import { TeamDirectory } from '@/partials/our-team/team-directory';
 
-export default function OurTeam() {
+export default function Apply() {
     return (
         <>
-            <Head title="Our Team" />
+            <Head title="Apply" />
 
             <div className="force-light min-h-screen bg-background">
                 <Header />
                 <main className="pt-36">
-                    <TeamHero />
+                    <ApplyHero />
                     <TeamDirectory />
                     <div className="mt-16">
                         <Contact />
