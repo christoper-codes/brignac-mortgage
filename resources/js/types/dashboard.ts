@@ -10,7 +10,6 @@ export type Campaign = {
     budget: number | null;
     starts_at: string | null;
     ends_at: string | null;
-    notes: string | null;
     tracking_url: string;
     visits_count: number;
     leads_count: number;

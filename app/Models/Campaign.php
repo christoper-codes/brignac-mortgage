@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['name', 'code', 'platform', 'status', 'budget_cents', 'starts_at', 'ends_at', 'notes'])]
+#[Fillable(['name', 'code', 'platform', 'status', 'budget_cents', 'starts_at', 'ends_at'])]
 class Campaign extends Model
 {
     /** @use HasFactory<CampaignFactory> */

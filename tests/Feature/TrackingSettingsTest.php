@@ -2,7 +2,11 @@
 
 use App\Models\TrackingSetting;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Testing\AssertableInertia as Assert;
+
+// The settings are cached for the whole app; the array cache would otherwise carry them between tests.
+beforeEach(fn () => Cache::flush());
 
 test('guests cannot open or change the pixel settings', function () {
     $this->get(route('dashboard.tracking.edit'))->assertRedirect(route('login'));

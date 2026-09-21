@@ -35,4 +35,8 @@ export default defineConfig({
             formVariants: true,
         }),
     ],
+     server: {
+        cors: true,
+        host: 'localhost',
+    },
 });

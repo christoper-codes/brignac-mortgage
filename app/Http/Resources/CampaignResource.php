@@ -29,7 +29,6 @@ class CampaignResource extends JsonResource
             'budget' => $this->budget_cents !== null ? $this->budget_cents / 100 : null,
             'starts_at' => $this->starts_at?->toDateString(),
             'ends_at' => $this->ends_at?->toDateString(),
-            'notes' => $this->notes,
             'tracking_url' => $this->trackingUrl(),
             'visits_count' => $visits,
             'leads_count' => $leads,

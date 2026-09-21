@@ -2,15 +2,27 @@ import { Head, router, useForm } from '@inertiajs/react';
 import { Check, Copy, Pencil, Plus, Trash2 } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
-import { Card, EmptyState, PageHeader, PlatformBadge, number } from '@/components/dashboard/ui';
+import { Card, EmptyState, PageHeader, PlatformBadge, PlatformMark, number } from '@/components/dashboard/ui';
 import InputError from '@/components/input-error';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { DatePicker } from '@/components/ui/date-picker';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useClipboard } from '@/hooks/use-clipboard';
 import { cn } from '@/lib/utils';
 import { destroy, index, store, update } from '@/routes/dashboard/campaigns';
-import type { Campaign } from '@/types/dashboard';
+import type { Campaign, Platform } from '@/types/dashboard';
 
 type Props = {
     campaigns: Campaign[];
@@ -25,9 +37,19 @@ const STATUS_STYLES: Record<string, string> = {
     ended: 'bg-red-500/10 text-red-500',
 };
 
+const STATUS_DOTS: Record<string, string> = {
+    active: 'bg-primary',
+    paused: 'bg-yellow-500',
+    draft: 'bg-foreground/30',
+    ended: 'bg-red-500',
+};
+
 const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 const fieldClass = 'h-11 w-full rounded-full border border-border bg-background px-5 text-sm text-foreground outline-none transition-colors focus:border-primary';
+const selectTriggerClass = 'h-11 w-full rounded-full border-border bg-background px-5 text-sm shadow-none focus-visible:border-primary focus-visible:ring-0';
+const selectContentClass = 'rounded-3xl p-1.5';
+const selectItemClass = 'rounded-full py-2.5 pr-8 pl-3';
 
 function CampaignForm({ campaign, platforms, statuses, onDone }: { campaign: Campaign | null; platforms: Props['platforms']; statuses: string[]; onDone: () => void }) {
     const form = useForm({
@@ -38,7 +60,6 @@ function CampaignForm({ campaign, platforms, statuses, onDone }: { campaign: Cam
         budget: campaign?.budget?.toString() ?? '',
         starts_at: campaign?.starts_at ?? '',
         ends_at: campaign?.ends_at ?? '',
-        notes: campaign?.notes ?? '',
     });
 
     const submit = (event: FormEvent) => {
@@ -63,41 +84,59 @@ function CampaignForm({ campaign, platforms, statuses, onDone }: { campaign: Cam
             <div className="grid gap-4 sm:grid-cols-2">
                 <div className="grid gap-2">
                     <Label htmlFor="platform">Platform</Label>
-                    <select id="platform" value={form.data.platform} onChange={(event) => form.setData('platform', event.target.value as Campaign['platform'])} className={fieldClass}>
-                        {platforms.map((platform) => (
-                            <option key={platform.value} value={platform.value}>{platform.label}</option>
-                        ))}
-                    </select>
+                    <Select value={form.data.platform} onValueChange={(value) => form.setData('platform', value as Platform)}>
+                        <SelectTrigger id="platform" className={selectTriggerClass}>
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className={selectContentClass}>
+                            {platforms.map((platform) => (
+                                <SelectItem key={platform.value} value={platform.value} className={selectItemClass}>
+                                    <PlatformMark platform={platform.value as Platform} className="size-4" />
+                                    {platform.label}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                     <InputError message={form.errors.platform} />
                 </div>
+
                 <div className="grid gap-2">
                     <Label htmlFor="status">Status</Label>
-                    <select id="status" value={form.data.status} onChange={(event) => form.setData('status', event.target.value)} className={cn(fieldClass, 'capitalize')}>
-                        {statuses.map((status) => (
-                            <option key={status} value={status}>{status}</option>
-                        ))}
-                    </select>
+                    <Select value={form.data.status} onValueChange={(value) => form.setData('status', value)}>
+                        <SelectTrigger id="status" className={cn(selectTriggerClass, 'capitalize')}>
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className={selectContentClass}>
+                            {statuses.map((status) => (
+                                <SelectItem key={status} value={status} className={cn(selectItemClass, 'capitalize')}>
+                                    <span className={cn('size-2 rounded-full', STATUS_DOTS[status])} />
+                                    {status}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                     <InputError message={form.errors.status} />
                 </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-                <div className="grid gap-2">
-                    <Label htmlFor="budget">Budget (USD)</Label>
-                    <Input id="budget" type="number" min="0" step="0.01" value={form.data.budget} onChange={(event) => form.setData('budget', event.target.value)} className={fieldClass} placeholder="500" />
-                    <InputError message={form.errors.budget} />
+            <div className="grid gap-2">
+                <Label htmlFor="budget">Budget</Label>
+                <div className="relative">
+                    <span className="pointer-events-none absolute top-1/2 left-5 -translate-y-1/2 text-sm text-foreground/50">$</span>
+                    <Input id="budget" type="number" inputMode="decimal" min="0" step="0.01" value={form.data.budget} onChange={(event) => form.setData('budget', event.target.value)} className={cn(fieldClass, 'pl-9')} placeholder="500" />
                 </div>
+                <InputError message={form.errors.budget} />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
                 <div className="grid gap-2">
                     <Label htmlFor="starts_at">Starts</Label>
-                    <Input id="starts_at" type="date" value={form.data.starts_at} onChange={(event) => form.setData('starts_at', event.target.value)} className={fieldClass} />
+                    <DatePicker id="starts_at" value={form.data.starts_at} onChange={(value) => form.setData('starts_at', value)} placeholder="Start date" />
                     <InputError message={form.errors.starts_at} />
                 </div>
                 <div className="grid gap-2">
                     <Label htmlFor="ends_at">Ends</Label>
-                    <Input id="ends_at" type="date" value={form.data.ends_at} onChange={(event) => form.setData('ends_at', event.target.value)} className={fieldClass} />
+                    <DatePicker id="ends_at" value={form.data.ends_at} onChange={(value) => form.setData('ends_at', value)} placeholder="End date" min={form.data.starts_at || undefined} />
                     <InputError message={form.errors.ends_at} />
                 </div>
             </div>
@@ -107,12 +146,6 @@ function CampaignForm({ campaign, platforms, statuses, onDone }: { campaign: Cam
                 <Input id="code" value={form.data.code} onChange={(event) => form.setData('code', event.target.value.toLowerCase())} className={fieldClass} placeholder="Auto-generated from the name" />
                 <p className="text-xs text-foreground/50">Goes in the ad link as utm_campaign. Lowercase letters, numbers, - and _.</p>
                 <InputError message={form.errors.code} />
-            </div>
-
-            <div className="grid gap-2">
-                <Label htmlFor="notes">Notes</Label>
-                <textarea id="notes" rows={3} value={form.data.notes} onChange={(event) => form.setData('notes', event.target.value)} className="w-full resize-none rounded-3xl border border-border bg-background px-5 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary" />
-                <InputError message={form.errors.notes} />
             </div>
 
             <button type="submit" disabled={form.processing} className="inline-flex h-11 w-full items-center justify-center rounded-full bg-foreground text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-50">
@@ -142,11 +175,12 @@ function TrackingLink({ url }: { url: string }) {
 
 export default function Campaigns({ campaigns, platforms, statuses }: Props) {
     const [editing, setEditing] = useState<Campaign | 'new' | null>(null);
+    const [deleting, setDeleting] = useState<Campaign | null>(null);
     const close = () => setEditing(null);
 
-    const remove = (campaign: Campaign) => {
-        if (window.confirm(`Delete "${campaign.name}"? Its leads and visits are kept.`)) {
-            router.delete(destroy(campaign.id).url, { preserveScroll: true });
+    const confirmDelete = () => {
+        if (deleting) {
+            router.delete(destroy(deleting.id).url, { preserveScroll: true, onFinish: () => setDeleting(null) });
         }
     };
 
@@ -193,7 +227,7 @@ export default function Campaigns({ campaigns, platforms, statuses }: Props) {
                                         <button type="button" onClick={() => setEditing(campaign)} aria-label="Edit campaign" className="grid size-9 place-items-center rounded-full text-foreground/50 transition-colors hover:bg-foreground/5 hover:text-foreground">
                                             <Pencil className="size-4" />
                                         </button>
-                                        <button type="button" onClick={() => remove(campaign)} aria-label="Delete campaign" className="grid size-9 place-items-center rounded-full text-foreground/50 transition-colors hover:bg-red-500/10 hover:text-red-500">
+                                        <button type="button" onClick={() => setDeleting(campaign)} aria-label="Delete campaign" className="grid size-9 place-items-center rounded-full text-foreground/50 transition-colors hover:bg-red-500/10 hover:text-red-500">
                                             <Trash2 className="size-4" />
                                         </button>
                                     </div>
@@ -215,7 +249,7 @@ export default function Campaigns({ campaigns, platforms, statuses }: Props) {
 
                                 {campaign.budget !== null && (
                                     <p className="text-xs text-foreground/50">
-                                        {campaign.budget !== null && <>Budget {money.format(campaign.budget)}</>}
+                                        Budget {money.format(campaign.budget)}
                                         {campaign.cost_per_lead !== null && <> · {money.format(campaign.cost_per_lead)} per lead</>}
                                     </p>
                                 )}
@@ -236,6 +270,21 @@ export default function Campaigns({ campaigns, platforms, statuses }: Props) {
                     {editing !== null && <CampaignForm key={editing === 'new' ? 'new' : editing.id} campaign={editing === 'new' ? null : editing} platforms={platforms} statuses={statuses} onDone={close} />}
                 </DialogContent>
             </Dialog>
+
+            <AlertDialog open={deleting !== null} onOpenChange={(open) => !open && setDeleting(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Delete this campaign?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            <span className="font-medium text-foreground">{deleting?.name}</span> and its tracking link will be removed. The visits, clicks and leads it already brought in are kept, just no longer tied to a campaign.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmDelete}>Delete campaign</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </>
     );
 }
