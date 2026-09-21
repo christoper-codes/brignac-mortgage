@@ -230,12 +230,12 @@ export function Calculator() {
                                     <label className="block">
                                         <span className="mb-1.5 block text-sm font-medium text-neutral-700">Loan Term</span>
                                         <Select value={termYears} onValueChange={setTermYears}>
-                                            <SelectTrigger className="h-auto w-full rounded-xl border-neutral-200 bg-neutral-50 px-3.5 py-2.5 text-neutral-900 [&_svg]:text-neutral-400">
+                                            <SelectTrigger className="h-11.5 w-full rounded-full border-neutral-200 bg-neutral-50 px-5 text-neutral-900 shadow-none focus-visible:border-primary focus-visible:ring-0 [&_svg]:text-neutral-400">
                                                 <SelectValue />
                                             </SelectTrigger>
-                                            <SelectContent>
+                                            <SelectContent className="rounded-3xl p-1.5">
                                                 {TERM_OPTIONS.map((option) => (
-                                                    <SelectItem key={option.value} value={option.value}>
+                                                    <SelectItem key={option.value} value={option.value} className="rounded-full py-2.5 pl-3">
                                                         {option.label}
                                                     </SelectItem>
                                                 ))}
@@ -294,7 +294,7 @@ export function Calculator() {
             </div>
 
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-5xl">
+                <DialogContent className="max-h-[88dvh] overflow-y-auto overscroll-contain rounded-4xl p-5 sm:max-w-5xl sm:p-8">
                     <DialogHeader>
                         <DialogTitle className="text-2xl text-primary">Calculation Results</DialogTitle>
                     </DialogHeader>
@@ -312,7 +312,7 @@ export function Calculator() {
                                     { label: 'Loan-to-Value', value: `${totals.ltv.toFixed(1)}%` },
                                     { label: 'Rate / Term', value: `${result.params.rate.toFixed(2)}% · ${result.params.years} yrs` },
                                 ].map((card) => (
-                                    <div key={card.label} className="rounded-xl border border-border bg-muted/40 p-3">
+                                    <div key={card.label} className="rounded-2xl border border-border bg-muted/40 p-3">
                                         <p className="text-[11px] tracking-wide text-muted-foreground uppercase">{card.label}</p>
                                         <p className="mt-1 text-sm font-semibold text-foreground">{card.value}</p>
                                     </div>
@@ -374,7 +374,37 @@ export function Calculator() {
                                 </div>
                             </div>
 
-                            <div className="overflow-x-auto rounded-lg border border-border">
+                            {/* Phones get one compact card per row: a wide table there forces sideways scrolling that fights the page's vertical scroll. */}
+                            <ul className="space-y-2 sm:hidden">
+                                {pagedRows.map((row) => {
+                                    const label = 'month' in row ? row.month : row.year;
+
+                                    return (
+                                        <li key={label} className="rounded-2xl border border-border p-3.5">
+                                            <div className="flex items-baseline justify-between">
+                                                <span className="text-sm font-semibold">
+                                                    {viewMode === 'month' ? 'Month' : 'Year'} {label}
+                                                </span>
+                                                <span className="text-xs text-muted-foreground">Balance {currencyPrecise.format(row.balance)}</span>
+                                            </div>
+                                            <dl className="mt-2 grid grid-cols-3 gap-2 text-xs">
+                                                {[
+                                                    [viewMode === 'month' ? 'Payment' : 'Paid', row.payment],
+                                                    ['Principal', row.principal],
+                                                    ['Interest', row.interest],
+                                                ].map(([name, value]) => (
+                                                    <div key={name as string} className="rounded-xl bg-muted/50 p-2">
+                                                        <dt className="text-[10px] text-muted-foreground uppercase">{name}</dt>
+                                                        <dd className="mt-0.5 font-medium">{currencyPrecise.format(value as number)}</dd>
+                                                    </div>
+                                                ))}
+                                            </dl>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+
+                            <div className="hidden overflow-x-auto rounded-3xl border border-border sm:block">
                                 <table className="w-full text-left text-sm">
                                     <thead className="bg-muted text-xs uppercase text-muted-foreground">
                                         <tr>

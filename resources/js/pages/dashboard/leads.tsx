@@ -3,6 +3,7 @@ import { Mail, MessageSquare, Phone } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { Card, EmptyState, PageHeader, PlatformBadge, StatePill } from '@/components/dashboard/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { index, update } from '@/routes/dashboard/leads';
 import type { Lead } from '@/types/dashboard';
@@ -23,7 +24,28 @@ const STATUS_STYLES: Record<string, string> = {
     lost: 'bg-red-500/10 text-red-500',
 };
 
-const selectClass = 'h-10 rounded-full border border-border bg-card px-4 text-sm capitalize text-foreground outline-none focus:border-primary';
+const ALL = 'all';
+
+// Radix selects can't hold an empty value, so "no filter" is a sentinel that maps back to undefined.
+function FilterSelect({ value, placeholder, options, onChange }: { value?: string; placeholder: string; options: { value: string; label: string }[]; onChange: (value: string | undefined) => void }) {
+    return (
+        <Select value={value ?? ALL} onValueChange={(next) => onChange(next === ALL ? undefined : next)}>
+            <SelectTrigger className="h-10 min-w-40 rounded-full border-border bg-card px-4 text-sm capitalize shadow-none focus-visible:border-primary focus-visible:ring-0">
+                <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="max-h-72 rounded-3xl p-1.5">
+                <SelectItem value={ALL} className="rounded-full py-2 pl-3">
+                    {placeholder}
+                </SelectItem>
+                {options.map((option) => (
+                    <SelectItem key={option.value} value={option.value} className="rounded-full py-2 pl-3 capitalize">
+                        {option.label}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
+    );
+}
 
 const dateTime = (iso: string) => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 
@@ -59,24 +81,14 @@ export default function Leads({ leads, filters, campaigns, statuses, states }: P
                             className="h-10 w-full rounded-full border border-border bg-card px-5 text-sm text-foreground outline-none focus:border-primary"
                         />
                     </form>
-                    <select value={filters.campaign ?? ''} onChange={(event) => filter({ campaign: event.target.value || undefined })} className={selectClass}>
-                        <option value="">All campaigns</option>
-                        {campaigns.map((campaign) => (
-                            <option key={campaign.id} value={campaign.id}>{campaign.name}</option>
-                        ))}
-                    </select>
-                    <select value={filters.status ?? ''} onChange={(event) => filter({ status: event.target.value || undefined })} className={selectClass}>
-                        <option value="">Any status</option>
-                        {statuses.map((status) => (
-                            <option key={status} value={status}>{status}</option>
-                        ))}
-                    </select>
-                    <select value={filters.state ?? ''} onChange={(event) => filter({ state: event.target.value || undefined })} className={selectClass}>
-                        <option value="">Any state</option>
-                        {states.map((state) => (
-                            <option key={state} value={state}>{state}</option>
-                        ))}
-                    </select>
+                    <FilterSelect
+                        value={filters.campaign}
+                        placeholder="All campaigns"
+                        onChange={(campaign) => filter({ campaign })}
+                        options={campaigns.map((campaign) => ({ value: String(campaign.id), label: campaign.name }))}
+                    />
+                    <FilterSelect value={filters.status} placeholder="Any status" onChange={(status) => filter({ status })} options={statuses.map((status) => ({ value: status, label: status }))} />
+                    <FilterSelect value={filters.state} placeholder="Any state" onChange={(state) => filter({ state })} options={states.map((state) => ({ value: state, label: state }))} />
                 </div>
 
                 {leads.data.length === 0 ? (
@@ -111,15 +123,18 @@ export default function Leads({ leads, filters, campaigns, statuses, states }: P
                                         {lead.ip_address && <p className="text-foreground/40">{lead.ip_address}</p>}
                                     </div>
 
-                                    <select
-                                        value={lead.status}
-                                        onChange={(event) => setStatus(lead, event.target.value)}
-                                        className={cn('h-9 rounded-full border-0 px-4 text-xs font-medium capitalize outline-none', STATUS_STYLES[lead.status])}
-                                    >
-                                        {statuses.map((status) => (
-                                            <option key={status} value={status}>{status}</option>
-                                        ))}
-                                    </select>
+                                    <Select value={lead.status} onValueChange={(status) => setStatus(lead, status)}>
+                                        <SelectTrigger className={cn('h-9 w-32 rounded-full border-0 px-4 text-xs font-medium capitalize shadow-none focus-visible:ring-0', STATUS_STYLES[lead.status])}>
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent className="rounded-3xl p-1.5" align="end">
+                                            {statuses.map((status) => (
+                                                <SelectItem key={status} value={status} className="rounded-full py-2 pl-3 capitalize">
+                                                    {status}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                             </Card>
                         ))}

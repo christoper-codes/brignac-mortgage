@@ -10,7 +10,7 @@ function AlertDialog({ ...props }: React.ComponentProps<typeof AlertDialogPrimit
 function AlertDialogContent({ className, ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
     return (
         <AlertDialogPrimitive.Portal>
-            <AlertDialogPrimitive.Overlay className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
+            <AlertDialogPrimitive.Overlay className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 backdrop-blur-md" />
             <AlertDialogPrimitive.Content
                 data-slot="alert-dialog-content"
                 className={cn(
