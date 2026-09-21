@@ -106,12 +106,13 @@ export function trackVisit(path: string): void {
     });
 }
 
-export function trackClick(label: string, target: string): void {
+export function trackClick(label: string, target: string, member?: string): void {
     pixelCta(label);
     send(click().url, {
         visitor_id: getVisitorId(),
         label,
         target,
+        team_member: member ?? null,
         path: window.location.pathname,
         utm_campaign: getAttribution().utm_campaign ?? null,
     });

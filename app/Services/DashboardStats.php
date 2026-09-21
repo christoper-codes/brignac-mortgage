@@ -77,10 +77,26 @@ class DashboardStats
                 ->whereBetween('created_at', [$from, $to])
                 ->groupBy('label')->orderByDesc('total')->limit(8)->get()
                 ->map(fn ($row): array => ['label' => $row->label, 'total' => (int) $row->total])->all(),
+            'teamMembers' => $this->teamMembers($from, $to),
             // Which agents (browser / device) actually turn into leads.
             'leadBrowsers' => $this->leadBreakdown($from, $to, 'browser'),
             'leadDevices' => $this->leadBreakdown($from, $to, 'device_type'),
         ];
+    }
+
+    /**
+     * Which team member visitors pick: Apply Now clicks first, every other tagged click (phone, email)
+     * as the total.
+     *
+     * @return list<array{member: string, applies: int, total: int}>
+     */
+    private function teamMembers(CarbonImmutable $from, CarbonImmutable $to): array
+    {
+        return CtaClick::query()
+            ->selectRaw("team_member, sum(case when label = 'Apply Now' then 1 else 0 end) as applies, count(*) as total")
+            ->whereBetween('created_at', [$from, $to])->whereNotNull('team_member')
+            ->groupBy('team_member')->orderByDesc('applies')->orderByDesc('total')->get()
+            ->map(fn ($row): array => ['member' => $row->team_member, 'applies' => (int) $row->applies, 'total' => (int) $row->total])->all();
     }
 
     /**

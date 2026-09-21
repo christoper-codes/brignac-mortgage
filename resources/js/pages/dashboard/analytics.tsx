@@ -17,13 +17,14 @@ type Props = {
     sources: Row[];
     pages: Row[];
     ctaLabels: { label: string; total: number }[];
+    teamMembers: { member: string; applies: number; total: number }[];
     leadBrowsers: Row[];
     leadDevices: Row[];
 };
 
 const shortDate = (date: string) => new Date(`${date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
-export default function Analytics({ days, totals, daily, weekly, monthly, states, countries, devices, browsers, systems, sources, pages, ctaLabels, leadBrowsers, leadDevices }: Props) {
+export default function Analytics({ days, totals, daily, weekly, monthly, states, countries, devices, browsers, systems, sources, pages, ctaLabels, teamMembers, leadBrowsers, leadDevices }: Props) {
     return (
         <>
             <Head title="Analytics" />
@@ -37,6 +38,27 @@ export default function Analytics({ days, totals, daily, weekly, monthly, states
                     <StatCard label="CTA clicks" value={totals.clicks} />
                     <StatCard label="Leads" value={totals.leads} />
                 </div>
+
+                <Card>
+                    <CardTitle>Apply Now clicks by team member</CardTitle>
+                    {teamMembers.length === 0 ? (
+                        <p className="py-6 text-center text-sm text-foreground/40">No clicks on the team page yet</p>
+                    ) : (
+                        <div className="grid gap-6 lg:grid-cols-2">
+                            <Breakdown rows={teamMembers.map((row) => ({ label: row.member, total: row.applies }))} />
+                            <ul className="space-y-2">
+                                {teamMembers.map((row) => (
+                                    <li key={row.member} className="flex items-center justify-between rounded-2xl bg-background px-4 py-3 text-sm">
+                                        <span className="truncate text-foreground/80">{row.member}</span>
+                                        <span className="ml-3 shrink-0 text-xs text-foreground/50">
+                                            {row.applies} apply · {row.total - row.applies} phone / email
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </Card>
 
                 <Card>
                     <CardTitle>Visitors per day</CardTitle>

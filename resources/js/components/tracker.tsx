@@ -50,7 +50,7 @@ export function Tracker() {
             if (link && isTrackedPath(window.location.pathname) && isCallToAction(link)) {
                 const label = link.dataset.cta ?? link.getAttribute('aria-label') ?? link.textContent?.trim() ?? 'Link';
 
-                trackClick(label.slice(0, 80), link.getAttribute('href') ?? '');
+                trackClick(label.slice(0, 80), link.getAttribute('href') ?? '', link.dataset.member);
             }
         };
 

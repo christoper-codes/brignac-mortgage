@@ -81,3 +81,18 @@ test('the overview ranks campaigns by leads', function () {
         ->where('topCampaigns.0.name', 'Winner')
         ->where('topCampaigns.0.leads', 3));
 });
+
+test('analytics ranks team members by Apply Now clicks', function () {
+    CtaClick::factory()->count(3)->create(['label' => 'Apply Now', 'team_member' => 'Shaun Brignac, MBA']);
+    CtaClick::factory()->create(['label' => 'Shaun@brignacmortgage.com', 'team_member' => 'Shaun Brignac, MBA']);
+    CtaClick::factory()->count(1)->create(['label' => 'Apply Now', 'team_member' => 'Allison Ratcliff']);
+    CtaClick::factory()->create(['label' => 'Apply Now', 'team_member' => null]);
+
+    $this->actingAs(User::factory()->create())
+        ->get(route('dashboard.analytics'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('teamMembers', [
+                ['member' => 'Shaun Brignac, MBA', 'applies' => 3, 'total' => 4],
+                ['member' => 'Allison Ratcliff', 'applies' => 1, 'total' => 1],
+            ]));
+});

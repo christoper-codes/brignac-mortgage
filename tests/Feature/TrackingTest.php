@@ -97,3 +97,17 @@ test('local addresses are never sent to the geolocation service', function () {
     Http::assertNothingSent();
     expect(Visit::query()->sole()->region_code)->toBeNull();
 });
+
+test('a click on a team member link remembers which member it was', function () {
+    $this->withHeader('User-Agent', IPHONE_UA)
+        ->postJson(route('track.click'), [
+            'visitor_id' => 'v',
+            'label' => 'Apply Now',
+            'target' => 'https://2401214.my1003app.com',
+            'team_member' => 'Shaun Brignac, MBA',
+            'path' => '/apply',
+        ])
+        ->assertNoContent();
+
+    expect(CtaClick::query()->sole())->team_member->toBe('Shaun Brignac, MBA');
+});

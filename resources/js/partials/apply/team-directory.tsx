@@ -111,14 +111,14 @@ function MemberPanel({ member }: { member: Member }) {
                 <motion.div variants={item} className="mt-6 grid gap-3 sm:grid-cols-2">
                     <div className="sm:col-span-2">
                         <DetailTile icon={Mail} label="Email" action={<CopyButton value={member.email} />}>
-                            <a href={`mailto:${member.email}`} className="hover:text-primary">
+                            <a href={`mailto:${member.email}`} data-member={member.name} className="hover:text-primary">
                                 {member.email}
                             </a>
                         </DetailTile>
                     </div>
                     {member.phones.map((phone) => (
                         <DetailTile key={phone.label} icon={Phone} label={phone.label}>
-                            <a href={telHref(phone.value)} className="hover:text-primary">
+                            <a href={telHref(phone.value)} data-member={member.name} className="hover:text-primary">
                                 {phone.value}
                             </a>
                         </DetailTile>
@@ -144,6 +144,7 @@ function MemberPanel({ member }: { member: Member }) {
                     {member.apply && (
                         <a
                             href={member.apply}
+                            data-member={member.name}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group inline-flex items-center gap-2 rounded-full bg-primary py-2.5 pr-2.5 pl-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"

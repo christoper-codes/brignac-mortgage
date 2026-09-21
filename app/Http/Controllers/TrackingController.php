@@ -44,6 +44,7 @@ class TrackingController extends Controller
             'visitor_id' => ['required', 'string', 'max:64'],
             'label' => ['required', 'string', 'max:255'],
             'target' => ['nullable', 'string', 'max:1024'],
+            'team_member' => ['nullable', 'string', 'max:255'],
             'path' => ['required', 'string', 'max:512'],
             'utm_campaign' => ['nullable', 'string', 'max:255'],
         ]);
@@ -56,6 +57,7 @@ class TrackingController extends Controller
             'visitor_id' => $data['visitor_id'],
             'label' => $data['label'],
             'target' => $data['target'] ?? null,
+            'team_member' => $data['team_member'] ?? null,
             'path' => $data['path'],
             ...$this->context->device($request),
             'campaign_id' => $this->context->campaignIdFor($data['utm_campaign'] ?? null),
