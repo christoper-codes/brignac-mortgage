@@ -1,5 +1,6 @@
 import { router } from '@inertiajs/react';
 import { useEffect } from 'react';
+import { loadPixels, pixelPageView } from '@/lib/pixels';
 import { isTrackedPath, trackClick, trackVisit } from '@/lib/tracking';
 
 const CTA_SELECTOR = 'a[href]';
@@ -23,16 +24,25 @@ function isCallToAction(link: HTMLAnchorElement): boolean {
  */
 export function Tracker() {
     useEffect(() => {
-        const reportPage = (url: string) => {
+        // Ad pixels load on the public site only, never inside the team dashboard.
+        const reportPage = (url: string, first: boolean) => {
             const path = new URL(url, window.location.origin).pathname;
 
-            if (isTrackedPath(path)) {
-                trackVisit(path);
+            if (!isTrackedPath(path)) {
+                return;
+            }
+
+            trackVisit(path);
+
+            if (first) {
+                loadPixels(window.__tracking ?? { metaPixelId: null, tiktokPixelId: null, googleAnalyticsId: null });
+            } else {
+                pixelPageView(path);
             }
         };
 
-        reportPage(window.location.href);
-        const stopListening = router.on('navigate', (event) => reportPage(event.detail.page.url));
+        reportPage(window.location.href, true);
+        const stopListening = router.on('navigate', (event) => reportPage(event.detail.page.url, false));
 
         const handleClick = (event: MouseEvent) => {
             const link = (event.target as Element | null)?.closest<HTMLAnchorElement>(CTA_SELECTOR);

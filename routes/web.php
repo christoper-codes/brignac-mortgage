@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\CampaignController;
 use App\Http\Controllers\Dashboard\LeadController as DashboardLeadController;
 use App\Http\Controllers\Dashboard\OverviewController;
+use App\Http\Controllers\Dashboard\TrackingController as DashboardTrackingController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\TrackingController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('analytics', AnalyticsController::class)->name('analytics');
+        Route::get('tracking', [DashboardTrackingController::class, 'edit'])->name('tracking.edit');
+        Route::put('tracking', [DashboardTrackingController::class, 'update'])->name('tracking.update');
         Route::get('leads', [DashboardLeadController::class, 'index'])->name('leads.index');
         Route::patch('leads/{lead}', [DashboardLeadController::class, 'update'])->name('leads.update');
         Route::resource('campaigns', CampaignController::class)->only(['index', 'store', 'update', 'destroy']);

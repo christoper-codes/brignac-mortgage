@@ -8,7 +8,6 @@ export type Campaign = {
     platform_label: string;
     status: string;
     budget: number | null;
-    pixel_id: string | null;
     starts_at: string | null;
     ends_at: string | null;
     notes: string | null;

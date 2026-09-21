@@ -55,10 +55,10 @@ test('a campaign can be updated keeping its own code', function () {
     $campaign = Campaign::factory()->create(['code' => 'keep-me']);
 
     $this->put(route('dashboard.campaigns.update', $campaign), [
-        'name' => 'Renamed', 'code' => 'keep-me', 'platform' => 'tiktok', 'status' => 'paused', 'pixel_id' => '12345',
+        'name' => 'Renamed', 'code' => 'keep-me', 'platform' => 'tiktok', 'status' => 'paused',
     ])->assertSessionHasNoErrors();
 
-    expect($campaign->fresh())->name->toBe('Renamed')->status->toBe(CampaignStatus::Paused)->pixel_id->toBe('12345');
+    expect($campaign->fresh())->name->toBe('Renamed')->status->toBe(CampaignStatus::Paused);
 });
 
 test('deleting a campaign keeps its leads', function () {

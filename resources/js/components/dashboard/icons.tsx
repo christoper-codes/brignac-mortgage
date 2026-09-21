@@ -62,6 +62,17 @@ export function AnalyticsIcon({ className }: IconProps) {
     );
 }
 
+export function TrackingIcon({ className }: IconProps) {
+    return (
+        <Icon className={className}>
+            <circle cx="12" cy="12" r="8.5" />
+            <circle cx="12" cy="12" r="4.5" />
+            <circle cx="12" cy="12" r="1" fill="currentColor" />
+            <path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3" />
+        </Icon>
+    );
+}
+
 export function SettingsIcon({ className }: IconProps) {
     return (
         <Icon className={className}>

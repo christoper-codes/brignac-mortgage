@@ -27,7 +27,6 @@ class CampaignResource extends JsonResource
             'platform_label' => $this->platform->label(),
             'status' => $this->status->value,
             'budget' => $this->budget_cents !== null ? $this->budget_cents / 100 : null,
-            'pixel_id' => $this->pixel_id,
             'starts_at' => $this->starts_at?->toDateString(),
             'ends_at' => $this->ends_at?->toDateString(),
             'notes' => $this->notes,

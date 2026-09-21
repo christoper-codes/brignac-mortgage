@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Check, CheckCircle2, ChevronDown, Mail, MapPin, Phone } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
+import { pixelLead } from '@/lib/pixels';
 import { getAttribution, getVisitorId } from '@/lib/tracking';
 import { store } from '@/routes/leads';
 
@@ -56,7 +57,10 @@ export function Contact() {
                     setProcessing(true);
                     setErrors({});
                 },
-                onSuccess: () => setSubmitted(true),
+                onSuccess: () => {
+                    setSubmitted(true);
+                    pixelLead();
+                },
                 onError: (formErrors) => setErrors(formErrors),
                 onFinish: () => setProcessing(false),
             },

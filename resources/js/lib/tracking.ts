@@ -1,3 +1,4 @@
+import { pixelCta } from '@/lib/pixels';
 import { click, visit } from '@/routes/track';
 
 const VISITOR_KEY = 'bm_vid';
@@ -106,6 +107,7 @@ export function trackVisit(path: string): void {
 }
 
 export function trackClick(label: string, target: string): void {
+    pixelCta(label);
     send(click().url, {
         visitor_id: getVisitorId(),
         label,

@@ -1,7 +1,7 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import type { ComponentType } from 'react';
-import { AnalyticsIcon, CampaignsIcon, LeadsIcon, LogoutIcon, OverviewIcon, SettingsIcon } from '@/components/dashboard/icons';
+import { AnalyticsIcon, CampaignsIcon, LeadsIcon, LogoutIcon, OverviewIcon, SettingsIcon, TrackingIcon } from '@/components/dashboard/icons';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
@@ -9,6 +9,7 @@ import { dashboard, logout } from '@/routes';
 import { analytics } from '@/routes/dashboard';
 import { index as campaigns } from '@/routes/dashboard/campaigns';
 import { index as leads } from '@/routes/dashboard/leads';
+import { edit as tracking } from '@/routes/dashboard/tracking';
 import { edit } from '@/routes/profile';
 
 type Item = { title: string; href: string; icon: ComponentType<{ className?: string }>; exact?: boolean; match?: string };
@@ -18,6 +19,7 @@ const ITEMS: Item[] = [
     { title: 'Campaigns', href: campaigns().url, icon: CampaignsIcon },
     { title: 'Leads', href: leads().url, icon: LeadsIcon },
     { title: 'Analytics', href: analytics().url, icon: AnalyticsIcon },
+    { title: 'Pixels', href: tracking().url, icon: TrackingIcon },
 ];
 
 const SETTINGS: Item = { title: 'Settings', href: edit().url, icon: SettingsIcon, match: '/settings' };

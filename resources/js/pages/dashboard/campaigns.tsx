@@ -36,7 +36,6 @@ function CampaignForm({ campaign, platforms, statuses, onDone }: { campaign: Cam
         platform: campaign?.platform ?? platforms[0]?.value ?? 'facebook',
         status: campaign?.status ?? 'draft',
         budget: campaign?.budget?.toString() ?? '',
-        pixel_id: campaign?.pixel_id ?? '',
         starts_at: campaign?.starts_at ?? '',
         ends_at: campaign?.ends_at ?? '',
         notes: campaign?.notes ?? '',
@@ -87,11 +86,6 @@ function CampaignForm({ campaign, platforms, statuses, onDone }: { campaign: Cam
                     <Label htmlFor="budget">Budget (USD)</Label>
                     <Input id="budget" type="number" min="0" step="0.01" value={form.data.budget} onChange={(event) => form.setData('budget', event.target.value)} className={fieldClass} placeholder="500" />
                     <InputError message={form.errors.budget} />
-                </div>
-                <div className="grid gap-2">
-                    <Label htmlFor="pixel_id">Pixel ID</Label>
-                    <Input id="pixel_id" value={form.data.pixel_id} onChange={(event) => form.setData('pixel_id', event.target.value)} className={fieldClass} placeholder="Optional" />
-                    <InputError message={form.errors.pixel_id} />
                 </div>
             </div>
 
@@ -219,11 +213,10 @@ export default function Campaigns({ campaigns, platforms, statuses }: Props) {
                                     ))}
                                 </dl>
 
-                                {(campaign.budget !== null || campaign.pixel_id) && (
+                                {campaign.budget !== null && (
                                     <p className="text-xs text-foreground/50">
                                         {campaign.budget !== null && <>Budget {money.format(campaign.budget)}</>}
                                         {campaign.cost_per_lead !== null && <> · {money.format(campaign.cost_per_lead)} per lead</>}
-                                        {campaign.pixel_id && <> · Pixel {campaign.pixel_id}</>}
                                     </p>
                                 )}
 

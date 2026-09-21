@@ -7,6 +7,16 @@ declare module 'react' {
     }
 }
 
+declare global {
+    interface Window {
+        __tracking?: {
+            metaPixelId: string | null;
+            tiktokPixelId: string | null;
+            googleAnalyticsId: string | null;
+        };
+    }
+}
+
 declare module '@inertiajs/core' {
     export interface InertiaConfig {
         sharedPageProps: {

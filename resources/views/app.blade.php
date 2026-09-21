@@ -36,6 +36,8 @@
 
         @fonts
 
+        {{-- Site-wide ad / analytics IDs, read by the tracker (which lives outside the Inertia page tree). --}}
+        <script>window.__tracking = @json(\App\Models\TrackingSetting::shared());</script>
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         <x-inertia::head>
