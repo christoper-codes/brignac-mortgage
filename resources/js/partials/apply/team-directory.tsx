@@ -188,9 +188,9 @@ export function TeamDirectory() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.9, ease: EASE }}
-                className="grid gap-6 lg:grid-cols-[280px_1fr]"
+                className="grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]"
             >
-                <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible" role="tablist">
+                <div className="flex min-w-0 gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] lg:flex-col lg:overflow-visible [&::-webkit-scrollbar]:hidden" role="tablist">
                     {MEMBERS.map((entry, index) => {
                         const isActive = index === activeIndex;
 
@@ -200,7 +200,11 @@ export function TeamDirectory() {
                                 type="button"
                                 role="tab"
                                 aria-selected={isActive}
-                                onClick={() => setActiveIndex(index)}
+                                onClick={(event) => {
+                                    setActiveIndex(index);
+                                    // On phones the tabs scroll sideways: centre the chosen one so its neighbours peek in on both sides.
+                                    event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                                }}
                                 className="relative flex shrink-0 items-center gap-3 rounded-3xl p-3 pr-6 text-left lg:pr-4"
                             >
                                 {isActive && (

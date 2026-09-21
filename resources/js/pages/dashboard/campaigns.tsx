@@ -47,7 +47,7 @@ const STATUS_DOTS: Record<string, string> = {
 const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 const fieldClass = 'h-11 w-full rounded-full border border-border bg-background px-5 text-sm text-foreground outline-none transition-colors focus:border-primary';
-const selectTriggerClass = 'h-11 w-full rounded-full border-border bg-background px-5 text-sm shadow-none focus-visible:border-primary focus-visible:ring-0';
+const selectTriggerClass = 'h-11 w-full data-[size=default]:h-11 rounded-full border-border bg-background px-5 text-sm shadow-none focus-visible:border-primary focus-visible:ring-0';
 const selectContentClass = 'rounded-3xl p-1.5';
 const selectItemClass = 'rounded-full py-2.5 pr-8 pl-3';
 

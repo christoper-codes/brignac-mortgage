@@ -159,7 +159,7 @@ export function Calculator() {
         <div className="bg-neutral-100/80 [background-image:radial-gradient(rgba(100,100,100,0.25)_1px,transparent_1px)] [background-size:14px_14px]">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="h-full overflow-hidden bg-white">
-                    <div className="px-4 text-neutral-900 sm:pt-52">
+                    <div className="px-4 pt-40 text-neutral-900 sm:pt-52">
                         <div className="mx-auto max-w-4xl">
                             <div className="flex flex-col items-center gap-4 text-center">
                                 <span className="inline-flex rounded-full bg-neutral-100 px-5 py-1.5 text-xs font-medium tracking-wide text-neutral-600 uppercase">
@@ -190,7 +190,7 @@ export function Calculator() {
                                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
                                     <label className="block">
                                         <span className="mb-1.5 block text-sm font-medium text-neutral-700">Property Value</span>
-                                        <div className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 py-2.5 focus-within:border-primary">
+                                        <div className="flex h-12 items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-5 focus-within:border-primary">
                                             <span className="text-neutral-400">$</span>
                                             <input
                                                 inputMode="numeric"
@@ -209,7 +209,7 @@ export function Calculator() {
 
                                     <label className="block">
                                         <span className="mb-1.5 block text-sm font-medium text-neutral-700">Loan Needed</span>
-                                        <div className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 py-2.5 focus-within:border-primary">
+                                        <div className="flex h-12 items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-5 focus-within:border-primary">
                                             <span className="text-neutral-400">$</span>
                                             <input
                                                 inputMode="numeric"
@@ -230,7 +230,7 @@ export function Calculator() {
                                     <label className="block">
                                         <span className="mb-1.5 block text-sm font-medium text-neutral-700">Loan Term</span>
                                         <Select value={termYears} onValueChange={setTermYears}>
-                                            <SelectTrigger className="h-11.5 w-full rounded-full border-neutral-200 bg-neutral-50 px-5 text-neutral-900 shadow-none focus-visible:border-primary focus-visible:ring-0 [&_svg]:text-neutral-400">
+                                            <SelectTrigger className="h-12 w-full rounded-full border-neutral-200 bg-neutral-50 px-5 data-[size=default]:h-12 text-neutral-900 shadow-none focus-visible:border-primary focus-visible:ring-0 [&_svg]:text-neutral-400">
                                                 <SelectValue />
                                             </SelectTrigger>
                                             <SelectContent className="rounded-3xl p-1.5">

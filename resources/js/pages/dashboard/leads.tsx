@@ -30,7 +30,7 @@ const ALL = 'all';
 function FilterSelect({ value, placeholder, options, onChange }: { value?: string; placeholder: string; options: { value: string; label: string }[]; onChange: (value: string | undefined) => void }) {
     return (
         <Select value={value ?? ALL} onValueChange={(next) => onChange(next === ALL ? undefined : next)}>
-            <SelectTrigger className="h-10 min-w-40 rounded-full border-border bg-card px-4 text-sm capitalize shadow-none focus-visible:border-primary focus-visible:ring-0">
+            <SelectTrigger className="h-10 min-w-40 data-[size=default]:h-10 rounded-full border-border bg-card px-4 text-sm capitalize shadow-none focus-visible:border-primary focus-visible:ring-0">
                 <SelectValue />
             </SelectTrigger>
             <SelectContent className="max-h-72 rounded-3xl p-1.5">

@@ -50,9 +50,7 @@ export function Faqs() {
                         return (
                             <div
                                 key={item.question}
-                                className={`overflow-hidden rounded-2xl bg-card transition-colors duration-300 ${
-                                    isOpen ? '' : ''
-                                }`}
+                                className="overflow-hidden rounded-4xl bg-card"
                             >
                                 <button
                                     type="button"
@@ -64,8 +62,8 @@ export function Faqs() {
                                     <motion.span
                                         animate={{ rotate: isOpen ? 180 : 0 }}
                                         transition={{ duration: 0.3, ease: EASE }}
-                                        className={`grid size-8 shrink-0 place-items-center rounded-full transition-colors duration-300 ${
-                                            isOpen ? 'bg-primary/15 text-primary' : 'bg-background text-foreground/60'
+                                        className={`grid size-9 shrink-0 place-items-center rounded-full transition-colors duration-300 ${
+                                            isOpen ? 'bg-foreground text-background' : 'bg-background text-foreground/60'
                                         }`}
                                     >
                                         <ChevronDown className="size-4" />
@@ -81,7 +79,7 @@ export function Faqs() {
                                             transition={{ duration: 0.35, ease: EASE }}
                                             className="overflow-hidden"
                                         >
-                                            <p className="border-t border-border px-6 pt-4 pb-6 text-sm leading-relaxed text-foreground/60 sm:px-8 sm:text-base">
+                                            <p className="px-6 pt-1 pb-6 text-sm leading-relaxed text-foreground/60 sm:px-8 sm:text-base">
                                                 {item.answer}
                                             </p>
                                         </motion.div>
