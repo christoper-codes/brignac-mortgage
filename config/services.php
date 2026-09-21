@@ -35,6 +35,12 @@ return [
         ],
     ],
 
+    'geolocation' => [
+        // ip-api.com free tier (HTTP only, non-commercial use, ~45 requests/min). Swap for a paid
+        // provider by changing this URL; {ip} is replaced with the visitor address.
+        'url' => env('GEOLOCATION_URL', 'http://ip-api.com/json/{ip}?fields=status,countryCode,region,regionName,city'),
+    ],
+
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),

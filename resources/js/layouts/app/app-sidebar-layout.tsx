@@ -1,20 +1,13 @@
-import { AppContent } from '@/components/app-content';
-import { AppShell } from '@/components/app-shell';
-import { AppSidebar } from '@/components/app-sidebar';
-import { AppSidebarHeader } from '@/components/app-sidebar-header';
+import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import type { AppLayoutProps } from '@/types';
 
-export default function AppSidebarLayout({
-    children,
-    breadcrumbs = [],
-}: AppLayoutProps) {
+// Authenticated shell: a floating frosted sidebar (a pill tab bar on mobile) and a soft canvas that
+// the rounded dashboard cards sit on.
+export default function AppSidebarLayout({ children }: AppLayoutProps) {
     return (
-        <AppShell variant="sidebar">
-            <AppSidebar />
-            <AppContent variant="sidebar" className="overflow-x-hidden">
-                <AppSidebarHeader breadcrumbs={breadcrumbs} />
-                {children}
-            </AppContent>
-        </AppShell>
+        <div className="min-h-dvh bg-background">
+            <DashboardSidebar />
+            <main className="px-4 pt-6 pb-28 sm:px-6 lg:pt-8 lg:pr-8 lg:pb-10 lg:pl-76">{children}</main>
+        </div>
     );
 }

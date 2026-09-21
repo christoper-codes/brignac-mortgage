@@ -1,8 +1,10 @@
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Check, CheckCircle2, ChevronDown, Mail, MapPin, Phone } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
+import { getAttribution, getVisitorId } from '@/lib/tracking';
+import { store } from '@/routes/leads';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -20,9 +22,45 @@ export function Contact() {
     const [submitted, setSubmitted] = useState(false);
     const [consentOpen, setConsentOpen] = useState(false);
 
+    const [consent, setConsent] = useState(false);
+    const [processing, setProcessing] = useState(false);
+    const [errors, setErrors] = useState<Record<string, string>>({});
+
+    // Saves the lead together with the campaign (UTM tags) that brought this visitor.
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        setSubmitted(true);
+
+        const attribution = getAttribution();
+
+        router.post(
+            store().url,
+            {
+                full_name: fullName,
+                email,
+                phone,
+                message,
+                sms_consent: consent,
+                visitor_id: getVisitorId(),
+                landing_path: attribution.landing_path ?? window.location.pathname,
+                referrer: attribution.referrer ?? document.referrer,
+                utm_source: attribution.utm_source,
+                utm_medium: attribution.utm_medium,
+                utm_campaign: attribution.utm_campaign,
+                utm_content: attribution.utm_content,
+                utm_term: attribution.utm_term,
+            },
+            {
+                preserveScroll: true,
+                preserveState: true,
+                onStart: () => {
+                    setProcessing(true);
+                    setErrors({});
+                },
+                onSuccess: () => setSubmitted(true),
+                onError: (formErrors) => setErrors(formErrors),
+                onFinish: () => setProcessing(false),
+            },
+        );
     };
 
     return (
@@ -117,6 +155,7 @@ export function Contact() {
                                                     placeholder="John Doe"
                                                     className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-primary"
                                                 />
+                                                {errors.full_name && <span className="mt-1 block text-xs text-red-500">{errors.full_name}</span>}
                                             </label>
 
                                             <label className="block">
@@ -129,6 +168,7 @@ export function Contact() {
                                                     placeholder="(504) 555-0123"
                                                     className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-primary"
                                                 />
+                                                {errors.phone && <span className="mt-1 block text-xs text-red-500">{errors.phone}</span>}
                                             </label>
                                         </div>
 
@@ -142,6 +182,7 @@ export function Contact() {
                                                 placeholder="you@email.com"
                                                 className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-primary"
                                             />
+                                            {errors.email && <span className="mt-1 block text-xs text-red-500">{errors.email}</span>}
                                         </label>
 
                                         <label className="block">
@@ -158,7 +199,13 @@ export function Contact() {
 
                                         <div className="rounded-2xl border border-border bg-background p-4">
                                             <label className="flex cursor-pointer items-start gap-3">
-                                                <input type="checkbox" required className="peer sr-only" />
+                                                <input
+                                                    type="checkbox"
+                                                    required
+                                                    checked={consent}
+                                                    onChange={(event) => setConsent(event.target.checked)}
+                                                    className="peer sr-only"
+                                                />
                                                 <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border border-foreground/25 bg-card text-primary-foreground transition-colors peer-checked:border-primary peer-checked:bg-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40 [&>svg]:scale-50 [&>svg]:opacity-0 [&>svg]:transition-all peer-checked:[&>svg]:scale-100 peer-checked:[&>svg]:opacity-100">
                                                     <Check className="size-3.5" strokeWidth={3} />
                                                 </span>
@@ -199,13 +246,15 @@ export function Contact() {
                                                     </motion.div>
                                                 )}
                                             </AnimatePresence>
+                                            {errors.sms_consent && <p className="mt-2 ml-8 text-xs text-red-500">{errors.sms_consent}</p>}
                                         </div>
 
                                         <button
                                             type="submit"
+                                            disabled={processing}
                                             className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
                                         >
-                                            Send Message
+                                            {processing ? 'Sending…' : 'Send Message'}
                                         </button>
                                     </motion.form>
                                 )}

@@ -27,3 +27,21 @@ export function GoogleMark({ className }: { className?: string }) {
         </svg>
     );
 }
+
+export function InstagramMark({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className={className}>
+            <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+        </svg>
+    );
+}
+
+export function TikTokMark({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+            <path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2V2h-3.4v13.7a2.9 2.9 0 1 1-2-2.8V9.4a6.3 6.3 0 1 0 5.4 6.3V9a8.1 8.1 0 0 0 4.8 1.5V7.1a4.9 4.9 0 0 1-1-.4Z" />
+        </svg>
+    );
+}

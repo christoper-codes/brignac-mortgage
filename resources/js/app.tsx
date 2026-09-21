@@ -1,5 +1,6 @@
 import { createInertiaApp } from '@inertiajs/react';
 import { CustomCursor } from '@/components/amicro/cursor';
+import { Tracker } from '@/components/tracker';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { initializeTheme } from '@/hooks/use-appearance';
@@ -36,6 +37,7 @@ createInertiaApp({
                 {app}
                 <Toaster />
                 <CustomCursor />
+                <Tracker />
             </TooltipProvider>
         );
     },
