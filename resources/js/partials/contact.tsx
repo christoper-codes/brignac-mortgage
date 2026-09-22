@@ -4,7 +4,7 @@ import { Check, CheckCircle2, ChevronDown, Mail, MapPin, Phone } from 'lucide-re
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { pixelLead } from '@/lib/pixels';
-import { getAttribution, getVisitorId } from '@/lib/tracking';
+import { getAttribution, getMetaCookies, getVisitorId, metaEventId } from '@/lib/tracking';
 import { store } from '@/routes/leads';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -32,6 +32,8 @@ export function Contact() {
         event.preventDefault();
 
         const attribution = getAttribution();
+        const eventId = metaEventId();
+        const { fbp, fbc } = getMetaCookies();
 
         router.post(
             store().url,
@@ -49,6 +51,9 @@ export function Contact() {
                 utm_campaign: attribution.utm_campaign,
                 utm_content: attribution.utm_content,
                 utm_term: attribution.utm_term,
+                meta_event_id: eventId,
+                fbp,
+                fbc,
             },
             {
                 preserveScroll: true,
@@ -59,7 +64,7 @@ export function Contact() {
                 },
                 onSuccess: () => {
                     setSubmitted(true);
-                    pixelLead();
+                    pixelLead(eventId);
                 },
                 onError: (formErrors) => setErrors(formErrors),
                 onFinish: () => setProcessing(false),

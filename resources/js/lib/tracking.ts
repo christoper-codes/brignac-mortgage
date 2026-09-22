@@ -1,4 +1,4 @@
-import { pixelCta } from '@/lib/pixels';
+import { pixelApplyClick, pixelCta } from '@/lib/pixels';
 import { click, visit } from '@/routes/track';
 
 const VISITOR_KEY = 'bm_vid';
@@ -77,6 +77,24 @@ export function isTrackedPath(path: string): boolean {
     return !PRIVATE_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
 }
 
+/** A fresh id per conversion, shared between the browser pixel call and the server CAPI call for it
+ * so Meta recognizes them as the same event instead of double-counting. */
+export function metaEventId(): string {
+    return window.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function readCookie(name: string): string | null {
+    const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+
+    return match ? decodeURIComponent(match[1]) : null;
+}
+
+/** The `_fbp`/`_fbc` cookies the Meta Pixel sets itself once loaded — sent to the server so the
+ * Conversions API call can be matched to the same browser as the pixel event. */
+export function getMetaCookies(): { fbp: string | null; fbc: string | null } {
+    return { fbp: readCookie('_fbp'), fbc: readCookie('_fbc') };
+}
+
 function send(url: string, body: Record<string, unknown>): void {
     fetch(url, {
         method: 'POST',
@@ -107,7 +125,17 @@ export function trackVisit(path: string): void {
 }
 
 export function trackClick(label: string, target: string, member?: string): void {
-    pixelCta(label);
+    const eventId = metaEventId();
+    const { fbp, fbc } = getMetaCookies();
+
+    // "Apply Now" from a team member's card is the #1 conversion we want ad platforms to optimize
+    // for, so it gets its own event instead of the generic "Contact" every other CTA fires.
+    if (label === 'Apply Now' && member) {
+        pixelApplyClick(member, eventId);
+    } else {
+        pixelCta(label);
+    }
+
     send(click().url, {
         visitor_id: getVisitorId(),
         label,
@@ -115,5 +143,8 @@ export function trackClick(label: string, target: string, member?: string): void
         team_member: member ?? null,
         path: window.location.pathname,
         utm_campaign: getAttribution().utm_campaign ?? null,
+        meta_event_id: eventId,
+        fbp,
+        fbc,
     });
 }

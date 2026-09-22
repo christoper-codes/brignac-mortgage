@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ResolveGeolocation;
+use App\Jobs\SendMetaConversionEvent;
 use App\Models\CtaClick;
 use App\Models\Visit;
 use App\Services\TrackingContext;
@@ -47,6 +48,9 @@ class TrackingController extends Controller
             'team_member' => ['nullable', 'string', 'max:255'],
             'path' => ['required', 'string', 'max:512'],
             'utm_campaign' => ['nullable', 'string', 'max:255'],
+            'meta_event_id' => ['nullable', 'string', 'max:128'],
+            'fbp' => ['nullable', 'string', 'max:128'],
+            'fbc' => ['nullable', 'string', 'max:255'],
         ]);
 
         if ($this->context->isBot($request)) {
@@ -64,6 +68,22 @@ class TrackingController extends Controller
         ]);
 
         ResolveGeolocation::dispatchAfterResponse($click);
+
+        // Priority #1 conversion: someone chose a loan officer and clicked through to apply.
+        if ($click->label === 'Apply Now' && $click->team_member) {
+            SendMetaConversionEvent::dispatchAfterResponse(
+                eventName: 'SubmitApplication',
+                userData: [
+                    'client_ip_address' => $request->ip(),
+                    'client_user_agent' => $request->userAgent(),
+                    'fbp' => $data['fbp'] ?? null,
+                    'fbc' => $data['fbc'] ?? null,
+                ],
+                customData: ['content_name' => $click->team_member],
+                eventId: $data['meta_event_id'] ?? null,
+                sourceUrl: url($click->path),
+            );
+        }
 
         return response()->noContent();
     }

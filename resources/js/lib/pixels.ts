@@ -86,14 +86,28 @@ export function pixelPageView(path: string): void {
     win().gtag?.('event', 'page_view', { page_path: path });
 }
 
-/** A visitor sent the contact form. */
-export function pixelLead(): void {
-    win().fbq?.('track', 'Lead');
+/**
+ * A visitor sent the contact form — priority #2 conversion. `eventId` is shared with the matching
+ * server-side Conversions API call (sent from LeadController) so Meta deduplicates the two into one.
+ */
+export function pixelLead(eventId: string): void {
+    win().fbq?.('track', 'Lead', {}, { eventID: eventId });
     win().ttq?.track('SubmitForm');
     win().gtag?.('event', 'generate_lead');
 }
 
-/** A visitor clicked a call to action (Apply, phone, email…). */
+/**
+ * A visitor picked a loan officer and clicked "Apply Now" — priority #1 conversion. Fires a distinct
+ * event from other CTAs so ad platforms can be told to optimize specifically for this action.
+ * `eventId` is shared with the matching server-side call (sent from TrackingController) for Meta's dedup.
+ */
+export function pixelApplyClick(member: string | undefined, eventId: string): void {
+    win().fbq?.('track', 'SubmitApplication', member ? { content_name: member } : {}, { eventID: eventId });
+    win().ttq?.track('Contact', { description: 'Apply Now', content_name: member });
+    win().gtag?.('event', 'apply_click', { team_member: member });
+}
+
+/** Any other call to action (phone, email, secondary links). */
 export function pixelCta(label: string): void {
     win().fbq?.('track', 'Contact');
     win().ttq?.track('ClickButton', { description: label });

@@ -21,6 +21,9 @@ class StoreLeadRequest extends FormRequest
             'visitor_id' => ['nullable', 'string', 'max:64'],
             'landing_path' => ['nullable', 'string', 'max:512'],
             'referrer' => ['nullable', 'string', 'max:1024'],
+            'meta_event_id' => ['nullable', 'string', 'max:128'],
+            'fbp' => ['nullable', 'string', 'max:128'],
+            'fbc' => ['nullable', 'string', 'max:255'],
             ...TrackingContext::utmRules(),
         ];
     }

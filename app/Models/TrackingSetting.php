@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
-#[Fillable(['meta_pixel_id', 'tiktok_pixel_id', 'google_analytics_id'])]
+#[Fillable(['meta_pixel_id', 'meta_capi_token', 'meta_test_event_code', 'tiktok_pixel_id', 'google_analytics_id'])]
 class TrackingSetting extends Model
 {
     /** @use HasFactory<TrackingSettingFactory> */
@@ -17,8 +17,9 @@ class TrackingSetting extends Model
     private const CACHE_KEY = 'tracking-settings';
 
     /**
-     * The site-wide IDs the public pages load their ad / analytics scripts with. Read on every page
-     * load, so it is cached until the settings are saved.
+     * The site-wide IDs the public pages load their ad / analytics scripts with. Safe to expose to
+     * the browser — pixel IDs are not secret, they appear in every fbq()/ttq() init call anyway.
+     * The Meta CAPI access token never goes through this method.
      *
      * @return array{metaPixelId: ?string, tiktokPixelId: ?string, googleAnalyticsId: ?string}
      */
@@ -33,6 +34,23 @@ class TrackingSetting extends Model
                 'googleAnalyticsId' => $setting?->google_analytics_id,
             ];
         });
+    }
+
+    /**
+     * The Meta Conversions API access token. Server-only — never render this in an Inertia prop or
+     * a blade view.
+     */
+    public static function metaCapiToken(): ?string
+    {
+        return self::query()->value('meta_capi_token');
+    }
+
+    /**
+     * Optional code from Events Manager's Test Events tool, sent along with every CAPI call while set.
+     */
+    public static function metaTestEventCode(): ?string
+    {
+        return self::query()->value('meta_test_event_code');
     }
 
     /**
