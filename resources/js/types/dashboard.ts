@@ -20,6 +20,7 @@ export type Campaign = {
 
 export type Lead = {
     id: number;
+    visitor_id: string | null;
     full_name: string;
     email: string;
     phone: string;
@@ -39,6 +40,8 @@ export type Lead = {
     sms_consent: boolean;
     created_at: string;
 };
+
+export type JourneyEvent = { type: 'visit' | 'click'; path: string; label: string | null; team_member: string | null; created_at: string };
 
 export type Kpi = { value: number; change?: number | null };
 export type Row = { label: string; total: number };

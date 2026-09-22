@@ -1,7 +1,12 @@
 import { Head } from '@inertiajs/react';
 import { BarChart, Breakdown, Card, CardTitle, PageHeader, RangeTabs, StatCard } from '@/components/dashboard/ui';
+import { pageLabel } from '@/lib/utils';
+import { MEMBERS } from '@/partials/apply/team-members';
 import { analytics } from '@/routes/dashboard';
 import type { DaySeries, PeriodSeries, Row, States } from '@/types/dashboard';
+
+/** Initials fallback for a team member whose name no longer matches the current roster. */
+const initials = (name: string) => name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase();
 
 type Props = {
     days: number;
@@ -47,14 +52,25 @@ export default function Analytics({ days, totals, daily, weekly, monthly, states
                         <div className="grid gap-6 lg:grid-cols-2">
                             <Breakdown rows={teamMembers.map((row) => ({ label: row.member, total: row.applies }))} />
                             <ul className="space-y-2">
-                                {teamMembers.map((row) => (
-                                    <li key={row.member} className="flex items-center justify-between rounded-2xl bg-background px-4 py-3 text-sm">
-                                        <span className="truncate text-foreground/80">{row.member}</span>
-                                        <span className="ml-3 shrink-0 text-xs text-foreground/50">
-                                            {row.applies} apply · {row.total - row.applies} phone / email
-                                        </span>
-                                    </li>
-                                ))}
+                                {teamMembers.map((row) => {
+                                    const photo = MEMBERS.find((member) => member.name === row.member)?.image;
+
+                                    return (
+                                        <li key={row.member} className="flex items-center justify-between rounded-2xl bg-background px-4 py-3 text-sm">
+                                            <span className="flex min-w-0 items-center gap-2.5">
+                                                {photo ? (
+                                                    <img src={photo} alt={row.member} className="size-8 shrink-0 rounded-full object-cover" />
+                                                ) : (
+                                                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-foreground/10 text-xs font-medium text-foreground/60">{initials(row.member)}</span>
+                                                )}
+                                                <span className="truncate text-foreground/80">{row.member}</span>
+                                            </span>
+                                            <span className="ml-3 shrink-0 text-xs text-foreground/50">
+                                                {row.applies} apply · {row.total - row.applies} phone / email
+                                            </span>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </div>
                     )}
@@ -110,7 +126,7 @@ export default function Analytics({ days, totals, daily, weekly, monthly, states
                     </Card>
                     <Card>
                         <CardTitle>Top pages</CardTitle>
-                        <Breakdown rows={pages} />
+                        <Breakdown rows={pages.map((row) => ({ ...row, label: pageLabel(row.label) }))} />
                     </Card>
                 </div>
 

@@ -70,7 +70,11 @@ export function RangeTabs({ value }: { value: number }) {
 
 export function Delta({ change }: { change?: number | null }) {
     if (change === null || change === undefined) {
-        return <span className="text-xs text-foreground/40">No prior data</span>;
+        return (
+            <span className="text-xs text-foreground/40" title="The previous period had no activity to compare against, so a % change can't be calculated yet.">
+                No prior data
+            </span>
+        );
     }
 
     const up = change >= 0;

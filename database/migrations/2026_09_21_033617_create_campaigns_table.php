@@ -18,10 +18,8 @@ return new class extends Migration
             $table->string('platform', 16)->index();
             $table->string('status', 16)->default('draft')->index();
             $table->unsignedInteger('budget_cents')->nullable();
-            $table->string('pixel_id')->nullable();
             $table->date('starts_at')->nullable();
             $table->date('ends_at')->nullable();
-            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

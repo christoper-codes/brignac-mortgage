@@ -1,15 +1,16 @@
 import { Head, Link, router } from '@inertiajs/react';
-import { Mail, MessageSquare, Phone } from 'lucide-react';
+import { ChevronDown, Mail, MessageSquare, MousePointerClick, Phone } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { Card, EmptyState, PageHeader, PlatformBadge, StatePill } from '@/components/dashboard/ui';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
+import { cn, pageLabel } from '@/lib/utils';
 import { index, update } from '@/routes/dashboard/leads';
-import type { Lead } from '@/types/dashboard';
+import type { JourneyEvent, Lead } from '@/types/dashboard';
 
 type Props = {
     leads: { data: Lead[]; meta: { current_page: number; last_page: number; total: number }; links: { prev: string | null; next: string | null } };
+    journeys: Record<string, JourneyEvent[]>;
     filters: { q?: string; campaign?: string; status?: string; state?: string };
     campaigns: { id: number; name: string }[];
     statuses: string[];
@@ -48,9 +49,68 @@ function FilterSelect({ value, placeholder, options, onChange }: { value?: strin
 }
 
 const dateTime = (iso: string) => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+const time = (iso: string) => new Date(iso).toLocaleString('en-US', { hour: 'numeric', minute: '2-digit' });
 
-export default function Leads({ leads, filters, campaigns, statuses, states }: Props) {
+// The chronological trail that led to a lead: every page view and CTA click from the same browser
+// (matched by visitor_id), ending with the form submission itself.
+function JourneyTimeline({ events, lead }: { events: JourneyEvent[]; lead: Lead }) {
+    if (events.length === 0) {
+        return <p className="text-xs text-foreground/50">No earlier page views or clicks were recorded for this visitor before they submitted the form.</p>;
+    }
+
+    return (
+        <ol className="space-y-2">
+            {events.map((event, index) => {
+                const isApply = event.type === 'click' && event.label === 'Apply Now';
+
+                return (
+                    <li key={index} className="flex items-start gap-2.5 text-xs">
+                        <span className={cn('mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full', isApply ? 'bg-primary text-primary-foreground' : event.type === 'click' ? 'bg-foreground/10 text-foreground/60' : 'bg-foreground/5 text-foreground/40')}>
+                            {event.type === 'click' ? <MousePointerClick className="size-3" /> : <span className="size-1.5 rounded-full bg-current" />}
+                        </span>
+                        <span className="text-foreground/70">
+                            {event.type === 'visit' ? (
+                                <>Visited <span className="font-medium text-foreground">{pageLabel(event.path)}</span></>
+                            ) : (
+                                <>
+                                    Clicked <span className={cn('font-medium', isApply ? 'text-primary' : 'text-foreground')}>{event.label}</span>
+                                    {event.team_member && <> for <span className="font-medium text-foreground">{event.team_member}</span></>}
+                                    {' '}on <span className="text-foreground/60">{pageLabel(event.path)}</span>
+                                </>
+                            )}
+                        </span>
+                        <span className="ml-auto shrink-0 text-foreground/30">{time(event.created_at)}</span>
+                    </li>
+                );
+            })}
+            <li className="flex items-start gap-2.5 text-xs">
+                <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <MessageSquare className="size-3" />
+                </span>
+                <span className="font-medium text-foreground">Submitted the contact form</span>
+                <span className="ml-auto shrink-0 text-foreground/30">{time(lead.created_at)}</span>
+            </li>
+        </ol>
+    );
+}
+
+export default function Leads({ leads, journeys, filters, campaigns, statuses, states }: Props) {
     const [search, setSearch] = useState(filters.q ?? '');
+    const [expanded, setExpanded] = useState<Set<number>>(new Set());
+
+    const toggleJourney = (leadId: number) => {
+        setExpanded((current) => {
+            const next = new Set(current);
+
+            if (next.has(leadId)) {
+                next.delete(leadId);
+            } else {
+                next.add(leadId);
+            }
+
+            return next;
+        });
+    };
 
     const filter = (next: Partial<Props['filters']>) => {
         router.get(index().url, { ...filters, ...next }, { preserveState: true, preserveScroll: true, replace: true });
@@ -136,6 +196,21 @@ export default function Leads({ leads, filters, campaigns, statuses, states }: P
                                         </SelectContent>
                                     </Select>
                                 </div>
+
+                                <button
+                                    type="button"
+                                    onClick={() => toggleJourney(lead.id)}
+                                    className="mt-3 flex items-center gap-1.5 text-xs font-medium text-foreground/50 hover:text-foreground"
+                                >
+                                    <ChevronDown className={cn('size-3.5 transition-transform', expanded.has(lead.id) && 'rotate-180')} />
+                                    {expanded.has(lead.id) ? 'Hide journey' : 'View journey'}
+                                </button>
+
+                                {expanded.has(lead.id) && (
+                                    <div className="mt-3 rounded-2xl bg-background p-4">
+                                        <JourneyTimeline events={lead.visitor_id ? (journeys[lead.visitor_id] ?? []) : []} lead={lead} />
+                                    </div>
+                                )}
                             </Card>
                         ))}
                     </div>

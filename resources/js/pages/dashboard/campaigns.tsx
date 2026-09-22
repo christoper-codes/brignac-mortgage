@@ -135,7 +135,7 @@ function CampaignForm({ campaign, platforms, statuses, onDone }: { campaign: Cam
                     <InputError message={form.errors.starts_at} />
                 </div>
                 <div className="grid gap-2">
-                    <Label htmlFor="ends_at">Ends</Label>
+                    <Label htmlFor="ends_at">Ends (optional)</Label>
                     <DatePicker id="ends_at" value={form.data.ends_at} onChange={(value) => form.setData('ends_at', value)} placeholder="End date" min={form.data.starts_at || undefined} />
                     <InputError message={form.errors.ends_at} />
                 </div>

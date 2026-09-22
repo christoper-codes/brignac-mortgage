@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('visitor_id', 64)->index();
             $table->string('label');
             $table->string('target', 1024)->nullable();
+            // Which team member's link/button was clicked (Apply Now, phone, email) — lets the
+            // dashboard show who visitors prefer.
+            $table->string('team_member')->nullable()->index();
             $table->string('path', 512);
             $table->string('ip_address', 45)->nullable();
             $table->string('country_code', 2)->nullable();
