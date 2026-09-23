@@ -1,19 +1,18 @@
 import { Link } from '@inertiajs/react';
 import { Phone } from 'lucide-react';
 import { FadeUp } from '@/components/amicro/fade-up';
-import { ZoomIn } from '@/components/amicro/zoom-in';
 
 export function Hero() {
     return (
         <section className="force-light relative isolate max-h-[950px] overflow-hidden bg-background text-foreground 2xl:max-h-[1000px]">
-            <ZoomIn delay={0.15} className="absolute inset-x-0 bottom-0 -z-10 h-[56vw] min-h-80 w-full">
+            <FadeUp delay={0.15} duration={1.2} yOffset={80} className="absolute inset-x-0 bottom-0 -z-10 h-[56vw] min-h-80 w-full">
                 <img
                     src="/img/hero.png"
                     alt="Modern home financed through Brignac Mortgage"
                     className="absolute inset-0 h-full w-full object-contain object-bottom"
                     fetchPriority="high"
                 />
-            </ZoomIn>
+            </FadeUp>
 
             <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-linear-to-t from-background to-transparent" />
 
