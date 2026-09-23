@@ -1,40 +1,23 @@
 import { Link } from '@inertiajs/react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Phone } from 'lucide-react';
-import { useRef } from 'react';
 import { FadeUp } from '@/components/amicro/fade-up';
 import { ZoomIn } from '@/components/amicro/zoom-in';
 
 export function Hero() {
-    const sectionRef = useRef<HTMLElement>(null);
-    const reduceMotion = useReducedMotion();
-    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
-
-    // Parallax: the house drifts down slower than the page scrolls, while the copy rises and softens
-    // away faster — the two layers separating is what sells the depth.
-    const imageY = useTransform(scrollYProgress, [0, 1], ['0%', reduceMotion ? '0%' : '22%']);
-    const imageScale = useTransform(scrollYProgress, [0, 1], [1, reduceMotion ? 1 : 1.08]);
-    const copyY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -90]);
-    const copyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, reduceMotion ? 1 : 0.15]);
-
     return (
-        <section ref={sectionRef} className="force-light relative isolate max-h-[950px] overflow-hidden bg-background text-foreground 2xl:max-h-[1000px]">
+        <section className="force-light relative isolate max-h-[950px] overflow-hidden bg-background text-foreground 2xl:max-h-[1000px]">
             <ZoomIn delay={0.15} className="absolute inset-x-0 bottom-0 -z-10 h-[56vw] min-h-80 w-full">
-                <motion.img
+                <img
                     src="/img/hero.png"
                     alt="Modern home financed through Brignac Mortgage"
-                    className="absolute inset-0 h-full w-full origin-bottom object-contain object-bottom will-change-transform"
-                    style={{ y: imageY, scale: imageScale }}
+                    className="absolute inset-0 h-full w-full object-contain object-bottom"
                     fetchPriority="high"
                 />
             </ZoomIn>
 
             <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-linear-to-t from-background to-transparent" />
 
-            <motion.div
-                style={{ y: copyY, opacity: copyOpacity }}
-                className="relative mx-auto flex max-w-5xl flex-col items-center px-4 pt-36 pb-[46vw] text-center sm:px-6 sm:pt-44 lg:px-8"
-            >
+            <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 pt-36 pb-[46vw] text-center sm:px-6 sm:pt-44 lg:px-8">
                 <FadeUp blur={10}>
                     <h1 className="text-4xl leading-[1.1] sm:text-5xl lg:text-6xl">
                         Your next home with the <br />
@@ -81,7 +64,7 @@ export function Hero() {
                         </span>
                     </a>
                 </FadeUp>
-            </motion.div>
+            </div>
         </section>
     );
 }

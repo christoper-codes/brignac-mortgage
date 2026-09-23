@@ -233,7 +233,7 @@ export function LoanTimeline() {
     const groupProgress = useTransform(scrollYProgress, [0, 1], [0, PROGRAM_GROUPS.length - 0.001]);
     const indicatorOpacity = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
     const panelScale = useTransform(scrollYProgress, [0, 0.06], [0.85, 1]);
-    const panelRadius = useTransform(scrollYProgress, [0, 0.06], [40, 24]);
+    const panelRadius = useTransform(scrollYProgress, [0, 0.06], [60, 48]);
 
     useMotionValueEvent(groupProgress, 'change', (value) => {
         const next = Math.min(PROGRAM_GROUPS.length - 1, Math.max(0, Math.floor(value)));
