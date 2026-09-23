@@ -19,6 +19,7 @@ import {
     Wallet,
 } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { Reveal } from '@/components/amicro/reveal';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -246,10 +247,12 @@ export function LoanTimeline() {
     return (
         <div className="bg-background py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
-                <h2 className="text-3xl text-foreground sm:text-4xl">Loan Products &amp; Programs</h2>
-                <p className="mt-4 text-base text-foreground/60">
+                <Reveal as="h2" className="text-3xl text-foreground sm:text-4xl">
+                    Loan Products &amp; Programs
+                </Reveal>
+                <Reveal as="p" delay={0.1} className="mt-4 text-base text-foreground/60">
                     Explore our diverse range of loan products and programs
-                </p>
+                </Reveal>
             </div>
 
             <div className="mx-auto mt-16 max-w-384 px-4 sm:px-6 lg:px-8">

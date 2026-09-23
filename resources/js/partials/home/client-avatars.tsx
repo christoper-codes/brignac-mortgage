@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { ArrowUpRight, Star, ThumbsUp } from 'lucide-react';
+import { Reveal } from '@/components/amicro/reveal';
 import { FacebookMark, GoogleMark } from '@/components/platform-marks';
 
 const TILES_PER_COLUMN = 6;
@@ -59,13 +60,15 @@ export function ClientAvatars() {
     return (
         <section className="force-light relative overflow-hidden bg-background py-20 sm:py-24">
             <div className="relative mx-auto max-w-xl px-4 text-center sm:px-6">
-                <p className="text-sm font-semibold tracking-wide text-primary uppercase">Testimonials</p>
-                <h2 className="mt-4 text-3xl text-foreground sm:text-4xl">Trusted by Homeowners Across Louisiana</h2>
-                <p className="mx-auto mt-4 max-w-xs text-base font-medium text-foreground/60">
+                <Reveal as="p" className="text-sm font-semibold tracking-wide text-primary uppercase">Testimonials</Reveal>
+                <Reveal as="h2" delay={0.08} className="mt-4 text-3xl text-foreground sm:text-4xl">
+                    Trusted by Homeowners Across Louisiana
+                </Reveal>
+                <Reveal as="p" delay={0.16} className="mx-auto mt-4 max-w-xs text-base font-medium text-foreground/60">
                     Join the hundreds of families who found the right loan with Brignac Mortgage.
-                </p>
+                </Reveal>
 
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <Reveal blur={0} y={20} delay={0.24} className="mt-6 flex flex-wrap items-center justify-center gap-3">
                     <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground">
                         <GoogleMark className="size-4" />
                         5.0
@@ -76,7 +79,7 @@ export function ClientAvatars() {
                         100% recommend
                         <ThumbsUp className="size-3.5 fill-primary text-primary" />
                     </span>
-                </div>
+                </Reveal>
             </div>
 
             <div
@@ -88,7 +91,7 @@ export function ClientAvatars() {
                 ))}
             </div>
 
-            <div className="relative mt-6 flex justify-center">
+            <Reveal blur={0} y={20} className="relative mt-6 flex justify-center">
                 <Link
                     href="/testimonials"
                     className="group inline-flex items-center gap-2 rounded-full bg-primary py-2.5 pr-2.5 pl-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
@@ -98,7 +101,7 @@ export function ClientAvatars() {
                         <ArrowUpRight className="size-4" />
                     </span>
                 </Link>
-            </div>
+            </Reveal>
         </section>
     );
 }

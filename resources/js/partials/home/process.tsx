@@ -1,6 +1,7 @@
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { BadgeCheck, KeyRound, ListChecks, Lock } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Reveal } from '@/components/amicro/reveal';
 
 const STEPS = [
     {
@@ -183,13 +184,13 @@ export function Process() {
         <section className="force-light relative bg-background py-20 sm:py-24">
             <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="text-center sm:text-left">
-                    <p className="text-sm font-semibold tracking-wide text-primary uppercase">Process</p>
-                    <h2 className="mx-auto mt-4 max-w-xs text-4xl text-foreground sm:mx-0 sm:max-w-sm sm:text-5xl">
+                    <Reveal as="p" className="text-sm font-semibold tracking-wide text-primary uppercase">Process</Reveal>
+                    <Reveal as="h2" delay={0.08} className="mx-auto mt-4 max-w-xs text-4xl text-foreground sm:mx-0 sm:max-w-sm sm:text-5xl">
                         How Financing Your Home Works
-                    </h2>
-                    <p className="mx-auto mt-4 max-w-sm text-base font-medium text-foreground/60 sm:mx-0">
+                    </Reveal>
+                    <Reveal as="p" delay={0.16} className="mx-auto mt-4 max-w-sm text-base font-medium text-foreground/60 sm:mx-0">
                         From application to closing, our streamlined process keeps you informed and confident every step of the way.
-                    </p>
+                    </Reveal>
                 </div>
             </div>
 

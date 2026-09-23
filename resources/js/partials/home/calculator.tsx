@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, Loader2, RotateCcw } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
+import { Reveal } from '@/components/amicro/reveal';
 import {
     Dialog,
     DialogContent,
@@ -272,14 +273,14 @@ export function Calculator() {
                     <div className="px-4 pt-40 text-neutral-900 sm:pt-52">
                         <div className="mx-auto max-w-4xl">
                             <div className="flex flex-col items-center gap-4 text-center">
-                                <span className="inline-flex rounded-full bg-neutral-100 px-5 py-1.5 text-xs font-medium tracking-wide text-neutral-600 uppercase">
+                                <Reveal as="span" className="inline-flex rounded-full bg-neutral-100 px-5 py-1.5 text-xs font-medium tracking-wide text-neutral-600 uppercase">
                                     Simulator
-                                </span>
-                                <h2 className="text-3xl text-neutral-900 sm:text-4xl">
+                                </Reveal>
+                                <Reveal as="h2" delay={0.08} className="text-3xl text-neutral-900 sm:text-4xl">
                                     Mortgage{' '}
                                     <span className="text-primary">Loan</span>{' '}
                                     Calculator
-                                </h2>
+                                </Reveal>
                                 <div className="flex flex-col items-center gap-2 text-xs text-neutral-500 sm:flex-row sm:gap-4">
                                     <p className="font-medium">
                                         30-year fixed national average (Freddie
@@ -300,6 +301,7 @@ export function Calculator() {
                                 </div>
                             </div>
 
+                            <Reveal blur={0} y={36} delay={0.15}>
                             <form
                                 onSubmit={handleCalculate}
                                 className="mt-10 space-y-8"
@@ -463,6 +465,7 @@ export function Calculator() {
                                     </button>
                                 </div>
                             </form>
+                            </Reveal>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, BadgeCheck, ChevronLeft, ChevronRight, MousePointer2, Search, Sparkle, User } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Reveal } from '@/components/amicro/reveal';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 
@@ -566,31 +567,33 @@ export function LoanPrograms() {
 
             <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl">
-                    <h2 className="text-3xl text-white sm:text-4xl lg:text-5xl">Loan Products &amp; Programs</h2>
-                    <p className="mt-4 text-lg text-white/60">
+                    <Reveal as="h2" className="text-3xl text-white sm:text-4xl lg:text-5xl">
+                        Loan Products &amp; Programs
+                    </Reveal>
+                    <Reveal as="p" delay={0.1} className="mt-4 text-lg text-white/60">
                         Whatever you're financing, there's a program built for it — explore the options below.
-                    </p>
+                    </Reveal>
                 </div>
 
                 {isMobile ? (
                     <MobileCarousel />
                 ) : (
                     <>
-                        <div className={`mt-[54px] ${DOTTED_PANEL}`}>
+                        <Reveal blur={0} y={40} className={`mt-[54px] ${DOTTED_PANEL}`}>
                             <div className="flex flex-col gap-2.5 md:h-[518px] md:flex-row">
                                 <PrequalCard />
                                 <EveryPathCard />
                             </div>
-                        </div>
+                        </Reveal>
 
-                        <div className="mt-[14px] grid gap-[14px] md:grid-cols-2 md:items-stretch">
+                        <Reveal blur={0} y={40} delay={0.1} className="mt-[14px] grid gap-[14px] md:grid-cols-2 md:items-stretch">
                             <div className="flex flex-col gap-[14px]">
                                 <MatchedCard />
                                 <ChatTestimonial />
                             </div>
 
                             <ClosingCard />
-                        </div>
+                        </Reveal>
                     </>
                 )}
             </div>

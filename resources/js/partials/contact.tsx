@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Check, CheckCircle2, ChevronDown, Mail, MapPin, Phone } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
+import { Reveal } from '@/components/amicro/reveal';
 import { pixelLead } from '@/lib/pixels';
 import { getAttribution, getMetaCookies, getVisitorId, metaEventId } from '@/lib/tracking';
 import { store } from '@/routes/leads';
@@ -77,15 +78,17 @@ export function Contact() {
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-5 lg:gap-16">
                     <div className="lg:col-span-2">
-                        <span className="inline-flex rounded-full border border-border bg-card px-5 py-1.5 text-xs font-medium tracking-wide text-foreground/60 uppercase">
+                        <Reveal as="span" className="inline-flex rounded-full border border-border bg-card px-5 py-1.5 text-xs font-medium tracking-wide text-foreground/60 uppercase">
                             Contact
-                        </span>
-                        <h2 className="mt-4 text-3xl text-foreground sm:text-4xl">Let's Talk About Your Loan</h2>
-                        <p className="mt-4 text-lg text-foreground/60">
+                        </Reveal>
+                        <Reveal as="h2" delay={0.08} className="mt-4 text-3xl text-foreground sm:text-4xl">
+                            Let's Talk About Your Loan
+                        </Reveal>
+                        <Reveal as="p" delay={0.16} className="mt-4 text-lg text-foreground/60">
                             Tell us a bit about what you're looking for and a member of our team will reach out shortly.
-                        </p>
+                        </Reveal>
 
-                        <div className="mt-10 flex flex-col gap-4">
+                        <Reveal blur={0} y={28} delay={0.24} className="mt-10 flex flex-col gap-4">
                             {CONTACT_INFO.map((item) => {
                                 const Icon = item.icon;
                                 const content = (
@@ -114,10 +117,10 @@ export function Contact() {
                                     </div>
                                 );
                             })}
-                        </div>
+                        </Reveal>
                     </div>
 
-                    <div className="lg:col-span-3">
+                    <Reveal blur={0} y={36} delay={0.15} className="lg:col-span-3">
                         <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 sm:p-10">
                             <AnimatePresence mode="wait">
                                 {submitted ? (
@@ -269,7 +272,7 @@ export function Contact() {
                                 )}
                             </AnimatePresence>
                         </div>
-                    </div>
+                    </Reveal>
                 </div>
             </div>
         </div>

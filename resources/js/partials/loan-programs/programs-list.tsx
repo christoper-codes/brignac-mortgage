@@ -2,6 +2,7 @@ import { Link } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Building2, Home, Landmark, Percent, ShieldCheck, TreePine } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Reveal } from '@/components/amicro/reveal';
 import { cn } from '@/lib/utils';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -276,11 +277,11 @@ export function ProgramsList() {
         <div data-header-theme="dark" className="force-dark relative bg-background py-20 sm:py-28">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
-                    <p className="text-sm font-semibold tracking-wide text-primary uppercase">Details</p>
-                    <h2 className="mt-4 text-3xl text-white sm:text-4xl">Explore Every Program</h2>
-                    <p className="mt-4 text-lg text-white/50">
+                    <Reveal as="p" className="text-sm font-semibold tracking-wide text-primary uppercase">Details</Reveal>
+                    <Reveal as="h2" delay={0.08} className="mt-4 text-3xl text-white sm:text-4xl">Explore Every Program</Reveal>
+                    <Reveal as="p" delay={0.16} className="mt-4 text-lg text-white/50">
                         Credit score ranges, down payment tiers, and eligible property types for each loan program we offer.
-                    </p>
+                    </Reveal>
                 </div>
 
                 <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[340px_auto_1fr] lg:items-start lg:gap-12">

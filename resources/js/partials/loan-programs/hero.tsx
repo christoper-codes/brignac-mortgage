@@ -2,6 +2,7 @@ import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, CalendarCheck, Handshake, ListChecks, Percent, Star, Timer } from 'lucide-react';
 import { useRef } from 'react';
+import { Reveal } from '@/components/amicro/reveal';
 
 const STATS = [
     { icon: ListChecks, label: 'Loan Programs', value: '6+' },
@@ -176,13 +177,13 @@ export function ProgramsHero() {
             />
 
             <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-4 text-center">
-                <h1 className="text-4xl leading-[1.1] sm:text-5xl text-white">
+                <Reveal as="h1" className="text-4xl leading-[1.1] sm:text-5xl text-white">
                     Find the Right Loan <span className="font-elegant text-primary italic">for Your Home</span>
-                </h1>
+                </Reveal>
 
-                <p className="mt-6 max-w-md text-base font-medium text-white/50">
+                <Reveal as="p" delay={0.1} className="mt-6 max-w-md text-base font-medium text-white/50">
                     From FHA to Jumbo, we match Louisiana homebuyers with the right program — fast, transparent, and built around you.
-                </p>
+                </Reveal>
 
                 <div className="mt-8">
                     <Link

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import { Reveal } from '@/components/amicro/reveal';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -34,16 +35,18 @@ export function Faqs() {
         <div className="bg-background py-24 sm:py-32">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
-                    <span className="inline-flex rounded-full border border-border bg-card px-5 py-1.5 text-xs font-medium tracking-wide text-foreground/60 uppercase">
+                    <Reveal as="span" className="inline-flex rounded-full border border-border bg-card px-5 py-1.5 text-xs font-medium tracking-wide text-foreground/60 uppercase">
                         FAQ
-                    </span>
-                    <h2 className="mt-4 text-3xl text-foreground sm:text-4xl">Frequently Asked Questions</h2>
-                    <p className="mt-4 text-lg text-foreground/60">
+                    </Reveal>
+                    <Reveal as="h2" delay={0.08} className="mt-4 text-3xl text-foreground sm:text-4xl">
+                        Frequently Asked Questions
+                    </Reveal>
+                    <Reveal as="p" delay={0.16} className="mt-4 text-lg text-foreground/60">
                         Answers to the questions we hear most from homebuyers and homeowners across Louisiana.
-                    </p>
+                    </Reveal>
                 </div>
 
-                <div className="mx-auto mt-14 flex max-w-3xl flex-col gap-3">
+                <Reveal blur={0} y={32} delay={0.1} className="mx-auto mt-14 flex max-w-3xl flex-col gap-3">
                     {FAQ_ITEMS.map((item, index) => {
                         const isOpen = openIndex === index;
 
@@ -88,7 +91,7 @@ export function Faqs() {
                             </div>
                         );
                     })}
-                </div>
+                </Reveal>
             </div>
         </div>
     );
