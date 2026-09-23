@@ -70,7 +70,7 @@ function CompanyMenu() {
                         style={{ transformOrigin: 'top center' }}
                         className="absolute top-full left-1/2 z-50 w-52 -translate-x-1/2 pt-3"
                     >
-                        <div className="rounded-3xl border border-border bg-background/90 p-2 shadow-xl shadow-black/10 backdrop-blur-xl">
+                        <div className="rounded-3xl border border-border bg-background p-2 shadow-xl shadow-black/10 backdrop-blur-xl">
                             {COMPANY_LINKS.map((link) => {
                                 const Icon = link.icon;
 

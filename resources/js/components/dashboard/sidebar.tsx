@@ -1,7 +1,26 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import type { ComponentType } from 'react';
-import { AnalyticsIcon, CampaignsIcon, LeadsIcon, LogoutIcon, OverviewIcon, SettingsIcon, TrackingIcon } from '@/components/dashboard/icons';
+import { useState } from 'react';
+import {
+    AnalyticsIcon,
+    CampaignsIcon,
+    LeadsIcon,
+    LogoutIcon,
+    OverviewIcon,
+    SettingsIcon,
+    TrackingIcon,
+} from '@/components/dashboard/icons';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
@@ -12,17 +31,33 @@ import { index as leads } from '@/routes/dashboard/leads';
 import { edit as tracking } from '@/routes/dashboard/tracking';
 import { edit } from '@/routes/profile';
 
-type Item = { title: string; href: string; icon: ComponentType<{ className?: string }>; exact?: boolean; match?: string };
+type Item = {
+    title: string;
+    href: string;
+    icon: ComponentType<{ className?: string }>;
+    exact?: boolean;
+    match?: string;
+};
 
 const ITEMS: Item[] = [
-    { title: 'Overview', href: dashboard().url, icon: OverviewIcon, exact: true },
+    {
+        title: 'Overview',
+        href: dashboard().url,
+        icon: OverviewIcon,
+        exact: true,
+    },
     { title: 'Campaigns', href: campaigns().url, icon: CampaignsIcon },
     { title: 'Leads', href: leads().url, icon: LeadsIcon },
     { title: 'Analytics', href: analytics().url, icon: AnalyticsIcon },
     { title: 'Pixels', href: tracking().url, icon: TrackingIcon },
 ];
 
-const SETTINGS: Item = { title: 'Settings', href: edit().url, icon: SettingsIcon, match: '/settings' };
+const SETTINGS: Item = {
+    title: 'Settings',
+    href: edit().url,
+    icon: SettingsIcon,
+    match: '/settings',
+};
 
 function useIsActive() {
     const { currentUrl } = useCurrentUrl();
@@ -31,15 +66,25 @@ function useIsActive() {
         const path = currentUrl.split('?')[0];
         const base = item.match ?? item.href;
 
-        return item.exact ? path === base : path === base || path.startsWith(`${base}/`);
+        return item.exact
+            ? path === base
+            : path === base || path.startsWith(`${base}/`);
     };
 }
 
 function Logo() {
     return (
         <Link href={dashboard().url} className="block px-2">
-            <img src="/img/darklogo.png" alt="Brignac Mortgage" className="w-32 dark:hidden" />
-            <img src="/img/lightlogo.png" alt="Brignac Mortgage" className="hidden w-32 dark:block" />
+            <img
+                src="/img/darklogo.png"
+                alt="Brignac Mortgage"
+                className="w-32 dark:hidden"
+            />
+            <img
+                src="/img/lightlogo.png"
+                alt="Brignac Mortgage"
+                className="hidden w-32 dark:block"
+            />
         </Link>
     );
 }
@@ -47,10 +92,16 @@ function Logo() {
 function UserChip() {
     const { auth } = usePage().props;
     const getInitials = useInitials();
+    const [confirming, setConfirming] = useState(false);
 
     if (!auth.user) {
         return null;
     }
+
+    const confirmLogout = () => {
+        router.flushAll();
+        router.post(logout().url);
+    };
 
     return (
         <div className="flex items-center gap-3 rounded-full border border-border bg-background/60 p-2 pr-3">
@@ -58,20 +109,40 @@ function UserChip() {
                 {getInitials(auth.user.name)}
             </span>
             <div className="min-w-0 flex-1 leading-tight">
-                <p className="truncate text-sm font-medium text-foreground">{auth.user.name}</p>
-                <p className="truncate text-xs text-foreground/50">{auth.user.email}</p>
+                <p className="truncate text-sm font-medium text-foreground">
+                    {auth.user.name}
+                </p>
+                <p className="truncate text-xs text-foreground/50">
+                    {auth.user.email}
+                </p>
             </div>
-            <Link
-                href={logout().url}
-                method="post"
-                as="button"
-                onClick={() => router.flushAll()}
+            <button
+                type="button"
+                onClick={() => setConfirming(true)}
                 aria-label="Log out"
                 data-test="logout-button"
                 className="grid size-8 shrink-0 place-items-center rounded-full text-foreground/50 transition-colors hover:bg-foreground/5 hover:text-foreground"
             >
                 <LogoutIcon className="size-4.5" />
-            </Link>
+            </button>
+
+            <AlertDialog open={confirming} onOpenChange={setConfirming}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Log out?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            You'll need to sign back in to reach the dashboard
+                            again.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmLogout}>
+                            Log out
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     );
 }
@@ -99,21 +170,29 @@ export function DashboardSidebar() {
                                 prefetch
                                 className={cn(
                                     'group relative flex items-center gap-3 rounded-full px-3 py-2.5 text-sm font-medium transition-colors',
-                                    active ? 'text-foreground' : 'text-foreground/55 hover:text-foreground',
+                                    active
+                                        ? 'text-foreground'
+                                        : 'text-foreground/55 hover:text-foreground',
                                     item.title === 'Settings' && 'mt-auto',
                                 )}
                             >
                                 {active && (
                                     <motion.span
                                         layoutId="dashboard-active-item"
-                                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 380,
+                                            damping: 32,
+                                        }}
                                         className="absolute inset-0 rounded-full border border-border bg-background shadow-sm"
                                     />
                                 )}
                                 <span
                                     className={cn(
                                         'relative grid size-9 shrink-0 place-items-center rounded-full transition-colors',
-                                        active ? 'bg-primary/15 text-primary' : 'bg-foreground/5 group-hover:bg-foreground/10',
+                                        active
+                                            ? 'bg-primary/15 text-primary'
+                                            : 'bg-foreground/5 group-hover:bg-foreground/10',
                                     )}
                                 >
                                     <Icon className="size-5" />
@@ -145,7 +224,11 @@ export function DashboardSidebar() {
                             {active && (
                                 <motion.span
                                     layoutId="dashboard-active-tab"
-                                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 380,
+                                        damping: 32,
+                                    }}
                                     className="absolute inset-0 rounded-full bg-primary/15"
                                 />
                             )}

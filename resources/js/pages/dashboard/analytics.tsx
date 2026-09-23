@@ -1,6 +1,5 @@
 import { Head } from '@inertiajs/react';
 import { BarChart, Breakdown, Card, CardTitle, PageHeader, RangeTabs, StatCard } from '@/components/dashboard/ui';
-import { pageLabel } from '@/lib/utils';
 import { MEMBERS } from '@/partials/apply/team-members';
 import { analytics } from '@/routes/dashboard';
 import type { DaySeries, PeriodSeries, Row, States } from '@/types/dashboard';
@@ -126,7 +125,7 @@ export default function Analytics({ days, totals, daily, weekly, monthly, states
                     </Card>
                     <Card>
                         <CardTitle>Top pages</CardTitle>
-                        <Breakdown rows={pages.map((row) => ({ ...row, label: pageLabel(row.label) }))} />
+                        <Breakdown rows={pages.map((row) => ({ ...row, label: `${window.location.origin}${row.label}` }))} plain />
                     </Card>
                 </div>
 

@@ -136,7 +136,7 @@ export function BarChart({ data, height = 200, tooltip }: { data: { label: strin
     );
 }
 
-export function Breakdown({ rows, empty = 'No data yet' }: { rows: Row[]; empty?: string }) {
+export function Breakdown({ rows, empty = 'No data yet', plain = false }: { rows: Row[]; empty?: string; plain?: boolean }) {
     const max = Math.max(1, ...rows.map((row) => row.total));
 
     if (rows.length === 0) {
@@ -148,7 +148,7 @@ export function Breakdown({ rows, empty = 'No data yet' }: { rows: Row[]; empty?
             {rows.map((row, index) => (
                 <li key={row.label}>
                     <div className="flex items-center justify-between text-sm">
-                        <span className="truncate text-foreground/80 capitalize">{row.label}</span>
+                        <span className={cn('truncate text-foreground/80', !plain && 'capitalize')}>{row.label}</span>
                         <span className="ml-3 font-medium text-foreground tabular-nums">{number.format(row.total)}</span>
                     </div>
                     <div className="mt-1.5 h-2 rounded-full bg-foreground/5">
