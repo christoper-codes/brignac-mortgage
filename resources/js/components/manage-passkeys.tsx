@@ -1,6 +1,7 @@
 import { router } from '@inertiajs/react';
 import { KeyRound } from 'lucide-react';
 import { destroy } from '@/actions/Laravel/Passkeys/Http/Controllers/PasskeyRegistrationController';
+import { Card } from '@/components/dashboard/ui';
 import Heading from '@/components/heading';
 import PasskeyItem from '@/components/passkey-item';
 import PasskeyRegistration from '@/components/passkey-register';
@@ -44,28 +45,30 @@ export default function ManagePasskeys(props: Props) {
     }
 
     return (
-        <div className="space-y-6">
+        <Card>
             <Heading
                 variant="small"
                 title="Passkeys"
                 description="Manage your passkeys for passwordless sign-in"
             />
 
-            <div className="overflow-hidden rounded-lg border border-border">
-                {passkeys.length > 0 ? (
-                    passkeys.map((passkey) => (
-                        <PasskeyItem
-                            key={passkey.id}
-                            passkey={passkey}
-                            onDelete={handleDelete}
-                        />
-                    ))
-                ) : (
-                    <EmptyState />
-                )}
-            </div>
+            <div className="space-y-4">
+                <div className="overflow-hidden rounded-3xl border border-border">
+                    {passkeys.length > 0 ? (
+                        passkeys.map((passkey) => (
+                            <PasskeyItem
+                                key={passkey.id}
+                                passkey={passkey}
+                                onDelete={handleDelete}
+                            />
+                        ))
+                    ) : (
+                        <EmptyState />
+                    )}
+                </div>
 
-            <PasskeyRegistration onSuccess={handleRegisterSuccess} />
-        </div>
+                <PasskeyRegistration onSuccess={handleRegisterSuccess} />
+            </div>
+        </Card>
     );
 }

@@ -1,5 +1,5 @@
-import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { ChevronLeft, ChevronRight, Loader2, RotateCcw } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import {
     Dialog,
@@ -145,6 +145,16 @@ export function Calculator() {
     );
     const [result, setResult] = useState<CalcResult | null>(null);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [calculating, setCalculating] = useState(false);
+    const calculateTimeout = useRef<number | null>(null);
+
+    useEffect(() => {
+        return () => {
+            if (calculateTimeout.current) {
+                window.clearTimeout(calculateTimeout.current);
+            }
+        };
+    }, []);
     const [viewMode, setViewMode] = useState<'month' | 'year'>('month');
     const [page, setPage] = useState(0);
 
@@ -229,18 +239,25 @@ export function Calculator() {
             return;
         }
 
-        setResult({
-            ...calculateAmortization(loan, interestRate, Number(termYears)),
-            params: {
-                loan,
-                years: Number(termYears),
-                rate: interestRate,
-                property,
-            },
-        });
-        setViewMode('month');
-        setPage(0);
-        setDialogOpen(true);
+        // Purely cosmetic: the math is instant, but a short "crunching the numbers" pause makes the
+        // result feel calculated rather than just toggled on.
+        setCalculating(true);
+
+        calculateTimeout.current = window.setTimeout(() => {
+            setResult({
+                ...calculateAmortization(loan, interestRate, Number(termYears)),
+                params: {
+                    loan,
+                    years: Number(termYears),
+                    rate: interestRate,
+                    property,
+                },
+            });
+            setViewMode('month');
+            setPage(0);
+            setCalculating(false);
+            setDialogOpen(true);
+        }, 700);
     };
 
     const handleReset = () => {
@@ -434,9 +451,15 @@ export function Calculator() {
                                 <div className="flex justify-center pt-2">
                                     <button
                                         type="submit"
-                                        className="rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                                        disabled={calculating}
+                                        className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-70"
                                     >
-                                        Calculate Payment
+                                        {calculating && (
+                                            <Loader2 className="size-4 animate-spin" />
+                                        )}
+                                        {calculating
+                                            ? 'Calculating…'
+                                            : 'Calculate Payment'}
                                     </button>
                                 </div>
                             </form>

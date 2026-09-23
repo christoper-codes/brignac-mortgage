@@ -1,6 +1,7 @@
 import { Form } from '@inertiajs/react';
 import { ShieldCheck } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Card } from '@/components/dashboard/ui';
 import Heading from '@/components/heading';
 import TwoFactorRecoveryCodes from '@/components/two-factor-recovery-codes';
 import TwoFactorSetupModal from '@/components/two-factor-setup-modal';
@@ -45,7 +46,7 @@ export default function ManageTwoFactor(props: Props) {
     }
 
     return (
-        <div className="space-y-6">
+        <Card>
             <Heading
                 variant="small"
                 title="Two-factor authentication"
@@ -66,6 +67,7 @@ export default function ManageTwoFactor(props: Props) {
                                     variant="destructive"
                                     type="submit"
                                     disabled={processing}
+                                    className="rounded-full"
                                 >
                                     Disable 2FA
                                 </Button>
@@ -90,7 +92,10 @@ export default function ManageTwoFactor(props: Props) {
 
                     <div>
                         {hasSetupData ? (
-                            <Button onClick={() => setShowSetupModal(true)}>
+                            <Button
+                                onClick={() => setShowSetupModal(true)}
+                                className="rounded-full"
+                            >
                                 <ShieldCheck />
                                 Continue setup
                             </Button>
@@ -100,7 +105,11 @@ export default function ManageTwoFactor(props: Props) {
                                 onSuccess={() => setShowSetupModal(true)}
                             >
                                 {({ processing }) => (
-                                    <Button type="submit" disabled={processing}>
+                                    <Button
+                                        type="submit"
+                                        disabled={processing}
+                                        className="rounded-full"
+                                    >
                                         Enable 2FA
                                     </Button>
                                 )}
@@ -121,6 +130,6 @@ export default function ManageTwoFactor(props: Props) {
                 fetchSetupData={fetchSetupData}
                 errors={errors}
             />
-        </div>
+        </Card>
     );
 }

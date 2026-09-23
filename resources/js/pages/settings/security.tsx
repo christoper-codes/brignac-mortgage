@@ -1,6 +1,7 @@
 import { Form, Head } from '@inertiajs/react';
 import { useRef } from 'react';
 import SecurityController from '@/actions/App/Http/Controllers/Settings/SecurityController';
+import { Card } from '@/components/dashboard/ui';
 import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
 import type { Props as ManagePasskeysProps } from '@/components/manage-passkeys';
@@ -8,9 +9,10 @@ import ManagePasskeys from '@/components/manage-passkeys';
 import type { Props as ManageTwoFactorProps } from '@/components/manage-two-factor';
 import ManageTwoFactor from '@/components/manage-two-factor';
 import PasswordInput from '@/components/password-input';
-import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { edit } from '@/routes/security';
+
+const fieldClass = 'h-11 rounded-full px-5';
 
 type Props = {
     passwordRules: string;
@@ -27,7 +29,7 @@ export default function Security(props: Props) {
 
             <h1 className="sr-only">Security settings</h1>
 
-            <div className="space-y-6">
+            <Card>
                 <Heading
                     variant="small"
                     title="Update password"
@@ -54,7 +56,7 @@ export default function Security(props: Props) {
                             currentPasswordInput.current?.focus();
                         }
                     }}
-                    className="space-y-6"
+                    className="space-y-5"
                 >
                     {({ errors, processing }) => (
                         <>
@@ -67,7 +69,7 @@ export default function Security(props: Props) {
                                     id="current_password"
                                     ref={currentPasswordInput}
                                     name="current_password"
-                                    className="mt-1 block w-full"
+                                    className={fieldClass}
                                     autoComplete="current-password"
                                     placeholder="Current password"
                                 />
@@ -82,7 +84,7 @@ export default function Security(props: Props) {
                                     id="password"
                                     ref={passwordInput}
                                     name="password"
-                                    className="mt-1 block w-full"
+                                    className={fieldClass}
                                     autoComplete="new-password"
                                     placeholder="New password"
                                     passwordrules={props.passwordRules}
@@ -99,7 +101,7 @@ export default function Security(props: Props) {
                                 <PasswordInput
                                     id="password_confirmation"
                                     name="password_confirmation"
-                                    className="mt-1 block w-full"
+                                    className={fieldClass}
                                     autoComplete="new-password"
                                     placeholder="Confirm password"
                                     passwordrules={props.passwordRules}
@@ -110,18 +112,20 @@ export default function Security(props: Props) {
                                 />
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                <Button
+                            <div className="flex items-center gap-4 pt-1">
+                                <button
+                                    type="submit"
                                     disabled={processing}
                                     data-test="update-password-button"
+                                    className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-8 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-50"
                                 >
                                     Save
-                                </Button>
+                                </button>
                             </div>
                         </>
                     )}
                 </Form>
-            </div>
+            </Card>
 
             <ManageTwoFactor
                 canManageTwoFactor={props.canManageTwoFactor}

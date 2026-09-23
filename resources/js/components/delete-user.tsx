@@ -4,7 +4,6 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
-import { Button } from '@/components/ui/button';
 import {
     Dialog,
     DialogClose,
@@ -20,30 +19,32 @@ export default function DeleteUser() {
     const passwordInput = useRef<HTMLInputElement>(null);
 
     return (
-        <div className="space-y-6">
+        <div className="rounded-4xl border border-red-200 bg-red-50/60 p-6 dark:border-red-500/20 dark:bg-red-500/10">
             <Heading
                 variant="small"
                 title="Delete account"
                 description="Delete your account and all of its resources"
             />
-            <div className="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
-                <div className="relative space-y-0.5 text-red-600 dark:text-red-100">
-                    <p className="font-medium">Warning</p>
-                    <p className="text-sm">
+
+            <div className="space-y-4">
+                <div className="space-y-0.5 text-red-600 dark:text-red-200">
+                    <p className="text-sm font-medium">Warning</p>
+                    <p className="text-sm text-red-600/80 dark:text-red-200/70">
                         Please proceed with caution, this cannot be undone.
                     </p>
                 </div>
 
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button
-                            variant="destructive"
+                        <button
+                            type="button"
                             data-test="delete-user-button"
+                            className="inline-flex h-11 items-center justify-center rounded-full bg-red-600 px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                         >
                             Delete account
-                        </Button>
+                        </button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="rounded-4xl">
                         <DialogTitle>
                             Are you sure you want to delete your account?
                         </DialogTitle>
@@ -79,6 +80,7 @@ export default function DeleteUser() {
                                             ref={passwordInput}
                                             placeholder="Password"
                                             autoComplete="current-password"
+                                            className="h-11 rounded-full px-5"
                                         />
 
                                         <InputError message={errors.password} />
@@ -86,28 +88,25 @@ export default function DeleteUser() {
 
                                     <DialogFooter className="gap-2">
                                         <DialogClose asChild>
-                                            <Button
-                                                variant="secondary"
+                                            <button
+                                                type="button"
                                                 onClick={() =>
                                                     resetAndClearErrors()
                                                 }
+                                                className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-sm font-medium transition-colors hover:bg-accent"
                                             >
                                                 Cancel
-                                            </Button>
+                                            </button>
                                         </DialogClose>
 
-                                        <Button
-                                            variant="destructive"
+                                        <button
+                                            type="submit"
                                             disabled={processing}
-                                            asChild
+                                            data-test="confirm-delete-user-button"
+                                            className="inline-flex h-11 items-center justify-center rounded-full bg-red-600 px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
                                         >
-                                            <button
-                                                type="submit"
-                                                data-test="confirm-delete-user-button"
-                                            >
-                                                Delete account
-                                            </button>
-                                        </Button>
+                                            Delete account
+                                        </button>
                                     </DialogFooter>
                                 </>
                             )}
