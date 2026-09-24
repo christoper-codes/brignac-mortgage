@@ -82,6 +82,15 @@ export function SettingsIcon({ className }: IconProps) {
     );
 }
 
+export function AiIcon({ className }: IconProps) {
+    return (
+        <Icon className={className}>
+            <path d="M10.5 4.5c.5 3.7 2.3 5.5 6 6-3.7.5-5.5 2.3-6 6-.5-3.7-2.3-5.5-6-6 3.7-.5 5.5-2.3 6-6Z" />
+            <path d="M18 3.5v3M16.5 5h3M18.5 16v3.5M16.75 17.75h3.5" />
+        </Icon>
+    );
+}
+
 export function LogoutIcon({ className }: IconProps) {
     return (
         <Icon className={className}>

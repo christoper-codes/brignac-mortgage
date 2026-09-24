@@ -41,6 +41,12 @@ return [
         'url' => env('GEOLOCATION_URL', 'http://ip-api.com/json/{ip}?fields=status,countryCode,region,regionName,city'),
     ],
 
+    'openai' => [
+        'key' => env('OPENAI_API_KEY'),
+        'url' => env('OPENAI_API_URL', 'https://api.openai.com/v1'),
+        'model' => env('OPENAI_API_MODEL', 'gpt-4.1-mini'),
+    ],
+
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),

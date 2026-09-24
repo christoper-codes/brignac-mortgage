@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Dashboard\AiController;
 use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\CampaignController;
 use App\Http\Controllers\Dashboard\LeadController as DashboardLeadController;
@@ -33,6 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('analytics', AnalyticsController::class)->name('analytics');
+        Route::get('ai', [AiController::class, 'index'])->name('ai');
+        Route::post('ai/plan', [AiController::class, 'plan'])->middleware('throttle:30,1')->name('ai.plan');
+        Route::post('ai/answer', [AiController::class, 'answer'])->middleware('throttle:30,1')->name('ai.answer');
         Route::get('tracking', [DashboardTrackingController::class, 'edit'])->name('tracking.edit');
         Route::put('tracking', [DashboardTrackingController::class, 'update'])->name('tracking.update');
         Route::get('leads', [DashboardLeadController::class, 'index'])->name('leads.index');

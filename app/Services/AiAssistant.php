@@ -1,0 +1,178 @@
+<?php
+
+namespace App\Services;
+
+use App\Exceptions\AiUnavailableException;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Facades\Http;
+
+/**
+ * Answers the admin's questions about the website in two cheap steps instead of one huge prompt:
+ *
+ *  1. plan():   the model only sees the *menu* of available data (ids + one-line descriptions) and the
+ *               question, and says which pieces it needs and for how many days.
+ *  2. answer(): we load just those pieces and ask again, this time with the data attached.
+ */
+class AiAssistant
+{
+    public const DEFAULT_DAYS = 30;
+
+    public const MAX_DAYS = 365;
+
+    public function __construct(private AiDataCatalog $catalog) {}
+
+    public function isConfigured(): bool
+    {
+        return filled(config('services.openai.key'));
+    }
+
+    /**
+     * Step 1 — decide which data is needed.
+     *
+     * @param  list<array{role: string, content: string}>  $history
+     * @return array{sources: list<string>, days: int}
+     */
+    public function plan(string $question, array $history = []): array
+    {
+        $system = <<<PROMPT
+You route questions for the marketing dashboard of Brignac Mortgage, a Louisiana wholesale mortgage broker. Decide which website data is needed to answer the admin's question.
+Reply with single-line JSON only, no markdown, no extra text: {"sources":["id",...],"days":N}
+Rules:
+- Use only ids from the catalog below, and pick the fewest that fully answer the question.
+- Use an empty list when no website data is needed (greetings, general questions).
+- "days" is the period the question is about (7, 30, 90...). Default {$this->defaultDays()} when not stated. Maximum {$this->maxDays()}.
+Catalog:
+{$this->catalog->menu()}
+PROMPT;
+
+        $raw = $this->chat([
+            ['role' => 'system', 'content' => $system],
+            ['role' => 'user', 'content' => $this->withHistory($question, $history)],
+        ], maxTokens: 150, json: true);
+
+        return $this->parsePlan($raw);
+    }
+
+    /**
+     * Step 2 — answer with only the data the plan asked for.
+     *
+     * @param  list<array{role: string, content: string}>  $history
+     * @param  list<string>  $sources
+     */
+    public function answer(string $question, array $history, array $sources, int $days): string
+    {
+        $days = $this->clampDays($days);
+        $context = $this->catalog->resolve($sources, $days);
+        $data = $context === [] ? 'No website data was needed for this question.' : json_encode($context, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        $system = <<<'PROMPT'
+You are the analytics assistant inside the marketing dashboard of Brignac Mortgage, a Louisiana wholesale mortgage broker. The two conversions that matter, in order: 1) clicks on "Apply Now" (team member cards on /apply), 2) contact-form leads.
+Answer the admin's question using ONLY the data provided. Be concise and specific with numbers; add one short, actionable suggestion when useful. If the data is empty or insufficient, say so plainly — never invent numbers.
+Reply in the same language as the question. Plain text only: short paragraphs, "- " bullets for lists, **bold** for key figures. No headings, tables or code fences.
+PROMPT;
+
+        $messages = [['role' => 'system', 'content' => $system]];
+
+        foreach ($history as $turn) {
+            $messages[] = ['role' => $turn['role'], 'content' => $turn['content']];
+        }
+
+        $messages[] = ['role' => 'user', 'content' => "Data (last {$days} days, JSON):\n{$data}\n\nQuestion: {$question}"];
+
+        $answer = $this->chat($messages, maxTokens: 700);
+
+        if ($answer === '') {
+            throw new AiUnavailableException('The AI returned an empty answer.');
+        }
+
+        return $answer;
+    }
+
+    /**
+     * @param  list<array{role: string, content: string}>  $messages
+     */
+    private function chat(array $messages, int $maxTokens, bool $json = false): string
+    {
+        if (! $this->isConfigured()) {
+            throw new AiUnavailableException('AI is not configured. Add OPENAI_API_KEY to your .env file.');
+        }
+
+        $payload = [
+            'model' => config('services.openai.model'),
+            'max_tokens' => $maxTokens,
+            'temperature' => 0.2,
+            'messages' => $messages,
+        ];
+
+        if ($json) {
+            $payload['response_format'] = ['type' => 'json_object'];
+        }
+
+        try {
+            $response = Http::withToken((string) config('services.openai.key'))
+                ->acceptJson()
+                ->timeout(30)
+                ->post(rtrim((string) config('services.openai.url'), '/').'/chat/completions', $payload);
+        } catch (ConnectionException) {
+            throw new AiUnavailableException('Could not reach the AI service. Try again in a moment.');
+        }
+
+        if ($response->failed()) {
+            report(new AiUnavailableException("OpenAI responded with HTTP {$response->status()}."));
+
+            throw new AiUnavailableException('The AI service returned an error. Try again in a moment.');
+        }
+
+        return trim((string) $response->json('choices.0.message.content', ''));
+    }
+
+    /**
+     * @return array{sources: list<string>, days: int}
+     */
+    private function parsePlan(string $raw): array
+    {
+        $raw = preg_replace('/^```(?:json)?\s*/i', '', $raw) ?? $raw;
+        $raw = preg_replace('/\s*```$/', '', trim($raw)) ?? $raw;
+        $data = json_decode($raw, true);
+
+        if (! is_array($data) || ! isset($data['sources']) || ! is_array($data['sources'])) {
+            // An unreadable plan shouldn't dead-end the chat: the headline numbers are a safe default.
+            return ['sources' => ['overview'], 'days' => self::DEFAULT_DAYS];
+        }
+
+        $sources = collect($data['sources'])
+            ->filter(fn ($id): bool => is_string($id) && $this->catalog->has($id))
+            ->unique()->values()->all();
+
+        return ['sources' => $sources, 'days' => $this->clampDays($data['days'] ?? self::DEFAULT_DAYS)];
+    }
+
+    private function clampDays(mixed $days): int
+    {
+        return is_numeric($days) ? max(1, min(self::MAX_DAYS, (int) $days)) : self::DEFAULT_DAYS;
+    }
+
+    /**
+     * @param  list<array{role: string, content: string}>  $history
+     */
+    private function withHistory(string $question, array $history): string
+    {
+        if ($history === []) {
+            return $question;
+        }
+
+        $recent = collect($history)->map(fn (array $turn): string => "{$turn['role']}: {$turn['content']}")->implode("\n");
+
+        return "Recent conversation:\n{$recent}\n\nNew question: {$question}";
+    }
+
+    private function defaultDays(): int
+    {
+        return self::DEFAULT_DAYS;
+    }
+
+    private function maxDays(): int
+    {
+        return self::MAX_DAYS;
+    }
+}

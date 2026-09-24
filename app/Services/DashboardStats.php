@@ -102,7 +102,7 @@ class DashboardStats
     /**
      * @return array{0: CarbonImmutable, 1: CarbonImmutable}
      */
-    private function window(int $days): array
+    public function window(int $days): array
     {
         $to = CarbonImmutable::now()->endOfDay();
 

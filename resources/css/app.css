@@ -20,6 +20,7 @@
 
     --animate-marquee: marquee 32s linear infinite;
     --animate-marquee-reverse: marquee-reverse 36s linear infinite;
+    --animate-ai-shimmer: ai-shimmer 2.2s linear infinite;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -177,5 +178,15 @@
     }
     to {
         transform: translateY(0);
+    }
+}
+
+/* AI assistant: the soft "thinking" shimmer on the status text. */
+@keyframes ai-shimmer {
+    from {
+        background-position: 200% 0;
+    }
+    to {
+        background-position: -200% 0;
     }
 }

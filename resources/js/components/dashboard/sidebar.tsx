@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import type { ComponentType } from 'react';
 import { useState } from 'react';
 import {
+    AiIcon,
     AnalyticsIcon,
     CampaignsIcon,
     LeadsIcon,
@@ -25,7 +26,7 @@ import { useCurrentUrl } from '@/hooks/use-current-url';
 import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { dashboard, logout } from '@/routes';
-import { analytics } from '@/routes/dashboard';
+import { ai, analytics } from '@/routes/dashboard';
 import { index as campaigns } from '@/routes/dashboard/campaigns';
 import { index as leads } from '@/routes/dashboard/leads';
 import { edit as tracking } from '@/routes/dashboard/tracking';
@@ -49,6 +50,7 @@ const ITEMS: Item[] = [
     { title: 'Campaigns', href: campaigns().url, icon: CampaignsIcon },
     { title: 'Leads', href: leads().url, icon: LeadsIcon },
     { title: 'Analytics', href: analytics().url, icon: AnalyticsIcon },
+    { title: 'AI', href: ai().url, icon: AiIcon },
     { title: 'Pixels', href: tracking().url, icon: TrackingIcon },
 ];
 
@@ -217,7 +219,7 @@ export function DashboardSidebar() {
                             href={item.href}
                             aria-label={item.title}
                             className={cn(
-                                'relative grid size-12 place-items-center rounded-full transition-colors',
+                                'relative grid size-11 place-items-center rounded-full transition-colors',
                                 active ? 'text-primary' : 'text-foreground/50',
                             )}
                         >
