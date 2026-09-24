@@ -240,7 +240,7 @@ export default function Ai({ configured }: { configured: boolean }) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1.6, ease: 'easeOut' }}
-                        className="pointer-events-none absolute top-[14%] -left-24 -z-10 size-[26rem] rounded-full bg-[radial-gradient(circle,rgba(120,140,255,0.2),transparent_68%)] blur-2xl"
+                        className="pointer-events-none absolute top-[-35%] -left-44 -z-10 size-[29rem] rounded-full bg-[radial-gradient(circle,rgba(120,140,255,0.2),transparent_68%)] blur-2xl"
                     />
                 )}
 
