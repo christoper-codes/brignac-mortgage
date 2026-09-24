@@ -302,7 +302,6 @@ export function ReviewWall() {
 
             <div className="relative mt-10">
                 <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-20 bg-linear-to-b from-background to-transparent sm:h-28" />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-linear-to-t from-background to-transparent sm:h-28" />
 
                 <AnimatePresence mode="wait">
                     <motion.div
