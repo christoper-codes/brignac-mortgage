@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLeadRequest;
 use App\Jobs\ResolveGeolocation;
+use App\Jobs\SendLeadEmails;
 use App\Jobs\SendMetaConversionEvent;
 use App\Models\Lead;
 use App\Services\TrackingContext;
@@ -23,6 +24,9 @@ class LeadController extends Controller
         ]);
 
         ResolveGeolocation::dispatchAfterResponse($lead);
+
+        // Queued behind the geolocation lookup, so the team's email already carries the lead's location.
+        SendLeadEmails::dispatchAfterResponse($lead);
 
         // Priority #2 conversion: the contact form. Email/phone are hashed (Meta requires SHA-256,
         // lowercased/trimmed for email and digits-only for phone) to improve match quality without

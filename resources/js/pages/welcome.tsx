@@ -16,7 +16,7 @@ import { StatsMarquee } from '@/partials/home/stats-marquee';
 export default function Welcome() {
     return (
         <>
-            <Head title="Louisiana Mortgage Lending" />
+            <Head title="Louisiana Mortgage Lender & Loan Officers" />
 
             <div className="min-h-screen bg-background">
                 <Header />

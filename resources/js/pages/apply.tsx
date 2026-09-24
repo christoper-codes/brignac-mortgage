@@ -9,7 +9,7 @@ import { Header } from '@/partials/header';
 export default function Apply() {
     return (
         <>
-            <Head title="Apply" />
+            <Head title="Apply for a Mortgage in Louisiana" />
 
             <div className="force-light min-h-screen bg-background">
                 <Header />

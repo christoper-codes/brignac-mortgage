@@ -7,7 +7,7 @@ import { ProgramsList } from '@/partials/loan-programs/programs-list';
 export default function LoanPrograms() {
     return (
         <>
-            <Head title="Loan Programs" />
+            <Head title="FHA, VA, USDA & Jumbo Loans in Louisiana" />
 
             <div className="force-dark min-h-screen bg-background">
                 <Header />

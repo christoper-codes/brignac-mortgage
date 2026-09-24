@@ -7,7 +7,7 @@ import { ReviewWall } from '@/partials/testimonials/review-wall';
 export default function Testimonials() {
     return (
         <>
-            <Head title="Testimonials" />
+            <Head title="Client Reviews & Testimonials" />
 
             <div className="force-light min-h-screen bg-background">
                 <Header />

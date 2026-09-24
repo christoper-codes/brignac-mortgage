@@ -8,7 +8,8 @@ import AppLayout from '@/layouts/app-layout';
 import AuthLayout from '@/layouts/auth-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+// Fixed (not APP_NAME): this is the suffix of every browser tab and search-result title.
+const appName = 'Brignac Mortgage';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
