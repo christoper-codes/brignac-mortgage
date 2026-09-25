@@ -59,6 +59,9 @@ class SeoMeta
                     'areaServed' => ['@type' => 'State', 'name' => 'Louisiana'],
                     'address' => [
                         '@type' => 'PostalAddress',
+                        'streetAddress' => $business['address']['street'],
+                        'addressLocality' => $business['address']['city'],
+                        'postalCode' => $business['address']['postal_code'],
                         'addressRegion' => $business['region'],
                         'addressCountry' => $business['country'],
                     ],

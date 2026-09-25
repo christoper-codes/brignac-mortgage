@@ -47,10 +47,15 @@ function DialogOverlay({
 function DialogContent({
   className,
   children,
+  container,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+}: React.ComponentProps<typeof DialogPrimitive.Content> & {
+  /** Renders the portal into this node instead of document.body — e.g. to keep it inside a
+   * `.force-light`/`.force-dark` subtree, which a plain className can't reach across a portal. */
+  container?: React.ComponentProps<typeof DialogPrimitive.Portal>["container"]
+}) {
   return (
-    <DialogPortal data-slot="dialog-portal">
+    <DialogPortal data-slot="dialog-portal" container={container}>
       <DialogOverlay />
       <DialogPrimitive.Content
         data-slot="dialog-content"

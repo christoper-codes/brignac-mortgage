@@ -19,10 +19,14 @@ return [
         'phone' => '+1-504-559-2821',
         'phone_display' => '(504) 559-2821',
         'email' => 'Shaun@brignacmortgage.com',
+        'address' => [
+            'street' => '21121 Waterfront East Dr',
+            'city' => 'Maurepas',
+            'postal_code' => '70449',
+        ],
         'region' => 'LA',
         'country' => 'US',
-        // Approximate office location (from the Google Maps embed on /apply). Add the street address here
-        // once confirmed — search engines use it for local results.
+        // Office location (matches the Google Maps embed on /apply) — used for local search results.
         'geo' => ['latitude' => 30.227, 'longitude' => -90.7284],
         'same_as' => [
             'https://www.facebook.com/BrignacMortgage',

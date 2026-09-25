@@ -71,7 +71,7 @@ export function Location() {
                             </span>
                             <div className="min-w-0 flex-1">
                                 <p className="truncate text-sm font-semibold text-foreground">Brignac Mortgage</p>
-                                <p className="truncate text-xs text-foreground/60">21121 Waterfront East Dr, Maurepas, LA</p>
+                                <p className="truncate text-xs text-foreground/60">21121 Waterfront East Dr, Maurepas, LA 70449</p>
                             </div>
                             <a
                                 href="https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A"

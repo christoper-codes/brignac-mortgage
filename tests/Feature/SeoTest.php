@@ -31,6 +31,8 @@ test('the home page publishes the business as structured data', function () {
 
     expect($schema['@graph'][0])
         ->toMatchArray(['@type' => 'FinancialService', 'telephone' => '+1-504-559-2821', 'identifier' => 'NMLS #2401214'])
+        ->and($schema['@graph'][0]['address'])
+        ->toMatchArray(['streetAddress' => '21121 Waterfront East Dr', 'addressLocality' => 'Maurepas', 'postalCode' => '70449', 'addressRegion' => 'LA'])
         ->and($schema['@graph'][1]['@type'])->toBe('WebSite');
 });
 

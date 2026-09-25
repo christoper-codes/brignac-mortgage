@@ -32,7 +32,7 @@ export function Faqs() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <div className="bg-background py-24 sm:py-32">
+        <div className="force-light bg-background py-24 sm:py-32">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
                     <Reveal as="span" className="inline-flex rounded-full border border-border bg-card px-5 py-1.5 text-xs font-medium tracking-wide text-foreground/60 uppercase">

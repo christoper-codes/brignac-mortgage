@@ -1,7 +1,7 @@
 :root {
     --background: #ffffff;
     --foreground: #14170f;
-    --card: #F6F7F9;
+    --card: #f6f7f9;
     --card-foreground: #14170f;
     --primary: #51b003;
     --primary-foreground: #ffffff;
@@ -12,12 +12,12 @@
 
 .dark {
     --background: #141211;
-    --foreground: #F6F7F9;
+    --foreground: #f6f7f9;
     --card: #131313;
-    --card-foreground: #F6F7F9;
+    --card-foreground: #f6f7f9;
     --primary: #51b003;
     --primary-foreground: #ffffff;
-    --secondary: #F6F7F9;
+    --secondary: #f6f7f9;
     --secondary-foreground: #14170f;
     --border: #262624;
 }
@@ -26,17 +26,32 @@
  * Forces a subtree to render with the light-mode tokens regardless of the .dark class on <html>.
  * Tailwind's `--color-*` theme variables (generated from these) inherit as already-resolved
  * values, not live var() references, so they must be re-declared here too, not just the base tokens.
+ *
+ * Every token .dark overrides is re-declared here too (not just background/foreground/card/border) —
+ * a subtree that's "always light" still renders shadcn portal content (Select/Dialog dropdowns,
+ * popovers) that reaches for --muted, --accent, --popover, --destructive, --input and --ring, and
+ * those were leaking the ancestor .dark values until every one of them was covered here.
  */
 .force-light {
     --background: #ffffff;
     --foreground: #14170f;
-    --card: #F6F7F9;
+    --card: #f6f7f9;
     --card-foreground: #14170f;
     --primary: #51b003;
     --primary-foreground: #ffffff;
     --secondary: #14170f;
     --secondary-foreground: #ffffff;
     --border: #e7e9ea;
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.577 0.245 27.325);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.87 0 0);
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -47,19 +62,40 @@
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
     --color-border: var(--border);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
 }
 
-/* Forces a subtree to render with the dark-mode tokens regardless of the .dark class on <html>. */
+/* Forces a subtree to render with the dark-mode tokens regardless of the .dark class on <html>. See
+ * the .force-light comment above — the same full token list applies here, mirrored. */
 .force-dark {
     --background: #141211;
-    --foreground: #F6F7F9;
+    --foreground: #f6f7f9;
     --card: #131313;
-    --card-foreground: #F6F7F9;
+    --card-foreground: #f6f7f9;
     --primary: #51b003;
     --primary-foreground: #ffffff;
-    --secondary: #F6F7F9;
+    --secondary: #f6f7f9;
     --secondary-foreground: #14170f;
     --border: #262624;
+    --popover: oklch(0.145 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.396 0.141 25.723);
+    --destructive-foreground: oklch(0.637 0.237 25.331);
+    --input: oklch(0.269 0 0);
+    --ring: oklch(0.439 0 0);
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -70,4 +106,14 @@
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
     --color-border: var(--border);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
 }

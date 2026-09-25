@@ -245,7 +245,7 @@ export function LoanTimeline() {
     const rangeEnd = rangeStart + group.length - 1;
 
     return (
-        <div className="bg-background py-24 sm:py-32">
+        <div className="force-light bg-background py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
                 <Reveal as="h2" className="text-3xl text-foreground sm:text-4xl">
                     Loan Products &amp; Programs

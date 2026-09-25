@@ -148,6 +148,19 @@ export function Calculator() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [calculating, setCalculating] = useState(false);
     const calculateTimeout = useRef<number | null>(null);
+    // The results modal and the Loan Term dropdown are portaled straight to document.body by
+    // default, which escapes this section's `force-light` subtree — no className on this component
+    // can reach them there. Rendering them into this node instead (also `force-light`, but never
+    // moved anywhere with a transform, so `fixed` positioning still measures against the viewport)
+    // keeps them light no matter the site's dark-mode setting. The ref is only readable after the
+    // commit phase, hence the state+effect instead of reading `.current` straight from render.
+    const portalRef = useRef<HTMLDivElement>(null);
+    const [portalContainer, setPortalContainer] =
+        useState<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        setPortalContainer(portalRef.current);
+    }, []);
 
     useEffect(() => {
         return () => {
@@ -266,17 +279,27 @@ export function Calculator() {
         setDialogOpen(false);
     };
 
+    // bg-neutral-100 is fully opaque on purpose (no /80): this section sits on the home page, whose
+    // own root background follows the site's dark-mode toggle, so anything less than fully opaque
+    // here would blend with dark mode showing through instead of covering it.
     return (
-        <div className="bg-neutral-100/80 [background-image:radial-gradient(rgba(100,100,100,0.25)_1px,transparent_1px)] [background-size:14px_14px]">
+        <div className="force-light bg-neutral-100 [background-image:radial-gradient(rgba(100,100,100,0.25)_1px,transparent_1px)] [background-size:14px_14px]">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="h-full overflow-hidden bg-white">
                     <div className="px-4 pt-40 text-neutral-900 sm:pt-52">
                         <div className="mx-auto max-w-4xl">
                             <div className="flex flex-col items-center gap-4 text-center">
-                                <Reveal as="span" className="inline-flex rounded-full bg-neutral-100 px-5 py-1.5 text-xs font-medium tracking-wide text-neutral-600 uppercase">
+                                <Reveal
+                                    as="span"
+                                    className="inline-flex rounded-full bg-neutral-100 px-5 py-1.5 text-xs font-medium tracking-wide text-neutral-600 uppercase"
+                                >
                                     Simulator
                                 </Reveal>
-                                <Reveal as="h2" delay={0.08} className="text-3xl text-neutral-900 sm:text-4xl">
+                                <Reveal
+                                    as="h2"
+                                    delay={0.08}
+                                    className="text-3xl text-neutral-900 sm:text-4xl"
+                                >
                                     Mortgage{' '}
                                     <span className="text-primary">Loan</span>{' '}
                                     Calculator
@@ -302,177 +325,199 @@ export function Calculator() {
                             </div>
 
                             <Reveal blur={0} y={36} delay={0.15}>
-                            <form
-                                onSubmit={handleCalculate}
-                                className="mt-10 space-y-8"
-                            >
-                                <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-                                    <label className="block">
-                                        <span className="mb-1.5 block text-sm font-medium text-neutral-700">
-                                            Property Value
-                                        </span>
-                                        <div className="flex h-12 items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-5 focus-within:border-primary">
-                                            <span className="text-neutral-400">
-                                                $
+                                <form
+                                    onSubmit={handleCalculate}
+                                    className="mt-10 space-y-8"
+                                >
+                                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+                                        <label className="block">
+                                            <span className="mb-1.5 block text-sm font-medium text-neutral-700">
+                                                Property Value
                                             </span>
-                                            <input
-                                                inputMode="numeric"
-                                                value={propertyValue}
-                                                onChange={(event) =>
-                                                    setPropertyValue(
-                                                        event.target.value.replace(
-                                                            /[^0-9.]/g,
-                                                            '',
-                                                        ),
-                                                    )
-                                                }
-                                                className="w-full bg-transparent text-neutral-900 placeholder-neutral-400 outline-none"
-                                                placeholder="450,000"
-                                            />
-                                        </div>
-                                        {errors.property ? (
-                                            <span className="mt-1 block text-xs text-red-500">
-                                                {errors.property}
-                                            </span>
-                                        ) : (
-                                            <span className="mt-1 block text-xs text-neutral-400"></span>
-                                        )}
-                                    </label>
-
-                                    <label className="block">
-                                        <span className="mb-1.5 block text-sm font-medium text-neutral-700">
-                                            Loan Needed
-                                        </span>
-                                        <div className="flex h-12 items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-5 focus-within:border-primary">
-                                            <span className="text-neutral-400">
-                                                $
-                                            </span>
-                                            <input
-                                                inputMode="numeric"
-                                                value={loanNeeded}
-                                                onChange={(event) =>
-                                                    setLoanNeeded(
-                                                        event.target.value.replace(
-                                                            /[^0-9.]/g,
-                                                            '',
-                                                        ),
-                                                    )
-                                                }
-                                                className="w-full bg-transparent text-neutral-900 placeholder-neutral-400 outline-none"
-                                                placeholder="360,000"
-                                            />
-                                        </div>
-                                        {errors.loan ? (
-                                            <span className="mt-1 block text-xs text-red-500">
-                                                {errors.loan}
-                                            </span>
-                                        ) : (
-                                            <span className="mt-1 block text-xs text-neutral-400"></span>
-                                        )}
-                                    </label>
-
-                                    <label className="block">
-                                        <span className="mb-1.5 block text-sm font-medium text-neutral-700">
-                                            Loan Term
-                                        </span>
-                                        <Select
-                                            value={termYears}
-                                            onValueChange={setTermYears}
-                                        >
-                                            <SelectTrigger className="h-12 w-full rounded-full border-neutral-200 bg-neutral-50 px-5 text-neutral-900 shadow-none focus-visible:border-primary focus-visible:ring-0 data-[size=default]:h-12 [&_svg]:text-neutral-400">
-                                                <SelectValue />
-                                            </SelectTrigger>
-                                            <SelectContent className="rounded-3xl p-1.5">
-                                                {TERM_OPTIONS.map((option) => (
-                                                    <SelectItem
-                                                        key={option.value}
-                                                        value={option.value}
-                                                        className="rounded-full py-2.5 pl-3"
-                                                    >
-                                                        {option.label}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                        <span className="mt-1 block text-xs text-neutral-400"></span>
-                                    </label>
-                                </div>
-
-                                <div>
-                                    <div className="text-center">
-                                        <p className="font-medium text-neutral-900">
-                                            What interest rate?
-                                        </p>
-                                        <p className="mt-1 text-xs text-neutral-500">
-                                            This rate depends on your credit
-                                            history and the lender you apply
-                                            with.
-                                        </p>
-                                    </div>
-
-                                    <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
-                                        <input
-                                            type="range"
-                                            min={RATE_MIN}
-                                            max={RATE_MAX}
-                                            step={0.01}
-                                            value={interestRate}
-                                            onChange={(event) =>
-                                                setInterestRate(
-                                                    Number(event.target.value),
-                                                )
-                                            }
-                                            className="h-2 w-full flex-1 cursor-pointer appearance-none rounded-full bg-neutral-200 accent-primary"
-                                        />
-                                        <div className="shrink-0 text-center text-sm text-neutral-900 sm:text-right">
-                                            <p>
-                                                Annual rate:{' '}
-                                                <span className="font-semibold">
-                                                    {interestRate.toFixed(2)}%
+                                            <div className="flex h-12 items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-5 focus-within:border-primary">
+                                                <span className="text-neutral-400">
+                                                    $
                                                 </span>
+                                                <input
+                                                    inputMode="numeric"
+                                                    value={propertyValue}
+                                                    onChange={(event) =>
+                                                        setPropertyValue(
+                                                            event.target.value.replace(
+                                                                /[^0-9.]/g,
+                                                                '',
+                                                            ),
+                                                        )
+                                                    }
+                                                    className="w-full bg-transparent text-neutral-900 placeholder-neutral-400 outline-none"
+                                                    placeholder="450,000"
+                                                />
+                                            </div>
+                                            {errors.property ? (
+                                                <span className="mt-1 block text-xs text-red-500">
+                                                    {errors.property}
+                                                </span>
+                                            ) : (
+                                                <span className="mt-1 block text-xs text-neutral-400"></span>
+                                            )}
+                                        </label>
+
+                                        <label className="block">
+                                            <span className="mb-1.5 block text-sm font-medium text-neutral-700">
+                                                Loan Needed
+                                            </span>
+                                            <div className="flex h-12 items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-5 focus-within:border-primary">
+                                                <span className="text-neutral-400">
+                                                    $
+                                                </span>
+                                                <input
+                                                    inputMode="numeric"
+                                                    value={loanNeeded}
+                                                    onChange={(event) =>
+                                                        setLoanNeeded(
+                                                            event.target.value.replace(
+                                                                /[^0-9.]/g,
+                                                                '',
+                                                            ),
+                                                        )
+                                                    }
+                                                    className="w-full bg-transparent text-neutral-900 placeholder-neutral-400 outline-none"
+                                                    placeholder="360,000"
+                                                />
+                                            </div>
+                                            {errors.loan ? (
+                                                <span className="mt-1 block text-xs text-red-500">
+                                                    {errors.loan}
+                                                </span>
+                                            ) : (
+                                                <span className="mt-1 block text-xs text-neutral-400"></span>
+                                            )}
+                                        </label>
+
+                                        <label className="block">
+                                            <span className="mb-1.5 block text-sm font-medium text-neutral-700">
+                                                Loan Term
+                                            </span>
+                                            <Select
+                                                value={termYears}
+                                                onValueChange={setTermYears}
+                                            >
+                                                <SelectTrigger className="h-12 w-full rounded-full border-neutral-200 bg-neutral-50 px-5 text-neutral-900 shadow-none focus-visible:border-primary focus-visible:ring-0 data-[size=default]:h-12 [&_svg]:text-neutral-400">
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent
+                                                    container={portalContainer}
+                                                    className="force-light rounded-3xl p-1.5"
+                                                >
+                                                    {TERM_OPTIONS.map(
+                                                        (option) => (
+                                                            <SelectItem
+                                                                key={
+                                                                    option.value
+                                                                }
+                                                                value={
+                                                                    option.value
+                                                                }
+                                                                className="rounded-full py-2.5 pl-3"
+                                                            >
+                                                                {option.label}
+                                                            </SelectItem>
+                                                        ),
+                                                    )}
+                                                </SelectContent>
+                                            </Select>
+                                            <span className="mt-1 block text-xs text-neutral-400"></span>
+                                        </label>
+                                    </div>
+
+                                    <div>
+                                        <div className="text-center">
+                                            <p className="font-medium text-neutral-900">
+                                                What interest rate?
                                             </p>
-                                            <p className="text-neutral-500">
-                                                Monthly rate:{' '}
-                                                {(interestRate / 12).toFixed(2)}
-                                                %
+                                            <p className="mt-1 text-xs text-neutral-500">
+                                                This rate depends on your credit
+                                                history and the lender you apply
+                                                with.
                                             </p>
+                                        </div>
+
+                                        <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
+                                            <input
+                                                type="range"
+                                                min={RATE_MIN}
+                                                max={RATE_MAX}
+                                                step={0.01}
+                                                value={interestRate}
+                                                onChange={(event) =>
+                                                    setInterestRate(
+                                                        Number(
+                                                            event.target.value,
+                                                        ),
+                                                    )
+                                                }
+                                                className="h-2 w-full flex-1 cursor-pointer appearance-none rounded-full bg-neutral-200 accent-primary"
+                                            />
+                                            <div className="shrink-0 text-center text-sm text-neutral-900 sm:text-right">
+                                                <p>
+                                                    Annual rate:{' '}
+                                                    <span className="font-semibold">
+                                                        {interestRate.toFixed(
+                                                            2,
+                                                        )}
+                                                        %
+                                                    </span>
+                                                </p>
+                                                <p className="text-neutral-500">
+                                                    Monthly rate:{' '}
+                                                    {(
+                                                        interestRate / 12
+                                                    ).toFixed(2)}
+                                                    %
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-4 flex justify-center">
+                                            <span className="rounded-full bg-neutral-100 px-4 py-1.5 text-center text-xs text-neutral-600">
+                                                The 30-year fixed national
+                                                average is around{' '}
+                                                {AVERAGE_RATE.toFixed(2)}%
+                                                (Freddie Mac). Your actual rate
+                                                depends on credit, down payment
+                                                and lender.
+                                            </span>
                                         </div>
                                     </div>
 
-                                    <div className="mt-4 flex justify-center">
-                                        <span className="rounded-full bg-neutral-100 px-4 py-1.5 text-center text-xs text-neutral-600">
-                                            The 30-year fixed national average
-                                            is around {AVERAGE_RATE.toFixed(2)}%
-                                            (Freddie Mac). Your actual rate
-                                            depends on credit, down payment and
-                                            lender.
-                                        </span>
+                                    <div className="flex justify-center pt-2">
+                                        <button
+                                            type="submit"
+                                            disabled={calculating}
+                                            className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-70"
+                                        >
+                                            {calculating && (
+                                                <Loader2 className="size-4 animate-spin" />
+                                            )}
+                                            {calculating
+                                                ? 'Calculating…'
+                                                : 'Calculate Payment'}
+                                        </button>
                                     </div>
-                                </div>
-
-                                <div className="flex justify-center pt-2">
-                                    <button
-                                        type="submit"
-                                        disabled={calculating}
-                                        className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-70"
-                                    >
-                                        {calculating && (
-                                            <Loader2 className="size-4 animate-spin" />
-                                        )}
-                                        {calculating
-                                            ? 'Calculating…'
-                                            : 'Calculate Payment'}
-                                    </button>
-                                </div>
-                            </form>
+                                </form>
                             </Reveal>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div ref={portalRef} className="force-light" />
+
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <DialogContent className="max-h-[88dvh] overflow-hidden rounded-4xl p-0 sm:max-w-5xl">
+                <DialogContent
+                    container={portalContainer}
+                    className="force-light max-h-[88dvh] overflow-hidden rounded-4xl p-0 sm:max-w-5xl"
+                >
                     {/* The scroll lives on this inner wrapper, not on the rounded DialogContent itself — otherwise the
                     native scrollbar sits flush on the corner and makes the modal look like it's overflowing. */}
                     <div className="max-h-[88dvh] [scrollbar-width:thin] [scrollbar-color:var(--color-border)_transparent] overflow-y-auto overscroll-contain p-5 sm:p-8 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent">

@@ -57,7 +57,8 @@
                     <tr>
                         <td class="muted" style="padding:26px 12px 0;font-family:{!! $font !!};font-size:12px;line-height:1.6;color:#86868b;text-align:center;">
                             {{ $business['legal_name'] }} · NMLS #{{ $business['nmls'] }}<br>
-                            Louisiana, USA · Equal Housing Opportunity Lender<br>
+                            {{ $business['address']['street'] }}, {{ $business['address']['city'] }}, {{ $business['region'] }} {{ $business['address']['postal_code'] }}<br>
+                            Equal Housing Opportunity Lender<br>
                             <a href="{{ url('/privacy-policy') }}" style="color:#86868b;">Privacy Policy</a> &nbsp;·&nbsp;
                             <a href="{{ url('/terms-and-conditions') }}" style="color:#86868b;">Terms</a> &nbsp;·&nbsp;
                             <a href="{{ url('/') }}" style="color:#86868b;">{{ parse_url(url('/'), PHP_URL_HOST) }}</a>

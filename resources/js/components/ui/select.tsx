@@ -55,10 +55,15 @@ function SelectContent({
   side = "bottom",
   sideOffset = 4,
   align = "center",
+  container,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Content>) {
+}: React.ComponentProps<typeof SelectPrimitive.Content> & {
+  /** Renders the portal into this node instead of document.body — e.g. to keep it inside a
+   * `.force-light`/`.force-dark` subtree, which a plain className can't reach across a portal. */
+  container?: React.ComponentProps<typeof SelectPrimitive.Portal>["container"]
+}) {
   return (
-    <SelectPrimitive.Portal>
+    <SelectPrimitive.Portal container={container}>
       <SelectPrimitive.Content
         data-slot="select-content"
         className={cn(

@@ -13,7 +13,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const CONTACT_INFO = [
     { icon: Phone, label: 'Call or Text', value: '(504) 559-2821', href: 'tel:+15045592821' },
     { icon: Mail, label: 'Email', value: 'Shaun@brignacmortgage.com', href: 'mailto:Shaun@brignacmortgage.com' },
-    { icon: MapPin, label: 'Office', value: 'Louisiana, USA', href: undefined },
+    { icon: MapPin, label: 'Office', value: '21121 Waterfront East Dr, Maurepas, LA 70449', href: 'https://maps.app.goo.gl/R2Gu7ezyuNRhw3C6A' },
 ];
 
 export function Contact() {
@@ -74,7 +74,7 @@ export function Contact() {
     };
 
     return (
-        <div className="bg-background py-24 sm:py-32">
+        <div className="force-light bg-background py-24 sm:py-32">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-5 lg:gap-16">
                     <div className="lg:col-span-2">
@@ -107,6 +107,8 @@ export function Contact() {
                                     <a
                                         key={item.label}
                                         href={item.href}
+                                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                                         className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-primary/30"
                                     >
                                         {content}
