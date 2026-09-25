@@ -11,6 +11,7 @@ import {
     OverviewIcon,
     SettingsIcon,
     TrackingIcon,
+    UsersIcon,
 } from '@/components/dashboard/icons';
 import {
     AlertDialog,
@@ -26,7 +27,7 @@ import { useCurrentUrl } from '@/hooks/use-current-url';
 import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { dashboard, logout } from '@/routes';
-import { ai, analytics } from '@/routes/dashboard';
+import { ai, analytics, users } from '@/routes/dashboard';
 import { index as campaigns } from '@/routes/dashboard/campaigns';
 import { index as leads } from '@/routes/dashboard/leads';
 import { edit as tracking } from '@/routes/dashboard/tracking';
@@ -53,6 +54,9 @@ const ITEMS: Item[] = [
     { title: 'AI', href: ai().url, icon: AiIcon },
     { title: 'Pixels', href: tracking().url, icon: TrackingIcon },
 ];
+
+// Only owners see this one: who has signed in, and when.
+const USERS: Item = { title: 'Users', href: users().url, icon: UsersIcon };
 
 const SETTINGS: Item = {
     title: 'Settings',
@@ -152,6 +156,8 @@ function UserChip() {
 // Desktop: a floating frosted panel inset from the screen edges. Mobile: a floating pill tab bar.
 export function DashboardSidebar() {
     const isActive = useIsActive();
+    const { auth } = usePage().props;
+    const items = auth.user?.role === 'owner' ? [...ITEMS, USERS, SETTINGS] : [...ITEMS, SETTINGS];
 
     return (
         <>
@@ -161,7 +167,7 @@ export function DashboardSidebar() {
                 </div>
 
                 <nav className="flex flex-1 flex-col gap-1">
-                    {[...ITEMS, SETTINGS].map((item) => {
+                    {items.map((item) => {
                         const Icon = item.icon;
                         const active = isActive(item);
 
@@ -209,7 +215,7 @@ export function DashboardSidebar() {
             </aside>
 
             <nav className="fixed inset-x-4 bottom-4 z-30 flex items-center justify-around rounded-full border border-border bg-card/80 p-2 shadow-xl shadow-black/10 backdrop-blur-xl lg:hidden">
-                {[...ITEMS, SETTINGS].map((item) => {
+                {items.map((item) => {
                     const Icon = item.icon;
                     const active = isActive(item);
 
@@ -219,7 +225,7 @@ export function DashboardSidebar() {
                             href={item.href}
                             aria-label={item.title}
                             className={cn(
-                                'relative grid size-11 place-items-center rounded-full transition-colors',
+                                'relative grid h-11 min-w-0 flex-1 place-items-center rounded-full transition-colors',
                                 active ? 'text-primary' : 'text-foreground/50',
                             )}
                         >

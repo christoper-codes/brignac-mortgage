@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\CampaignController;
 use App\Http\Controllers\Dashboard\LeadController as DashboardLeadController;
 use App\Http\Controllers\Dashboard\OverviewController;
 use App\Http\Controllers\Dashboard\TrackingController as DashboardTrackingController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
@@ -40,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('analytics', AnalyticsController::class)->name('analytics');
         Route::get('ai', [AiController::class, 'index'])->name('ai');
+        Route::get('users', [UserController::class, 'index'])->middleware('can:view-users')->name('users');
         Route::post('ai/plan', [AiController::class, 'plan'])->middleware('throttle:30,1')->name('ai.plan');
         Route::post('ai/answer', [AiController::class, 'answer'])->middleware('throttle:30,1')->name('ai.answer');
         Route::get('tracking', [DashboardTrackingController::class, 'edit'])->name('tracking.edit');

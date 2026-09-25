@@ -82,6 +82,16 @@ export function SettingsIcon({ className }: IconProps) {
     );
 }
 
+export function UsersIcon({ className }: IconProps) {
+    return (
+        <Icon className={className}>
+            <circle cx="9.5" cy="8.5" r="3.2" />
+            <path d="M3.5 19.5c.4-3.2 2.7-5 6-5s5.6 1.8 6 5" />
+            <path d="M16.5 5.6a3 3 0 0 1 0 5.8M18 14.9c1.6.6 2.6 2 2.9 4.6" />
+        </Icon>
+    );
+}
+
 export function AiIcon({ className }: IconProps) {
     return (
         <Icon className={className}>

@@ -44,6 +44,20 @@ export type Lead = {
 export type JourneyEvent = { type: 'visit' | 'click'; path: string; label: string | null; team_member: string | null; created_at: string };
 export type Journeys = Record<number, JourneyEvent[]>;
 
+export type TeamMember = {
+    id: number;
+    name: string;
+    email: string;
+    role: 'owner' | 'admin';
+    role_label: string;
+    is_you: boolean;
+    last_login_at: string | null;
+    last_seen_at: string | null;
+    last_login_ip: string | null;
+    login_count: number;
+    created_at: string | null;
+};
+
 export type Kpi = { value: number; change?: number | null };
 export type Row = { label: string; total: number };
 
