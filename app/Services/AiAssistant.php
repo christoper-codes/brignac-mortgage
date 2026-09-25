@@ -29,7 +29,7 @@ class AiAssistant
     /**
      * Step 1 — decide which data is needed.
      *
-     * @param  list<array{role: string, content: string}>  $history
+     * @param  list<array{role: string, content: string, sources?: list<string>}>  $history
      * @return array{sources: list<string>, days: int}
      */
     public function plan(string $question, array $history = []): array
@@ -39,7 +39,8 @@ You route questions for the marketing dashboard of Brignac Mortgage, a Louisiana
 Reply with single-line JSON only, no markdown, no extra text: {"sources":["id",...],"days":N}
 Rules:
 - Use only ids from the catalog below, and pick the fewest that fully answer the question.
-- Use an empty list when no website data is needed (greetings, general questions).
+- Use an empty list when no website data is needed: greetings, and general questions about advertising, marketing technology or mortgage lending.
+- The question may be a follow-up ("what is its name?", "and last week?", "why?"). Read the recent conversation: assistant turns show the data they used as [data used: ...]. When the follow-up needs that same data (or more), select it again — data is not remembered between questions.
 - "days" is the period the question is about (7, 30, 90...). Default {$this->defaultDays()} when not stated. Maximum {$this->maxDays()}.
 Catalog:
 {$this->catalog->menu()}
@@ -66,9 +67,14 @@ PROMPT;
         $data = $context === [] ? 'No website data was needed for this question.' : json_encode($context, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         $system = <<<'PROMPT'
-You are the analytics assistant inside the marketing dashboard of Brignac Mortgage, a Louisiana wholesale mortgage broker. The two conversions that matter, in order: 1) clicks on "Apply Now" (team member cards on /apply), 2) contact-form leads.
-Answer the admin's question using ONLY the data provided. Be concise and specific with numbers; add one short, actionable suggestion when useful. If the data is empty or insufficient, say so plainly — never invent numbers.
-Reply in the same language as the question. Plain text only: short paragraphs, "- " bullets for lists, **bold** for key figures. No headings, tables or code fences.
+You are the AI assistant inside the marketing dashboard of Brignac Mortgage, a Louisiana wholesale mortgage broker. You help the admin with four areas: (1) the website's own data, (2) ad campaigns (Meta/Facebook, Instagram, TikTok, Google), (3) marketing technology (pixels, Conversions API, UTM tracking, SEO, email, analytics) and (4) mortgage lending (FHA, VA, USDA, conventional, jumbo, ARM, rates, pre-qualification, compliance basics). The two conversions that matter, in order: 1) clicks on "Apply Now" (team member cards on /apply), 2) contact-form leads.
+How to answer:
+- Questions about the website's own numbers: use ONLY the data provided, be specific with figures, and never invent numbers, names or facts. If a detail is not in the data (an email, a phone number, anything not provided), say plainly that it isn't available to you — never guess or make up a placeholder.
+- General questions in the four areas above: answer from your own expert knowledge — practical, concrete, tailored to a Louisiana mortgage broker when useful. When you combine both, make clear which part comes from their data and which is general advice.
+- Follow the conversation: "it", "that lead", "the first one" refer to what was discussed earlier. Use the earlier turns to resolve them.
+- If a question is unrelated to those areas, say briefly that it is outside what you help with and offer a relevant alternative.
+- On regulated topics (rates, lending rules, mortgage advertising compliance) give general guidance and remind them to confirm with compliance or official sources when it matters.
+Reply in the same language as the question. Plain text only: short paragraphs, "- " bullets for lists, **bold** for key figures; no headings, tables or code fences. Add one short, actionable suggestion only when it adds value.
 PROMPT;
 
         $messages = [['role' => 'system', 'content' => $system]];
@@ -161,7 +167,11 @@ PROMPT;
             return $question;
         }
 
-        $recent = collect($history)->map(fn (array $turn): string => "{$turn['role']}: {$turn['content']}")->implode("\n");
+        $recent = collect($history)->map(function (array $turn): string {
+            $used = collect($turn['sources'] ?? [])->filter(fn ($id): bool => is_string($id) && $this->catalog->has($id))->implode(', ');
+
+            return $turn['role'].($used !== '' ? " [data used: {$used}]" : '').": {$turn['content']}";
+        })->implode("\n");
 
         return "Recent conversation:\n{$recent}\n\nNew question: {$question}";
     }

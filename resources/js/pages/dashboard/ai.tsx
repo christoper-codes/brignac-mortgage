@@ -2,11 +2,11 @@ import { Head, usePage } from '@inertiajs/react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
     ArrowUp,
-    Globe,
+    Landmark,
+    Lightbulb,
     Megaphone,
     MonitorSmartphone,
     MousePointerClick,
-    TrendingUp,
     Users,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -53,19 +53,19 @@ const SUGGESTIONS: { icon: LucideIcon; label: string; question: string }[] = [
         question: 'Which browser and device convert best?',
     },
     {
-        icon: Globe,
-        label: 'Traffic',
-        question: 'Where are my visitors coming from?',
-    },
-    {
-        icon: TrendingUp,
-        label: 'Trends',
-        question: 'How is traffic trending compared to previous weeks?',
-    },
-    {
         icon: Users,
         label: 'Leads',
-        question: 'How are my leads distributed by status?',
+        question: 'Which lead should I contact first, and why?',
+    },
+    {
+        icon: Lightbulb,
+        label: 'Campaign ideas',
+        question: 'How can I improve my Meta ads for FHA leads?',
+    },
+    {
+        icon: Landmark,
+        label: 'Mortgage',
+        question: 'What documents does an FHA borrower usually need?',
     },
 ];
 
@@ -152,6 +152,7 @@ export default function Ai({ configured }: { configured: boolean }) {
                 .map((message) => ({
                     role: message.role,
                     content: message.content,
+                    sources: message.sources?.map((source) => source.id),
                 })),
         );
 

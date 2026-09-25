@@ -16,11 +16,13 @@ class AiPlanRequest extends FormRequest
             'history' => ['nullable', 'array', 'max:8'],
             'history.*.role' => ['required', 'string', 'in:user,assistant'],
             'history.*.content' => ['required', 'string', 'max:2000'],
+            'history.*.sources' => ['nullable', 'array', 'max:12'],
+            'history.*.sources.*' => ['string', 'max:60'],
         ];
     }
 
     /**
-     * @return list<array{role: string, content: string}>
+     * @return list<array{role: string, content: string, sources?: list<string>}>
      */
     public function history(): array
     {

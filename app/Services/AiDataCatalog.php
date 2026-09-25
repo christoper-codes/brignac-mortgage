@@ -36,7 +36,7 @@ class AiDataCatalog
             'devices_browsers_os' => ['label' => 'Devices, browsers & OS', 'description' => 'Visitors by device type, browser and operating system.'],
             'lead_conversion_by_agent' => ['label' => 'Which browsers/devices convert', 'description' => 'Leads (form submissions) broken down by browser and device — which ones actually turn into leads.'],
             'geography' => ['label' => 'Geography', 'description' => 'Visitors by US state and country, and the share of located visitors inside Louisiana.'],
-            'leads' => ['label' => 'Leads', 'description' => 'Lead summary: totals by status and by campaign, plus the most recent leads (anonymized — no names, emails or phones).'],
+            'leads' => ['label' => 'Leads', 'description' => 'Lead summary: totals by status and by campaign, plus the most recent leads with their name, status, campaign, source, state, device and browser (never emails, phone numbers or messages).'],
         ];
     }
 
@@ -165,8 +165,8 @@ class AiDataCatalog
     }
 
     /**
-     * Lead-level data is anonymized on purpose: this leaves the server for a third-party API, so no
-     * names, emails, phone numbers or free-text messages are included.
+     * This leaves the server for a third-party API, so it carries names (so the admin can ask who a
+     * lead is) but never emails, phone numbers or free-text messages.
      *
      * @return array<string, mixed>
      */
@@ -184,6 +184,7 @@ class AiDataCatalog
                 ->groupBy(fn (Lead $lead): string => $lead->campaign?->name ?? 'No campaign')
                 ->map(fn ($group): int => $group->count())->sortDesc()->all(),
             'recent' => (clone $leads)->latest()->limit(15)->get()->map(fn (Lead $lead): array => [
+                'name' => $lead->full_name,
                 'date' => $lead->created_at?->toDateString(),
                 'status' => $lead->status->value,
                 'campaign' => $lead->campaign?->name,

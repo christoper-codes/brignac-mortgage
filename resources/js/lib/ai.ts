@@ -1,7 +1,8 @@
 import { answer, plan } from '@/routes/dashboard/ai';
 
 export type AiSource = { id: string; label: string };
-export type AiTurn = { role: 'user' | 'assistant'; content: string };
+/** `sources` (assistant turns) are the data ids that answer used, so a follow-up can re-select them. */
+export type AiTurn = { role: 'user' | 'assistant'; content: string; sources?: string[] };
 
 export type AiPlan = { sources: AiSource[]; days: number };
 
@@ -15,6 +16,7 @@ export function recentHistory(turns: AiTurn[]): AiTurn[] {
         .map((turn) => ({
             role: turn.role,
             content: turn.content.slice(0, HISTORY_CONTENT_LIMIT),
+            ...(turn.sources?.length ? { sources: turn.sources } : {}),
         }));
 }
 

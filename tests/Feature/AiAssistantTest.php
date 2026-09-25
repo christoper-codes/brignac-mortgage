@@ -87,9 +87,9 @@ test('an unreadable plan falls back to the overview instead of failing', functio
         ->assertJsonPath('days', 30);
 });
 
-test('answering attaches only the requested data and keeps lead contact details out', function () {
+test('answering attaches only the requested data, with lead names but never contact details', function () {
     $campaign = Campaign::factory()->create(['name' => 'Spring FHA']);
-    Lead::factory()->create(['campaign_id' => $campaign->id, 'email' => 'private.person@example.com', 'full_name' => 'Private Person', 'phone' => '5045550199']);
+    Lead::factory()->create(['campaign_id' => $campaign->id, 'email' => 'private.person@example.com', 'full_name' => 'Private Person', 'phone' => '5045550199', 'message' => 'A very private message']);
     fakeOpenAi('Spring FHA leads with **1** lead.');
 
     $this->actingAs(User::factory()->create())
@@ -110,7 +110,8 @@ test('answering attaches only the requested data and keeps lead contact details 
             && str_contains($last, 'Question: How is Spring FHA doing?')
             && ! str_contains($last, 'top_pages') && ! str_contains($last, '"geography"')
             && ! str_contains($payload, 'private.person@example.com')
-            && ! str_contains($payload, 'Private Person')
+            && str_contains($last, 'Private Person')
+            && ! str_contains($payload, 'A very private message')
             && ! str_contains($payload, '5045550199')
             && collect($request['messages'])->pluck('role')->all() === ['system', 'user', 'assistant', 'user'];
     });
@@ -147,4 +148,47 @@ test('a provider error is reported as unavailable without leaking details', func
         ->postJson(route('dashboard.ai.answer'), ['message' => 'hello', 'sources' => [], 'days' => 30])
         ->assertStatus(503)
         ->assertJsonMissing(['message' => 'Incorrect API key provided: sk-secret']);
+});
+
+test('the plan sees which data earlier answers used, so follow-ups keep the thread', function () {
+    fakeOpenAi('{"sources":["leads"],"days":30}');
+
+    $this->actingAs(User::factory()->create())
+        ->postJson(route('dashboard.ai.plan'), [
+            'message' => 'what is its name?',
+            'history' => [
+                ['role' => 'user', 'content' => 'Which lead should I attend first?'],
+                ['role' => 'assistant', 'content' => 'The qualified lead from Spring FHA.', 'sources' => ['leads', 'not_a_real_source']],
+            ],
+        ])
+        ->assertOk()
+        ->assertJsonPath('sources.0.id', 'leads');
+
+    Http::assertSent(function (Request $request) {
+        $user = $request['messages'][1]['content'];
+        $system = $request['messages'][0]['content'];
+
+        return str_contains($user, 'assistant [data used: leads]: The qualified lead from Spring FHA.')
+            && ! str_contains($user, 'not_a_real_source')
+            && str_contains($user, 'New question: what is its name?')
+            && str_contains($system, 'follow-up');
+    });
+});
+
+test('the assistant may answer general campaign, technology and mortgage questions without website data', function () {
+    fakeOpenAi('Lookalike audiences work best with 1,000+ seed leads.');
+
+    $this->actingAs(User::factory()->create())
+        ->postJson(route('dashboard.ai.answer'), ['message' => 'How should I set up a lookalike audience?', 'sources' => [], 'days' => 30])
+        ->assertOk()
+        ->assertJson(['answer' => 'Lookalike audiences work best with 1,000+ seed leads.']);
+
+    Http::assertSent(function (Request $request) {
+        $system = $request['messages'][0]['content'];
+
+        return str_contains($system, 'ad campaigns') && str_contains($system, 'mortgage lending')
+            && str_contains($system, 'your own expert knowledge')
+            && str_contains($system, 'never guess')
+            && str_contains(collect($request['messages'])->last()['content'], 'No website data was needed');
+    });
 });
