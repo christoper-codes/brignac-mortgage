@@ -85,15 +85,11 @@ export default function Analytics({
                     title="Analytics"
                     description="Who visits, from where, on what, and what they click."
                     actions={
-                        <div className="flex flex-wrap items-center gap-3">
-                            <RangeFilter range={range} from={from} to={to} />
-                            <ExportDialog
-                                subject="analytics"
-                                url={exportMethod}
-                            />
-                        </div>
+                        <ExportDialog subject="analytics" url={exportMethod} />
                     }
                 />
+
+                <RangeFilter range={range} from={from} to={to} />
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
                     <StatCard label="Visitors" value={totals.visitors} />
