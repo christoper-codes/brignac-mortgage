@@ -39,10 +39,7 @@ export function ThinkingLights({ active }: { active: boolean }) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1.1, ease: 'easeInOut' }}
-                    // Spans the content column (same insets as the layout's <main>: the floating sidebar
-                    // on the left at lg+), not the whole viewport, so the lights sit centered behind the
-                    // composer instead of drifting left toward the sidebar.
-                    className="pointer-events-none fixed inset-y-0 right-0 left-0 z-0 lg:right-8 lg:left-76"
+                    className="pointer-events-none fixed inset-0 z-0"
                 >
                     {BLOBS.map((blob) => (
                         <motion.div
