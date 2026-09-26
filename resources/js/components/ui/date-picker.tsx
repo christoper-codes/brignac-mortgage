@@ -14,11 +14,13 @@ type Props = {
     placeholder?: string;
     /** Days before this ISO date are not selectable. */
     min?: string;
+    /** Extra classes for the trigger, e.g. a smaller height in a filter bar. */
+    className?: string;
 };
 
 // A calendar popover in place of the browser's native date input: same value format (YYYY-MM-DD),
 // but styled like the rest of the dashboard.
-export function DatePicker({ id, value, onChange, placeholder = 'Pick a date', min }: Props) {
+export function DatePicker({ id, value, onChange, placeholder = 'Pick a date', min, className }: Props) {
     const [open, setOpen] = useState(false);
     const selected = value ? parseISO(value) : undefined;
 
@@ -31,6 +33,7 @@ export function DatePicker({ id, value, onChange, placeholder = 'Pick a date', m
                     className={cn(
                         'flex h-11 w-full items-center gap-3 rounded-full border border-border bg-background px-5 text-left text-sm outline-none transition-colors focus-visible:border-primary data-[state=open]:border-primary',
                         selected ? 'text-foreground' : 'text-foreground/40',
+                        className,
                     )}
                 >
                     <CalendarDays className="size-4 shrink-0 text-foreground/50" />

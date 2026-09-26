@@ -96,3 +96,53 @@ test('analytics ranks team members by Apply Now clicks', function () {
                 ['member' => 'Allison Ratcliff', 'applies' => 1, 'total' => 1],
             ]));
 });
+
+test('the today range only counts activity from the current day', function () {
+    Visit::factory()->count(2)->create();
+    Visit::factory()->create(['created_at' => now()->subDay()]);
+    Lead::factory()->create();
+    Lead::factory()->create(['created_at' => now()->subDays(3)]);
+
+    $this->get(route('dashboard', ['range' => 1]))
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('range', 1)
+            ->where('days', 1)
+            ->has('series', 1)
+            ->where('kpis.visitors.value', 2)
+            ->where('kpis.leads.value', 1));
+
+    $this->get(route('dashboard.analytics', ['range' => 1]))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('range', 1)
+            ->where('totals.pageViews', 2)
+            ->has('daily', 1));
+});
+
+test('an exact from and to range overrides the presets', function () {
+    Visit::factory()->count(2)->create(['created_at' => now()->subDays(10)]);
+    Visit::factory()->create(['created_at' => now()->subDays(2)]);
+    Visit::factory()->create();
+
+    $this->get(route('dashboard', [
+        'range' => 7,
+        'from' => now()->subDays(12)->toDateString(),
+        'to' => now()->subDays(8)->toDateString(),
+    ]))
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('range', 'custom')
+            ->where('days', 5)
+            ->where('from', now()->subDays(12)->toDateString())
+            ->where('to', now()->subDays(8)->toDateString())
+            ->has('series', 5)
+            ->where('kpis.visitors.value', 2));
+});
+
+test('a range that ends before it starts is rejected', function () {
+    $this->get(route('dashboard', ['from' => '2026-05-10', 'to' => '2026-05-01']))->assertSessionHasErrors('to');
+});
+
+test('a preset range reports the preset it is on', function () {
+    $this->get(route('dashboard', ['range' => 90]))->assertInertia(fn (Assert $page) => $page->where('range', 90)->where('days', 90));
+});

@@ -1,5 +1,5 @@
 import { Head, router, useForm } from '@inertiajs/react';
-import { Check, Copy, Pencil, Plus, Trash2 } from 'lucide-react';
+import { Check, Copy, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 import {
@@ -43,7 +43,10 @@ import { cn } from '@/lib/utils';
 import { destroy, index, store, update } from '@/routes/dashboard/campaigns';
 import type { Campaign, Platform } from '@/types/dashboard';
 
+type Filters = { q?: string; from?: string; to?: string };
+
 type Props = {
+    filters: Filters;
     campaigns: Campaign[];
     platforms: { value: string; label: string }[];
     statuses: string[];
@@ -296,10 +299,49 @@ function TrackingLink({ url }: { url: string }) {
     );
 }
 
-export default function Campaigns({ campaigns, platforms, statuses }: Props) {
+export default function Campaigns({
+    filters,
+    campaigns,
+    platforms,
+    statuses,
+}: Props) {
     const [editing, setEditing] = useState<Campaign | 'new' | null>(null);
     const [deleting, setDeleting] = useState<Campaign | null>(null);
+    const [search, setSearch] = useState(filters.q ?? '');
     const close = () => setEditing(null);
+    const hasFilters = Boolean(filters.q || filters.from || filters.to);
+
+    const filter = (next: Filters) => {
+        router.get(
+            index().url,
+            { ...filters, ...next },
+            { preserveState: true, preserveScroll: true, replace: true },
+        );
+    };
+
+    const submitSearch = (event: FormEvent) => {
+        event.preventDefault();
+        filter({ q: search.trim() || undefined });
+    };
+
+    const clearFilters = () => {
+        setSearch('');
+        router.get(
+            index().url,
+            {},
+            { preserveState: true, preserveScroll: true, replace: true },
+        );
+    };
+
+    // The end date can't come before the start date, so moving the start past it drops the end.
+    const changeFrom = (value: string) =>
+        filter({
+            from: value || undefined,
+            to:
+                value && filters.to && value > filters.to
+                    ? undefined
+                    : filters.to,
+        });
 
     const confirmDelete = () => {
         if (deleting) {
@@ -330,7 +372,69 @@ export default function Campaigns({ campaigns, platforms, statuses }: Props) {
                     }
                 />
 
-                {campaigns.length === 0 ? (
+                {(campaigns.length > 0 || hasFilters) && (
+                    <div className="flex flex-wrap items-center gap-3">
+                        <form
+                            onSubmit={submitSearch}
+                            className="relative min-w-56 flex-1"
+                        >
+                            <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-foreground/40" />
+                            <input
+                                value={search}
+                                onChange={(event) =>
+                                    setSearch(event.target.value)
+                                }
+                                placeholder="Search by campaign name"
+                                className="h-10 w-full rounded-full border border-border bg-card pr-5 pl-10 text-sm text-foreground outline-none focus:border-primary"
+                            />
+                        </form>
+                        <div className="w-44">
+                            <DatePicker
+                                value={filters.from ?? ''}
+                                onChange={changeFrom}
+                                placeholder="From date"
+                                className="h-10 bg-card px-4"
+                            />
+                        </div>
+                        <div className="w-44">
+                            <DatePicker
+                                value={filters.to ?? ''}
+                                onChange={(value) =>
+                                    filter({ to: value || undefined })
+                                }
+                                placeholder="To date"
+                                min={filters.from}
+                                className="h-10 bg-card px-4"
+                            />
+                        </div>
+                        {hasFilters && (
+                            <button
+                                type="button"
+                                onClick={clearFilters}
+                                className="inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-sm text-foreground/60 transition-colors hover:bg-foreground/5 hover:text-foreground"
+                            >
+                                <X className="size-4" />
+                                Clear
+                            </button>
+                        )}
+                    </div>
+                )}
+
+                {campaigns.length === 0 && hasFilters ? (
+                    <EmptyState
+                        title="No campaigns match"
+                        description="Try another name or widen the date range. Campaigns match when their start–end dates overlap the range."
+                        action={
+                            <button
+                                type="button"
+                                onClick={clearFilters}
+                                className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background"
+                            >
+                                Clear filters
+                            </button>
+                        }
+                    />
+                ) : campaigns.length === 0 ? (
                     <EmptyState
                         title="No campaigns yet"
                         description="Create one per ad: you get a tracking link, and every visit, click and lead that comes through it is counted here."

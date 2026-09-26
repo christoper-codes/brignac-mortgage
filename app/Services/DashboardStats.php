@@ -22,9 +22,9 @@ class DashboardStats
     /**
      * @return array<string, mixed>
      */
-    public function overview(int $days): array
+    public function overview(CarbonImmutable $from, CarbonImmutable $to): array
     {
-        [$from, $to] = $this->window($days);
+        $days = $this->daysIn($from, $to);
         $previousFrom = $from->subDays($days);
         $previousTo = $from->subSecond();
 
@@ -34,6 +34,8 @@ class DashboardStats
 
         return [
             'days' => $days,
+            'from' => $from->toDateString(),
+            'to' => $to->toDateString(),
             'kpis' => [
                 'visitors' => $this->kpi($visitors, $this->uniqueVisitors($previousFrom, $previousTo)),
                 'leads' => $this->kpi($leads, Lead::query()->whereBetween('created_at', [$previousFrom, $previousTo])->count()),
@@ -50,12 +52,12 @@ class DashboardStats
     /**
      * @return array<string, mixed>
      */
-    public function analytics(int $days): array
+    public function analytics(CarbonImmutable $from, CarbonImmutable $to): array
     {
-        [$from, $to] = $this->window($days);
-
         return [
-            'days' => $days,
+            'days' => $this->daysIn($from, $to),
+            'from' => $from->toDateString(),
+            'to' => $to->toDateString(),
             'totals' => [
                 'visitors' => $this->uniqueVisitors($from, $to),
                 'pageViews' => Visit::query()->whereBetween('created_at', [$from, $to])->count(),
@@ -107,6 +109,14 @@ class DashboardStats
         $to = CarbonImmutable::now()->endOfDay();
 
         return [$to->subDays($days - 1)->startOfDay(), $to];
+    }
+
+    /**
+     * Calendar days covered by a range, both ends included (today alone is 1).
+     */
+    private function daysIn(CarbonImmutable $from, CarbonImmutable $to): int
+    {
+        return (int) round($from->startOfDay()->diffInDays($to->startOfDay())) + 1;
     }
 
     private function uniqueVisitors(CarbonImmutable $from, CarbonImmutable $to): int

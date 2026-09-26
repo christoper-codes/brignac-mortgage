@@ -109,7 +109,7 @@ class AiDataCatalog
      */
     private function analytics(int $days): array
     {
-        return $this->analytics ??= $this->stats->analytics($days);
+        return $this->analytics ??= $this->stats->analytics(...$this->stats->window($days));
     }
 
     /**
@@ -117,7 +117,7 @@ class AiDataCatalog
      */
     private function overview(int $days): array
     {
-        $kpis = $this->stats->overview($days)['kpis'];
+        $kpis = $this->stats->overview(...$this->stats->window($days))['kpis'];
         $totals = $this->analytics($days)['totals'];
 
         return [

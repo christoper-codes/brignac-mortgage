@@ -92,3 +92,32 @@ test('a lead status must be valid', function () {
 
     $this->patch(route('dashboard.leads.update', $lead), ['status' => 'bogus'])->assertSessionHasErrors('status');
 });
+
+test('the campaign list can be filtered by name', function () {
+    Campaign::factory()->create(['name' => 'Spring FHA']);
+    Campaign::factory()->create(['name' => 'Fall VA']);
+
+    $this->get(route('dashboard.campaigns.index', ['q' => 'spring']))
+        ->assertInertia(fn (Assert $page) => $page
+            ->has('campaigns', 1)
+            ->where('campaigns.0.name', 'Spring FHA')
+            ->where('filters.q', 'spring'));
+});
+
+test('the campaign list can be filtered by a date range that overlaps the campaign run', function () {
+    Campaign::factory()->create(['name' => 'Spring', 'starts_at' => '2026-03-01', 'ends_at' => '2026-03-31']);
+    Campaign::factory()->create(['name' => 'Summer', 'starts_at' => '2026-06-01', 'ends_at' => '2026-06-30']);
+    Campaign::factory()->create(['name' => 'Evergreen', 'starts_at' => '2026-01-01', 'ends_at' => null]);
+
+    $names = fn (array $query): array => collect($this->get(route('dashboard.campaigns.index', $query))->viewData('page')['props']['campaigns'])
+        ->pluck('name')->sort()->values()->all();
+
+    expect($names(['from' => '2026-03-15', 'to' => '2026-03-20']))->toBe(['Evergreen', 'Spring'])
+        ->and($names(['from' => '2026-07-01']))->toBe(['Evergreen'])
+        ->and($names(['to' => '2026-02-01']))->toBe(['Evergreen'])
+        ->and($names(['from' => '2026-06-10', 'to' => '2026-06-12']))->toBe(['Evergreen', 'Summer']);
+});
+
+test('an end date before the start date is rejected by the campaign filter', function () {
+    $this->get(route('dashboard.campaigns.index', ['from' => '2026-05-10', 'to' => '2026-05-01']))->assertSessionHasErrors('to');
+});
