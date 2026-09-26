@@ -568,7 +568,7 @@ export function LoanPrograms() {
             <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl">
                     <Reveal as="h2" className="text-3xl text-white sm:text-4xl lg:text-5xl">
-                        Loan Products &amp; Programs
+                        Why us
                     </Reveal>
                     <Reveal as="p" delay={0.1} className="mt-4 text-lg text-white/60">
                         Whatever you're financing, there's a program built for it — explore the options below.

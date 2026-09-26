@@ -248,7 +248,7 @@ export function LoanTimeline() {
         <div className="force-light bg-background py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
                 <Reveal as="h2" className="text-3xl text-foreground sm:text-4xl">
-                    Loan Products &amp; Programs
+                    Our Services &amp; Products
                 </Reveal>
                 <Reveal as="p" delay={0.1} className="mt-4 text-base text-foreground/60">
                     Explore our diverse range of loan products and programs
