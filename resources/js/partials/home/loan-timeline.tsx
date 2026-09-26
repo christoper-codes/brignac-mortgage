@@ -1,4 +1,10 @@
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
+import {
+    AnimatePresence,
+    motion,
+    useMotionValueEvent,
+    useScroll,
+    useTransform,
+} from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import {
     Building2,
@@ -27,7 +33,8 @@ const PROGRAMS = [
     {
         icon: Home,
         title: 'Conventional and Construction Loans',
-        subtitle: 'From your first home to ground-up construction, financed the right way.',
+        subtitle:
+            'From your first home to ground-up construction, financed the right way.',
         tag: 'Conventional',
         spec: '30-Yr Fixed',
         idealFor: 'First-time & repeat buyers',
@@ -35,7 +42,8 @@ const PROGRAMS = [
     {
         icon: Landmark,
         title: 'FHA Loans',
-        subtitle: 'Low down payment options backed by the Federal Housing Administration.',
+        subtitle:
+            'Low down payment options backed by the Federal Housing Administration.',
         tag: 'Government-Backed',
         spec: '3.5% Down',
         idealFor: 'Buyers with limited savings',
@@ -43,7 +51,8 @@ const PROGRAMS = [
     {
         icon: ShieldCheck,
         title: 'VA and VA Construction Loans',
-        subtitle: 'Zero-down financing and construction options for those who served.',
+        subtitle:
+            'Zero-down financing and construction options for those who served.',
         tag: 'Military Benefit',
         spec: '0% Down',
         idealFor: 'Active-duty & veteran buyers',
@@ -51,7 +60,8 @@ const PROGRAMS = [
     {
         icon: TreePine,
         title: 'RD/USDA',
-        subtitle: 'Zero-down financing for eligible rural and suburban properties.',
+        subtitle:
+            'Zero-down financing for eligible rural and suburban properties.',
         tag: 'Rural Development',
         spec: '0% Down',
         idealFor: 'Rural & suburban buyers',
@@ -59,7 +69,8 @@ const PROGRAMS = [
     {
         icon: Percent,
         title: 'Fixed, ARMs, 3-2-1, 2-1, 1-1 and 1-0 Buydowns',
-        subtitle: 'Flexible rate structures designed to fit your budget today and tomorrow.',
+        subtitle:
+            'Flexible rate structures designed to fit your budget today and tomorrow.',
         tag: 'Rate Options',
         spec: '3-2-1 Buydown',
         idealFor: 'Buyers wanting lower early payments',
@@ -67,7 +78,8 @@ const PROGRAMS = [
     {
         icon: Building2,
         title: 'Jumbo Loan Experts',
-        subtitle: 'Financing above conventional limits for high-value properties.',
+        subtitle:
+            'Financing above conventional limits for high-value properties.',
         tag: 'Jumbo',
         spec: 'Above Conforming',
         idealFor: 'High-value home buyers',
@@ -91,7 +103,8 @@ const PROGRAMS = [
     {
         icon: FileText,
         title: 'Bank Statement Loans',
-        subtitle: 'Qualify using bank statements instead of tax returns — built for the self-employed.',
+        subtitle:
+            'Qualify using bank statements instead of tax returns — built for the self-employed.',
         tag: 'Self-Employed',
         spec: '12-24 Mo. Statements',
         idealFor: 'Self-employed borrowers',
@@ -99,7 +112,8 @@ const PROGRAMS = [
     {
         icon: Layers,
         title: 'Non-QM Loans',
-        subtitle: 'Flexible qualification for borrowers outside traditional guidelines.',
+        subtitle:
+            'Flexible qualification for borrowers outside traditional guidelines.',
         tag: 'Non-QM',
         spec: 'Flexible Terms',
         idealFor: 'Non-traditional income borrowers',
@@ -115,7 +129,8 @@ const PROGRAMS = [
     {
         icon: Warehouse,
         title: 'Mobile Home Loans - Single and Double Wide',
-        subtitle: 'Single and double wide manufactured homes, financed with confidence.',
+        subtitle:
+            'Single and double wide manufactured homes, financed with confidence.',
         tag: 'Manufactured',
         spec: 'Single/Double Wide',
         idealFor: 'Manufactured home buyers',
@@ -139,8 +154,9 @@ const PROGRAMS = [
 ];
 
 const GROUP_SIZE = 2;
-const PROGRAM_GROUPS = Array.from({ length: Math.ceil(PROGRAMS.length / GROUP_SIZE) }, (_, i) =>
-    PROGRAMS.slice(i * GROUP_SIZE, i * GROUP_SIZE + GROUP_SIZE),
+const PROGRAM_GROUPS = Array.from(
+    { length: Math.ceil(PROGRAMS.length / GROUP_SIZE) },
+    (_, i) => PROGRAMS.slice(i * GROUP_SIZE, i * GROUP_SIZE + GROUP_SIZE),
 );
 
 const TICK_COUNT = 32;
@@ -157,12 +173,22 @@ const fromLeft: Variants = {
 
 const fromBottomLeft: Variants = {
     hidden: { opacity: 0, y: 20, x: -14 },
-    show: { opacity: 1, y: 0, x: 0, transition: { duration: 0.45, ease: EASE } },
+    show: {
+        opacity: 1,
+        y: 0,
+        x: 0,
+        transition: { duration: 0.45, ease: EASE },
+    },
 };
 
 const fromBottomRight: Variants = {
     hidden: { opacity: 0, y: 20, x: 14 },
-    show: { opacity: 1, y: 0, x: 0, transition: { duration: 0.45, ease: EASE } },
+    show: {
+        opacity: 1,
+        y: 0,
+        x: 0,
+        transition: { duration: 0.45, ease: EASE },
+    },
 };
 
 const fromRight: Variants = {
@@ -170,7 +196,13 @@ const fromRight: Variants = {
     show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: EASE } },
 };
 
-function ProgramIllustration({ program, compact = false }: { program: (typeof PROGRAMS)[number]; compact?: boolean }) {
+function ProgramIllustration({
+    program,
+    compact = false,
+}: {
+    program: (typeof PROGRAMS)[number];
+    compact?: boolean;
+}) {
     const Icon = program.icon;
 
     return (
@@ -187,25 +219,37 @@ function ProgramIllustration({ program, compact = false }: { program: (typeof PR
                     <Icon className={compact ? 'size-5' : 'size-6'} />
                 </span>
                 <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-white">{program.title}</p>
+                    <p className="truncate text-sm font-semibold text-white">
+                        {program.title}
+                    </p>
                     <p className="text-xs text-white/50">Brignac Mortgage</p>
                 </div>
             </motion.div>
 
-            <div className={`grid grid-cols-2 gap-3 ${compact ? 'mt-4' : 'mt-6'}`}>
+            <div
+                className={`grid grid-cols-2 gap-3 ${compact ? 'mt-4' : 'mt-6'}`}
+            >
                 <motion.div
                     variants={fromBottomLeft}
                     className={`rounded-2xl bg-white/4 ring-1 ring-white/10 ${compact ? 'p-3' : 'p-4'}`}
                 >
                     <p className="text-xs text-white/40">Category</p>
-                    <p className={`mt-1 font-semibold text-white ${compact ? 'text-base' : 'text-lg'}`}>{program.tag}</p>
+                    <p
+                        className={`mt-1 font-semibold text-white ${compact ? 'text-base' : 'text-lg'}`}
+                    >
+                        {program.tag}
+                    </p>
                 </motion.div>
                 <motion.div
                     variants={fromBottomRight}
                     className={`rounded-2xl bg-white/4 ring-1 ring-white/10 ${compact ? 'p-3' : 'p-4'}`}
                 >
                     <p className="text-xs text-white/40">Highlight</p>
-                    <p className={`mt-1 font-semibold text-white ${compact ? 'text-base' : 'text-lg'}`}>{program.spec}</p>
+                    <p
+                        className={`mt-1 font-semibold text-white ${compact ? 'text-base' : 'text-lg'}`}
+                    >
+                        {program.spec}
+                    </p>
                 </motion.div>
             </div>
 
@@ -213,12 +257,18 @@ function ProgramIllustration({ program, compact = false }: { program: (typeof PR
                 variants={fromRight}
                 className={`mt-3 flex items-center gap-3 rounded-2xl bg-white/4 ring-1 ring-white/10 ${compact ? 'p-3' : 'p-4'}`}
             >
-                <span className={`grid shrink-0 place-items-center rounded-xl bg-white/10 text-white/70 ${compact ? 'size-8' : 'size-9'}`}>
+                <span
+                    className={`grid shrink-0 place-items-center rounded-xl bg-white/10 text-white/70 ${compact ? 'size-8' : 'size-9'}`}
+                >
                     <Users className={compact ? 'size-3.5' : 'size-4'} />
                 </span>
                 <div className="min-w-0">
                     <p className="text-xs text-white/40">Ideal For</p>
-                    <p className={`truncate font-medium text-white ${compact ? 'text-xs' : 'text-sm'}`}>{program.idealFor}</p>
+                    <p
+                        className={`truncate font-medium text-white ${compact ? 'text-xs' : 'text-sm'}`}
+                    >
+                        {program.idealFor}
+                    </p>
                 </div>
             </motion.div>
         </motion.div>
@@ -229,14 +279,24 @@ export function LoanTimeline() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });
-    const groupProgress = useTransform(scrollYProgress, [0, 1], [0, PROGRAM_GROUPS.length - 0.001]);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ['start start', 'end end'],
+    });
+    const groupProgress = useTransform(
+        scrollYProgress,
+        [0, 1],
+        [0, PROGRAM_GROUPS.length - 0.001],
+    );
     const indicatorOpacity = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
     const panelScale = useTransform(scrollYProgress, [0, 0.06], [0.85, 1]);
     const panelRadius = useTransform(scrollYProgress, [0, 0.06], [60, 48]);
 
     useMotionValueEvent(groupProgress, 'change', (value) => {
-        const next = Math.min(PROGRAM_GROUPS.length - 1, Math.max(0, Math.floor(value)));
+        const next = Math.min(
+            PROGRAM_GROUPS.length - 1,
+            Math.max(0, Math.floor(value)),
+        );
         setActiveIndex((current) => (current === next ? current : next));
     });
 
@@ -247,11 +307,19 @@ export function LoanTimeline() {
     return (
         <div className="force-light bg-background py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
-                <Reveal as="h2" className="text-3xl text-foreground sm:text-4xl">
+                <Reveal
+                    as="h2"
+                    className="text-3xl text-foreground sm:text-4xl"
+                >
                     Our Services &amp; Products
                 </Reveal>
-                <Reveal as="p" delay={0.1} className="mt-4 text-base text-foreground/60">
-                    Explore our diverse range of loan products and programs
+                <Reveal
+                    as="p"
+                    delay={0.1}
+                    className="mt-4 text-base text-foreground/60"
+                >
+                    From your first home to investment properties, explore
+                    everything we can finance for you.
                 </Reveal>
             </div>
 
@@ -263,25 +331,35 @@ export function LoanTimeline() {
                     style={{ height: `${PROGRAM_GROUPS.length * 60}vh` }}
                 >
                     <motion.div
-                        style={{ scale: panelScale, borderRadius: panelRadius, transformOrigin: 'center top' }}
+                        style={{
+                            scale: panelScale,
+                            borderRadius: panelRadius,
+                            transformOrigin: 'center top',
+                        }}
                         className="force-dark sticky top-8 h-[calc(100vh-4rem)] overflow-hidden bg-background text-foreground"
                     >
                         <div className="mx-auto grid h-full max-w-6xl grid-cols-1 items-center gap-10 px-6 py-12 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:px-16">
                             <div className="relative flex h-full flex-col justify-center sm:pl-10">
                                 <div className="absolute inset-y-0 left-0 hidden w-px bg-white/10 sm:block">
-                                    {Array.from({ length: TICK_COUNT }).map((_, index) => (
-                                        <span
-                                            key={index}
-                                            className="absolute left-1/2 h-px w-2 -translate-x-1/2 bg-white/15"
-                                            style={{ top: `${(index / (TICK_COUNT - 1)) * 100}%` }}
-                                        />
-                                    ))}
+                                    {Array.from({ length: TICK_COUNT }).map(
+                                        (_, index) => (
+                                            <span
+                                                key={index}
+                                                className="absolute left-1/2 h-px w-2 -translate-x-1/2 bg-white/15"
+                                                style={{
+                                                    top: `${(index / (TICK_COUNT - 1)) * 100}%`,
+                                                }}
+                                            />
+                                        ),
+                                    )}
 
                                     {PROGRAM_GROUPS.map((_, index) => (
                                         <span
                                             key={index}
                                             className="absolute left-1/2 -translate-x-1/2"
-                                            style={{ top: `${(index / (PROGRAM_GROUPS.length - 1)) * 100}%` }}
+                                            style={{
+                                                top: `${(index / (PROGRAM_GROUPS.length - 1)) * 100}%`,
+                                            }}
                                         >
                                             <span
                                                 className={`block rounded-full transition-all duration-300 ${
@@ -295,7 +373,9 @@ export function LoanTimeline() {
                                 </div>
 
                                 <span className="text-xs font-semibold tracking-widest text-primary uppercase">
-                                    {rangeStart === rangeEnd ? `Program ${rangeStart}` : `Programs ${rangeStart}–${rangeEnd}`}
+                                    {rangeStart === rangeEnd
+                                        ? `Service ${rangeStart}`
+                                        : `Services ${rangeStart}–${rangeEnd}`}
                                 </span>
 
                                 <AnimatePresence mode="wait">
@@ -312,11 +392,23 @@ export function LoanTimeline() {
                                                 key={p.title}
                                                 initial={{ opacity: 0, y: 16 }}
                                                 animate={{ opacity: 1, y: 0 }}
-                                                transition={{ duration: 0.4, ease: EASE, delay: i * 0.15 }}
-                                                className={i > 0 ? 'mt-5 border-t border-white/10 pt-5' : ''}
+                                                transition={{
+                                                    duration: 0.4,
+                                                    ease: EASE,
+                                                    delay: i * 0.15,
+                                                }}
+                                                className={
+                                                    i > 0
+                                                        ? 'mt-5 border-t border-white/10 pt-5'
+                                                        : ''
+                                                }
                                             >
-                                                <h3 className="text-xl font-semibold text-white sm:text-2xl">{p.title}</h3>
-                                                <p className="mt-2 max-w-sm text-sm text-white/60">{p.subtitle}</p>
+                                                <h3 className="text-xl font-semibold text-white sm:text-2xl">
+                                                    {p.title}
+                                                </h3>
+                                                <p className="mt-2 max-w-sm text-sm text-white/60">
+                                                    {p.subtitle}
+                                                </p>
                                             </motion.div>
                                         ))}
                                     </motion.div>
@@ -346,11 +438,26 @@ export function LoanTimeline() {
                                         {group.map((p, i) => (
                                             <motion.div
                                                 key={p.title}
-                                                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40, scale: 0.95 }}
-                                                animate={{ opacity: 1, x: 0, scale: 1 }}
-                                                transition={{ duration: 0.5, ease: EASE, delay: 0.15 + i * 0.18 }}
+                                                initial={{
+                                                    opacity: 0,
+                                                    x: i % 2 === 0 ? -40 : 40,
+                                                    scale: 0.95,
+                                                }}
+                                                animate={{
+                                                    opacity: 1,
+                                                    x: 0,
+                                                    scale: 1,
+                                                }}
+                                                transition={{
+                                                    duration: 0.5,
+                                                    ease: EASE,
+                                                    delay: 0.15 + i * 0.18,
+                                                }}
                                             >
-                                                <ProgramIllustration program={p} compact />
+                                                <ProgramIllustration
+                                                    program={p}
+                                                    compact
+                                                />
                                             </motion.div>
                                         ))}
                                     </motion.div>
