@@ -4,31 +4,65 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function ApplyHero() {
     return (
-        <section className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-            <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: EASE }}
-                className="text-sm font-semibold tracking-wide text-primary uppercase"
-            >
-                Apply Today
-            </motion.p>
-            <motion.h1
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
-                className="mt-4 text-4xl text-foreground sm:text-5xl"
-            >
-                Meet the People Behind Your Loan
-            </motion.h1>
-            <motion.p
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
-                className="mt-5 text-lg text-foreground/60"
-            >
-                Licensed, NMLS-verified mortgage professionals based in Louisiana. Start your application with the people who will personally guide you from your first question to the day you get your keys.
-            </motion.p>
+        <section className="relative isolate py-8 sm:py-12">
+            {/* Same treatment as the testimonials hero: flush to the top corners, faded on their
+                outer edges only (not toward the copy), `isolate` so the negative z-index stays
+                scoped to this section instead of sinking behind the page's own opaque ancestor
+                backgrounds. */}
+            <motion.img
+                src="/img/testimonials.png"
+                alt=""
+                aria-hidden="true"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, ease: EASE }}
+                className="pointer-events-none absolute top-0 -left-4 -z-10 w-85 max-w-none sm:w-105 lg:w-125"
+                style={{
+                    maskImage:
+                        'linear-gradient(to right, transparent 0%, black 45%)',
+                }}
+            />
+            <motion.img
+                src="/img/testimonials2.png"
+                alt=""
+                aria-hidden="true"
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, ease: EASE }}
+                className="pointer-events-none absolute -top-1 right-0 -z-10 w-85 max-w-none sm:-top-2 sm:w-105 lg:w-125"
+                style={{
+                    maskImage:
+                        'linear-gradient(to left, transparent 0%, black 45%)',
+                }}
+            />
+
+            <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-2xl lg:px-8">
+                <motion.p
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: EASE }}
+                    className="text-sm font-semibold tracking-wide text-primary uppercase"
+                >
+                    Apply Today
+                </motion.p>
+                <motion.h1
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
+                    className="mt-4 text-4xl text-foreground sm:text-5xl"
+                >
+                    Meet Your Mortgage Team
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
+                    className="mt-5 text-lg text-foreground/60"
+                >
+                    Licensed, NMLS-verified professionals ready to guide you
+                    from application to closing.
+                </motion.p>
+            </div>
         </section>
     );
 }
