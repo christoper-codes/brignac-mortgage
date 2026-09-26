@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react';
+import { ExportDialog } from '@/components/dashboard/export-dialog';
 import {
     BarChart,
     Breakdown,
@@ -10,6 +11,7 @@ import {
 } from '@/components/dashboard/ui';
 import { MEMBERS } from '@/partials/apply/team-members';
 import { analytics } from '@/routes/dashboard';
+import { exportMethod } from '@/routes/dashboard/analytics';
 import type { DaySeries, PeriodSeries, Row, States } from '@/types/dashboard';
 
 /** Initials fallback for a team member whose name no longer matches the current roster. */
@@ -82,7 +84,15 @@ export default function Analytics({
                 <PageHeader
                     title="Analytics"
                     description="Who visits, from where, on what, and what they click."
-                    actions={<RangeFilter range={range} from={from} to={to} />}
+                    actions={
+                        <div className="flex flex-wrap items-center gap-3">
+                            <RangeFilter range={range} from={from} to={to} />
+                            <ExportDialog
+                                subject="analytics"
+                                url={exportMethod}
+                            />
+                        </div>
+                    }
                 />
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">

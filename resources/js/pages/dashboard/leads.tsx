@@ -1,5 +1,6 @@
 import { Head, Link, router } from '@inertiajs/react';
 import {
+    CalendarDays,
     ChevronDown,
     Mail,
     MessageSquare,
@@ -8,6 +9,7 @@ import {
 } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
+import { ExportDialog } from '@/components/dashboard/export-dialog';
 import {
     Card,
     EmptyState,
@@ -23,7 +25,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { cn, pageLabel } from '@/lib/utils';
-import { index, update } from '@/routes/dashboard/leads';
+import { exportMethod, index, update } from '@/routes/dashboard/leads';
 import type { JourneyEvent, Journeys, Lead } from '@/types/dashboard';
 
 type Props = {
@@ -33,7 +35,13 @@ type Props = {
         links: { prev: string | null; next: string | null };
     };
     journeys: Journeys;
-    filters: { q?: string; campaign?: string; status?: string; state?: string };
+    filters: {
+        q?: string;
+        campaign?: string;
+        status?: string;
+        state?: string;
+        per_page?: string;
+    };
     campaigns: { id: number; name: string }[];
     statuses: string[];
     states: string[];
@@ -46,6 +54,19 @@ const STATUS_STYLES: Record<string, string> = {
     closed: 'bg-foreground text-background',
     lost: 'bg-red-500/10 text-red-500',
 };
+
+const initials = (name: string) =>
+    name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0])
+        .join('')
+        .toUpperCase();
+
+// Same pill as the campaign badge, so the date and SMS consent read as part of the same set.
+const PILL =
+    'flex w-fit items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground/80';
 
 const ALL = 'all';
 
@@ -257,6 +278,9 @@ export default function Leads({
                 <PageHeader
                     title="Leads"
                     description={`${leads.meta.total} people who reached out through the site.`}
+                    actions={
+                        <ExportDialog subject="leads" url={exportMethod} />
+                    }
                 />
 
                 <div className="flex flex-wrap items-center gap-3">
@@ -295,6 +319,28 @@ export default function Leads({
                             label: state,
                         }))}
                     />
+                    <div className="inline-flex rounded-full border border-border bg-card p-1">
+                        {[
+                            { value: undefined, label: '10 per page' },
+                            { value: ALL, label: 'View all' },
+                        ].map((option) => (
+                            <button
+                                key={option.label}
+                                type="button"
+                                onClick={() =>
+                                    filter({ per_page: option.value })
+                                }
+                                className={cn(
+                                    'rounded-full px-4 py-1.5 text-xs font-medium transition-colors',
+                                    filters.per_page === option.value
+                                        ? 'bg-foreground text-background'
+                                        : 'text-foreground/60 hover:text-foreground',
+                                )}
+                            >
+                                {option.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 {leads.data.length === 0 ? (
@@ -311,41 +357,41 @@ export default function Leads({
                                 className="p-5"
                             >
                                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.4fr_1fr_1fr_auto] lg:items-center">
-                                    <div className="min-w-0">
-                                        <div className="flex items-center gap-2">
-                                            <p className="min-w-0 flex-1 truncate text-base font-semibold text-foreground">
-                                                {lead.full_name}
-                                            </p>
-                                            {lead.sms_consent && (
-                                                <span className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
-                                                    SMS OK
-                                                </span>
+                                    <div className="flex min-w-0 items-center gap-3">
+                                        <span className="grid size-11 shrink-0 place-items-center rounded-full bg-foreground text-sm font-semibold text-background">
+                                            {initials(lead.full_name)}
+                                        </span>
+                                        <div className="min-w-0 flex-1">
+                                            <div className="flex items-center gap-2">
+                                                <p className="min-w-0 flex-1 truncate text-base font-semibold text-foreground">
+                                                    {lead.full_name}
+                                                </p>
+                                            </div>
+                                            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-foreground/60">
+                                                <a
+                                                    href={`mailto:${lead.email}`}
+                                                    className="inline-flex items-center gap-1.5 hover:text-foreground"
+                                                >
+                                                    <Mail className="size-3.5" />
+                                                    {lead.email}
+                                                </a>
+                                                <a
+                                                    href={`tel:${lead.phone}`}
+                                                    className="inline-flex items-center gap-1.5 hover:text-foreground"
+                                                >
+                                                    <Phone className="size-3.5" />
+                                                    {lead.phone}
+                                                </a>
+                                            </div>
+                                            {lead.message && (
+                                                <p className="mt-2 flex gap-1.5 text-xs text-foreground/50">
+                                                    <MessageSquare className="mt-0.5 size-3.5 shrink-0" />
+                                                    <span className="line-clamp-2">
+                                                        {lead.message}
+                                                    </span>
+                                                </p>
                                             )}
                                         </div>
-                                        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-foreground/60">
-                                            <a
-                                                href={`mailto:${lead.email}`}
-                                                className="inline-flex items-center gap-1.5 hover:text-foreground"
-                                            >
-                                                <Mail className="size-3.5" />
-                                                {lead.email}
-                                            </a>
-                                            <a
-                                                href={`tel:${lead.phone}`}
-                                                className="inline-flex items-center gap-1.5 hover:text-foreground"
-                                            >
-                                                <Phone className="size-3.5" />
-                                                {lead.phone}
-                                            </a>
-                                        </div>
-                                        {lead.message && (
-                                            <p className="mt-2 flex gap-1.5 text-xs text-foreground/50">
-                                                <MessageSquare className="mt-0.5 size-3.5 shrink-0" />
-                                                <span className="line-clamp-2">
-                                                    {lead.message}
-                                                </span>
-                                            </p>
-                                        )}
                                     </div>
 
                                     <div className="space-y-1.5 text-xs text-foreground/60">
@@ -361,7 +407,10 @@ export default function Leads({
                                                 {lead.source ?? 'Direct'}
                                             </span>
                                         )}
-                                        <p>{dateTime(lead.created_at)}</p>
+                                        <span className={PILL}>
+                                            <CalendarDays className="size-3.5" />
+                                            {dateTime(lead.created_at)}
+                                        </span>
                                     </div>
 
                                     <div className="space-y-1.5 text-xs text-foreground/60">
@@ -386,6 +435,12 @@ export default function Leads({
                                             <p className="text-foreground/40">
                                                 {lead.ip_address}
                                             </p>
+                                        )}
+                                        {lead.sms_consent && (
+                                            <span className={PILL}>
+                                                <MessageSquare className="size-3.5 text-primary" />
+                                                SMS OK
+                                            </span>
                                         )}
                                     </div>
 

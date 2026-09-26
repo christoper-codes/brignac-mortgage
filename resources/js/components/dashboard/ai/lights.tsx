@@ -39,7 +39,9 @@ export function ThinkingLights({ active }: { active: boolean }) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1.1, ease: 'easeInOut' }}
-                    className="pointer-events-none fixed inset-0 z-0"
+                    // lg:translate-x-16 nudges the whole wash right, toward the middle of the content
+                    // column (the floating sidebar takes the left side at lg+).
+                    className="pointer-events-none fixed inset-0 z-0 lg:translate-x-16"
                 >
                     {BLOBS.map((blob) => (
                         <motion.div

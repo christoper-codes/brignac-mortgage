@@ -121,3 +121,26 @@ test('the campaign list can be filtered by a date range that overlaps the campai
 test('an end date before the start date is rejected by the campaign filter', function () {
     $this->get(route('dashboard.campaigns.index', ['from' => '2026-05-10', 'to' => '2026-05-01']))->assertSessionHasErrors('to');
 });
+
+test('leads are listed 10 per page unless the whole list is requested', function () {
+    Lead::factory()->count(23)->create();
+
+    $this->get(route('dashboard.leads.index'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->has('leads.data', 10)
+            ->where('leads.meta.last_page', 3)
+            ->where('leads.meta.total', 23));
+
+    $this->get(route('dashboard.leads.index', ['page' => 3]))
+        ->assertInertia(fn (Assert $page) => $page->has('leads.data', 3));
+
+    $this->get(route('dashboard.leads.index', ['per_page' => 'all']))
+        ->assertInertia(fn (Assert $page) => $page
+            ->has('leads.data', 23)
+            ->where('leads.meta.last_page', 1)
+            ->where('filters.per_page', 'all'));
+});
+
+test('an unknown leads page size is rejected', function () {
+    $this->get(route('dashboard.leads.index', ['per_page' => 500]))->assertSessionHasErrors('per_page');
+});

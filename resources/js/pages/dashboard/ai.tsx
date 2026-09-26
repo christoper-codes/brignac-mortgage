@@ -284,7 +284,7 @@ export default function Ai({ configured }: { configured: boolean }) {
                     )}
 
                     {empty ? (
-                        <div className="flex h-full flex-col justify-center pb-6">
+                        <div className="flex min-h-full flex-col justify-center pb-6">
                             <div className="relative">
                                 <motion.div
                                     initial={{ opacity: 0, y: 8 }}

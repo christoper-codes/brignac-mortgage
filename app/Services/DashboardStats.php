@@ -119,6 +119,21 @@ class DashboardStats
         return (int) round($from->startOfDay()->diffInDays($to->startOfDay())) + 1;
     }
 
+    /**
+     * From the first recorded visit, lead or click up to today (just today when nothing is recorded yet).
+     *
+     * @return array{0: CarbonImmutable, 1: CarbonImmutable}
+     */
+    public function allTimeWindow(): array
+    {
+        $first = collect([Visit::query()->min('created_at'), Lead::query()->min('created_at'), CtaClick::query()->min('created_at')])
+            ->filter()
+            ->map(fn (string $date): CarbonImmutable => CarbonImmutable::parse($date))
+            ->min();
+
+        return [($first ?? CarbonImmutable::now())->startOfDay(), CarbonImmutable::now()->endOfDay()];
+    }
+
     private function uniqueVisitors(CarbonImmutable $from, CarbonImmutable $to): int
     {
         return Visit::query()->whereBetween('created_at', [$from, $to])->distinct()->count('visitor_id');

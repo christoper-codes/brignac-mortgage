@@ -4,19 +4,24 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\LeadStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExportRangeRequest;
 use App\Http\Resources\LeadResource;
 use App\Models\Campaign;
 use App\Models\CtaClick;
 use App\Models\Lead;
 use App\Models\Visit;
+use App\Services\SpreadsheetExport;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class LeadController extends Controller
 {
+    private const PER_PAGE = 10;
+
     public function index(Request $request): Response
     {
         $filters = $request->validate([
@@ -24,9 +29,10 @@ class LeadController extends Controller
             'campaign' => ['nullable', 'integer'],
             'status' => ['nullable', Rule::enum(LeadStatus::class)],
             'state' => ['nullable', 'string', 'max:8'],
+            'per_page' => ['nullable', Rule::in(['all'])],
         ]);
 
-        $leads = Lead::query()
+        $query = Lead::query()
             ->with('campaign')
             ->when($filters['q'] ?? null, fn ($query, string $term) => $query->where(function ($query) use ($term): void {
                 $query->where('full_name', 'like', "%{$term}%")
@@ -36,9 +42,11 @@ class LeadController extends Controller
             ->when($filters['campaign'] ?? null, fn ($query, int $campaign) => $query->where('campaign_id', $campaign))
             ->when($filters['status'] ?? null, fn ($query, string $status) => $query->where('status', $status))
             ->when($filters['state'] ?? null, fn ($query, string $state) => $query->where('region_code', $state))
-            ->latest()
-            ->paginate(15)
-            ->withQueryString();
+            ->latest();
+
+        // Pages of 10, or every matching lead on a single page.
+        $perPage = ($filters['per_page'] ?? null) === 'all' ? max((clone $query)->count(), 1) : self::PER_PAGE;
+        $leads = $query->paginate($perPage)->withQueryString();
 
         // Computed before wrapping in LeadResource below: ->collection() replaces the paginator's
         // items with resources in place, so ->items() would no longer yield Lead models afterward.
@@ -120,6 +128,45 @@ class LeadController extends Controller
 
             return [$lead->id => $events];
         })->all();
+    }
+
+    /**
+     * Every lead (or only those received in the chosen period) as an Excel file: the same details the
+     * lead cards show, without the journey.
+     */
+    public function export(ExportRangeRequest $request, SpreadsheetExport $spreadsheet): StreamedResponse
+    {
+        $rows = Lead::query()
+            ->with('campaign')
+            ->when($request->period(), fn ($query, array $period) => $query->whereBetween('created_at', $period))
+            ->latest()
+            ->get()
+            ->map(fn (Lead $lead): array => [
+                $lead->full_name,
+                $lead->email,
+                $lead->phone,
+                $lead->sms_consent_at !== null,
+                $lead->message,
+                $lead->status->value,
+                $lead->campaign?->name,
+                $lead->campaign?->platform->label(),
+                $lead->utm_source ?? 'Direct',
+                $lead->created_at?->format('Y-m-d H:i'),
+                $lead->city,
+                $lead->region ?? $lead->region_code,
+                $lead->country_code,
+                $lead->ip_address,
+                $lead->device_type,
+                $lead->browser,
+                $lead->os,
+            ])->all();
+
+        return $spreadsheet->download("leads-{$request->label()}.xlsx", [
+            'Leads' => [
+                ['Name', 'Email', 'Phone', 'SMS consent', 'Message', 'Status', 'Campaign', 'Platform', 'Source', 'Received', 'City', 'State', 'Country', 'IP address', 'Device', 'Browser', 'Operating system'],
+                ...$rows,
+            ],
+        ]);
     }
 
     public function update(Request $request, Lead $lead): RedirectResponse

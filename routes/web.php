@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Dashboard\AiController;
 use App\Http\Controllers\Dashboard\AnalyticsController;
+use App\Http\Controllers\Dashboard\AnalyticsExportController;
 use App\Http\Controllers\Dashboard\CampaignController;
 use App\Http\Controllers\Dashboard\LeadController as DashboardLeadController;
 use App\Http\Controllers\Dashboard\OverviewController;
@@ -40,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('analytics', AnalyticsController::class)->name('analytics');
+        Route::get('analytics/export', AnalyticsExportController::class)->name('analytics.export');
         Route::get('ai', [AiController::class, 'index'])->name('ai');
         Route::get('users', [UserController::class, 'index'])->middleware('can:view-users')->name('users');
         Route::post('ai/plan', [AiController::class, 'plan'])->middleware('throttle:30,1')->name('ai.plan');
@@ -47,6 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('tracking', [DashboardTrackingController::class, 'edit'])->name('tracking.edit');
         Route::put('tracking', [DashboardTrackingController::class, 'update'])->name('tracking.update');
         Route::get('leads', [DashboardLeadController::class, 'index'])->name('leads.index');
+        Route::get('leads/export', [DashboardLeadController::class, 'export'])->name('leads.export');
         Route::patch('leads/{lead}', [DashboardLeadController::class, 'update'])->name('leads.update');
         Route::resource('campaigns', CampaignController::class)->only(['index', 'store', 'update', 'destroy']);
     });
