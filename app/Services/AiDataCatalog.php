@@ -37,6 +37,7 @@ class AiDataCatalog
             'lead_conversion_by_agent' => ['label' => 'Which browsers/devices convert', 'description' => 'Leads (form submissions) broken down by browser and device — which ones actually turn into leads.'],
             'geography' => ['label' => 'Geography', 'description' => 'Visitors by US state and country, and the share of located visitors inside Louisiana.'],
             'leads' => ['label' => 'Leads', 'description' => 'Lead summary: totals by status and by campaign, plus the most recent leads with their name, status, campaign, source, state, device and browser (never emails, phone numbers or messages).'],
+            'dashboard_help' => ['label' => 'Dashboard help', 'description' => 'What each dashboard page is for (Overview, Campaigns, Leads, Analytics, AI assistant, Pixels), what it shows, how its filters and search work, how to export data to Excel, and how key numbers (visitors, conversion, cost per lead...) are calculated. Use this whenever the admin asks how to use the dashboard, where to find something, or how a number is worked out — not just when they ask for the numbers themselves.'],
         ];
     }
 
@@ -99,7 +100,69 @@ class AiDataCatalog
                 'countries' => $this->analytics($days)['countries'],
             ],
             'leads' => $this->leads($days),
+            'dashboard_help' => $this->dashboardHelp(),
         };
+    }
+
+    /**
+     * Static reference for the admin dashboard itself — not website analytics, but what each page
+     * does, how its filters/search/export work, and how the headline numbers are defined. Doesn't
+     * depend on the period, so it's the same regardless of the "days" the plan step picked.
+     *
+     * @return array<string, mixed>
+     */
+    private function dashboardHelp(): array
+    {
+        return [
+            'pages' => [
+                'overview' => [
+                    'route' => '/dashboard',
+                    'purpose' => 'The landing page: a quick read on how campaigns are performing right now.',
+                    'shows' => ['4 KPI cards: Visitors, Leads, CTA clicks, Conversion (leads ÷ visitors)', 'Visitors per day bar chart', 'Where visitors are (by US state, plus % inside Louisiana)', 'Top 5 campaigns by leads', 'The 5 most recent leads'],
+                    'filters' => 'Date range at the top: presets Today / 7d / 30d / 90d, or an exact From–To range typed with the date picker. A custom range overrides the presets. Every number on the page updates to that range.',
+                    'export' => 'No export on this page — use Leads or Analytics for that.',
+                ],
+                'campaigns' => [
+                    'route' => '/dashboard/campaigns',
+                    'purpose' => 'Create and manage the tracking link for each ad, and see what it brought in.',
+                    'shows' => ['One card per campaign: platform (Facebook/Instagram/TikTok), status, budget, and its all-time Visits, Leads, Clicks, Conversion % and cost per lead', 'The tracking link to paste into the ad (adds UTM parameters automatically)'],
+                    'filters' => 'Search by campaign name, and a From–To date range. A campaign matches the date range when its own start–end run overlaps it (no start date counts from when it was created; no end date means still running). Important: this filter only decides which campaign cards are shown — the Visits/Leads/Clicks/Conversion numbers on each card are always all-time totals for that campaign, not scoped to the filter.',
+                    'export' => 'No export here — use "New campaign" to create one, the pencil icon to edit, the trash icon to delete.',
+                    'other' => 'Creating or editing a campaign opens a form for name, platform, status, budget, start/end dates and an optional custom tracking code.',
+                ],
+                'leads' => [
+                    'route' => '/dashboard/leads',
+                    'purpose' => 'Every person who submitted the contact form, with where they came from and how to reach them.',
+                    'shows' => ['Name, email, phone, message, SMS consent', 'Campaign/source, submission date', 'Location (city/state), device, browser, OS, IP address', 'Status: New, Contacted, Qualified, Closed, Lost — changeable right on the card', '"View journey": every page they visited and every button they clicked, in order, leading up to the form submission'],
+                    'filters' => 'Search by name/email/phone, plus dropdowns for campaign, status and state. Results are paginated 10 per page, or "View all" to show every match on one page.',
+                    'export' => 'The "Export to Excel" button opens a dialog: download all leads, or only leads from a specific date range (both a From and a To date are required). The file has the same details as the cards — everything except the journey.',
+                ],
+                'analytics' => [
+                    'route' => '/dashboard/analytics',
+                    'purpose' => 'The deep-dive version of Overview: who visits, from where, on what, and what they click.',
+                    'shows' => ['Totals: Visitors, Page views, CTA clicks, Leads', 'Apply Now clicks by team member (who visitors prefer to work with)', 'Visitors per day/week/month', 'Visitors by US state and country', 'Traffic sources, CTA clicks, top pages', 'Devices, browsers, operating systems — and which of those actually turn into leads'],
+                    'filters' => 'Same date filter as Overview: Today / 7d / 30d / 90d presets or a custom From–To range. Note: the weekly and monthly charts always show the last 12 weeks/months regardless of this filter — everything else on the page respects it.',
+                    'export' => '"Export to Excel" downloads either everything recorded so far, or one chosen date range, as a workbook with one sheet per table on the page (Summary, Daily, Weekly, Monthly, States, Countries, Traffic sources, CTA clicks, Top pages, Team members, Devices, Browsers, Operating systems, Lead browsers, Lead devices).',
+                ],
+                'ai_assistant' => [
+                    'route' => '/dashboard/ai',
+                    'purpose' => 'This chat. Answers questions about the website\'s own data, campaigns, marketing tech, mortgage lending, and how to use this dashboard.',
+                ],
+                'pixels' => [
+                    'route' => '/dashboard/tracking',
+                    'purpose' => 'Where ad tracking pixels are configured, so conversions get reported back to each ad platform.',
+                    'shows' => ['Meta Pixel ID and server-side Conversions API access token (for Facebook/Instagram)', 'TikTok Pixel ID', 'Google Analytics measurement ID'],
+                    'other' => 'The Conversions API token is never shown again once saved — only that one is set, and its last 4 characters.',
+                ],
+            ],
+            'how_numbers_are_defined' => [
+                'visitors' => 'Distinct visitor_id in the period — a person reloading the page ten times still counts once.',
+                'page_views' => 'Every page load, including repeat visits from the same person.',
+                'conversion' => 'Leads ÷ visitors, as a percentage.',
+                'cost_per_lead' => "A campaign's budget ÷ its lead count (only shown once a budget is set and at least one lead came in).",
+                'home_state_share' => 'Of visitors whose location could be determined, the % that are in Louisiana (LA) — the brokerage\'s licensed state.',
+            ],
+        ];
     }
 
     /**

@@ -192,3 +192,32 @@ test('the assistant may answer general campaign, technology and mortgage questio
             && str_contains(collect($request['messages'])->last()['content'], 'No website data was needed');
     });
 });
+
+test('the AI can plan and answer how-to questions about the dashboard itself', function () {
+    fakeOpenAi(
+        '{"sources":["dashboard_help"],"days":30}',
+        'Go to /dashboard/leads and use the Export to Excel button.',
+    );
+    $user = $this->actingAs(User::factory()->create());
+
+    $user->postJson(route('dashboard.ai.plan'), ['message' => 'How do I download the leads?'])
+        ->assertOk()
+        ->assertJson(['sources' => [['id' => 'dashboard_help', 'label' => 'Dashboard help']]]);
+
+    $user->postJson(route('dashboard.ai.answer'), [
+        'message' => 'How do I download the leads?',
+        'history' => [],
+        'sources' => ['dashboard_help'],
+        'days' => 30,
+    ])->assertOk()->assertJson(['answer' => 'Go to /dashboard/leads and use the Export to Excel button.']);
+
+    Http::assertSent(function (Request $request) {
+        $last = collect($request['messages'])->last()['content'] ?? '';
+
+        return str_contains($last, '"dashboard_help"')
+            && str_contains($last, '/dashboard/leads')
+            && str_contains($last, 'Export to Excel')
+            && str_contains($last, '/dashboard/campaigns')
+            && str_contains($last, '/dashboard/analytics');
+    });
+});
