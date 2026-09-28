@@ -38,22 +38,18 @@ export function TestimonialsHero() {
 
             <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
                 <Reveal
-                    as="p"
-                    className="text-sm font-semibold tracking-wide text-primary uppercase"
-                >
-                    Testimonials
-                </Reveal>
-                <Reveal
                     as="h1"
-                    delay={0.08}
-                    className="mt-4 text-3xl text-foreground sm:text-4xl"
+                    className="text-4xl leading-[1.1] text-foreground sm:text-5xl"
                 >
-                    What Our Clients Say
+                    What Our{' '}
+                    <span className="font-elegant text-primary italic">
+                        Clients Say
+                    </span>
                 </Reveal>
                 <Reveal
                     as="p"
-                    delay={0.16}
-                    className="mt-4 text-lg text-foreground/60"
+                    delay={0.1}
+                    className="mt-6 text-lg text-foreground/60"
                 >
                     Real reviews from real homeowners we've helped finance
                     across Louisiana.

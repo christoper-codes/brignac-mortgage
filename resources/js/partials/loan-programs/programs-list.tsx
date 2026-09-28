@@ -1,8 +1,15 @@
 import { Link } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, Building2, Home, Landmark, Percent, ShieldCheck, TreePine } from 'lucide-react';
+import {
+    ArrowUpRight,
+    Building2,
+    Home,
+    Landmark,
+    Percent,
+    ShieldCheck,
+    TreePine,
+} from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { Reveal } from '@/components/amicro/reveal';
 import { cn } from '@/lib/utils';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -18,7 +25,13 @@ const PROGRAMS = [
             { label: 'Down Payment', value: 'As low as 3.5%' },
         ],
         lists: [
-            { label: 'Down Payment Tiers', items: ['Credit Score 500-560: 10% Down', 'Credit Score 560+: 3.5% Down'] },
+            {
+                label: 'Down Payment Tiers',
+                items: [
+                    'Credit Score 500-560: 10% Down',
+                    'Credit Score 560+: 3.5% Down',
+                ],
+            },
             {
                 label: 'Loan Options',
                 items: [
@@ -34,10 +47,20 @@ const PROGRAMS = [
             },
             {
                 label: 'Special Programs For',
-                items: ['Law Enforcement', 'Teachers', 'Firefighters', 'Emergency Medical Technicians (EMT)', 'and More'],
+                items: [
+                    'Law Enforcement',
+                    'Teachers',
+                    'Firefighters',
+                    'Emergency Medical Technicians (EMT)',
+                    'and More',
+                ],
             },
         ],
-        cta: { label: 'See More', href: 'https://www.hud.gov/buying/loans', external: true },
+        cta: {
+            label: 'See More',
+            href: 'https://www.hud.gov/buying/loans',
+            external: true,
+        },
     },
     {
         icon: Home,
@@ -58,7 +81,13 @@ const PROGRAMS = [
                     'Second Home Purchase: 5%',
                 ],
             },
-            { label: 'Eligible Properties', items: ['Primary, second, and investment properties', 'Manufactured Homes'] },
+            {
+                label: 'Eligible Properties',
+                items: [
+                    'Primary, second, and investment properties',
+                    'Manufactured Homes',
+                ],
+            },
             {
                 label: 'Loan Options',
                 items: [
@@ -71,7 +100,11 @@ const PROGRAMS = [
                 ],
             },
         ],
-        cta: { label: 'See More', href: 'https://www.consumerfinance.gov/owning-a-home/conventional-loans/', external: true },
+        cta: {
+            label: 'See More',
+            href: 'https://www.consumerfinance.gov/owning-a-home/conventional-loans/',
+            external: true,
+        },
     },
     {
         icon: ShieldCheck,
@@ -94,7 +127,11 @@ const PROGRAMS = [
             },
             {
                 label: 'Funding Fee',
-                items: ['First Time Homebuyer: 2.3%', 'Subsequent Use: 3.3%', 'Waived for Purple Heart, Service-Connected Disabilities, Surviving Spouses'],
+                items: [
+                    'First Time Homebuyer: 2.3%',
+                    'Subsequent Use: 3.3%',
+                    'Waived for Purple Heart, Service-Connected Disabilities, Surviving Spouses',
+                ],
             },
             {
                 label: 'Eligible Properties',
@@ -110,7 +147,11 @@ const PROGRAMS = [
                 ],
             },
         ],
-        cta: { label: 'See More', href: 'https://www.va.gov/housing-assistance/home-loans/eligibility/', external: true },
+        cta: {
+            label: 'See More',
+            href: 'https://www.va.gov/housing-assistance/home-loans/eligibility/',
+            external: true,
+        },
     },
     {
         icon: TreePine,
@@ -130,7 +171,15 @@ const PROGRAMS = [
                     'Property must be located in an eligible area (per the USDA eligibility website)',
                 ],
             },
-            { label: 'Eligible Properties', items: ['Primary Residence', 'Single Family Homes', 'Manufactured Properties', 'And More'] },
+            {
+                label: 'Eligible Properties',
+                items: [
+                    'Primary Residence',
+                    'Single Family Homes',
+                    'Manufactured Properties',
+                    'And More',
+                ],
+            },
         ],
         cta: { label: 'Click to Apply', href: '/apply', external: false },
     },
@@ -146,7 +195,12 @@ const PROGRAMS = [
         lists: [
             {
                 label: 'Credit Score Requirements',
-                items: ['Minimum: 580+', 'Conventional ARM: 620', 'FHA ARM: 580', 'VA ARM: No requirements'],
+                items: [
+                    'Minimum: 580+',
+                    'Conventional ARM: 620',
+                    'FHA ARM: 580',
+                    'VA ARM: No requirements',
+                ],
             },
             {
                 label: 'About This Program',
@@ -183,7 +237,9 @@ const PROGRAMS = [
         lists: [
             {
                 label: 'About This Program',
-                items: ['For home purchases that exceed the conforming loan limit — set at $766,550 for 2026'],
+                items: [
+                    'For home purchases that exceed the conforming loan limit — set at $766,550 for 2026',
+                ],
             },
             {
                 label: 'Eligible Properties',
@@ -214,7 +270,9 @@ function useActiveProgramIndex(count: number) {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        const index = itemRefs.current.findIndex((el) => el === entry.target);
+                        const index = itemRefs.current.findIndex(
+                            (el) => el === entry.target,
+                        );
 
                         if (index !== -1) {
                             setActiveIndex(index);
@@ -243,14 +301,18 @@ function ScrollProgressRail({ activeIndex }: { activeIndex: number }) {
             <div className="relative h-72 w-px rounded-full bg-white/10">
                 <motion.div
                     className="absolute inset-x-0 top-0 w-px rounded-full bg-primary"
-                    animate={{ height: `${((activeIndex + 1) / PROGRAMS.length) * 100}%` }}
+                    animate={{
+                        height: `${((activeIndex + 1) / PROGRAMS.length) * 100}%`,
+                    }}
                     transition={{ duration: 0.4, ease: EASE }}
                 />
 
                 {PROGRAMS.map((program, index) => (
                     <span
                         key={program.name}
-                        style={{ top: `${(index / (PROGRAMS.length - 1)) * 100}%` }}
+                        style={{
+                            top: `${(index / (PROGRAMS.length - 1)) * 100}%`,
+                        }}
                         className={cn(
                             'absolute left-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-300',
                             index <= activeIndex ? 'bg-primary' : 'bg-white/20',
@@ -259,8 +321,9 @@ function ScrollProgressRail({ activeIndex }: { activeIndex: number }) {
                 ))}
             </div>
 
-            <p className="text-[11px] tabular-nums text-white/40">
-                {String(activeIndex + 1).padStart(2, '0')} / {String(PROGRAMS.length).padStart(2, '0')}
+            <p className="text-[11px] text-white/40 tabular-nums">
+                {String(activeIndex + 1).padStart(2, '0')} /{' '}
+                {String(PROGRAMS.length).padStart(2, '0')}
             </p>
         </div>
     );
@@ -274,9 +337,17 @@ export function ProgramsList() {
     const activeProgram = PROGRAMS[activeIndex];
 
     return (
-        <div data-header-theme="dark" className="force-dark relative bg-background">
+        // pt-16 here (not mt-16 on the grid below) on purpose: a child's top margin collapses
+        // through this div (it has no padding/border/BFC of its own otherwise) and escapes above
+        // it, opening a gap between this zone's rect and the hero's above it — during that gap
+        // neither `[data-header-theme="dark"]` zone covers the viewport top, so the header would
+        // flash light while scrolling past it. Padding can't collapse, so it can't leave a gap.
+        <div
+            data-header-theme="dark"
+            className="force-dark relative bg-background pt-16"
+        >
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[340px_auto_1fr] lg:items-start lg:gap-12">
+                <div className="grid grid-cols-1 gap-10 lg:grid-cols-[340px_auto_1fr] lg:items-start lg:gap-12">
                     <div className="hidden lg:sticky lg:top-32 lg:block">
                         <div className="relative aspect-3/4 w-full overflow-hidden rounded-3xl bg-white/5">
                             <AnimatePresence>
@@ -288,14 +359,27 @@ export function ProgramsList() {
                                     transition={{ duration: 0.5, ease: EASE }}
                                     className="absolute inset-0"
                                 >
-                                    <img src={activeProgram.image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-125 object-cover blur-2xl" />
-                                    <img src={activeProgram.image} alt={activeProgram.name} className="absolute inset-0 h-full w-full object-contain" />
+                                    <img
+                                        src={activeProgram.image}
+                                        alt=""
+                                        aria-hidden="true"
+                                        className="absolute inset-0 h-full w-full scale-125 object-cover blur-2xl"
+                                    />
+                                    <img
+                                        src={activeProgram.image}
+                                        alt={activeProgram.name}
+                                        className="absolute inset-0 h-full w-full object-contain"
+                                    />
                                 </motion.div>
                             </AnimatePresence>
                             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/90 via-black/10 to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-5">
-                                <p className="text-xs font-semibold tracking-wide text-white/70 uppercase">{activeProgram.tagline}</p>
-                                <p className="mt-1 text-lg font-semibold text-white">{activeProgram.name}</p>
+                                <p className="text-xs font-semibold tracking-wide text-white/70 uppercase">
+                                    {activeProgram.tagline}
+                                </p>
+                                <p className="mt-1 text-lg font-semibold text-white">
+                                    {activeProgram.name}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -317,8 +401,17 @@ export function ProgramsList() {
                                     className="lg:min-h-[60vh] lg:py-8"
                                 >
                                     <div className="relative mb-6 aspect-3/2 overflow-hidden rounded-3xl border border-white/10 lg:hidden">
-                                        <img src={program.image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-125 object-cover blur-2xl" />
-                                        <img src={program.image} alt={program.name} className="absolute inset-0 h-full w-full object-contain" />
+                                        <img
+                                            src={program.image}
+                                            alt=""
+                                            aria-hidden="true"
+                                            className="absolute inset-0 h-full w-full scale-125 object-cover blur-2xl"
+                                        />
+                                        <img
+                                            src={program.image}
+                                            alt={program.name}
+                                            className="absolute inset-0 h-full w-full object-contain"
+                                        />
                                     </div>
 
                                     <div className="flex items-center gap-4">
@@ -326,16 +419,27 @@ export function ProgramsList() {
                                             <Icon className="size-6" />
                                         </span>
                                         <div>
-                                            <p className="text-base font-semibold text-white sm:text-lg">{program.name}</p>
-                                            <p className="text-sm text-white/50">{program.tagline}</p>
+                                            <p className="text-base font-semibold text-white sm:text-lg">
+                                                {program.name}
+                                            </p>
+                                            <p className="text-sm text-white/50">
+                                                {program.tagline}
+                                            </p>
                                         </div>
                                     </div>
 
                                     <div className="mt-6 grid grid-cols-2 gap-3">
                                         {program.facts.map((fact) => (
-                                            <div key={fact.label} className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
-                                                <p className="text-xs text-white/40">{fact.label}</p>
-                                                <p className="mt-1 text-lg font-semibold text-white">{fact.value}</p>
+                                            <div
+                                                key={fact.label}
+                                                className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10"
+                                            >
+                                                <p className="text-xs text-white/40">
+                                                    {fact.label}
+                                                </p>
+                                                <p className="mt-1 text-lg font-semibold text-white">
+                                                    {fact.value}
+                                                </p>
                                             </div>
                                         ))}
                                     </div>
@@ -343,10 +447,15 @@ export function ProgramsList() {
                                     <div className="mt-6 grid gap-6 sm:grid-cols-2">
                                         {program.lists.map((list) => (
                                             <div key={list.label}>
-                                                <p className="text-xs font-semibold tracking-wide text-white/40 uppercase">{list.label}</p>
+                                                <p className="text-xs font-semibold tracking-wide text-white/40 uppercase">
+                                                    {list.label}
+                                                </p>
                                                 <ul className="mt-3 space-y-2">
                                                     {list.items.map((item) => (
-                                                        <li key={item} className="flex gap-2 text-sm text-white/70">
+                                                        <li
+                                                            key={item}
+                                                            className="flex gap-2 text-sm text-white/70"
+                                                        >
                                                             <span className="mt-2 size-1 shrink-0 rounded-full bg-primary" />
                                                             {item}
                                                         </li>
