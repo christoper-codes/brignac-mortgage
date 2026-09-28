@@ -1,7 +1,14 @@
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, CalendarCheck, Handshake, ListChecks, Percent, Star, Timer } from 'lucide-react';
-import { useRef } from 'react';
+import {
+    ArrowUpRight,
+    CalendarCheck,
+    Handshake,
+    ListChecks,
+    Percent,
+    Star,
+    Timer,
+} from 'lucide-react';
 import { Reveal } from '@/components/amicro/reveal';
 
 const STATS = [
@@ -13,7 +20,26 @@ const STATS = [
     { icon: Handshake, label: 'Wholesale Partners', value: '50+' },
 ];
 
-const GLYPHS = ['Ω', 'β', 'λ', 'μ', 'φ', 'δ', 'Σ', 'π', 'θ', 'Δ', 'α', 'χ', '&', '+', '*', '%', '§', 'Ψ'];
+const GLYPHS = [
+    'Ω',
+    'β',
+    'λ',
+    'μ',
+    'φ',
+    'δ',
+    'Σ',
+    'π',
+    'θ',
+    'Δ',
+    'α',
+    'χ',
+    '&',
+    '+',
+    '*',
+    '%',
+    '§',
+    'Ψ',
+];
 
 function StatChip({ stat }: { stat: (typeof STATS)[number] }) {
     const Icon = stat.icon;
@@ -24,7 +50,9 @@ function StatChip({ stat }: { stat: (typeof STATS)[number] }) {
                 <Icon className="size-4.5" />
             </span>
             <div>
-                <p className="text-2xl font-semibold text-white">{stat.value}</p>
+                <p className="text-2xl font-semibold text-white">
+                    {stat.value}
+                </p>
                 <p className="mt-1 text-xs text-white/50">{stat.label}</p>
             </div>
         </div>
@@ -87,21 +115,35 @@ const DIVIDER_PARTICLES = [
 // through — a scatter of sparking particles finishes the effect. Pure CSS/SVG, no image asset.
 function GlowDivider() {
     return (
-        <div className="pointer-events-none absolute -top-20 -bottom-20 z-10" style={{ left: '48%' }}>
+        <div
+            className="pointer-events-none absolute -top-20 -bottom-20 z-10"
+            style={{ left: '48%' }}
+        >
             {/* wide soft cloud */}
             <div
                 className="absolute inset-0 left-0 w-32 -translate-x-1/2 bg-primary blur-3xl"
-                style={{ maskImage: 'radial-gradient(ellipse 30% 46% at 50% 50%, black 0%, transparent 100%)', opacity: 0.55 }}
+                style={{
+                    maskImage:
+                        'radial-gradient(ellipse 30% 46% at 50% 50%, black 0%, transparent 100%)',
+                    opacity: 0.55,
+                }}
             />
             {/* medium glow */}
             <div
                 className="absolute inset-0 left-0 w-14 -translate-x-1/2 bg-primary blur-xl"
-                style={{ maskImage: 'radial-gradient(ellipse 30% 47% at 50% 50%, black 0%, transparent 100%)', opacity: 0.8 }}
+                style={{
+                    maskImage:
+                        'radial-gradient(ellipse 30% 47% at 50% 50%, black 0%, transparent 100%)',
+                    opacity: 0.8,
+                }}
             />
             {/* bright hairline core */}
             <div
                 className="absolute inset-0 left-0 w-px -translate-x-1/2 bg-white shadow-[0_0_10px_2px_rgba(81,176,3,0.9)]"
-                style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)' }}
+                style={{
+                    maskImage:
+                        'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+                }}
             />
 
             {DIVIDER_PARTICLES.map((particle, index) => (
@@ -115,74 +157,63 @@ function GlowDivider() {
                         height: particle.size,
                         boxShadow: `0 0 6px 2px rgba(81,176,3,${particle.glow})`,
                     }}
-                    animate={{ opacity: [particle.glow * 0.25, particle.glow, particle.glow * 0.25], scale: [0.8, 1.2, 0.8] }}
-                    transition={{ duration: particle.duration, delay: particle.delay, repeat: Infinity, ease: 'easeInOut' }}
+                    animate={{
+                        opacity: [
+                            particle.glow * 0.25,
+                            particle.glow,
+                            particle.glow * 0.25,
+                        ],
+                        scale: [0.8, 1.2, 0.8],
+                    }}
+                    transition={{
+                        duration: particle.duration,
+                        delay: particle.delay,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                    }}
                 />
             ))}
         </div>
     );
 }
 
-const DOT_GRID = { backgroundSize: '28px 28px' };
-
 export function ProgramsHero() {
     const track = [...STATS, ...STATS, ...STATS];
-    const litRef = useRef<HTMLDivElement>(null);
-
-    // The pointer position drives a CSS mask on the bright dot layer, so the dots under the cursor
-    // light up without re-rendering React on every mouse move.
-    const handleMove = (event: React.MouseEvent<HTMLElement>) => {
-        const rect = event.currentTarget.getBoundingClientRect();
-        const lit = litRef.current;
-
-        if (lit) {
-            lit.style.setProperty('--mx', `${event.clientX - rect.left}px`);
-            lit.style.setProperty('--my', `${event.clientY - rect.top}px`);
-            lit.style.opacity = '1';
-        }
-    };
-
-    const handleLeave = () => {
-        if (litRef.current) {
-            litRef.current.style.opacity = '0';
-        }
-    };
 
     return (
         <section
             data-header-theme="dark"
-            onMouseMove={handleMove}
-            onMouseLeave={handleLeave}
             className="force-dark relative overflow-hidden bg-background pt-40 pb-20 sm:pt-48 sm:pb-24"
         >
-            <div
+            <img
+                src="/img/programs-bg.svg"
+                alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
+                className="pointer-events-none absolute top-0 left-0 w-full max-w-none select-none"
                 style={{
-                    ...DOT_GRID,
-                    backgroundImage: 'radial-gradient(rgba(81,176,3,0.32) 1.5px, transparent 1.5px)',
-                    maskImage: 'radial-gradient(ellipse 85% 75% at 50% 25%, black 0%, transparent 85%)',
-                }}
-            />
-            <div
-                ref={litRef}
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500"
-                style={{
-                    ...DOT_GRID,
-                    backgroundImage: 'radial-gradient(rgba(110,220,40,0.75) 1.9px, transparent 1.9px)',
-                    maskImage: 'radial-gradient(circle 170px at var(--mx, -999px) var(--my, -999px), black 0%, transparent 100%)',
-                    filter: 'drop-shadow(0 0 3px rgba(81,176,3,0.5))',
+                    maskImage:
+                        'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)',
                 }}
             />
 
             <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-4 text-center">
-                <Reveal as="h1" className="text-4xl leading-[1.1] sm:text-5xl text-white">
-                    Find the Right Loan <span className="font-elegant text-primary italic">for Your Home</span>
+                <Reveal
+                    as="h1"
+                    className="text-4xl leading-[1.1] text-white sm:text-5xl"
+                >
+                    Find the Right Loan{' '}
+                    <span className="font-elegant text-primary italic">
+                        for Your Home
+                    </span>
                 </Reveal>
 
-                <Reveal as="p" delay={0.1} className="mt-6 max-w-md text-base font-medium text-white/50">
-                    From FHA to Jumbo, we match Louisiana homebuyers with the right program — fast, transparent, and built around you.
+                <Reveal
+                    as="p"
+                    delay={0.1}
+                    className="mt-6 max-w-md text-base font-medium text-white/50"
+                >
+                    From FHA to Jumbo, we match Louisiana homebuyers with the
+                    right program — fast, transparent, and built around you.
                 </Reveal>
 
                 <div className="mt-8">
@@ -191,7 +222,7 @@ export function ProgramsHero() {
                         className="group inline-flex h-11.75 items-center justify-center rounded-[40px] bg-white pr-1.5 pl-5 text-base font-medium tracking-tighter text-neutral-900 shadow-[inset_0_2px_8px_rgba(255,255,255,0.9),0_4px_16px_rgba(8,10,16,0.35)] ring-1 ring-black/[0.06] transition-transform duration-200 ease-out hover:-translate-y-0.5"
                     >
                         Get Pre-Qualified
-                        <span className="ml-2 grid size-9 shrink-0 place-items-center rounded-full bg-neutral-900 text-white transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                        <span className="ml-2 grid size-9 shrink-0 place-items-center rounded-full bg-neutral-900 text-white transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                             <ArrowUpRight className="size-3.5" />
                         </span>
                     </Link>
@@ -203,21 +234,28 @@ export function ProgramsHero() {
                     <div
                         className="absolute inset-0"
                         style={{
-                            maskImage: 'linear-gradient(to right, transparent 0%, transparent 48%, black 48%, black 88%, transparent 100%)',
+                            maskImage:
+                                'linear-gradient(to right, transparent 0%, transparent 48%, black 48%, black 88%, transparent 100%)',
                         }}
                     >
-                        <div className="animate-marquee-reverse flex h-full w-max items-center gap-3">
+                        <div className="flex h-full w-max animate-marquee-reverse items-center gap-3">
                             {track.map((stat, index) => (
-                                <StatChip key={`${stat.label}-${index}`} stat={stat} />
+                                <StatChip
+                                    key={`${stat.label}-${index}`}
+                                    stat={stat}
+                                />
                             ))}
                         </div>
                     </div>
 
                     <div
                         className="pointer-events-none absolute inset-0"
-                        style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 48%, transparent 48%)' }}
+                        style={{
+                            maskImage:
+                                'linear-gradient(to right, transparent 0%, black 12%, black 48%, transparent 48%)',
+                        }}
                     >
-                        <div className="animate-marquee-reverse flex h-full w-max items-center gap-3">
+                        <div className="flex h-full w-max animate-marquee-reverse items-center gap-3">
                             {track.map((_, index) => (
                                 <CipherChip key={index} />
                             ))}
