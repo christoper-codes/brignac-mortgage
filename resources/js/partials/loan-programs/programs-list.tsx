@@ -274,16 +274,8 @@ export function ProgramsList() {
     const activeProgram = PROGRAMS[activeIndex];
 
     return (
-        <div data-header-theme="dark" className="force-dark relative bg-background py-20 sm:py-28">
+        <div data-header-theme="dark" className="force-dark relative bg-background">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                <div className="mx-auto max-w-2xl text-center">
-                    <Reveal as="p" className="text-sm font-semibold tracking-wide text-primary uppercase">Details</Reveal>
-                    <Reveal as="h2" delay={0.08} className="mt-4 text-3xl text-white sm:text-4xl">Explore Every Program</Reveal>
-                    <Reveal as="p" delay={0.16} className="mt-4 text-lg text-white/50">
-                        Credit score ranges, down payment tiers, and eligible property types for each loan program we offer.
-                    </Reveal>
-                </div>
-
                 <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[340px_auto_1fr] lg:items-start lg:gap-12">
                     <div className="hidden lg:sticky lg:top-32 lg:block">
                         <div className="relative aspect-3/4 w-full overflow-hidden rounded-3xl bg-white/5">
