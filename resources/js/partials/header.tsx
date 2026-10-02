@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, ChevronDown, Info, LogIn } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useCurrentUrl } from '@/hooks/use-current-url';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
@@ -17,7 +18,7 @@ const COMPANY_LINKS = [
     { label: 'Login', href: '/login', icon: LogIn },
 ];
 
-function CompanyMenu() {
+function CompanyMenu({ active }: { active: boolean }) {
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -47,16 +48,44 @@ function CompanyMenu() {
     }, [open]);
 
     return (
-        <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+        <div
+            ref={ref}
+            className="relative"
+            onMouseEnter={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
+        >
             <button
                 type="button"
                 onClick={() => setOpen((value) => !value)}
                 aria-expanded={open}
                 aria-haspopup="menu"
-                className="inline-flex items-center gap-1 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+                className={cn(
+                    'relative inline-flex items-center gap-1 rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors',
+                    active
+                        ? 'text-primary'
+                        : 'text-foreground/70 hover:text-foreground',
+                )}
             >
-                Company
-                <ChevronDown className={cn('size-3.5 transition-transform duration-300', open && 'rotate-180')} />
+                {active && (
+                    <motion.span
+                        layoutId="header-nav-active"
+                        transition={{
+                            type: 'spring',
+                            stiffness: 380,
+                            damping: 32,
+                        }}
+                        className="absolute inset-0 rounded-full bg-primary/10"
+                    />
+                )}
+                <span className="relative inline-flex items-center gap-1">
+                    Company
+                    <ChevronDown
+                        className={cn(
+                            'size-3.5 transition-transform duration-300',
+                            open && 'rotate-180',
+                        )}
+                    />
+                </span>
             </button>
 
             <AnimatePresence>
@@ -114,7 +143,11 @@ function MenuIcon({ open }: { open: boolean }) {
                 className={bar}
                 style={{ top: 'calc(50% - 0.875px)' }}
                 initial={false}
-                animate={{ y: open ? 0 : 4, rotate: open ? -45 : 0, width: open ? 24 : 15 }}
+                animate={{
+                    y: open ? 0 : 4,
+                    rotate: open ? -45 : 0,
+                    width: open ? 24 : 15,
+                }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             />
         </span>
@@ -123,7 +156,17 @@ function MenuIcon({ open }: { open: boolean }) {
 
 // Full-screen menu: blurred backdrop, links centered and staggered in. Rendered in a portal because
 // the header's own backdrop-filter would otherwise trap a fixed child inside the header box.
-function MobileMenu({ open, dark, onClose }: { open: boolean; dark: boolean; onClose: () => void }) {
+function MobileMenu({
+    open,
+    dark,
+    onClose,
+}: {
+    open: boolean;
+    dark: boolean;
+    onClose: () => void;
+}) {
+    const { isCurrentUrl } = useCurrentUrl();
+
     useEffect(() => {
         if (!open) {
             return;
@@ -147,7 +190,11 @@ function MobileMenu({ open, dark, onClose }: { open: boolean; dark: boolean; onC
 
     const item = {
         hidden: { opacity: 0, y: 24 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
+        show: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+        },
     };
 
     return createPortal(
@@ -167,20 +214,35 @@ function MobileMenu({ open, dark, onClose }: { open: boolean; dark: boolean; onC
                         initial="hidden"
                         animate="show"
                         exit="hidden"
-                        transition={{ staggerChildren: 0.07, delayChildren: 0.12 }}
+                        transition={{
+                            staggerChildren: 0.07,
+                            delayChildren: 0.12,
+                        }}
                         className="flex flex-col items-center gap-3 px-6 text-center"
                     >
-                        {[...NAV_LINKS, ...COMPANY_LINKS].map((link) => (
-                            <motion.div key={link.href} variants={item}>
-                                <Link
-                                    href={link.href}
-                                    onClick={onClose}
-                                    className="block rounded-full px-6 py-2 font-heading text-4xl font-extrabold tracking-tighter text-foreground/80 transition-colors hover:bg-foreground/5 hover:text-foreground"
-                                >
-                                    {link.label}
-                                </Link>
-                            </motion.div>
-                        ))}
+                        {[...NAV_LINKS, ...COMPANY_LINKS].map((link) => {
+                            const active = isCurrentUrl(link.href);
+
+                            return (
+                                <motion.div key={link.href} variants={item}>
+                                    <Link
+                                        href={link.href}
+                                        onClick={onClose}
+                                        className={cn(
+                                            'flex items-center gap-3 rounded-full px-6 py-2 font-heading text-4xl font-extrabold tracking-tighter transition-colors hover:bg-foreground/5',
+                                            active
+                                                ? 'text-primary'
+                                                : 'text-foreground/80 hover:text-foreground',
+                                        )}
+                                    >
+                                        {active && (
+                                            <span className="size-2 shrink-0 rounded-full bg-primary" />
+                                        )}
+                                        {link.label}
+                                    </Link>
+                                </motion.div>
+                            );
+                        })}
 
                         <motion.div variants={item} className="mt-6">
                             <Link
@@ -203,15 +265,20 @@ function MobileMenu({ open, dark, onClose }: { open: boolean; dark: boolean; onC
 }
 
 export function Header() {
-    const [scrolled, setScrolled] = useState(() => typeof window !== 'undefined' && window.scrollY > 24);
+    const [scrolled, setScrolled] = useState(
+        () => typeof window !== 'undefined' && window.scrollY > 24,
+    );
     const [inDarkZone, setInDarkZone] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const { isCurrentUrl } = useCurrentUrl();
 
     useEffect(() => {
         const onScroll = () => {
             setScrolled(window.scrollY > 24);
 
-            const zones = document.querySelectorAll('[data-header-theme="dark"]');
+            const zones = document.querySelectorAll(
+                '[data-header-theme="dark"]',
+            );
             const overDarkZone = Array.from(zones).some((zone) => {
                 const rect = zone.getBoundingClientRect();
 
@@ -232,8 +299,16 @@ export function Header() {
                 initial={false}
                 animate={scrolled ? 'scrolled' : 'top'}
                 variants={{
-                    top: { maxWidth: '80rem', marginTop: '0rem', borderRadius: '0rem' },
-                    scrolled: { maxWidth: '64rem', marginTop: '0.75rem', borderRadius: '9999px' },
+                    top: {
+                        maxWidth: '80rem',
+                        marginTop: '0rem',
+                        borderRadius: '0rem',
+                    },
+                    scrolled: {
+                        maxWidth: '64rem',
+                        marginTop: '0.75rem',
+                        borderRadius: '9999px',
+                    },
                 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
@@ -254,35 +329,61 @@ export function Header() {
                 )}
             >
                 <div className="flex items-center justify-between gap-6 px-5 py-3 sm:px-6 lg:px-8">
-                    <Link href="/" className="flex items-center gap-2 shrink-0">
+                    <Link href="/" className="flex shrink-0 items-center gap-2">
                         <img
-                            src={inDarkZone ? '/img/lightlogo.png' : '/img/darklogo.png'}
+                            src={
+                                inDarkZone
+                                    ? '/img/lightlogo.png'
+                                    : '/img/darklogo.png'
+                            }
                             alt="Brignac Mortgage"
                             className="w-32"
                             fetchPriority="high"
                         />
                     </Link>
 
-                    <nav className="hidden items-center gap-8 lg:flex">
-                        {NAV_LINKS.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                        <CompanyMenu />
+                    <nav className="hidden items-center gap-1 lg:flex">
+                        {NAV_LINKS.map((link) => {
+                            const active = isCurrentUrl(link.href);
+
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={cn(
+                                        'relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors',
+                                        active
+                                            ? 'text-primary'
+                                            : 'text-foreground/70 hover:text-foreground',
+                                    )}
+                                >
+                                    {active && (
+                                        <motion.span
+                                            layoutId="header-nav-active"
+                                            transition={{
+                                                type: 'spring',
+                                                stiffness: 380,
+                                                damping: 32,
+                                            }}
+                                            className="absolute inset-0 rounded-full bg-primary/10"
+                                        />
+                                    )}
+                                    <span className="relative">
+                                        {link.label}
+                                    </span>
+                                </Link>
+                            );
+                        })}
+                        <CompanyMenu active={isCurrentUrl('/apply')} />
                     </nav>
 
                     <div className="hidden items-center gap-3 lg:flex">
                         <Link
                             href="/apply"
-                            className="group inline-flex h-11.75 items-center justify-center rounded-[40px] bg-[#080a10] pr-1.5 pl-5 text-base font-medium tracking-tighter text-white shadow-[inset_0_4px_19px_rgba(255,255,255,0.55),0_2px_14px_rgba(129,141,151,0.35)] transition-[transform,box-shadow,filter] duration-200 ease-out hover:shadow-[inset_0_4px_19px_rgba(255,255,255,0.65),0_6px_20px_rgba(129,141,151,0.45)] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:outline-none"
+                            className="group inline-flex h-11.75 items-center justify-center rounded-[40px] bg-[#080a10] pr-1.5 pl-5 text-base font-medium tracking-tighter text-white shadow-[inset_0_4px_19px_rgba(255,255,255,0.55),0_2px_14px_rgba(129,141,151,0.35)] transition-[transform,box-shadow,filter] duration-200 ease-out hover:shadow-[inset_0_4px_19px_rgba(255,255,255,0.65),0_6px_20px_rgba(129,141,151,0.45)] focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98]"
                         >
                             Get Pre-Qualified
-                            <span className="ml-2 grid size-9 shrink-0 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/15 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                            <span className="ml-2 grid size-9 shrink-0 place-items-center rounded-full bg-white/10 text-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)] ring-1 ring-white/15 transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                                 <svg
                                     viewBox="0 0 16 16"
                                     fill="none"
@@ -309,9 +410,12 @@ export function Header() {
                         <MenuIcon open={mobileOpen} />
                     </button>
                 </div>
-
             </motion.div>
-            <MobileMenu open={mobileOpen} dark={inDarkZone} onClose={() => setMobileOpen(false)} />
+            <MobileMenu
+                open={mobileOpen}
+                dark={inDarkZone}
+                onClose={() => setMobileOpen(false)}
+            />
         </header>
     );
 }
