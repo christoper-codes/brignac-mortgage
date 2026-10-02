@@ -3,6 +3,7 @@ import { Footer } from '@/partials/footer';
 import { Header } from '@/partials/header';
 import { ProgramsHero } from '@/partials/loan-programs/hero';
 import { ProgramsList } from '@/partials/loan-programs/programs-list';
+import { ProgramsVideo } from '@/partials/loan-programs/video';
 
 export default function LoanPrograms() {
     return (
@@ -14,6 +15,7 @@ export default function LoanPrograms() {
                 <main>
                     <ProgramsHero />
                     <ProgramsList />
+                    <ProgramsVideo />
                 </main>
                 <Footer dark />
             </div>
