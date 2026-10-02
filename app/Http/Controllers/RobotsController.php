@@ -26,6 +26,9 @@ class RobotsController extends Controller
             'Disallow: /leads',
             '',
             'Sitemap: '.url('sitemap.xml'),
+            '',
+            '# https://llmstxt.org — plain-language summary for AI assistants/answer engines.',
+            '# '.url('llms.txt'),
         ];
 
         return response(implode("\n", $lines)."\n", 200, ['Content-Type' => 'text/plain; charset=UTF-8']);

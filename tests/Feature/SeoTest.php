@@ -33,7 +33,22 @@ test('the home page publishes the business as structured data', function () {
         ->toMatchArray(['@type' => 'FinancialService', 'telephone' => '+1-504-559-2821', 'identifier' => 'NMLS #2401214'])
         ->and($schema['@graph'][0]['address'])
         ->toMatchArray(['streetAddress' => '21121 Waterfront East Dr', 'addressLocality' => 'Maurepas', 'postalCode' => '70449', 'addressRegion' => 'LA'])
-        ->and($schema['@graph'][1]['@type'])->toBe('WebSite');
+        ->and($schema['@graph'][0]['aggregateRating'])
+        ->toMatchArray(['@type' => 'AggregateRating', 'ratingValue' => 5.0, 'reviewCount' => 15])
+        ->and($schema['@graph'][1]['@type'])->toBe('WebSite')
+        ->and($schema['@graph'][2])
+        ->toMatchArray(['@type' => 'FAQPage'])
+        ->and($schema['@graph'][2]['mainEntity'][0])
+        ->toMatchArray(['@type' => 'Question', 'name' => 'How do I get pre-qualified for a mortgage?']);
+});
+
+test('only the home page carries FAQPage structured data', function () {
+    $html = $this->get(route('apply'))->getContent();
+
+    preg_match('#<script type="application/ld\+json">(.*?)</script>#s', $html, $match);
+    $schema = json_decode($match[1] ?? '', true);
+
+    expect(collect($schema['@graph'])->pluck('@type')->all())->not->toContain('FAQPage');
 });
 
 test('pages that are not public are marked noindex', function () {
@@ -57,10 +72,22 @@ test('the sitemap lists every public page and nothing private', function () {
     $response->assertDontSee('dashboard', false)->assertDontSee('login', false);
 });
 
-test('robots.txt blocks private areas and points to the sitemap', function () {
+test('robots.txt blocks private areas and points to the sitemap and llms.txt', function () {
     $this->get(route('robots'))
         ->assertOk()
         ->assertSee('Disallow: /dashboard')
         ->assertSee('Disallow: /track/')
-        ->assertSee('Sitemap: '.url('sitemap.xml'));
+        ->assertSee('Sitemap: '.url('sitemap.xml'))
+        ->assertSee(url('llms.txt'));
+});
+
+test('llms.txt summarizes the business for AI assistants', function () {
+    $this->get(route('llms'))
+        ->assertOk()
+        ->assertHeader('Content-Type', 'text/plain; charset=UTF-8')
+        ->assertSee('Brignac Mortgage')
+        ->assertSee('NMLS #2401214')
+        ->assertSee(url('/programs'))
+        ->assertSee(url('/apply'))
+        ->assertSee('Shaun Brignac, MBA');
 });

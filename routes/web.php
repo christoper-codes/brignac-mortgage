@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\OverviewController;
 use App\Http\Controllers\Dashboard\TrackingController as DashboardTrackingController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\LlmsController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\TrackingController;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('sitemap.xml', SitemapController::class)->name('sitemap');
 Route::get('robots.txt', RobotsController::class)->name('robots');
+Route::get('llms.txt', LlmsController::class)->name('llms');
 
 Route::inertia('/', 'welcome')->name('home');
 Route::inertia('programs', 'loan-programs')->name('programs');

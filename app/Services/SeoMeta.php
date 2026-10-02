@@ -28,7 +28,42 @@ class SeoMeta
             'robots' => $page === null ? 'noindex, nofollow' : 'index, follow, max-image-preview:large',
             'image' => url(config('site.og_image')),
             'site_name' => $business['name'],
-            'schema' => ($page['schema'] ?? false) ? $this->businessSchema() : null,
+            'schema' => ($page['schema'] ?? false) ? $this->schemaFor($request->route()?->getName()) : null,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function schemaFor(?string $routeName): array
+    {
+        $schema = $this->businessSchema();
+
+        if ($routeName === 'home') {
+            $schema['@graph'][] = $this->faqSchema();
+        }
+
+        return $schema;
+    }
+
+    /**
+     * FAQPage for the home page's FAQ section — the same questions, so this only describes what's
+     * already readable on the page instead of adding anything new.
+     *
+     * @return array<string, mixed>
+     */
+    private function faqSchema(): array
+    {
+        return [
+            '@type' => 'FAQPage',
+            'mainEntity' => collect(config('site.home_faqs'))->map(fn (array $faq): array => [
+                '@type' => 'Question',
+                'name' => $faq['question'],
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $faq['answer'],
+                ],
+            ])->all(),
         ];
     }
 
@@ -77,6 +112,11 @@ class SeoMeta
                         'closes' => $business['closes'],
                     ]],
                     'sameAs' => $business['same_as'],
+                    'aggregateRating' => [
+                        '@type' => 'AggregateRating',
+                        'ratingValue' => $business['rating']['value'],
+                        'reviewCount' => $business['rating']['count'],
+                    ],
                 ],
                 [
                     '@type' => 'WebSite',

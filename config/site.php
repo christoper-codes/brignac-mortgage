@@ -38,6 +38,9 @@ return [
         // Monday–Friday, 9am–5pm (Saturday and Sunday by appointment).
         'opens' => '09:00',
         'closes' => '17:00',
+        // Google Business Profile rating — update this when it changes; it's published as
+        // AggregateRating structured data, which needs to match what's actually shown there.
+        'rating' => ['value' => 5.0, 'count' => 15],
     ],
 
     /*
@@ -102,5 +105,25 @@ return [
 
     // Social-sharing image (absolute URL is built from this path).
     'og_image' => '/img/hero.png',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Home page FAQs (SEO)
+    |--------------------------------------------------------------------------
+    |
+    | FAQPage structured data for the home page, built from the same questions
+    | shown there. Keep in sync with resources/js/partials/home/faqs.tsx —
+    | this doesn't render anything, it just describes what's already on the
+    | page, so it needs to stay a match.
+    |
+    */
+
+    'home_faqs' => [
+        ['question' => 'How do I get pre-qualified for a mortgage?', 'answer' => "Getting pre-qualified takes just a few minutes online. Share some basic financial information and we'll give you a clear picture of what you can afford — with no impact to your credit score."],
+        ['question' => 'What credit score do I need to qualify?', 'answer' => "It depends on the loan program. Conventional loans typically start around 620, while FHA loans can go as low as 580. We'll help you find the right program for your credit profile."],
+        ['question' => 'How much do I need for a down payment?', 'answer' => 'Down payments range from 0% for VA and USDA loans to as little as 3% for conventional loans. We also offer down payment assistance programs for qualified buyers.'],
+        ['question' => 'What documents do I need to apply?', 'answer' => 'Typically pay stubs, W-2s or tax returns, bank statements, and a photo ID. Self-employed borrowers may qualify using bank statements instead of tax returns.'],
+        ['question' => 'How long does closing take?', 'answer' => 'Our streamlined process averages 18 days from application to closing, though timelines can vary based on the loan program and property.'],
+    ],
 
 ];
