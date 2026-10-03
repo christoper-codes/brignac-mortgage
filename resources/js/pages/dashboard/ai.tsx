@@ -224,11 +224,13 @@ export default function Ai({ configured }: { configured: boolean }) {
         <>
             <Head title="AI assistant" />
 
-            {/* Flat near-black canvas with a barely-there glow at the top — the dashboard shell (and its
-                frosted sidebar) sits on top of it. */}
+            {/* The theme's own dark background (not a hardcoded near-black) with a barely-there glow
+                at the top — the dashboard shell (and its frosted sidebar) sits on top of it. This
+                page is always forced dark (see AppSidebarLayout's ALWAYS_DARK_PREFIXES), so
+                bg-background resolves to the dark token here regardless of the site-wide toggle. */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none fixed inset-0 z-0 bg-[#0a0a0b] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(255,255,255,0.06),transparent)]"
+                className="pointer-events-none fixed inset-0 z-0 bg-background bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(255,255,255,0.06),transparent)]"
             />
 
             <ThinkingLights active={busy} />

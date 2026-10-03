@@ -13,13 +13,16 @@
 .dark {
     --background: #101215;
     --foreground: #f6f7f9;
-    --card: #131313;
+    /* card/border pick up the same cool blue-gray undertone as --background (previously a neutral
+       gray card and a warm-tinted border, both left over from the old, warmer #141211 background)
+       so the whole dark surface reads as one consistent hue family instead of clashing. */
+    --card: #14171a;
     --card-foreground: #f6f7f9;
     --primary: #51b003;
     --primary-foreground: #ffffff;
     --secondary: #f6f7f9;
     --secondary-foreground: #14170f;
-    --border: #262624;
+    --border: #262c33;
 }
 
 /*
@@ -79,13 +82,14 @@
 .force-dark {
     --background: #101215;
     --foreground: #f6f7f9;
-    --card: #131313;
+    /* Same cool blue-gray family as --background — see the matching comment in .dark above. */
+    --card: #14171a;
     --card-foreground: #f6f7f9;
     --primary: #51b003;
     --primary-foreground: #ffffff;
     --secondary: #f6f7f9;
     --secondary-foreground: #14170f;
-    --border: #262624;
+    --border: #262c33;
     --popover: oklch(0.145 0 0);
     --popover-foreground: oklch(0.985 0 0);
     --muted: oklch(0.269 0 0);

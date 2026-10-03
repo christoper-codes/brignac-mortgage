@@ -51,13 +51,15 @@ export function ProgramsVideo() {
                     just behind the card, making it invisible. max-w-3xl (smaller than the section's
                     own max-w-6xl) keeps the card modest instead of a huge full-width block. */}
                 <div className="relative isolate mx-auto mt-12 max-w-3xl sm:mt-16">
-                    {/* The same cover, blurred and bled past the card's own edges, so the card reads
-                        as glowing against the dark section instead of sitting on a flat background. */}
-                    <img
-                        src={COVER}
-                        alt=""
+                    {/* A soft primary-colored glow instead of a blurred photo — simpler, and reads
+                        as a light bled past the card's own edges against the dark section. */}
+                    <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute -inset-8 -z-10 scale-110 object-cover opacity-60 blur-3xl sm:-inset-12"
+                        className="pointer-events-none absolute -inset-8 -z-10 sm:-inset-12"
+                        style={{
+                            background:
+                                'radial-gradient(ellipse 70% 70% at 50% 50%, rgba(81,176,3,0.25), transparent 70%)',
+                        }}
                     />
 
                     <Reveal
