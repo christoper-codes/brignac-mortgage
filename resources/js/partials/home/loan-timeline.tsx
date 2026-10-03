@@ -5,27 +5,22 @@ import {
     useScroll,
     useTransform,
 } from 'framer-motion';
-import type { Variants } from 'framer-motion';
 import {
     Building2,
     ChevronsDown,
-    FileText,
     Hammer,
     HandCoins,
     Home,
     Landmark,
     Layers,
     Percent,
-    Repeat,
     ShieldCheck,
-    Store,
     TreePine,
-    Users,
-    Warehouse,
     Wallet,
 } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { Reveal } from '@/components/amicro/reveal';
+import { cn } from '@/lib/utils';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -101,55 +96,74 @@ const PROGRAMS = [
         idealFor: 'Buyers short on down payment',
     },
     {
-        icon: FileText,
-        title: 'Bank Statement Loans',
-        subtitle:
-            'Qualify using bank statements instead of tax returns — built for the self-employed.',
-        tag: 'Self-Employed',
-        spec: '12-24 Mo. Statements',
-        idealFor: 'Self-employed borrowers',
-    },
-    {
         icon: Layers,
         title: 'Non-QM Loans',
         subtitle:
-            'Flexible qualification for borrowers outside traditional guidelines.',
+            'Flexible qualification for borrowers outside traditional guidelines — including bank statements instead of tax returns for the self-employed.',
         tag: 'Non-QM',
         spec: 'Flexible Terms',
-        idealFor: 'Non-traditional income borrowers',
-    },
-    {
-        icon: Store,
-        title: 'Commercial Loans',
-        subtitle: 'Financing for investment and commercial properties.',
-        tag: 'Commercial',
-        spec: 'Investment Property',
-        idealFor: 'Investors & business owners',
-    },
-    {
-        icon: Warehouse,
-        title: 'Mobile Home Loans - Single and Double Wide',
-        subtitle:
-            'Single and double wide manufactured homes, financed with confidence.',
-        tag: 'Manufactured',
-        spec: 'Single/Double Wide',
-        idealFor: 'Manufactured home buyers',
+        idealFor: 'Self-employed & non-traditional income borrowers',
     },
     {
         icon: Hammer,
-        title: 'Rehab Loans',
-        subtitle: 'Finance the purchase and the renovation in a single loan.',
+        title: 'Rehab Loans & Fix-and-Flip',
+        subtitle:
+            'Finance the purchase and the renovation in a single loan, or short-term funding built for investors moving fast.',
         tag: 'Renovation',
         spec: 'Purchase + Repair',
-        idealFor: 'Fixer-upper buyers',
+        idealFor: 'Fixer-upper buyers & investors',
+    },
+];
+
+// Swapped in behind the floating glass chips on the right, cycling per group. Duplicates are fine
+// for now — more will be added later.
+const TIMELINE_IMAGES = [
+    '/img/loan_timeline/img-3.jpg',
+    '/img/loan_timeline/img-2.jpg',
+    '/img/loan_timeline/img-1.jpg',
+];
+
+// A different silhouette each time the photo changes — plain rounded rectangle, a squircle with
+// two sharp corners, and an asymmetric blob — so the frame itself varies, not just the photo in it.
+const TIMELINE_SHAPES = [
+    { aspect: 'aspect-4/5', radius: 'rounded-[2.5rem]' },
+    {
+        aspect: 'aspect-square',
+        radius: 'rounded-tl-[4rem] rounded-tr-xl rounded-br-[4rem] rounded-bl-xl',
     },
     {
-        icon: Repeat,
-        title: 'Fix and Flip',
-        subtitle: 'Short-term financing built for investors moving fast.',
-        tag: 'Investor',
-        spec: 'Short-Term',
-        idealFor: 'Real estate investors',
+        aspect: 'aspect-3/4',
+        radius: 'rounded-[35%_65%_65%_35%/45%_45%_55%_55%]',
+    },
+];
+
+// Where a floating chip can land, each with its own drift so two chips on screen together never
+// move in lockstep. Picked per group below so the pair of spots (and the direction each drifts)
+// changes from one group to the next instead of always being "top-left" and "bottom-right".
+const CHIP_SPOTS = [
+    {
+        className: 'top-6 -left-8',
+        float: { x: [0, 10, -4, 0], y: [0, -14, 6, 0] },
+    },
+    {
+        className: 'top-6 -right-8',
+        float: { x: [0, -10, 4, 0], y: [0, -10, -4, 0] },
+    },
+    {
+        className: 'bottom-8 -left-10',
+        float: { x: [0, 12, -6, 0], y: [0, 10, -8, 0] },
+    },
+    {
+        className: 'bottom-8 -right-10',
+        float: { x: [0, -12, 6, 0], y: [0, 12, -6, 0] },
+    },
+    {
+        className: 'top-1/2 -left-12 -translate-y-1/2',
+        float: { x: [0, 14, 0, -6, 0], y: [0, -10, 10, 0] },
+    },
+    {
+        className: 'top-1/3 -right-12',
+        float: { x: [0, -8, 10, 0], y: [0, 8, -12, 0] },
     },
 ];
 
@@ -160,120 +174,6 @@ const PROGRAM_GROUPS = Array.from(
 );
 
 const TICK_COUNT = 32;
-
-const cardVariants: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-};
-
-const fromLeft: Variants = {
-    hidden: { opacity: 0, x: -28 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: EASE } },
-};
-
-const fromBottomLeft: Variants = {
-    hidden: { opacity: 0, y: 20, x: -14 },
-    show: {
-        opacity: 1,
-        y: 0,
-        x: 0,
-        transition: { duration: 0.45, ease: EASE },
-    },
-};
-
-const fromBottomRight: Variants = {
-    hidden: { opacity: 0, y: 20, x: 14 },
-    show: {
-        opacity: 1,
-        y: 0,
-        x: 0,
-        transition: { duration: 0.45, ease: EASE },
-    },
-};
-
-const fromRight: Variants = {
-    hidden: { opacity: 0, x: 28 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: EASE } },
-};
-
-function ProgramIllustration({
-    program,
-    compact = false,
-}: {
-    program: (typeof PROGRAMS)[number];
-    compact?: boolean;
-}) {
-    const Icon = program.icon;
-
-    return (
-        <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate="show"
-            className={`w-full max-w-sm rounded-3xl bg-white/4 ring-1 ring-white/10 backdrop-blur ${compact ? 'p-5' : 'p-6'}`}
-        >
-            <motion.div variants={fromLeft} className="flex items-center gap-3">
-                <span
-                    className={`grid shrink-0 place-items-center rounded-2xl bg-primary/15 text-primary ${compact ? 'size-10' : 'size-12'}`}
-                >
-                    <Icon className={compact ? 'size-5' : 'size-6'} />
-                </span>
-                <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-white">
-                        {program.title}
-                    </p>
-                    <p className="text-xs text-white/50">Brignac Mortgage</p>
-                </div>
-            </motion.div>
-
-            <div
-                className={`grid grid-cols-2 gap-3 ${compact ? 'mt-4' : 'mt-6'}`}
-            >
-                <motion.div
-                    variants={fromBottomLeft}
-                    className={`rounded-2xl bg-white/4 ring-1 ring-white/10 ${compact ? 'p-3' : 'p-4'}`}
-                >
-                    <p className="text-xs text-white/40">Category</p>
-                    <p
-                        className={`mt-1 font-semibold text-white ${compact ? 'text-base' : 'text-lg'}`}
-                    >
-                        {program.tag}
-                    </p>
-                </motion.div>
-                <motion.div
-                    variants={fromBottomRight}
-                    className={`rounded-2xl bg-white/4 ring-1 ring-white/10 ${compact ? 'p-3' : 'p-4'}`}
-                >
-                    <p className="text-xs text-white/40">Highlight</p>
-                    <p
-                        className={`mt-1 font-semibold text-white ${compact ? 'text-base' : 'text-lg'}`}
-                    >
-                        {program.spec}
-                    </p>
-                </motion.div>
-            </div>
-
-            <motion.div
-                variants={fromRight}
-                className={`mt-3 flex items-center gap-3 rounded-2xl bg-white/4 ring-1 ring-white/10 ${compact ? 'p-3' : 'p-4'}`}
-            >
-                <span
-                    className={`grid shrink-0 place-items-center rounded-xl bg-white/10 text-white/70 ${compact ? 'size-8' : 'size-9'}`}
-                >
-                    <Users className={compact ? 'size-3.5' : 'size-4'} />
-                </span>
-                <div className="min-w-0">
-                    <p className="text-xs text-white/40">Ideal For</p>
-                    <p
-                        className={`truncate font-medium text-white ${compact ? 'text-xs' : 'text-sm'}`}
-                    >
-                        {program.idealFor}
-                    </p>
-                </div>
-            </motion.div>
-        </motion.div>
-    );
-}
 
 export function LoanTimeline() {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -433,33 +333,116 @@ export function LoanTimeline() {
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
                                         transition={{ duration: 0.3 }}
-                                        className="flex w-full max-w-sm flex-col gap-4"
+                                        className="relative w-full max-w-sm"
                                     >
-                                        {group.map((p, i) => (
-                                            <motion.div
-                                                key={p.title}
-                                                initial={{
-                                                    opacity: 0,
-                                                    x: i % 2 === 0 ? -40 : 40,
-                                                    scale: 0.95,
-                                                }}
-                                                animate={{
-                                                    opacity: 1,
-                                                    x: 0,
-                                                    scale: 1,
-                                                }}
-                                                transition={{
-                                                    duration: 0.5,
-                                                    ease: EASE,
-                                                    delay: 0.15 + i * 0.18,
-                                                }}
-                                            >
-                                                <ProgramIllustration
-                                                    program={p}
-                                                    compact
-                                                />
-                                            </motion.div>
-                                        ))}
+                                        {/* One photo instead of two data cards — a different
+                                            silhouette each time (see TIMELINE_SHAPES), with the
+                                            per-service info now living in the floating glass chips
+                                            below, iOS-style. */}
+                                        <div
+                                            className={cn(
+                                                'relative w-full overflow-hidden ring-1 ring-white/10 transition-[border-radius] duration-500',
+                                                TIMELINE_SHAPES[
+                                                    activeIndex %
+                                                        TIMELINE_SHAPES.length
+                                                ].aspect,
+                                                TIMELINE_SHAPES[
+                                                    activeIndex %
+                                                        TIMELINE_SHAPES.length
+                                                ].radius,
+                                            )}
+                                        >
+                                            <img
+                                                src={
+                                                    TIMELINE_IMAGES[
+                                                        activeIndex %
+                                                            TIMELINE_IMAGES.length
+                                                    ]
+                                                }
+                                                alt=""
+                                                aria-hidden="true"
+                                                loading="lazy"
+                                                className="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
+                                        </div>
+
+                                        {/* Floating, frosted-glass chips — one per service in the
+                                            group (3 of them, not just 2). Which spots they land in
+                                            (and which way each one drifts) comes from CHIP_SPOTS,
+                                            keyed off the group index, so the trio changes from one
+                                            group to the next instead of always landing in the same
+                                            three corners. */}
+                                        {group.map((p, i) => {
+                                            const Icon = p.icon;
+                                            const spot =
+                                                CHIP_SPOTS[
+                                                    (activeIndex * GROUP_SIZE +
+                                                        i) %
+                                                        CHIP_SPOTS.length
+                                                ];
+
+                                            return (
+                                                <motion.div
+                                                    key={p.title}
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: 20,
+                                                        scale: 0.9,
+                                                    }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        x: spot.float.x,
+                                                        y: spot.float.y,
+                                                        scale: 1,
+                                                    }}
+                                                    transition={{
+                                                        opacity: {
+                                                            duration: 0.5,
+                                                            ease: EASE,
+                                                            delay:
+                                                                0.2 + i * 0.15,
+                                                        },
+                                                        scale: {
+                                                            duration: 0.5,
+                                                            ease: EASE,
+                                                            delay:
+                                                                0.2 + i * 0.15,
+                                                        },
+                                                        x: {
+                                                            duration:
+                                                                7 + i * 1.5,
+                                                            repeat: Infinity,
+                                                            ease: 'easeInOut',
+                                                            delay: 1,
+                                                        },
+                                                        y: {
+                                                            duration:
+                                                                6 + i * 1.5,
+                                                            repeat: Infinity,
+                                                            ease: 'easeInOut',
+                                                            delay: 1,
+                                                        },
+                                                    }}
+                                                    className={cn(
+                                                        'absolute z-10 flex w-52 items-center gap-3 rounded-2xl border border-white/30 bg-white/20 p-3 shadow-xl shadow-black/20 backdrop-blur-2xl',
+                                                        spot.className,
+                                                    )}
+                                                >
+                                                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-white/15 text-white">
+                                                        <Icon className="size-5" />
+                                                    </span>
+                                                    <div className="min-w-0">
+                                                        <p className="truncate text-xs font-semibold text-white">
+                                                            {p.title}
+                                                        </p>
+                                                        <p className="truncate text-[11px] text-white/60">
+                                                            {p.tag}
+                                                        </p>
+                                                    </div>
+                                                </motion.div>
+                                            );
+                                        })}
                                     </motion.div>
                                 </AnimatePresence>
                             </div>

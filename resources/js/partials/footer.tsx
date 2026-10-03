@@ -59,9 +59,16 @@ const LEGAL_LINKS = [
     { label: 'Terms and Conditions', href: '/terms-and-conditions' },
 ];
 
+// Its own floating glass island — not a strip of a shared full-width bar — so it stays a compact,
+// content-sized card like the rest of this app's "liquid glass" chips (see loan-timeline.tsx).
+const GLASS_CARD =
+    'w-full max-w-xs rounded-4xl px-6 py-6 backdrop-blur-2xl sm:w-auto';
+
 function FooterBrand() {
     return (
-        <div className="flex w-full flex-col items-center gap-5 text-center sm:w-[26%] sm:items-start sm:text-left">
+        <div
+            className={`${GLASS_CARD} flex flex-col items-center gap-5 text-center sm:items-start sm:text-left`}
+        >
             <h2 className="text-lg leading-[1.1] text-foreground">
                 Brignac <span className="text-primary">Mortgage</span>
             </h2>
@@ -96,7 +103,9 @@ function FooterBrand() {
 
 function FooterLinks() {
     return (
-        <div className="flex w-full flex-col items-center gap-5 text-center sm:w-[26%] sm:items-end sm:text-right">
+        <div
+            className={`${GLASS_CARD} flex flex-col items-center gap-5 text-center sm:items-end sm:text-right`}
+        >
             <Link
                 href="/apply"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary py-2 pr-2 pl-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
@@ -153,7 +162,12 @@ export function Footer({ dark = false }: { dark?: boolean }) {
                 className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-linear-to-b from-background to-transparent sm:h-48"
             />
 
-            <div className="absolute inset-x-0 bottom-0 mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-12 sm:flex-row sm:items-end sm:justify-between sm:gap-0 sm:px-6 sm:py-16 lg:px-8">
+            {/* Near the top, not the middle — that's the lion's own spot, and the sky behind it is
+                the lightest part of the photo. Two separate frosted "liquid glass" islands (not one
+                bar spanning the full width) hold the content, iOS-style: translucent, blurred,
+                tinted from the theme's own background so each reads as glass in both variants
+                instead of a fixed white or black panel. */}
+            <div className="absolute inset-x-0 top-8 mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 sm:top-12 sm:flex-row sm:items-start sm:justify-between sm:px-6 lg:px-8">
                 <FooterBrand />
                 <FooterLinks />
             </div>
