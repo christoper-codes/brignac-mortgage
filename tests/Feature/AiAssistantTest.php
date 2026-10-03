@@ -221,3 +221,40 @@ test('the AI can plan and answer how-to questions about the dashboard itself', f
             && str_contains($last, '/dashboard/analytics');
     });
 });
+
+test('the plan prompt instructs the AI to pair daily and long-term trend sources for pattern questions', function () {
+    fakeOpenAi('{"sources":["daily_trend","long_term_trend"],"days":90}');
+
+    $this->actingAs(User::factory()->create())
+        ->postJson(route('dashboard.ai.plan'), ['message' => 'What trends stand out lately?'])
+        ->assertOk()
+        ->assertJson(['sources' => [
+            ['id' => 'daily_trend', 'label' => 'Daily trend'],
+            ['id' => 'long_term_trend', 'label' => 'Weekly & monthly trend'],
+        ]]);
+
+    Http::assertSent(function (Request $request) {
+        $system = $request['messages'][0]['content'];
+
+        return str_contains($system, 'trends, patterns')
+            && str_contains($system, 'daily_trend') && str_contains($system, 'long_term_trend');
+    });
+});
+
+test('the answer prompt asks the AI to call out standout patterns instead of just listing trend numbers', function () {
+    fakeOpenAi('Visitors climbed steadily, with a clear spike on Fridays.');
+
+    $this->actingAs(User::factory()->create())
+        ->postJson(route('dashboard.ai.answer'), [
+            'message' => 'What trends stand out lately?',
+            'history' => [],
+            'sources' => ['daily_trend'],
+            'days' => 30,
+        ])->assertOk();
+
+    Http::assertSent(function (Request $request) {
+        $system = $request['messages'][0]['content'];
+
+        return str_contains($system, 'call out what actually stands out');
+    });
+});

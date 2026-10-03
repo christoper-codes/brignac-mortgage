@@ -7,6 +7,7 @@ import {
     Megaphone,
     MonitorSmartphone,
     MousePointerClick,
+    TrendingUp,
     Users,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -37,6 +38,11 @@ type Message = {
 };
 
 const SUGGESTIONS: { icon: LucideIcon; label: string; question: string }[] = [
+    {
+        icon: TrendingUp,
+        label: 'Trends',
+        question: 'What trends or patterns stand out in my data lately?',
+    },
     {
         icon: Megaphone,
         label: 'Campaigns',
