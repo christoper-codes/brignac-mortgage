@@ -17,7 +17,7 @@ export default function Testimonials() {
                     <ReviewWall />
                 </main>
                 <FacebookCollage />
-                <Footer image={false} />
+                <Footer />
             </div>
         </>
     );
