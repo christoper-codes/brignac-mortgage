@@ -273,14 +273,6 @@ export function ReviewWall() {
 
     return (
         <div className="relative mt-12 overflow-hidden pb-16">
-            {/* Soft house backdrop: low opacity, fading out toward both the top and the bottom. */}
-            <img
-                src="/img/hero.png"
-                alt=""
-                aria-hidden="true"
-                className="pointer-events-none absolute bottom-0 left-1/2 w-full max-w-[1800px] -translate-x-1/2 object-contain opacity-30"
-                style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 40%, black 70%, transparent 100%)' }}
-            />
 
         <section className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center gap-4">

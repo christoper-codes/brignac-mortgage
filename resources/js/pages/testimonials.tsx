@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { Footer } from '@/partials/footer';
 import { Header } from '@/partials/header';
+import { FacebookCollage } from '@/partials/testimonials/facebook-collage';
 import { TestimonialsHero } from '@/partials/testimonials/hero';
 import { ReviewWall } from '@/partials/testimonials/review-wall';
 
@@ -15,7 +16,8 @@ export default function Testimonials() {
                     <TestimonialsHero />
                     <ReviewWall />
                 </main>
-                <Footer />
+                <FacebookCollage />
+                <Footer image={false} />
             </div>
         </>
     );

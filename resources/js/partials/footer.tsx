@@ -159,7 +159,14 @@ function FooterContact() {
     );
 }
 
-export function Footer({ dark = false }: { dark?: boolean }) {
+export function Footer({
+    dark = false,
+    image = true,
+}: {
+    dark?: boolean;
+    /** Set false to skip the bottom photo band — e.g. testimonials replaces it with its own. */
+    image?: boolean;
+}) {
     return (
         // No margin on the footer itself: `data-header-theme` lives on this element, and a margin
         // sits outside its box — getBoundingClientRect() (what the header's scroll check reads)
@@ -199,22 +206,24 @@ export function Footer({ dark = false }: { dark?: boolean }) {
 
             {/* The lion, full-bleed below the content — taller now that it isn't also carrying
                 text, and fading up into the section above instead of meeting it at a hard line. */}
-            <div className="relative min-h-64 overflow-hidden sm:min-h-140">
-                <img
-                    src={
-                        dark
-                            ? '/img/dark_footer-v2.jpeg'
-                            : '/img/light_footer-v2.jpeg'
-                    }
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 h-full w-full object-cover"
-                />
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-background to-transparent sm:h-32"
-                />
-            </div>
+            {image && (
+                <div className="relative min-h-64 overflow-hidden sm:min-h-140">
+                    <img
+                        src={
+                            dark
+                                ? '/img/dark_footer-v2.jpeg'
+                                : '/img/light_footer-v2.jpeg'
+                        }
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 h-full w-full object-cover"
+                    />
+                    <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-background to-transparent sm:h-32"
+                    />
+                </div>
+            )}
         </footer>
     );
 }
