@@ -511,7 +511,10 @@ export function Calculator() {
                 </div>
             </div>
 
-            <div ref={portalRef} className="force-light" />
+            {/* force-light only re-declares the CSS variables — it doesn't set `color` itself, so
+            any text here without its own text-* class would otherwise inherit whatever `color`
+            the real (possibly dark-mode) <body> resolved to. text-foreground re-anchors it. */}
+            <div ref={portalRef} className="force-light text-foreground" />
 
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                 <DialogContent
