@@ -19,7 +19,7 @@ export function ProgramsVideo() {
         // the header flashes light while scrolling through it.
         <div
             data-header-theme="dark"
-            className="force-dark relative bg-background pt-32 pb-20 sm:pt-40 sm:pb-24"
+            className="force-dark relative bg-background pt-32 pb-20 sm:pt-60 sm:pb-40"
         >
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
