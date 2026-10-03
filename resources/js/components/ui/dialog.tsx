@@ -48,11 +48,15 @@ function DialogContent({
   className,
   children,
   container,
+  showCloseButton = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   /** Renders the portal into this node instead of document.body — e.g. to keep it inside a
    * `.force-light`/`.force-dark` subtree, which a plain className can't reach across a portal. */
   container?: React.ComponentProps<typeof DialogPrimitive.Portal>["container"]
+  /** Set false to skip the built-in close button — e.g. a custom-styled one (via `DialogClose`)
+   * fits better than this default light-chrome one, such as inside a dark immersive viewer. */
+  showCloseButton?: boolean
 }) {
   return (
     <DialogPortal data-slot="dialog-portal" container={container}>
@@ -66,10 +70,12 @@ function DialogContent({
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
-          <XIcon />
-          <span className="sr-only">Close</span>
-        </DialogPrimitive.Close>
+        {showCloseButton && (
+          <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+            <XIcon />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        )}
       </DialogPrimitive.Content>
     </DialogPortal>
   )
