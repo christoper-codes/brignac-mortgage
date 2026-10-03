@@ -17,15 +17,11 @@ const IMAGES = Array.from(
     (_, i) => `/img/success_stories/img-${i + 1}.jpg`,
 );
 
-// Alternating tilt per card, straightened on hover — a scrapbook of printed photos, not a grid of
-// uniform tiles.
-const TILTS = ['-rotate-2', 'rotate-2', 'rotate-1', '-rotate-1'];
-
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Testimonials' own closing section: a scrapbook of printed, slightly-tilted photos — real
-// closing-day moments, each kept at its own natural shape — that open into a matching light,
-// frosted-glass viewer with a filmstrip of the others below it.
+// Testimonials' own closing section: real closing-day photos, each kept at its own natural shape,
+// in iOS-style continuously-rounded frames that scale up smoothly on hover — opening into a
+// blurred-glass viewer (no light or dark panel of its own, just the blur) with a filmstrip below.
 export function SuccessStories() {
     const [active, setActive] = useState<number | null>(null);
 
@@ -76,16 +72,13 @@ export function SuccessStories() {
                             type="button"
                             onClick={() => show(index)}
                             aria-label={`Open photo ${index + 1}`}
-                            className={cn(
-                                'group block w-full bg-white p-2 pb-6 text-left shadow-[0_2px_6px_rgba(0,0,0,0.12),0_12px_24px_-12px_rgba(0,0,0,0.3)] ring-1 ring-black/5 transition-[transform,box-shadow] duration-300 ease-out hover:z-10 hover:scale-[1.04] hover:rotate-0 hover:shadow-[0_4px_14px_rgba(0,0,0,0.16),0_30px_50px_-20px_rgba(0,0,0,0.45)]',
-                                TILTS[index % TILTS.length],
-                            )}
+                            className="group block w-full overflow-hidden rounded-4xl shadow-md ring-1 shadow-black/10 ring-black/5 transition-shadow duration-500 ease-out hover:z-10 hover:shadow-xl hover:shadow-black/20"
                         >
                             <img
                                 src={src}
                                 alt=""
                                 loading="lazy"
-                                className="h-auto w-full object-cover"
+                                className="h-auto w-full origin-center object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                             />
                         </button>
                     </Reveal>
@@ -96,12 +89,11 @@ export function SuccessStories() {
                 open={active !== null}
                 onOpenChange={(open) => !open && setActive(null)}
             >
-                {/* A light, frosted-glass viewer to match the scrapbook above — the photo itself
-                    kept inside the same white print-frame as the grid, just much bigger, with a
-                    filmstrip of the others below it. */}
+                {/* No light or dark panel of its own — just the blur, so whatever's behind (the
+                    page, the overlay) shows through softly instead of sitting on a tinted card. */}
                 <DialogContent
                     showCloseButton={false}
-                    className="force-light flex h-[92vh] w-[95vw] max-w-5xl flex-col gap-0 overflow-hidden rounded-[2rem] border border-white/60 bg-background/70 p-0 shadow-2xl backdrop-blur-2xl sm:max-w-5xl"
+                    className="flex h-[92vh] w-[95vw] max-w-5xl flex-col gap-0 overflow-hidden rounded-4xl border-none bg-transparent p-0 shadow-none backdrop-blur-2xl sm:max-w-5xl"
                 >
                     <DialogTitle className="sr-only">
                         Success story photo
@@ -111,7 +103,7 @@ export function SuccessStories() {
                         it.
                     </DialogDescription>
 
-                    <DialogClose className="absolute top-4 right-4 z-10 grid size-10 place-items-center rounded-full border border-white/60 bg-white/70 text-foreground shadow-lg backdrop-blur-xl transition-colors hover:bg-white/90">
+                    <DialogClose className="absolute top-4 right-4 z-10 grid size-10 place-items-center rounded-full bg-white/10 text-white backdrop-blur-xl transition-colors hover:bg-white/20">
                         <X className="size-5" />
                         <span className="sr-only">Close</span>
                     </DialogClose>
@@ -119,27 +111,23 @@ export function SuccessStories() {
                     {active !== null && (
                         <div className="relative flex flex-1 items-center justify-center overflow-hidden p-6 sm:p-12">
                             <AnimatePresence mode="wait">
-                                <motion.div
+                                <motion.img
                                     key={active}
+                                    src={IMAGES[active]}
+                                    alt=""
                                     initial={{ opacity: 0, scale: 0.96 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.3, ease: EASE }}
-                                    className="max-h-full max-w-full bg-white p-2.5 pb-7 shadow-[0_8px_30px_rgba(0,0,0,0.25)] ring-1 ring-black/5"
-                                >
-                                    <img
-                                        src={IMAGES[active]}
-                                        alt=""
-                                        className="max-h-[68vh] max-w-full object-contain"
-                                    />
-                                </motion.div>
+                                    className="max-h-[70vh] max-w-full rounded-4xl object-contain shadow-2xl"
+                                />
                             </AnimatePresence>
 
                             <button
                                 type="button"
                                 onClick={() => show(active - 1)}
                                 aria-label="Previous photo"
-                                className="absolute top-1/2 left-3 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/60 bg-white/70 text-foreground shadow-lg backdrop-blur-xl transition-colors hover:bg-white/90 sm:left-6"
+                                className="absolute top-1/2 left-3 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur-xl transition-colors hover:bg-white/20 sm:left-6"
                             >
                                 <ChevronLeft className="size-5" />
                             </button>
@@ -147,7 +135,7 @@ export function SuccessStories() {
                                 type="button"
                                 onClick={() => show(active + 1)}
                                 aria-label="Next photo"
-                                className="absolute top-1/2 right-3 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/60 bg-white/70 text-foreground shadow-lg backdrop-blur-xl transition-colors hover:bg-white/90 sm:right-6"
+                                className="absolute top-1/2 right-3 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur-xl transition-colors hover:bg-white/20 sm:right-6"
                             >
                                 <ChevronRight className="size-5" />
                             </button>
@@ -155,7 +143,7 @@ export function SuccessStories() {
                     )}
 
                     {/* The filmstrip — every other photo, scrollable, the active one picked out. */}
-                    <div className="flex shrink-0 [scrollbar-width:none] items-center justify-center gap-3 overflow-x-auto border-t border-white/60 bg-white/30 p-4 [&::-webkit-scrollbar]:hidden">
+                    <div className="flex shrink-0 [scrollbar-width:none] items-center justify-center gap-3 overflow-x-auto p-4 [&::-webkit-scrollbar]:hidden">
                         {IMAGES.map((src, index) => (
                             <button
                                 key={src}
@@ -164,17 +152,17 @@ export function SuccessStories() {
                                 aria-label={`Show photo ${index + 1}`}
                                 aria-current={index === active}
                                 className={cn(
-                                    'size-14 shrink-0 overflow-hidden rounded-lg border bg-white p-0.5 transition-all duration-200 sm:size-18',
+                                    'size-14 shrink-0 overflow-hidden rounded-2xl transition-all duration-200 sm:size-18',
                                     index === active
-                                        ? 'border-primary opacity-100'
-                                        : 'border-black/10 opacity-50 hover:opacity-90',
+                                        ? 'opacity-100 ring-2 ring-primary'
+                                        : 'opacity-50 hover:opacity-90',
                                 )}
                             >
                                 <img
                                     src={src}
                                     alt=""
                                     loading="lazy"
-                                    className="h-full w-full rounded-md object-cover"
+                                    className="h-full w-full object-cover"
                                 />
                             </button>
                         ))}
