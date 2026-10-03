@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Reveal } from '@/components/amicro/reveal';
 import {
     Dialog,
@@ -27,6 +27,26 @@ export function SuccessStories() {
 
     const show = (index: number) =>
         setActive(((index % IMAGE_COUNT) + IMAGE_COUNT) % IMAGE_COUNT);
+
+    // The site already has a global cursor (components/amicro/cursor.tsx) that inverts itself via
+    // mix-blend-difference — great for most of the site, but it turns black over light photos. So
+    // rather than drawing a second cursor here, tell that one to go solid white for as long as the
+    // lightbox is open.
+    useEffect(() => {
+        if (active === null) {
+            return;
+        }
+
+        window.dispatchEvent(
+            new CustomEvent('cursor:force-white', { detail: true }),
+        );
+
+        return () => {
+            window.dispatchEvent(
+                new CustomEvent('cursor:force-white', { detail: false }),
+            );
+        };
+    }, [active]);
 
     return (
         <div className="force-light relative bg-background py-24 sm:py-32">
@@ -142,8 +162,12 @@ export function SuccessStories() {
                         </div>
                     )}
 
-                    {/* The filmstrip — every other photo, scrollable, the active one picked out. */}
-                    <div className="flex shrink-0 [scrollbar-width:none] items-center justify-center gap-3 overflow-x-auto p-4 [&::-webkit-scrollbar]:hidden">
+                    {/* The filmstrip — every other photo, scrollable, the active one picked out.
+                        justify-start on mobile: centering a row that overflows its scroll
+                        container clips the leading/trailing padding in some browsers, flushing the
+                        first and last thumbnails against the modal's edge. It only switches to
+                        centered once the row is wide enough (sm:) to not need scrolling. */}
+                    <div className="flex shrink-0 [scrollbar-width:none] items-center justify-start gap-3 overflow-x-auto p-4 sm:justify-center [&::-webkit-scrollbar]:hidden">
                         {IMAGES.map((src, index) => (
                             <button
                                 key={src}
