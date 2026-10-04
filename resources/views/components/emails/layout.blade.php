@@ -8,29 +8,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
-    <meta name="supported-color-schemes" content="light dark">
+    {{-- Forced light, same as the rest of the site's public-facing pages: these two tags tell
+    clients that honor them (iOS/macOS Mail, newer Outlook) not to auto-darken the email, and
+    there's no @media (prefers-color-scheme: dark) block here to override the inline colors below
+    even if a client ignores the tags. Gmail's own algorithmic dark mode can't be told "no" outright,
+    but it leaves explicit inline background/text colors alone as long as every element sets them,
+    which they already do throughout these templates. --}}
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
     <title>{{ $business['name'] }}</title>
     <style>
         body { margin: 0; padding: 0; background: #f5f5f7; }
         a { color: #3f8f02; }
-        .logo-dark { display: none; }
         @media (max-width: 600px) {
             .container { width: 100% !important; }
             .pad { padding-left: 24px !important; padding-right: 24px !important; }
             .h1 { font-size: 27px !important; }
-        }
-        @media (prefers-color-scheme: dark) {
-            body, .page { background: #000000 !important; }
-            .card { background: #1c1c1e !important; }
-            .text { color: #f5f5f7 !important; }
-            .muted { color: #a1a1a6 !important; }
-            .panel { background: #2c2c2e !important; }
-            .rule { border-color: #3a3a3c !important; }
-            .btn-dark { background: #f5f5f7 !important; color: #000000 !important; }
-            .badge { background: #1f3a0d !important; color: #8fd955 !important; }
-            .logo-light { display: none !important; }
-            .logo-dark { display: block !important; }
         }
     </style>
 </head>
@@ -43,8 +36,7 @@
                 <table role="presentation" class="container" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;max-width:560px;">
                     <tr>
                         <td style="padding:0 12px 22px;">
-                            <img class="logo-light" src="{{ url('/img/darklogo.png') }}" alt="{{ $business['name'] }}" width="128" style="display:block;border:0;height:auto;">
-                            <img class="logo-dark" src="{{ url('/img/lightlogo.png') }}" alt="{{ $business['name'] }}" width="128" style="display:none;border:0;height:auto;">
+                            <img src="{{ url('/img/darklogo.png') }}" alt="{{ $business['name'] }}" width="128" style="display:block;border:0;height:auto;">
                         </td>
                     </tr>
 
