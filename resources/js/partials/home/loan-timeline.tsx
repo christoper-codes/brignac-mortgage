@@ -192,6 +192,15 @@ const PROGRAM_GROUPS = Array.from(
 
 const TICK_COUNT = 32;
 
+const FOUNDER_QUOTE =
+    'We believe that life is for living and you should be passionate about what you do. We hold our team to a high standard, and we only hire the best! We look forward to working with you and your family.';
+
+// One extra scroll "stop" tacked onto the end, past the last service group — instead of the
+// section just releasing once the programs are done, the content blurs out (not away) and the
+// founder's quote fades in over it, so the section ends on a deliberate closing note.
+const TOTAL_STOPS = PROGRAM_GROUPS.length + 1;
+const QUOTE_START = PROGRAM_GROUPS.length / TOTAL_STOPS;
+
 export function LoanTimeline() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -202,12 +211,22 @@ export function LoanTimeline() {
     });
     const groupProgress = useTransform(
         scrollYProgress,
-        [0, 1],
+        [0, QUOTE_START],
         [0, PROGRAM_GROUPS.length - 0.001],
     );
     const indicatorOpacity = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
     const panelScale = useTransform(scrollYProgress, [0, 0.06], [0.85, 1]);
     const panelRadius = useTransform(scrollYProgress, [0, 0.06], [60, 48]);
+    const contentBlur = useTransform(
+        scrollYProgress,
+        [QUOTE_START, 1],
+        ['blur(0px)', 'blur(20px)'],
+    );
+    const quoteOpacity = useTransform(
+        scrollYProgress,
+        [QUOTE_START, 1],
+        [0, 1],
+    );
 
     useMotionValueEvent(groupProgress, 'change', (value) => {
         const next = Math.min(
@@ -245,7 +264,7 @@ export function LoanTimeline() {
                     ref={sectionRef}
                     data-header-theme="dark"
                     className="relative"
-                    style={{ height: `${PROGRAM_GROUPS.length * 60}vh` }}
+                    style={{ height: `${TOTAL_STOPS * 60}vh` }}
                 >
                     <motion.div
                         style={{
@@ -255,7 +274,10 @@ export function LoanTimeline() {
                         }}
                         className="force-dark sticky top-8 h-[calc(100vh-4rem)] overflow-hidden bg-background text-foreground"
                     >
-                        <div className="mx-auto grid h-full max-w-6xl grid-cols-1 items-center gap-10 px-6 py-12 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:px-16">
+                        <motion.div
+                            style={{ filter: contentBlur }}
+                            className="mx-auto grid h-full max-w-6xl grid-cols-1 items-center gap-10 px-6 py-12 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:px-16"
+                        >
                             <div className="relative flex h-full flex-col justify-center sm:pl-10">
                                 <div className="absolute inset-y-0 left-0 hidden w-px bg-white/10 sm:block">
                                     {Array.from({ length: TICK_COUNT }).map(
@@ -462,7 +484,31 @@ export function LoanTimeline() {
                                     </motion.div>
                                 </AnimatePresence>
                             </div>
-                        </div>
+                        </motion.div>
+
+                        {/* The closing note: fades in only over the final stop, on top of the
+                            now-blurred content above rather than after it's gone. */}
+                        <motion.div
+                            style={{ opacity: quoteOpacity }}
+                            className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-6 text-center sm:px-16"
+                        >
+                            <div className="max-w-xl">
+                                <img
+                                    src="/img/shaun-ceo.jpg"
+                                    alt="Shaun Brignac"
+                                    className="mx-auto size-20 rounded-full object-cover ring-4 ring-white/10 sm:size-24"
+                                />
+                                <p className="mt-6 text-xl leading-snug text-white italic sm:text-2xl">
+                                    &ldquo;{FOUNDER_QUOTE}&rdquo;
+                                </p>
+                                <p className="mt-5 text-sm font-semibold text-white">
+                                    Shaun Brignac
+                                    <span className="mt-0.5 block text-xs font-normal text-white/50">
+                                        President and CEO | Brignac Mortgage
+                                    </span>
+                                </p>
+                            </div>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>
