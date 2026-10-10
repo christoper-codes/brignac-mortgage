@@ -151,29 +151,31 @@ const TIMELINE_SHAPES = [
 // Where a floating chip can land, each with its own drift so two chips on screen together never
 // move in lockstep. All anchored near the image's vertical middle (a tight band around top-1/2,
 // alternating left/right) instead of the four corners, with the pair changing per group below.
+// The horizontal offset is much smaller on mobile — the dark panel clips its sides there, so a
+// chip pushed as far out as on desktop would just get cut off instead of floating over anything.
 const CHIP_SPOTS = [
     {
-        className: 'top-[42%] -left-10 -translate-y-1/2',
+        className: 'top-[42%] -left-4 -translate-y-1/2 sm:-left-10',
         float: { x: [0, 10, -4, 0], y: [0, -14, 6, 0] },
     },
     {
-        className: 'top-[58%] -right-10 -translate-y-1/2',
+        className: 'top-[58%] -right-4 -translate-y-1/2 sm:-right-10',
         float: { x: [0, -10, 4, 0], y: [0, -10, -4, 0] },
     },
     {
-        className: 'top-1/2 -left-12 -translate-y-1/2',
+        className: 'top-1/2 -left-5 -translate-y-1/2 sm:-left-12',
         float: { x: [0, 12, -6, 0], y: [0, 10, -8, 0] },
     },
     {
-        className: 'top-[46%] -right-12 -translate-y-1/2',
+        className: 'top-[46%] -right-5 -translate-y-1/2 sm:-right-12',
         float: { x: [0, -12, 6, 0], y: [0, 12, -6, 0] },
     },
     {
-        className: 'top-[54%] -left-8 -translate-y-1/2',
+        className: 'top-[54%] -left-3 -translate-y-1/2 sm:-left-8',
         float: { x: [0, 14, 0, -6, 0], y: [0, -10, 10, 0] },
     },
     {
-        className: 'top-1/2 -right-8 -translate-y-1/2',
+        className: 'top-1/2 -right-3 -translate-y-1/2 sm:-right-8',
         float: { x: [0, -8, 10, 0], y: [0, 8, -12, 0] },
     },
 ];
@@ -327,7 +329,7 @@ export function LoanTimeline() {
 
                                 <motion.div
                                     style={{ opacity: indicatorOpacity }}
-                                    className="absolute bottom-0 left-0 flex items-center gap-2 text-xs font-medium text-white/50 sm:pl-10"
+                                    className="absolute bottom-0 left-0 hidden lg:flex items-center gap-2 text-xs font-medium text-white/50 sm:pl-10"
                                 >
                                     <span className="grid size-8 place-items-center rounded-full bg-white/10">
                                         <ChevronsDown className="size-4" />
@@ -435,18 +437,18 @@ export function LoanTimeline() {
                                                         },
                                                     }}
                                                     className={cn(
-                                                        'absolute z-10 flex w-52 items-center gap-3 rounded-2xl border border-white/30 bg-white/20 p-3 shadow-xl shadow-black/20 backdrop-blur-2xl',
+                                                        'absolute z-10 flex w-40 items-center gap-2 rounded-2xl border border-white/30 bg-white/20 p-2 shadow-xl shadow-black/20 backdrop-blur-2xl sm:w-52 sm:gap-3 sm:p-3',
                                                         spot.className,
                                                     )}
                                                 >
-                                                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-white/15 text-white">
-                                                        <Icon className="size-5" />
+                                                    <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-white/15 text-white sm:size-10">
+                                                        <Icon className="size-4 sm:size-5" />
                                                     </span>
                                                     <div className="min-w-0">
-                                                        <p className="truncate text-xs font-semibold text-white">
+                                                        <p className="truncate text-[11px] font-semibold text-white sm:text-xs">
                                                             {p.title}
                                                         </p>
-                                                        <p className="truncate text-[11px] text-white/60">
+                                                        <p className="truncate text-[10px] text-white/60 sm:text-[11px]">
                                                             {p.tag}
                                                         </p>
                                                     </div>
