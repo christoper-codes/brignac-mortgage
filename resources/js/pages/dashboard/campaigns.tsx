@@ -1,4 +1,4 @@
-import { Head, router, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
 import { Check, Copy, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
@@ -41,6 +41,7 @@ import {
 import { useClipboard } from '@/hooks/use-clipboard';
 import { cn } from '@/lib/utils';
 import { destroy, index, store, update } from '@/routes/dashboard/campaigns';
+import { index as leadsIndex } from '@/routes/dashboard/leads';
 import type { Campaign, Platform } from '@/types/dashboard';
 
 type Filters = { q?: string; from?: string; to?: string };
@@ -502,37 +503,54 @@ export default function Campaigns({
                                 </div>
 
                                 <dl className="grid grid-cols-4 gap-2">
-                                    {[
-                                        [
-                                            'Visits',
-                                            number.format(
+                                    <div className="rounded-2xl bg-background p-3 text-center">
+                                        <dd className="text-lg font-semibold text-foreground tabular-nums">
+                                            {number.format(
                                                 campaign.visits_count,
-                                            ),
-                                        ],
-                                        [
-                                            'Leads',
-                                            number.format(campaign.leads_count),
-                                        ],
-                                        [
-                                            'Clicks',
-                                            number.format(
+                                            )}
+                                        </dd>
+                                        <dt className="text-[11px] text-foreground/50">
+                                            Visits
+                                        </dt>
+                                    </div>
+
+                                    {/* The one stat that's also a drill-down: jumps to the Leads
+                                        page pre-filtered to just this campaign's leads. */}
+                                    <Link
+                                        href={leadsIndex.url({
+                                            query: { campaign: campaign.id },
+                                        })}
+                                        className="rounded-2xl bg-background p-3 text-center transition-colors hover:bg-primary/10"
+                                    >
+                                        <dd className="text-lg font-semibold text-primary tabular-nums">
+                                            {number.format(
+                                                campaign.leads_count,
+                                            )}
+                                        </dd>
+                                        <dt className="text-[11px] text-foreground/50">
+                                            Leads
+                                        </dt>
+                                    </Link>
+
+                                    <div className="rounded-2xl bg-background p-3 text-center">
+                                        <dd className="text-lg font-semibold text-foreground tabular-nums">
+                                            {number.format(
                                                 campaign.clicks_count,
-                                            ),
-                                        ],
-                                        ['Conv.', `${campaign.conversion}%`],
-                                    ].map(([label, value]) => (
-                                        <div
-                                            key={label}
-                                            className="rounded-2xl bg-background p-3 text-center"
-                                        >
-                                            <dd className="text-lg font-semibold text-foreground tabular-nums">
-                                                {value}
-                                            </dd>
-                                            <dt className="text-[11px] text-foreground/50">
-                                                {label}
-                                            </dt>
-                                        </div>
-                                    ))}
+                                            )}
+                                        </dd>
+                                        <dt className="text-[11px] text-foreground/50">
+                                            Clicks
+                                        </dt>
+                                    </div>
+
+                                    <div className="rounded-2xl bg-background p-3 text-center">
+                                        <dd className="text-lg font-semibold text-foreground tabular-nums">
+                                            {campaign.conversion}%
+                                        </dd>
+                                        <dt className="text-[11px] text-foreground/50">
+                                            Conv.
+                                        </dt>
+                                    </div>
                                 </dl>
 
                                 {campaign.budget !== null && (
