@@ -16,7 +16,18 @@ import { WhyUs } from '@/partials/home/why-us';
 export default function Welcome() {
     return (
         <>
-            <Head title="Louisiana Mortgage Lender & Loan Officers" />
+            <Head title="Louisiana Mortgage Lender & Loan Officers">
+                {/* Tells the browser to start fetching the hero photo the instant it gets this
+                    HTML, instead of waiting to discover the <img> tag further down the page —
+                    fetchPriority="high" on the <img> itself only affects scheduling once the
+                    browser already knows about it, not how early it starts the request. */}
+                <link
+                    rel="preload"
+                    as="image"
+                    href="/img/hero.png"
+                    fetchPriority="high"
+                />
+            </Head>
 
             {/* This page mixes light and dark sections, but most of it is light — force-light here as
                 the default so any gap/margin between sections shows light, not the site's dark-mode

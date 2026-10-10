@@ -5,7 +5,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function TestimonialsHero() {
     return (
-        <section className="relative isolate py-8 sm:py-12">
+        <section className="relative isolate sm:py-12">
             {/* Flush to the top-left, faded to white on its outer edge so it sits behind the copy
                 instead of competing with it — decorative, not a full-bleed hero image. Hidden on
                 mobile: the text column fills the width there and it would land right behind the copy. */}
