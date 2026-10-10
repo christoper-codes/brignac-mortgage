@@ -125,22 +125,26 @@ const TIMELINE_IMAGES = [
     '/img/loan_timeline/img-5.jpg',
 ];
 
-// A different frame per photo, one per group — all squircle-family (big rounded corner opposite a
-// sharp one) except two: a plain rounded rectangle and an organic blob, so there's still a baseline
-// and an outlier, not five near-identical corners.
+// One squircle family throughout — two adjacent corners heavily rounded on one side, the other
+// side left sharp(ish) — same type as the last one, each just rotated to a different side, and
+// all taller/more elongated than a square, getting progressively taller through the middle before
+// easing back.
 const TIMELINE_SHAPES = [
-    { aspect: 'aspect-4/5', radius: 'rounded-[2.5rem]' },
     {
-        aspect: 'aspect-square',
-        radius: 'rounded-tl-[4rem] rounded-tr-xl rounded-br-[4rem] rounded-bl-xl',
+        aspect: 'aspect-4/5',
+        radius: 'rounded-tl-[4rem] rounded-bl-[4rem] rounded-tr-xl rounded-br-xl',
     },
     {
         aspect: 'aspect-3/4',
-        radius: 'rounded-[35%_65%_65%_35%/45%_45%_55%_55%]',
+        radius: 'rounded-tr-[4rem] rounded-br-[4rem] rounded-tl-xl rounded-bl-xl',
     },
     {
-        aspect: 'aspect-square',
-        radius: 'rounded-tr-[4rem] rounded-tl-xl rounded-bl-[4rem] rounded-br-xl',
+        aspect: 'aspect-2/3',
+        radius: 'rounded-tl-[4rem] rounded-tr-[4rem] rounded-bl-xl rounded-br-xl',
+    },
+    {
+        aspect: 'aspect-3/4',
+        radius: 'rounded-bl-[4rem] rounded-br-[4rem] rounded-tl-xl rounded-tr-xl',
     },
     {
         aspect: 'aspect-4/5',
@@ -329,7 +333,7 @@ export function LoanTimeline() {
 
                                 <motion.div
                                     style={{ opacity: indicatorOpacity }}
-                                    className="absolute bottom-0 left-0 hidden lg:flex items-center gap-2 text-xs font-medium text-white/50 sm:pl-10"
+                                    className="absolute bottom-0 left-0 hidden items-center gap-2 text-xs font-medium text-white/50 sm:pl-10 lg:flex"
                                 >
                                     <span className="grid size-8 place-items-center rounded-full bg-white/10">
                                         <ChevronsDown className="size-4" />
