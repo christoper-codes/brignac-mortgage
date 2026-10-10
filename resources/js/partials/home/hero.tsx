@@ -14,19 +14,19 @@ export function Hero() {
                 delay={0.15}
                 duration={1.2}
                 yOffset={80}
-                className="absolute inset-x-0 bottom-0 -z-10 h-[65vw] min-h-80 w-full sm:h-[56vw]"
+                className="absolute inset-x-0 bottom-0 -z-10 h-[90vw] min-h-80 w-full sm:h-[56vw]"
             >
                 <img
                     src="/img/hero.png"
                     alt="Modern home financed through Brignac Mortgage"
-                    className="absolute inset-0 h-full w-full origin-bottom scale-[1.35] object-contain object-bottom sm:scale-100"
+                    className="absolute inset-0 h-full w-full origin-bottom scale-[2] object-contain object-bottom sm:scale-100"
                     fetchPriority="high"
                 />
             </FadeUp>
 
             <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-linear-to-t from-background to-transparent" />
 
-            <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 pt-36 pb-[56vw] text-center sm:px-6 sm:pt-44 sm:pb-[46vw] lg:px-8">
+            <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 pt-36 pb-[70vw] text-center sm:px-6 sm:pt-44 sm:pb-[46vw] lg:px-8">
                 <FadeUp blur={10}>
                     <h1 className="text-4xl leading-[1.1] sm:text-5xl lg:text-6xl">
                         Your next home with the <br />
