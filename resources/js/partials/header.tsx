@@ -235,9 +235,6 @@ function MobileMenu({
                                                 : 'text-foreground/80 hover:text-foreground',
                                         )}
                                     >
-                                        {active && (
-                                            <span className="size-2 shrink-0 rounded-full bg-primary" />
-                                        )}
                                         {link.label}
                                     </Link>
                                 </motion.div>

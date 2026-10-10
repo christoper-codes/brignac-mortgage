@@ -66,10 +66,14 @@ const LEGAL_LINKS = [
     { label: 'Terms and Conditions', href: '/terms-and-conditions' },
 ];
 
-// Shared by every column below, so the four stay visually aligned as one row (or stack in the same
-// order) instead of each inventing its own spacing.
-const COLUMN =
-    'flex flex-col items-center gap-3 text-center sm:items-start sm:text-left';
+// Shared by every column below, so the four stay visually aligned as one row on desktop (all
+// left-aligned there, same as before). On mobile they stack, each set off from the next by a
+// divider line (added on the grid wrapper below) — but not all centered the same way: the two
+// link lists (Explore, Legal) read better left-aligned like an actual list, while the brand intro
+// and the contact/CTA block read better centered, like the page's other centered mobile sections.
+const COLUMN = 'flex w-full flex-col items-start gap-3 text-left';
+const COLUMN_CENTER =
+    'flex w-full flex-col items-center gap-3 text-center sm:items-start sm:text-left';
 const COLUMN_HEADING =
     'text-xs font-semibold tracking-wide text-foreground/40 uppercase';
 const COLUMN_LINK =
@@ -77,7 +81,7 @@ const COLUMN_LINK =
 
 function FooterBrand() {
     return (
-        <div className={`${COLUMN} col-span-2 sm:col-span-1`}>
+        <div className={COLUMN_CENTER}>
             <h3 className="text-lg leading-[1.1] text-foreground">
                 Brignac <span className="text-primary">Mortgage</span>
             </h3>
@@ -135,7 +139,7 @@ function FooterLegal() {
 
 function FooterContact() {
     return (
-        <div className={COLUMN}>
+        <div className={COLUMN_CENTER}>
             <p className={COLUMN_HEADING}>Contact</p>
             <a href="tel:+15045592821" className={COLUMN_LINK}>
                 (504) 559-2821
@@ -195,7 +199,11 @@ export function Footer({
                         </p>
                     </div>
 
-                    <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 sm:gap-x-10">
+                    {/* Mobile: a single stacked list, each section set off from the next by a
+                        divider line — Brand and Contact centered, Explore and Legal left-aligned
+                        like actual lists. Desktop: the usual four-column row, all left-aligned,
+                        divider turned off since the columns sit side by side instead of stacking. */}
+                    <div className="mt-12 grid grid-cols-1 divide-y divide-border *:py-8 sm:grid-cols-4 sm:gap-x-10 sm:gap-y-10 sm:divide-y-0 sm:*:py-0 [&>*:first-child]:pt-0">
                         <FooterBrand />
                         <FooterExplore />
                         <FooterLegal />
