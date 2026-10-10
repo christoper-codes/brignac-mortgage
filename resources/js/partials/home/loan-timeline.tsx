@@ -115,16 +115,19 @@ const PROGRAMS = [
     },
 ];
 
-// Swapped in behind the floating glass chips on the right, cycling per group. Duplicates are fine
-// for now — more will be added later.
+// Swapped in behind the floating glass chips on the right, one per group — five photos for the
+// five groups, so each scroll stop gets its own, never a repeat.
 const TIMELINE_IMAGES = [
-    '/img/loan_timeline/img-3.jpg',
-    '/img/loan_timeline/img-2.jpg',
     '/img/loan_timeline/img-1.jpg',
+    '/img/loan_timeline/img-2.jpg',
+    '/img/loan_timeline/img-3.jpg',
+    '/img/loan_timeline/img-4.jpg',
+    '/img/loan_timeline/img-5.jpg',
 ];
 
-// A different silhouette each time the photo changes — plain rounded rectangle, a squircle with
-// two sharp corners, and an asymmetric blob — so the frame itself varies, not just the photo in it.
+// A different frame per photo, one per group — all squircle-family (big rounded corner opposite a
+// sharp one) except two: a plain rounded rectangle and an organic blob, so there's still a baseline
+// and an outlier, not five near-identical corners.
 const TIMELINE_SHAPES = [
     { aspect: 'aspect-4/5', radius: 'rounded-[2.5rem]' },
     {
@@ -135,34 +138,42 @@ const TIMELINE_SHAPES = [
         aspect: 'aspect-3/4',
         radius: 'rounded-[35%_65%_65%_35%/45%_45%_55%_55%]',
     },
+    {
+        aspect: 'aspect-square',
+        radius: 'rounded-tr-[4rem] rounded-tl-xl rounded-bl-[4rem] rounded-br-xl',
+    },
+    {
+        aspect: 'aspect-4/5',
+        radius: 'rounded-bl-[4rem] rounded-tr-xl rounded-tl-[4rem] rounded-br-xl',
+    },
 ];
 
 // Where a floating chip can land, each with its own drift so two chips on screen together never
-// move in lockstep. Picked per group below so the pair of spots (and the direction each drifts)
-// changes from one group to the next instead of always being "top-left" and "bottom-right".
+// move in lockstep. All anchored near the image's vertical middle (a tight band around top-1/2,
+// alternating left/right) instead of the four corners, with the pair changing per group below.
 const CHIP_SPOTS = [
     {
-        className: 'top-6 -left-8',
+        className: 'top-[42%] -left-10 -translate-y-1/2',
         float: { x: [0, 10, -4, 0], y: [0, -14, 6, 0] },
     },
     {
-        className: 'top-6 -right-8',
+        className: 'top-[58%] -right-10 -translate-y-1/2',
         float: { x: [0, -10, 4, 0], y: [0, -10, -4, 0] },
     },
     {
-        className: 'bottom-8 -left-10',
+        className: 'top-1/2 -left-12 -translate-y-1/2',
         float: { x: [0, 12, -6, 0], y: [0, 10, -8, 0] },
     },
     {
-        className: 'bottom-8 -right-10',
+        className: 'top-[46%] -right-12 -translate-y-1/2',
         float: { x: [0, -12, 6, 0], y: [0, 12, -6, 0] },
     },
     {
-        className: 'top-1/2 -left-12 -translate-y-1/2',
+        className: 'top-[54%] -left-8 -translate-y-1/2',
         float: { x: [0, 14, 0, -6, 0], y: [0, -10, 10, 0] },
     },
     {
-        className: 'top-1/3 -right-12',
+        className: 'top-1/2 -right-8 -translate-y-1/2',
         float: { x: [0, -8, 10, 0], y: [0, 8, -12, 0] },
     },
 ];
@@ -335,8 +346,7 @@ export function LoanTimeline() {
                                         transition={{ duration: 0.3 }}
                                         className="relative w-full max-w-sm"
                                     >
-                                        {/* One photo instead of two data cards — a different
-                                            silhouette each time (see TIMELINE_SHAPES), with the
+                                        {/* One photo instead of two data cards, with the
                                             per-service info now living in the floating glass chips
                                             below, iOS-style. */}
                                         <div

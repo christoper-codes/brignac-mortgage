@@ -72,11 +72,8 @@ function ProcessCard({
             </span>
 
             <div className="relative flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-2xl bg-neutral-100 text-primary ring-1 ring-black/5">
+                <span className="grid size-11 place-items-center rounded-2xl bg-neutral-100 text-dark ring-1 ring-black/5">
                     <Icon className="size-5" />
-                </span>
-                <span className="text-xs font-semibold tracking-widest text-foreground/40 uppercase">
-                    Step {index + 1}
                 </span>
             </div>
 
