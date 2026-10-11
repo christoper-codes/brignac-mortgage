@@ -41,11 +41,26 @@ test('the ids are saved normalised and reach the public pages', function () {
 
     auth()->logout();
 
+    // Meta/TikTok reach the public page in every environment; Google Analytics is withheld
+    // outside production specifically, so local/staging traffic never reports into the real GA4
+    // property — see app.blade.php.
     $this->get('/')
         ->assertOk()
         ->assertSee('window.__tracking', false)
         ->assertSee('123456789012345', false)
-        ->assertSee('G-ABC123XYZ9', false);
+        ->assertDontSee('G-ABC123XYZ9', false);
+});
+
+test('google analytics only reaches the public page in production', function () {
+    $this->actingAs(User::factory()->create())
+        ->put(route('dashboard.tracking.update'), ['google_analytics_id' => 'g-abc123xyz9'])
+        ->assertSessionHasNoErrors();
+
+    auth()->logout();
+
+    $this->app['env'] = 'production';
+
+    $this->get('/')->assertOk()->assertSee('G-ABC123XYZ9', false);
 });
 
 test('saving again updates the same row and refreshes what pages see', function () {

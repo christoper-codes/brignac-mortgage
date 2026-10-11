@@ -41,8 +41,20 @@
 
         @fonts
 
-        {{-- Site-wide ad / analytics IDs, read by the tracker (which lives outside the Inertia page tree). --}}
-        <script>window.__tracking = @json(\App\Models\TrackingSetting::shared());</script>
+        {{--
+            Site-wide ad / analytics IDs, read by the tracker (which lives outside the Inertia
+            page tree). Google Analytics is blanked out outside production — otherwise every local
+            run (ours or a visitor's dev build) would report a real page view to Shaun's real GA4
+            property. This only withholds the ID from the PUBLIC script tag; the dashboard's own
+            settings form still reads the real saved value straight from TrackingSetting::shared(),
+            so editing it works the same in every environment. Our own visit/click tracking
+            (lib/tracking.ts, feeding /dashboard/analytics) is untouched by this and always runs.
+        --}}
+        @php($tracking = array_merge(
+            \App\Models\TrackingSetting::shared(),
+            app()->environment('production') ? [] : ['googleAnalyticsId' => null],
+        ))
+        <script>window.__tracking = @json($tracking);</script>
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         <x-inertia::head>
