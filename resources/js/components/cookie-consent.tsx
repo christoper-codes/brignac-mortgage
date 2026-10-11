@@ -80,7 +80,9 @@ export function CookieConsent() {
             role="region"
             aria-label="Cookie notice"
             className={cn(
-                'fixed right-4 bottom-4 z-50 max-w-sm rounded-3xl border p-4 shadow-2xl backdrop-blur-2xl transition-colors duration-300',
+                // Centered along the bottom edge on mobile (inset-x-4 + mx-auto); pinned to the
+                // bottom-right instead from sm: up, same as before.
+                'fixed inset-x-4 bottom-4 z-50 mx-auto max-w-sm rounded-3xl border p-4 shadow-2xl backdrop-blur-2xl transition-colors duration-300 sm:right-4 sm:left-auto',
                 inDarkZone
                     ? 'force-dark border-white/10 bg-black/40 text-white'
                     : 'force-light border-white/15 bg-background/40 text-foreground',
