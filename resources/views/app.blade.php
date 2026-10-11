@@ -35,9 +35,9 @@
 
         @include('partials.seo', ['seo' => $seo])
 
+        <link rel="icon" href="/img/logo.ico" sizes="any">
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-        <link rel="icon" href="/img/logo.webp" type="image/webp">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
         @fonts
