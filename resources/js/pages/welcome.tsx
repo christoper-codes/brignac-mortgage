@@ -24,7 +24,8 @@ export default function Welcome() {
                 <link
                     rel="preload"
                     as="image"
-                    href="/img/hero.png"
+                    href="/img/hero.webp"
+                    type="image/webp"
                     fetchPriority="high"
                 />
             </Head>

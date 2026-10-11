@@ -17,7 +17,7 @@ export function Hero() {
                 className="absolute inset-x-0 bottom-0 -z-10 h-[90vw] min-h-80 w-full sm:h-[56vw]"
             >
                 <img
-                    src="/img/hero.png"
+                    src="/img/hero.webp"
                     alt="Modern home financed through Brignac Mortgage"
                     className="absolute inset-0 h-full w-full origin-bottom scale-[2] object-contain object-bottom sm:scale-100"
                     fetchPriority="high"
