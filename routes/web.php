@@ -62,17 +62,35 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-Route::get('/migrate-fresh', function () {
-    Artisan::call('migrate:fresh');
-    return "migrate-fresh";
-});
-Route::get('/storage-fresh', function () {
-    Artisan::call('storage:link');
-    return "storage-fresh";
-});
-Route::get('/optimize-fresh', function () {
-    Artisan::call('optimize:clear');
-    return "optimize-fresh";
-});
+// One-time production setup helpers, for hosts with no SSH/terminal access. Protected by a
+// shared secret (DEPLOY_TOKEN in .env) passed as ?token=... — without this check, anyone who
+// found the URL could run these with a plain GET request. See config/deploy.php for the token,
+// and remove this whole block (plus that config file) once the site is live and set up.
+Route::get('/deploy/{action}', function (string $action) {
+    $token = (string) request()->query('token', '');
+    $expected = (string) config('deploy.token');
+
+    abort_unless($expected !== '' && hash_equals($expected, $token), 403);
+
+    $commands = [
+        // Safe to run again on a later deploy — only applies migrations not already run.
+        'migrate' => fn () => Artisan::call('migrate', ['--force' => true]),
+        // First-time setup only. Recreates every table from scratch — never run this again once
+        // the site has real visitors, leads, or users in it.
+        'migrate-fresh' => fn () => Artisan::call('migrate:fresh', ['--force' => true]),
+        // The allowed dashboard logins — safe to re-run (firstOrCreate, won't duplicate).
+        'seed' => fn () => Artisan::call('db:seed', ['--force' => true]),
+        // The real historical leads carried over from the old site. Only needs to run once.
+        'seed-legacy-leads' => fn () => Artisan::call('db:seed', ['--class' => 'LegacyLeadsSeeder', '--force' => true]),
+        'storage-link' => fn () => Artisan::call('storage:link'),
+        'optimize-clear' => fn () => Artisan::call('optimize:clear'),
+    ];
+
+    abort_unless(isset($commands[$action]), 404);
+
+    $commands[$action]();
+
+    return response(Artisan::output() ?: "{$action}: done")->header('Content-Type', 'text/plain');
+})->name('deploy.run');
 
 require __DIR__.'/settings.php';
