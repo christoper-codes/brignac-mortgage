@@ -72,7 +72,7 @@ function ProcessCard({
             </span>
 
             <div className="relative flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-2xl bg-neutral-100 text-dark ring-1 ring-black/5">
+                <span className="grid size-11 place-items-center rounded-2xl bg-neutral-100 text-neutral-900 ring-1 ring-black/5">
                     <Icon className="size-5" />
                 </span>
             </div>
