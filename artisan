@@ -3,6 +3,11 @@
 
 use Symfony\Component\Console\Input\ArgvInput;
 
+// Same reasoning as public/index.php: laravel/framework's own bundled config/database.php still
+// uses the PDO::MYSQL_ATTR_SSL_CA constant PHP 8.5 deprecated, and that's not ours to fix in
+// vendor/. Hidden here too so artisan commands aren't cluttered with it.
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 define('LARAVEL_START', microtime(true));
 
 // Register the Composer autoloader...

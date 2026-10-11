@@ -57,8 +57,11 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
+            // PDO::MYSQL_ATTR_SSL_CA was deprecated in PHP 8.5 in favor of the driver-specific
+            // Pdo\Mysql::ATTR_SSL_CA (added in 8.4) — the old one is kept as a fallback for any
+            // PHP version before 8.4, where the new class doesn't exist yet.
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                (class_exists(\Pdo\Mysql::class) ? \Pdo\Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
 
@@ -77,8 +80,11 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
+            // PDO::MYSQL_ATTR_SSL_CA was deprecated in PHP 8.5 in favor of the driver-specific
+            // Pdo\Mysql::ATTR_SSL_CA (added in 8.4) — the old one is kept as a fallback for any
+            // PHP version before 8.4, where the new class doesn't exist yet.
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                (class_exists(\Pdo\Mysql::class) ? \Pdo\Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
 
