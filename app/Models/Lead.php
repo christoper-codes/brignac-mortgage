@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Unguarded]
 class Lead extends Model
 {
     /** @use HasFactory<LeadFactory> */
     use HasFactory;
+
+    // Deleting a lead from the dashboard hides it everywhere (the index, exports, analytics,
+    // campaign lead counts — everything already queries through this model) without losing the
+    // record, in case it was removed by mistake.
+    use SoftDeletes;
 
     /**
      * @return array<string, string>

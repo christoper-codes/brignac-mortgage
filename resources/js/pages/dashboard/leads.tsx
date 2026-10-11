@@ -6,6 +6,7 @@ import {
     MessageSquare,
     MousePointerClick,
     Phone,
+    Trash2,
 } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
@@ -18,6 +19,16 @@ import {
     StatePill,
 } from '@/components/dashboard/ui';
 import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import {
     Select,
     SelectContent,
     SelectItem,
@@ -25,7 +36,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { cn, pageLabel } from '@/lib/utils';
-import { exportMethod, index, update } from '@/routes/dashboard/leads';
+import { destroy, exportMethod, index, update } from '@/routes/dashboard/leads';
 import type { JourneyEvent, Journeys, Lead } from '@/types/dashboard';
 
 type Props = {
@@ -234,6 +245,7 @@ export default function Leads({
 }: Props) {
     const [search, setSearch] = useState(filters.q ?? '');
     const [expanded, setExpanded] = useState<Set<number>>(new Set());
+    const [deleting, setDeleting] = useState<Lead | null>(null);
 
     const toggleJourney = (leadId: number) => {
         setExpanded((current) => {
@@ -268,6 +280,15 @@ export default function Leads({
             { status },
             { preserveScroll: true, preserveState: true },
         );
+    };
+
+    const confirmDelete = () => {
+        if (deleting) {
+            router.delete(destroy(deleting.id).url, {
+                preserveScroll: true,
+                onFinish: () => setDeleting(null),
+            });
+        }
     };
 
     return (
@@ -375,13 +396,20 @@ export default function Leads({
                                                     <Mail className="size-3.5" />
                                                     {lead.email}
                                                 </a>
-                                                <a
-                                                    href={`tel:${lead.phone}`}
-                                                    className="inline-flex items-center gap-1.5 hover:text-foreground"
-                                                >
-                                                    <Phone className="size-3.5" />
-                                                    {lead.phone}
-                                                </a>
+                                                {lead.phone ? (
+                                                    <a
+                                                        href={`tel:${lead.phone}`}
+                                                        className="inline-flex items-center gap-1.5 hover:text-foreground"
+                                                    >
+                                                        <Phone className="size-3.5" />
+                                                        {lead.phone}
+                                                    </a>
+                                                ) : (
+                                                    <span className="inline-flex items-center gap-1.5 text-foreground/40">
+                                                        <Phone className="size-3.5" />
+                                                        No phone on file
+                                                    </span>
+                                                )}
                                             </div>
                                             {lead.message && (
                                                 <p className="mt-2 flex gap-1.5 text-xs text-foreground/50">
@@ -444,35 +472,46 @@ export default function Leads({
                                         )}
                                     </div>
 
-                                    <Select
-                                        value={lead.status}
-                                        onValueChange={(status) =>
-                                            setStatus(lead, status)
-                                        }
-                                    >
-                                        <SelectTrigger
-                                            className={cn(
-                                                'h-9 w-32 rounded-full border-0 px-4 text-xs font-medium capitalize shadow-none focus-visible:ring-0',
-                                                STATUS_STYLES[lead.status],
-                                            )}
+                                    <div className="flex items-center gap-1">
+                                        <Select
+                                            value={lead.status}
+                                            onValueChange={(status) =>
+                                                setStatus(lead, status)
+                                            }
                                         >
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent
-                                            className="rounded-3xl p-1.5"
-                                            align="end"
+                                            <SelectTrigger
+                                                className={cn(
+                                                    'h-9 w-32 rounded-full border-0 px-4 text-xs font-medium capitalize shadow-none focus-visible:ring-0',
+                                                    STATUS_STYLES[lead.status],
+                                                )}
+                                            >
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent
+                                                className="rounded-3xl p-1.5"
+                                                align="end"
+                                            >
+                                                {statuses.map((status) => (
+                                                    <SelectItem
+                                                        key={status}
+                                                        value={status}
+                                                        className="rounded-full py-2 pl-3 capitalize"
+                                                    >
+                                                        {status}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+
+                                        <button
+                                            type="button"
+                                            onClick={() => setDeleting(lead)}
+                                            aria-label="Delete lead"
+                                            className="grid size-9 shrink-0 place-items-center rounded-full text-foreground/50 transition-colors hover:bg-red-500/10 hover:text-red-500"
                                         >
-                                            {statuses.map((status) => (
-                                                <SelectItem
-                                                    key={status}
-                                                    value={status}
-                                                    className="rounded-full py-2 pl-3 capitalize"
-                                                >
-                                                    {status}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
+                                            <Trash2 className="size-4" />
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <button
@@ -540,6 +579,32 @@ export default function Leads({
                     </div>
                 )}
             </div>
+
+            <AlertDialog
+                open={deleting !== null}
+                onOpenChange={(open) => !open && setDeleting(null)}
+            >
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Delete this lead?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            <span className="font-medium text-foreground">
+                                {deleting?.full_name}
+                            </span>{' '}
+                            will no longer show up here, in exports, or in
+                            analytics. The record itself isn&apos;t permanently
+                            erased, so it can be recovered later if this was a
+                            mistake.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmDelete}>
+                            Delete lead
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </>
     );
 }

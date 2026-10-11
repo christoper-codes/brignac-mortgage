@@ -56,6 +56,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('leads', [DashboardLeadController::class, 'index'])->name('leads.index');
         Route::get('leads/export', [DashboardLeadController::class, 'export'])->name('leads.export');
         Route::patch('leads/{lead}', [DashboardLeadController::class, 'update'])->name('leads.update');
+        Route::delete('leads/{lead}', [DashboardLeadController::class, 'destroy'])->name('leads.destroy');
         Route::resource('campaigns', CampaignController::class)->only(['index', 'store', 'update', 'destroy']);
     });
 });

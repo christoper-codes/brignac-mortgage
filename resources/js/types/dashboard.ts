@@ -23,7 +23,7 @@ export type Lead = {
     visitor_id: string | null;
     full_name: string;
     email: string;
-    phone: string;
+    phone: string | null;
     message: string | null;
     status: string;
     campaign: { id: number; name: string; platform: Platform } | null;
@@ -41,7 +41,13 @@ export type Lead = {
     created_at: string;
 };
 
-export type JourneyEvent = { type: 'visit' | 'click'; path: string; label: string | null; team_member: string | null; created_at: string };
+export type JourneyEvent = {
+    type: 'visit' | 'click';
+    path: string;
+    label: string | null;
+    team_member: string | null;
+    created_at: string;
+};
 export type Journeys = Record<number, JourneyEvent[]>;
 
 export type TeamMember = {
@@ -61,7 +67,13 @@ export type TeamMember = {
 export type Kpi = { value: number; change?: number | null };
 export type Row = { label: string; total: number };
 
-export type DaySeries = { date: string; visitors: number; pageViews: number; clicks: number; leads: number };
+export type DaySeries = {
+    date: string;
+    visitors: number;
+    pageViews: number;
+    clicks: number;
+    leads: number;
+};
 export type PeriodSeries = { label: string; visitors: number; leads: number };
 
 export type States = {

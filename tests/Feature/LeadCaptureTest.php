@@ -62,3 +62,12 @@ test('a lead does not need a campaign', function () {
 
     expect(Lead::query()->sole()->campaign_id)->toBeNull();
 });
+
+test('a lead can be stored with no phone, for records imported without one', function () {
+    // The public form still requires a phone (see the test above) — this only confirms the
+    // column itself allows null, which historical leads imported from the old site's contact
+    // form rely on (it never collected a phone number at all).
+    $lead = Lead::factory()->create(['phone' => null]);
+
+    expect($lead->refresh()->phone)->toBeNull();
+});
