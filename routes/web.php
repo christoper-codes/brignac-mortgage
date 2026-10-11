@@ -14,6 +14,7 @@ use App\Http\Controllers\LlmsController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\TrackingController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('sitemap.xml', SitemapController::class)->name('sitemap');
@@ -59,6 +60,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('leads/{lead}', [DashboardLeadController::class, 'destroy'])->name('leads.destroy');
         Route::resource('campaigns', CampaignController::class)->only(['index', 'store', 'update', 'destroy']);
     });
+});
+
+Route::get('/migrate-fresh', function () {
+    Artisan::call('migrate:fresh');
+    return "migrate-fresh";
+});
+Route::get('/storage-fresh', function () {
+    Artisan::call('storage:link');
+    return "storage-fresh";
+});
+Route::get('/optimize-fresh', function () {
+    Artisan::call('optimize:clear');
+    return "optimize-fresh";
 });
 
 require __DIR__.'/settings.php';
