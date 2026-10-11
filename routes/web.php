@@ -31,7 +31,10 @@ Route::inertia('terms-and-conditions', 'terms-and-conditions')->name('terms-and-
 // Public tracking + lead capture (fed by the landing pages).
 Route::post('track/visit', [TrackingController::class, 'visit'])->middleware('throttle:120,1')->name('track.visit');
 Route::post('track/click', [TrackingController::class, 'click'])->middleware('throttle:120,1')->name('track.click');
-Route::post('leads', [LeadController::class, 'store'])->middleware('throttle:10,1')->name('leads.store');
+// A real visitor submits this once; 10/minute was sized for generic abuse protection, not spam —
+// tightened so a bot hammering the endpoint from one IP hits the wall fast while still leaving
+// room for someone genuinely fixing a validation error and resubmitting a couple of times.
+Route::post('leads', [LeadController::class, 'store'])->middleware('throttle:5,10')->name('leads.store');
 
 Route::middleware('guest')->group(function () {
     Route::post('auth/google', [GoogleController::class, 'redirect'])->middleware('throttle:10,1')->name('google.redirect');
