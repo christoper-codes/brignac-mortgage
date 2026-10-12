@@ -59,5 +59,4 @@ createInertiaApp({
 
 document.addEventListener('DOMContentLoaded', () => {
     Aos.init();
-    FB.init({ xfbml: true, version: 'v21.0' });
 });

@@ -29,8 +29,5 @@
     </head>
     <body class="font-sans antialiased text-gray-600">
         @inertia
-        <script src="https://widget.tagembed.com/embed.min.js" type="text/javascript"></script>
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v21.0"></script>
     </body>
 </html>
