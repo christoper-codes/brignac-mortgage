@@ -24,7 +24,7 @@ test('the campaign list shows counts and the tracking url', function () {
             ->where('campaigns.0.budget', 500)
             ->where('campaigns.0.cost_per_lead', 250)
             ->where('campaigns.0.tracking_url', rtrim(url('/'), '/').'/?utm_source=instagram&utm_medium=paid_social&utm_campaign=spring')
-            ->has('platforms', 3));
+            ->has('platforms', 5));
 });
 
 test('a campaign can be created and gets a unique code from its name', function () {

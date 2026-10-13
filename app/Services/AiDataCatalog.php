@@ -125,7 +125,7 @@ class AiDataCatalog
                 'campaigns' => [
                     'route' => '/dashboard/campaigns',
                     'purpose' => 'Create and manage the tracking link for each ad, and see what it brought in.',
-                    'shows' => ['One card per campaign: platform (Facebook/Instagram/TikTok), status, budget, and its all-time Visits, Leads, Clicks, Conversion % and cost per lead', 'The tracking link to paste into the ad (adds UTM parameters automatically)'],
+                    'shows' => ['One card per campaign: platform (Facebook/Instagram/TikTok/Meta/YouTube), status, budget, and its all-time Visits, Leads, Clicks, Conversion % and cost per lead', 'The tracking link to paste into the ad (adds UTM parameters automatically)'],
                     'filters' => 'Search by campaign name, and a From–To date range. A campaign matches the date range when its own start–end run overlaps it (no start date counts from when it was created; no end date means still running). Important: this filter only decides which campaign cards are shown — the Visits/Leads/Clicks/Conversion numbers on each card are always all-time totals for that campaign, not scoped to the filter.',
                     'export' => 'No export here — use "New campaign" to create one, the pencil icon to edit, the trash icon to delete.',
                     'other' => 'Creating or editing a campaign opens a form for name, platform, status, budget, start/end dates and an optional custom tracking code.',

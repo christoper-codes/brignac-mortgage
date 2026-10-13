@@ -6,7 +6,9 @@ import { useState } from 'react';
 import {
     FacebookMark,
     InstagramMark,
+    MetaMark,
     TikTokMark,
+    YouTubeMark,
 } from '@/components/platform-marks';
 import { DatePicker } from '@/components/ui/date-picker';
 import { cn } from '@/lib/utils';
@@ -364,15 +366,20 @@ export function PlatformMark({
     platform: Platform;
     className?: string;
 }) {
-    if (platform === 'facebook') {
-        return <FacebookMark className={cn('text-[#1877F2]', className)} />;
+    switch (platform) {
+        case 'facebook':
+            return <FacebookMark className={cn('text-[#1877F2]', className)} />;
+        case 'instagram':
+            return (
+                <InstagramMark className={cn('text-[#E1306C]', className)} />
+            );
+        case 'meta':
+            return <MetaMark className={cn('text-[#0866FF]', className)} />;
+        case 'youtube':
+            return <YouTubeMark className={cn('text-[#FF0000]', className)} />;
+        default:
+            return <TikTokMark className={cn('text-foreground', className)} />;
     }
-
-    return platform === 'instagram' ? (
-        <InstagramMark className={cn('text-[#E1306C]', className)} />
-    ) : (
-        <TikTokMark className={cn('text-foreground', className)} />
-    );
 }
 
 export function PlatformBadge({

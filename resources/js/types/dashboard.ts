@@ -1,4 +1,4 @@
-export type Platform = 'facebook' | 'instagram' | 'tiktok';
+export type Platform = 'facebook' | 'instagram' | 'tiktok' | 'meta' | 'youtube';
 
 export type Campaign = {
     id: number;
