@@ -157,7 +157,7 @@ const PROGRAMS = [
         icon: TreePine,
         name: 'USDA Loan',
         tagline: 'General USDA Loan Program',
-        image: '/img/loan_programs/general_usda_loan_program.webp',
+        image: '/img/loan_programs/general_usda_loan_program.png',
         facts: [
             { label: 'Credit Score', value: '620+' },
             { label: 'Down Payment', value: '0%' },
