@@ -25,18 +25,8 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->configureActions();
         $this->configureViews();
         $this->configureRateLimiting();
-    }
-
-    /**
-     * Configure Fortify actions.
-     */
-    private function configureActions(): void
-    {
-        // Google is the only sign-in method and accounts are created by hand: password logins always fail.
-        Fortify::authenticateUsing(fn () => null);
     }
 
     /**

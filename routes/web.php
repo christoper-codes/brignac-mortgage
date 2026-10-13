@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Dashboard\AiController;
 use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\AnalyticsExportController;
@@ -36,11 +35,6 @@ Route::post('track/click', [TrackingController::class, 'click'])->middleware('th
 // tightened so a bot hammering the endpoint from one IP hits the wall fast while still leaving
 // room for someone genuinely fixing a validation error and resubmitting a couple of times.
 Route::post('leads', [LeadController::class, 'store'])->middleware('throttle:5,10')->name('leads.store');
-
-Route::middleware('guest')->group(function () {
-    Route::post('auth/google', [GoogleController::class, 'redirect'])->middleware('throttle:10,1')->name('google.redirect');
-    Route::get('auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
-});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', OverviewController::class)->name('dashboard');
