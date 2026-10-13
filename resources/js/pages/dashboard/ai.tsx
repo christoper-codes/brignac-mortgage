@@ -2,7 +2,6 @@ import { Head, usePage } from '@inertiajs/react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
     ArrowUp,
-    Landmark,
     Lightbulb,
     Megaphone,
     MonitorSmartphone,
@@ -67,11 +66,6 @@ const SUGGESTIONS: { icon: LucideIcon; label: string; question: string }[] = [
         icon: Lightbulb,
         label: 'Campaign ideas',
         question: 'How can I improve my Meta ads for FHA leads?',
-    },
-    {
-        icon: Landmark,
-        label: 'Mortgage',
-        question: 'What documents does an FHA borrower usually need?',
     },
 ];
 
