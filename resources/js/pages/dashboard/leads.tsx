@@ -119,8 +119,11 @@ function FilterSelect({
     );
 }
 
+// Always shown in the business's own timezone (Louisiana), not the viewer's — so the team sees the
+// same time on a lead regardless of where they're logging in from.
 const dateTime = (iso: string) =>
     new Date(iso).toLocaleString('en-US', {
+        timeZone: 'America/Chicago',
         month: 'short',
         day: 'numeric',
         hour: 'numeric',
@@ -128,6 +131,7 @@ const dateTime = (iso: string) =>
     });
 const time = (iso: string) =>
     new Date(iso).toLocaleString('en-US', {
+        timeZone: 'America/Chicago',
         hour: 'numeric',
         minute: '2-digit',
     });
