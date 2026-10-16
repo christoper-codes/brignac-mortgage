@@ -7,8 +7,8 @@ import type { AppLayoutProps } from '@/types';
 // Pages that are always dark, whatever the user's appearance setting (the AI assistant).
 const ALWAYS_DARK_PREFIXES = ['/dashboard/ai'];
 
-// Authenticated shell: a floating frosted sidebar (a pill tab bar on mobile) and a soft canvas that
-// the rounded dashboard cards sit on.
+// Authenticated shell: a floating frosted sidebar (a top bar with a full-screen menu on mobile) and
+// a soft canvas that the rounded dashboard cards sit on.
 export default function AppSidebarLayout({ children }: AppLayoutProps) {
     const { url } = usePage();
     const path = url.split('?')[0];
@@ -42,7 +42,7 @@ export default function AppSidebarLayout({ children }: AppLayoutProps) {
             )}
         >
             <DashboardSidebar />
-            <main className="px-4 pt-6 pb-28 sm:px-6 lg:pt-8 lg:pr-8 lg:pb-10 lg:pl-76">
+            <main className="px-4 pt-24 pb-6 sm:px-6 lg:pt-8 lg:pr-8 lg:pb-10 lg:pl-76">
                 {children}
             </main>
         </div>

@@ -1,7 +1,8 @@
 import { Link, router, usePage } from '@inertiajs/react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import type { ComponentType } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
     AiIcon,
     AnalyticsIcon,
@@ -153,11 +154,146 @@ function UserChip() {
     );
 }
 
-// Desktop: a floating frosted panel inset from the screen edges. Mobile: a floating pill tab bar.
+// Two slim bars that slide into an X — same mark the public header uses for its own mobile menu.
+function MenuIcon({ open }: { open: boolean }) {
+    const bar = 'absolute right-0 h-[1.75px] rounded-full bg-current';
+
+    return (
+        <span className="relative block h-5 w-6">
+            <motion.span
+                className={bar}
+                style={{ top: 'calc(50% - 0.875px)' }}
+                initial={false}
+                animate={{ y: open ? 0 : -4, rotate: open ? 45 : 0, width: 24 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            />
+            <motion.span
+                className={bar}
+                style={{ top: 'calc(50% - 0.875px)' }}
+                initial={false}
+                animate={{
+                    y: open ? 0 : 4,
+                    rotate: open ? -45 : 0,
+                    width: open ? 24 : 15,
+                }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            />
+        </span>
+    );
+}
+
+// Full-screen blurred overlay for the dashboard items, in a portal for the same reason the public
+// header's mobile menu is: its own backdrop-filter would otherwise trap a fixed child inside it.
+function MobileNavMenu({
+    open,
+    items,
+    onClose,
+}: {
+    open: boolean;
+    items: Item[];
+    onClose: () => void;
+}) {
+    const isActive = useIsActive();
+
+    useEffect(() => {
+        if (!open) {
+            return;
+        }
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [open]);
+
+    const item = {
+        hidden: { opacity: 0, y: 24 },
+        show: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+        },
+    };
+
+    return createPortal(
+        <AnimatePresence>
+            {open && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 bg-background/80 backdrop-blur-2xl lg:hidden"
+                >
+                    <motion.nav
+                        initial="hidden"
+                        animate="show"
+                        exit="hidden"
+                        transition={{
+                            staggerChildren: 0.06,
+                            delayChildren: 0.1,
+                        }}
+                        className="flex w-full max-w-xs flex-col gap-2 px-6"
+                    >
+                        {items.map((navItem) => {
+                            const Icon = navItem.icon;
+                            const active = isActive(navItem);
+
+                            return (
+                                <motion.div key={navItem.href} variants={item}>
+                                    <Link
+                                        href={navItem.href}
+                                        onClick={onClose}
+                                        className={cn(
+                                            'flex items-center gap-4 rounded-2xl px-4 py-3.5 text-lg font-semibold transition-colors',
+                                            active
+                                                ? 'bg-primary/10 text-primary'
+                                                : 'text-foreground/80 hover:bg-foreground/5',
+                                        )}
+                                    >
+                                        <span
+                                            className={cn(
+                                                'grid size-10 shrink-0 place-items-center rounded-full',
+                                                active
+                                                    ? 'bg-primary/15 text-primary'
+                                                    : 'bg-foreground/5',
+                                            )}
+                                        >
+                                            <Icon className="size-5" />
+                                        </span>
+                                        {navItem.title}
+                                    </Link>
+                                </motion.div>
+                            );
+                        })}
+                    </motion.nav>
+
+                    <motion.div
+                        variants={item}
+                        initial="hidden"
+                        animate="show"
+                        className="w-full max-w-xs px-6"
+                    >
+                        <UserChip />
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>,
+        document.body,
+    );
+}
+
+// Desktop: a floating frosted panel inset from the screen edges. Mobile: a top bar (logo, settings,
+// hamburger) matching the public pages' header, opening a blurred full-screen menu for the rest.
 export function DashboardSidebar() {
     const isActive = useIsActive();
     const { auth } = usePage().props;
-    const items = auth.user?.role === 'owner' ? [...ITEMS, USERS, SETTINGS] : [...ITEMS, SETTINGS];
+    const isOwner = auth.user?.role === 'owner';
+    const items = isOwner ? [...ITEMS, USERS, SETTINGS] : [...ITEMS, SETTINGS];
+    const mobileMenuItems = isOwner ? [...ITEMS, USERS] : ITEMS;
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     return (
         <>
@@ -214,37 +350,38 @@ export function DashboardSidebar() {
                 <UserChip />
             </aside>
 
-            <nav className="fixed inset-x-4 bottom-4 z-30 flex items-center justify-around rounded-full border border-border bg-card/80 p-2 shadow-xl shadow-black/10 backdrop-blur-xl lg:hidden">
-                {items.map((item) => {
-                    const Icon = item.icon;
-                    const active = isActive(item);
+            <header className="fixed inset-x-4 top-4 z-30 flex items-center justify-between rounded-full border border-border bg-card/80 px-3 py-2 shadow-xl shadow-black/10 backdrop-blur-xl lg:hidden">
+                <Logo />
 
-                    return (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            aria-label={item.title}
-                            className={cn(
-                                'relative grid h-11 min-w-0 flex-1 place-items-center rounded-full transition-colors',
-                                active ? 'text-primary' : 'text-foreground/50',
-                            )}
-                        >
-                            {active && (
-                                <motion.span
-                                    layoutId="dashboard-active-tab"
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 380,
-                                        damping: 32,
-                                    }}
-                                    className="absolute inset-0 rounded-full bg-primary/15"
-                                />
-                            )}
-                            <Icon className="relative size-6" />
-                        </Link>
-                    );
-                })}
-            </nav>
+                <div className="flex items-center gap-1">
+                    <Link
+                        href={SETTINGS.href}
+                        aria-label="Settings"
+                        className={cn(
+                            'grid size-10 place-items-center rounded-full transition-colors',
+                            isActive(SETTINGS)
+                                ? 'bg-primary/15 text-primary'
+                                : 'text-foreground/60 hover:bg-foreground/5 hover:text-foreground',
+                        )}
+                    >
+                        <SettingsIcon className="size-5" />
+                    </Link>
+                    <button
+                        type="button"
+                        onClick={() => setMobileOpen((open) => !open)}
+                        aria-label="Toggle menu"
+                        className="grid size-10 place-items-center rounded-full text-foreground/60 transition-colors hover:bg-foreground/5 hover:text-foreground"
+                    >
+                        <MenuIcon open={mobileOpen} />
+                    </button>
+                </div>
+            </header>
+
+            <MobileNavMenu
+                open={mobileOpen}
+                items={mobileMenuItems}
+                onClose={() => setMobileOpen(false)}
+            />
         </>
     );
 }
